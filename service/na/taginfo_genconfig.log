@@ -1,0 +1,1507 @@
+=========================================
+DATETIME=20180725T1049  1532508543
+CONTINENT_LONG=north-america
+CONTINENT=na
+START_PORT=22000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where iso not in ('us','ca') and (length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','dk','us','ca')) 
+ISO_SERVICE_FILTER=1=1 
+=========================================
+:: gen new configs
+Starting dockerized-taginfo_db_1 ... 
+[1A[2KStarting dockerized-taginfo_db_1 ... [32mdone[0m[1Bcheck db connection
+CONTINENT_LONG=north-america
+CONTINENT=na
+START_PORT=22000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where iso not in ('us','ca') and (length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','dk','us','ca'))
+ISO_SERVICE_FILTER=1=1
+CONTINENT_LONG=north-america
+CONTINENT=na
+-------- north-america ----------- 
+--2018-07-25 08:49:06--  http://download.geofabrik.de/north-america.kml
+Resolving download.geofabrik.de (download.geofabrik.de)... 88.99.24.113, 88.99.105.98
+Connecting to download.geofabrik.de (download.geofabrik.de)|88.99.24.113|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9372 (9.2K) [application/vnd.google-earth.kml+xml]
+Saving to: 'north-america.kml'
+
+     0K .........                                             100%  105M=0s
+
+2018-07-25 08:49:06 (105 MB/s) - 'north-america.kml' saved [9372/9372]
+
+==================================
+;
+;
+;
+;
+;
+;
+;
+CREATE OR REPLACE FUNCTION imposmid2shortid (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN 'n'|| id::text
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN 'w'|| (abs(id))::text   
+   WHEN  (id <  -1e17 )               THEN 'r'|| (abs(id) -1e17)::text   
+   ELSE 'error'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION imposmid2weburl (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN format('<a href="http://www.osm.org/node/%1$s">n%1$s</a>'     , id::text )
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN format('<a href="http://www.osm.org/way/%1$s">w%1$s</a>'      , (abs(id))::text )   
+   WHEN  (id <  -1e17 )               THEN format('<a href="http://www.osm.org/relation/%1$s">r%1$s</a>' , (abs(id) -1e17)::text )  
+   ELSE 'error_url'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION get_xtaginfo(iso text, xmin  numeric, xmax  numeric, ymin  numeric, ymax numeric ) 
+      RETURNS numeric[]   AS
+$BODY$
+DECLARE
+    i  integer ;
+    xs numeric ;
+    ys numeric ; 
+    last_ok integer ;
+    xd numeric;
+    yd numeric;
+    zzz numeric;
+    xppd numeric;
+    yppd numeric;
+    moda numeric[] ;
+BEGIN
+    moda= ARRAY [
+                 0.000,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009
+                ,0.010,0.011,0.012,0.013,0.014,0.015,0.016,0.017,0.018,0.019
+                ,0.020,0.021,0.022,0.023,0.024,0.025,0.026,0.027,0.028,0.029
+                ,0.030,0.031,0.032,0.033,0.034,0.035,0.036,0.037,0.038,0.039
+                ,0.040,0.041,0.042,0.043,0.044,0.045,0.046,0.047,0.048,0.049
+                ,0.050,0.051,0.052,0.053,0.054,0.055,0.056,0.057,0.058,0.059
+                ,0.060,0.061,0.062,0.063,0.064,0.065,0.066,0.067,0.068,0.069
+                ,0.070,0.071,0.072,0.073,0.074,0.075,0.076,0.077,0.078,0.079
+                ,0.080,0.081,0.082,0.083,0.084,0.085,0.086,0.087,0.088,0.089
+                ,0.090,0.091,0.092,0.093,0.094,0.095,0.096,0.097,0.098,0.099 
+                
+                ,0.100,0.101,0.102,0.103,0.104,0.105,0.106,0.107,0.108,0.109
+                ,0.110,0.111,0.112,0.113,0.114,0.115,0.116,0.117,0.118,0.119
+                ,0.120,0.121,0.122,0.123,0.124,0.125,0.126,0.127,0.128,0.129
+                ,0.130,0.131,0.132,0.133,0.134,0.135,0.136,0.137,0.138,0.139
+                ,0.140,0.141,0.142,0.143,0.144,0.145,0.146,0.147,0.148,0.149
+                ,0.150,0.151,0.152,0.153,0.154,0.155,0.156,0.157,0.158,0.159
+                ,0.160,0.161,0.162,0.163,0.164,0.165,0.166,0.167,0.168,0.169
+                ,0.170,0.171,0.172,0.173,0.174,0.175,0.176,0.177,0.178,0.179
+                ,0.180,0.181,0.182,0.183,0.184,0.185,0.186,0.187,0.188,0.189
+                ,0.190,0.191,0.192,0.193,0.194,0.195,0.196,0.197,0.198,0.199 
+
+                ,0.200,0.201,0.202,0.203,0.204,0.205,0.206,0.207,0.208,0.209
+                ,0.210,0.211,0.212,0.213,0.214,0.215,0.216,0.217,0.218,0.219
+                ,0.220,0.221,0.222,0.223,0.224,0.225,0.226,0.227,0.228,0.229
+                ,0.230,0.231,0.232,0.233,0.234,0.235,0.236,0.237,0.238,0.239
+                ,0.240,0.241,0.242,0.243,0.244,0.245,0.246,0.247,0.248,0.249
+                ,0.250,0.251,0.252,0.253,0.254,0.255,0.256,0.257,0.258,0.259
+                ,0.260,0.261,0.262,0.263,0.264,0.265,0.266,0.267,0.268,0.269
+                ,0.270,0.271,0.272,0.273,0.274,0.275,0.276,0.277,0.278,0.279
+                ,0.280,0.281,0.282,0.283,0.284,0.285,0.286,0.287,0.288,0.289
+                ,0.290,0.291,0.292,0.293,0.294,0.295,0.296,0.297,0.298,0.299  
+
+                ,0.300,0.301,0.302,0.303,0.304,0.305,0.306,0.307,0.308,0.309
+                ,0.310,0.311,0.312,0.313,0.314,0.315,0.316,0.317,0.318,0.319
+                ,0.320,0.321,0.322,0.323,0.324,0.325,0.326,0.327,0.328,0.329
+                ,0.330,0.331,0.332,0.333,0.334,0.335,0.336,0.337,0.338,0.339
+                ,0.340,0.341,0.342,0.343,0.344,0.345,0.346,0.347,0.348,0.349
+                ,0.350,0.351,0.352,0.353,0.354,0.355,0.356,0.357,0.358,0.359
+                ,0.360,0.361,0.362,0.363,0.364,0.365,0.366,0.367,0.368,0.369
+                ,0.370,0.371,0.372,0.373,0.374,0.375,0.376,0.377,0.378,0.379
+                ,0.380,0.381,0.382,0.383,0.384,0.385,0.386,0.387,0.388,0.389
+                ,0.390,0.391,0.392,0.393,0.394,0.395,0.396,0.397,0.398,0.399 
+
+                ,0.400,0.401,0.402,0.403,0.404,0.405,0.406,0.407,0.408,0.409
+                ,0.410,0.411,0.412,0.413,0.414,0.415,0.416,0.417,0.418,0.419
+                ,0.420,0.421,0.422,0.423,0.424,0.425,0.426,0.427,0.428,0.429
+                ,0.430,0.431,0.432,0.433,0.434,0.435,0.436,0.437,0.438,0.439
+                ,0.440,0.441,0.442,0.443,0.444,0.445,0.446,0.447,0.448,0.449
+                ,0.450,0.451,0.452,0.453,0.454,0.455,0.456,0.457,0.458,0.459
+                ,0.460,0.461,0.462,0.463,0.464,0.465,0.466,0.467,0.468,0.469
+                ,0.470,0.471,0.472,0.473,0.474,0.475,0.476,0.477,0.478,0.479
+                ,0.480,0.481,0.482,0.483,0.484,0.485,0.486,0.487,0.488,0.489
+                ,0.490,0.491,0.492,0.493,0.494,0.495,0.496,0.497,0.498,0.499 
+
+                ,0.500,0.501,0.502,0.503,0.504,0.505,0.506,0.507,0.508,0.509
+                ,0.510,0.511,0.512,0.513,0.514,0.515,0.516,0.517,0.518,0.519
+                ,0.520,0.521,0.522,0.523,0.524,0.525,0.526,0.527,0.528,0.529
+                ,0.530,0.531,0.532,0.533,0.534,0.535,0.536,0.537,0.538,0.539
+                ,0.540,0.541,0.542,0.543,0.544,0.545,0.546,0.547,0.548,0.549
+                ,0.550,0.551,0.552,0.553,0.554,0.555,0.556,0.557,0.558,0.559
+                ,0.560,0.561,0.562,0.563,0.564,0.565,0.566,0.567,0.568,0.569
+                ,0.570,0.571,0.572,0.573,0.574,0.575,0.576,0.577,0.578,0.579
+                ,0.580,0.581,0.582,0.583,0.584,0.585,0.586,0.587,0.588,0.589
+                ,0.590,0.591,0.592,0.593,0.594,0.595,0.596,0.597,0.598,0.599 
+
+                ];
+    last_ok =0 ;
+    xd = xmax-xmin;  
+    yd = ymax-ymin; 
+    FOR i IN 1..30000 LOOP
+        xs = i * xd ;
+        ys = i * yd ;
+
+        IF  xs * ys  >= ( 255*255) THEN
+
+        FOR ri IN REVERSE i..0 LOOP
+           FOREACH  yppd IN ARRAY moda LOOP
+             FOREACH  xppd IN ARRAY moda  LOOP
+                 
+                  xs=ri* (xd+   xppd ) ;
+                  ys=ri* (yd+   yppd ) ; 
+
+                  IF     
+                             xs=round(xs) 
+                         and ys=round(ys) 
+                         and (  xs * ys ) <= (255*255) 
+                         and xs>0 
+                         and ys>0
+                         THEN
+                         RAISE NOTICE 'OK   R# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                        -- Reverse Antimeridian shift.
+                         IF xmax+xppd > 180 THEN
+                            xmax= xmax -180;
+                            xmin= xmin -180;
+                            RAISE NOTICE 'Reversed# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                            IF xmin <  -180  THEN
+                                RAISE NOTICE 'ERROR: XMIN < -180# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+                            END IF ;
+                         END IF ;
+                         RETURN  ARRAY[ round(xs) , round(ys) , xmin, xmax+xppd , ymin, ymax+yppd ] ;
+                   END IF;               
+             END LOOP;
+           END LOOP ;
+        END LOOP;   
+        
+        RETURN ARRAY[-2,0,0,0,0,0];
+
+           
+        END IF;
+
+        
+        IF  xs * ys  >= ( 255*255) 
+        THEN  
+           RETURN ARRAY[0,0,0,0,0,0]  ;
+        END IF;   
+        
+    END LOOP;
+       
+    RETURN ARRAY[-1,0,0,0,0,0]  ;
+END
+$BODY$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT PARALLEL SAFE ;
+CREATE FUNCTION
+DROP TABLE IF EXISTS  osm_admin2_continent_all ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent_all as
+select a.*   
+    ,st_area( ST_Intersection(  c.wkb_geometry  ,   a.geometry )) / st_area(  a.geometry )  as area_pct
+    ,case 
+            when a.iso3166_2!=''  then lower(a.iso3166_2) 
+                                  else lower(a.iso3166_1)
+            end   
+            as iso
+from KMLX_CONTINENT as c,
+        osm_admin   as a
+where 
+        ( length(a.iso3166_1) = 2  or length(a.iso3166_2) > 3 )
+    and 
+        ST_Contains (c.wkb_geometry , St_PointOnSurface( a.geometry ))
+;
+SELECT 102
+;
+DROP TABLE IF EXISTS  osm_admin2_continent ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent as
+select * 
+from osm_admin2_continent_all   
+  where iso not in ('us','ca') and (length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','dk','us','ca')) 
+order by iso
+;
+SELECT 68
+;
+                                         Table "public.osm_admin2_continent"
+      Column      |          Type           | Collation | Nullable | Default | Storage  | Stats target | Description 
+------------------+-------------------------+-----------+----------+---------+----------+--------------+-------------
+ id               | bigint                  |           |          |         | plain    |              | 
+ admin_level      | integer                 |           |          |         | plain    |              | 
+ name             | character varying       |           |          |         | extended |              | 
+ int_name         | character varying       |           |          |         | extended |              | 
+ official_name    | character varying       |           |          |         | extended |              | 
+ name_en          | character varying       |           |          |         | extended |              | 
+ maritime         | character varying       |           |          |         | extended |              | 
+ border_type      | character varying       |           |          |         | extended |              | 
+ iso3166_1        | character varying       |           |          |         | extended |              | 
+ iso3166_2        | character varying       |           |          |         | extended |              | 
+ iso3166_1alpha3  | character varying       |           |          |         | extended |              | 
+ default_language | character varying       |           |          |         | extended |              | 
+ wikipedia        | character varying       |           |          |         | extended |              | 
+ wikidata         | character varying       |           |          |         | extended |              | 
+ flag             | character varying       |           |          |         | extended |              | 
+ boundary         | character varying       |           |          |         | extended |              | 
+ geometry         | geometry(Geometry,4326) |           |          |         | main     |              | 
+ area_pct         | double precision        |           |          |         | plain    |              | 
+ iso              | text                    |           |          |         | extended |              | 
+
+update osm_admin2_continent set name_en=name  where name_en='' ;
+UPDATE 0
+select count(*) as iso_admin_numbers from osm_admin2_continent;
+ iso_admin_numbers 
+-------------------
+                68
+(1 row)
+
+DROP TABLE IF EXISTS iso_gdname CASCADE;
+DROP TABLE
+CREATE TABLE iso_gdname as
+SELECT distinct on (t.iso) 
+       t.iso, t."name" as iso_name , g."name" as gdname, st_area(g.wkb_geometry) as area
+FROM osm_admin2_continent  as t
+    ,gkml                  as g
+where
+     ST_Contains (   g.wkb_geometry  ,  t.geometry   )
+order by t.iso, area NULLS LAST
+;
+SELECT 66
+Drop table IF EXISTS xtaginfo CASCADE;
+DROP TABLE
+create table xtaginfo as
+with pdata as
+(
+    select distinct on (osm.iso) 
+         osm.iso 
+        ,name
+        ,name_en
+        ,id
+        ,area_pct
+        ,iso_gdname.gdname    as gdname
+        ,imposmid2shortid(id) as osmid
+        ,admin_level 
+        ,row_number() OVER ( ORDER BY osm.iso ) as port_order 
+        ,st_xmax( geometry)  - st_xmin( geometry)  as dx 
+        ,wikidata
+        ,wikipedia
+        ,flag
+        ,geometry
+        ,st_area(geometry) as iso_area
+        ,case when  (  1=1   )  then 'yes'
+                                               else ''
+         end as service     
+    from osm_admin2_continent as osm
+    left join iso_gdname on osm.iso=iso_gdname.iso
+    ORDER BY osm.iso, iso_area DESC NULLS LAST
+)
+, normal_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( geometry) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( geometry) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( geometry) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( geometry) +  0.0051)::numeric, 2 ) as tymax
+       ,'normal'::text as ttype
+       from pdata 
+       where dx < 200 
+       )
+, antimerdian_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as tymax
+       ,'shifted'::text as ttype
+       from pdata 
+       where dx >= 200 
+       )
+       select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  normal_data       
+union  select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  antimerdian_data
+order by iso 
+;
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = bm, 400 , 288.000 , 224.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-ab, 24 , 243.000 , 267.000 ,0.115 ,0.105
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-bc, 14 , 357.000 , 168.000 ,0.490 ,0.210
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-mb, 20 , 261.000 , 221.000 ,0.030 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-nb, 56 , 308.000 , 203.000 ,0.050 ,0.085
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-nl, 16 , 244.000 , 222.000 ,0.030 ,0.095
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-ns, 48 , 330.000 , 192.000 ,0.035 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-nt, 8 , 277.000 , 154.000 ,0.035 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-nu, 5 , 306.000 , 161.000 ,0.120 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-on, 14 , 294.000 , 217.000 ,0.160 ,0.310
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-pe, 144 , 360.000 , 180.000 ,0.010 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-qc, 12 , 273.000 , 213.000 ,0.070 ,0.150
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-sk, 25 , 217.000 , 276.000 ,0.030 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ca-yt, 18 , 315.000 , 180.000 ,0.300 ,0.140
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = fr-pm, 300 , 240.000 , 246.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = gl, 6 , 387.000 , 147.000 ,0.390 ,0.130
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = mx, 10 , 322.000 , 184.000 ,0.090 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-al, 60 , 216.000 , 294.000 ,0.000 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ar, 60 , 300.000 , 210.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-az, 42 , 252.000 , 252.000 ,0.220 ,0.320
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ca, 25 , 259.000 , 238.000 ,0.000 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-co, 45 , 324.000 , 189.000 ,0.170 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ct, 168 , 336.000 , 189.000 ,0.050 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-dc, 1150 , 253.000 , 253.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-de, 225 , 189.000 , 315.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-fl, 35 , 273.000 , 238.000 ,0.130 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ga, 52 , 260.000 , 247.000 ,0.140 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-hi, 16 , 380.000 , 156.000 ,0.050 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ia, 55 , 363.000 , 176.000 ,0.090 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-id, 36 , 225.000 , 261.000 ,0.040 ,0.220
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-il, 50 , 226.000 , 277.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-in, 68 , 238.000 , 272.000 ,0.180 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ks, 50 , 374.000 , 151.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ky, 52 , 403.000 , 143.000 ,0.130 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-la, 52 , 286.000 , 221.000 ,0.200 ,0.080
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ma, 100 , 365.000 , 171.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-md, 80 , 362.000 , 148.000 ,0.015 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-me, 56 , 238.000 , 259.000 ,0.040 ,0.085
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-mi, 32 , 268.000 , 212.000 ,0.075 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-mn, 36 , 288.000 , 216.000 ,0.240 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-mo, 44 , 297.000 , 209.000 ,0.060 ,0.120
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ms, 60 , 216.000 , 294.000 ,0.030 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-mt, 32 , 388.000 , 152.000 ,0.105 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nc, 50 , 447.000 , 142.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nd, 50 , 375.000 , 154.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ne, 48 , 426.000 , 150.000 ,0.115 ,0.105
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nh, 108 , 216.000 , 297.000 ,0.000 ,0.130
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nj, 120 , 204.000 , 309.000 ,0.020 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nm, 40 , 243.000 , 228.000 ,0.015 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-nv, 38 , 228.000 , 285.000 ,0.020 ,0.490
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ny, 40 , 320.000 , 182.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-oh, 60 , 261.000 , 237.000 ,0.030 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ok, 45 , 387.000 , 153.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-or, 40 , 330.000 , 173.000 ,0.000 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-pa, 60 , 351.000 , 171.000 ,0.000 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ri, 280 , 231.000 , 266.000 ,0.005 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-sc, 64 , 312.000 , 208.000 ,0.055 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-sd, 48 , 372.000 , 168.000 ,0.120 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-tn, 64 , 560.000 , 112.000 ,0.070 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-tx, 20 , 263.000 , 214.000 ,0.000 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ut, 50 , 251.000 , 251.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-va, 50 , 426.000 , 147.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-vt, 115 , 230.000 , 276.000 ,0.020 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-wa, 48 , 384.000 , 168.000 ,0.070 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-wi, 43 , 301.000 , 215.000 ,0.350 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-wv, 60 , 297.000 , 207.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-wy, 45 , 324.000 , 189.000 ,0.190 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-ak, 7 , 406.000 , 147.000 ,0.080 ,0.410
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = us-ak, 7 , 406.000 , 147.000 ,0.080 ,0.410
+SELECT 68
+select iso, taginfo_scale,ttype, area_pct,  service  from xtaginfo order by iso ;
+  iso  |              taginfo_scale              |  ttype  |     area_pct      | service 
+-------+-----------------------------------------+---------+-------------------+---------
+ bm    | {288,224,-65.13,-64.410,32.04,32.600}   | normal  |                 1 | yes
+ ca-ab | {243,267,-120.01,-109.885,48.99,60.115} | normal  |                 1 | yes
+ ca-bc | {357,168,-139.06,-113.560,48.22,60.220} | normal  |                 1 | yes
+ ca-mb | {261,221,-102.01,-88.960,48.99,60.040}  | normal  |                 1 | yes
+ ca-nb | {308,203,-69.06,-63.560,44.55,48.175}   | normal  |                 1 | yes
+ ca-nl | {244,222,-67.83,-52.580,46.60,60.475}   | normal  |                 1 | yes
+ ca-ns | {330,192,-66.45,-59.575,43.27,47.270}   | normal  |                 1 | yes
+ ca-nt | {277,154,-136.59,-101.965,59.99,79.240} | normal  |                 1 | yes
+ ca-nu | {306,161,-120.69,-59.490,51.15,83.350}  | normal  |                 1 | yes
+ ca-on | {294,217,-95.16,-74.160,41.67,57.170}   | normal  |                 1 | yes
+ ca-pe | {360,180,-64.45,-61.950,45.85,47.100}   | normal  |                 1 | yes
+ ca-qc | {273,213,-79.78,-57.030,44.99,62.740}   | normal  |                 1 | yes
+ ca-sk | {217,276,-110.01,-101.330,48.99,60.030} | normal  |                 1 | yes
+ ca-yt | {315,180,-141.01,-123.510,59.99,69.990} | normal  |                 1 | yes
+ fr-pm | {240,246,-56.70,-55.900,46.55,47.370}   | normal  |                 1 | yes
+ gl    | {387,147,-74.13,-9.630,59.51,84.010}    | normal  |                 1 | yes
+ mx    | {322,184,-118.60,-86.400,14.38,32.780}  | normal  | 0.998725538451094 | yes
+ us-ak | {406,147,-7.89,50.110,51.02,72.020}     | shifted | 0.988462393881351 | yes
+ us-al | {216,294,-88.48,-84.880,30.13,35.030}   | normal  |                 1 | yes
+ us-ar | {300,210,-94.62,-89.620,33.00,36.500}   | normal  |                 1 | yes
+ us-az | {252,252,-114.82,-108.820,31.33,37.330} | normal  |                 1 | yes
+ us-ca | {259,238,-124.49,-114.130,32.52,42.040} | normal  |                 1 | yes
+ us-co | {324,189,-109.07,-101.870,36.99,41.190} | normal  |                 1 | yes
+ us-ct | {336,189,-73.73,-71.730,40.94,42.065}   | normal  |                 1 | yes
+ us-dc | {253,253,-77.12,-76.900,38.79,39.010}   | normal  |                 1 | yes
+ us-de | {189,315,-75.79,-74.950,38.45,39.850}   | normal  |                 1 | yes
+ us-fl | {273,238,-87.64,-79.840,24.39,31.190}   | normal  |                 1 | yes
+ us-ga | {260,247,-85.61,-80.610,30.35,35.100}   | normal  |                 1 | yes
+ us-hi | {380,156,-178.45,-154.700,18.86,28.610} | normal  |                 1 | yes
+ us-ia | {363,176,-96.64,-90.040,40.37,43.570}   | normal  |                 1 | yes
+ us-id | {225,261,-117.25,-111.000,41.98,49.230} | normal  |                 1 | yes
+ us-il | {226,277,-91.52,-87.000,36.97,42.510}   | normal  |                 1 | yes
+ us-in | {238,272,-88.10,-84.600,37.77,41.770}   | normal  |                 1 | yes
+ us-ks | {374,151,-102.06,-94.580,36.99,40.010}  | normal  |                 1 | yes
+ us-ky | {403,143,-89.58,-81.830,36.49,39.240}   | normal  |                 1 | yes
+ us-la | {286,221,-94.05,-88.550,28.85,33.100}   | normal  |                 1 | yes
+ us-ma | {365,171,-73.51,-69.860,41.18,42.890}   | normal  |                 1 | yes
+ us-md | {362,148,-79.49,-74.965,37.88,39.730}   | normal  |                 1 | yes
+ us-me | {238,259,-71.09,-66.840,42.92,47.545}   | normal  |                 1 | yes
+ us-mi | {268,212,-90.42,-82.045,41.69,48.315}   | normal  |                 1 | yes
+ us-mn | {288,216,-97.24,-89.240,43.49,49.490}   | normal  |                 1 | yes
+ us-mo | {297,209,-95.78,-89.030,35.99,40.740}   | normal  |                 1 | yes
+ us-ms | {216,294,-91.66,-88.060,30.14,35.040}   | normal  |                 1 | yes
+ us-mt | {388,152,-116.05,-103.925,44.35,49.100} | normal  |                 1 | yes
+ us-nc | {447,142,-84.33,-75.390,33.75,36.590}   | normal  |                 1 | yes
+ us-nd | {375,154,-104.05,-96.550,45.93,49.010}  | normal  |                 1 | yes
+ us-ne | {426,150,-104.06,-95.185,39.99,43.115}  | normal  |                 1 | yes
+ us-nh | {216,297,-72.56,-70.560,42.69,45.440}   | normal  |                 1 | yes
+ us-nj | {204,309,-75.57,-73.870,38.79,41.365}   | normal  |                 1 | yes
+ us-nm | {243,228,-109.06,-102.985,31.33,37.030} | normal  |                 1 | yes
+ us-nv | {228,285,-120.01,-114.010,35.00,42.500} | normal  |                 1 | yes
+ us-ny | {320,182,-79.77,-71.770,40.47,45.020}   | normal  |                 1 | yes
+ us-oh | {261,237,-84.83,-80.480,38.40,42.350}   | normal  |                 1 | yes
+ us-ok | {387,153,-103.01,-94.410,33.61,37.010}  | normal  |                 1 | yes
+ us-or | {330,173,-124.71,-116.460,41.99,46.315} | normal  |                 1 | yes
+ us-pa | {351,171,-80.53,-74.680,39.71,42.560}   | normal  |                 1 | yes
+ us-ri | {231,266,-71.91,-71.085,41.09,42.040}   | normal  |                 1 | yes
+ us-sc | {312,208,-83.36,-78.485,32.03,35.280}   | normal  |                 1 | yes
+ us-sd | {372,168,-104.06,-96.310,42.47,45.970}  | normal  |                 1 | yes
+ us-tn | {560,112,-90.32,-81.570,34.98,36.730}   | normal  |                 1 | yes
+ us-tx | {263,214,-106.65,-93.500,25.83,36.530}  | normal  |                 1 | yes
+ us-ut | {251,251,-114.06,-109.040,36.99,42.010} | normal  |                 1 | yes
+ us-va | {426,147,-83.68,-75.160,36.54,39.480}   | normal  |                 1 | yes
+ us-vt | {230,276,-73.44,-71.440,42.72,45.120}   | normal  |                 1 | yes
+ us-wa | {384,168,-124.84,-116.840,45.54,49.040} | normal  |                 1 | yes
+ us-wi | {301,215,-92.89,-85.890,42.49,47.490}   | normal  |                 1 | yes
+ us-wv | {297,207,-82.65,-77.700,37.20,40.650}   | normal  |                 1 | yes
+ us-wy | {324,189,-111.06,-103.860,40.99,45.190} | normal  |                 1 | yes
+(68 rows)
+
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+processing:  bm -100000000001993208
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/bm/poly/poly.osm.pbf  r1993208
+processing:  ca-ab -100000000000391186
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-ab/poly/poly.osm.pbf  r391186
+processing:  ca-bc -100000000000390867
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-bc/poly/poly.osm.pbf  r390867
+processing:  ca-mb -100000000000390841
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-mb/poly/poly.osm.pbf  r390841
+processing:  ca-nb -100000000000068942
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-nb/poly/poly.osm.pbf  r68942
+processing:  ca-nl -100000000000391196
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-nl/poly/poly.osm.pbf  r391196
+processing:  ca-ns -100000000000390558
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-ns/poly/poly.osm.pbf  r390558
+processing:  ca-nt -100000000000391220
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-nt/poly/poly.osm.pbf  r391220
+processing:  ca-nu -100000000000390840
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-nu/poly/poly.osm.pbf  r390840
+processing:  ca-on -100000000000068841
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-on/poly/poly.osm.pbf  r68841
+processing:  ca-pe -100000000000391115
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-pe/poly/poly.osm.pbf  r391115
+processing:  ca-qc -100000000000061549
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-qc/poly/poly.osm.pbf  r61549
+processing:  ca-sk -100000000000391178
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-sk/poly/poly.osm.pbf  r391178
+processing:  ca-yt -100000000000391455
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/ca-yt/poly/poly.osm.pbf  r391455
+processing:  fr-pm -100000000003406826
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/fr-pm/poly/poly.osm.pbf  r3406826
+processing:  gl -100000000002184073
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/gl/poly/poly.osm.pbf  r2184073
+processing:  mx -100000000000114686
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/mx/poly/poly.osm.pbf  r114686
+processing:  us-ak -100000000001116270
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ak/poly/poly.osm.pbf  r1116270
+processing:  us-al -100000000000161950
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-al/poly/poly.osm.pbf  r161950
+processing:  us-ar -100000000000161646
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ar/poly/poly.osm.pbf  r161646
+processing:  us-az -100000000000162018
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-az/poly/poly.osm.pbf  r162018
+processing:  us-ca -100000000000165475
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ca/poly/poly.osm.pbf  r165475
+processing:  us-co -100000000000161961
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-co/poly/poly.osm.pbf  r161961
+processing:  us-ct -100000000000165794
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ct/poly/poly.osm.pbf  r165794
+processing:  us-dc -100000000000162069
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-dc/poly/poly.osm.pbf  r162069
+processing:  us-de -100000000000162110
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-de/poly/poly.osm.pbf  r162110
+processing:  us-fl -100000000000162050
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-fl/poly/poly.osm.pbf  r162050
+processing:  us-ga -100000000000161957
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ga/poly/poly.osm.pbf  r161957
+processing:  us-hi -100000000000166563
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-hi/poly/poly.osm.pbf  r166563
+processing:  us-ia -100000000000161650
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ia/poly/poly.osm.pbf  r161650
+processing:  us-id -100000000000162116
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-id/poly/poly.osm.pbf  r162116
+processing:  us-il -100000000000122586
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-il/poly/poly.osm.pbf  r122586
+processing:  us-in -100000000000161816
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-in/poly/poly.osm.pEnd of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+bf  r161816
+processing:  us-ks -100000000000161644
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ks/poly/poly.osm.pbf  r161644
+processing:  us-ky -100000000000161655
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ky/poly/poly.osm.pbf  r161655
+processing:  us-la -100000000000224922
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-la/poly/poly.osm.pbf  r224922
+processing:  us-ma -100000000000061315
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ma/poly/poly.osm.pbf  r61315
+processing:  us-md -100000000000162112
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-md/poly/poly.osm.pbf  r162112
+processing:  us-me -100000000000063512
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-me/poly/poly.osm.pbf  r63512
+processing:  us-mi -100000000000165789
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-mi/poly/poly.osm.pbf  r165789
+processing:  us-mn -100000000000165471
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-mn/poly/poly.osm.pbf  r165471
+processing:  us-mo -100000000000161638
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-mo/poly/poly.osm.pbf  r161638
+processing:  us-ms -100000000000161943
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ms/poly/poly.osm.pbf  r161943
+processing:  us-mt -100000000000162115
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-mt/poly/poly.osm.pbf  r162115
+processing:  us-nc -100000000000224045
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nc/poly/poly.osm.pbf  r224045
+processing:  us-nd -100000000000161653
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nd/poly/poly.osm.pbf  r161653
+processing:  us-ne -100000000000161648
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ne/poly/poly.osm.pbf  r161648
+processing:  us-nh -100000000000067213
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nh/poly/poly.osm.pbf  r67213
+processing:  us-nj -100000000000224951
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nj/poly/poly.osm.pbf  r224951
+processing:  us-nm -100000000000162014
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nm/poly/poly.osm.pbf  r162014
+processing:  us-nv -100000000000165473
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-nv/poly/poly.osm.pbf  r165473
+processing:  us-ny -100000000000061320
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ny/poly/poly.osm.pbf  r61320
+processing:  us-oh -100000000000162061
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-oh/poly/poly.osm.pbf  r162061
+processing:  us-ok -100000000000161645
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ok/poly/poly.osm.pbf  r161645
+processing:  us-or -100000000000165476
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-or/poly/poly.osm.pbf  r165476
+processing:  us-pa -100000000000162109
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-pa/poly/poly.osm.pbf  r162109
+processing:  us-ri -100000000000392915
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ri/poly/poly.osm.pbf  r392915
+processing:  us-sc -100000000000224040
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-sc/poly/poly.osm.pbf  r224040
+processing:  us-sd -100000000000161652
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-sd/poly/poly.osm.pbf  r161652
+processing:  us-tn -100000000000161838
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-tn/poly/poly.osm.pbf  r161838
+processing:  us-tx -100000000000114690
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-tx/poly/poly.osm.pbf  r114690
+processing:  us-ut -100000000000161993
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-ut/poly/poly.osm.pbf  r161993
+processing:  us-va -100000000000224042
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-va/poly/poly.osm.pbf  r224042
+processing:  us-vt -100000000000060759
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-vt/poly/poly.osm.pbf  r60759
+processing:  us-wa -100000000000165479
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-wa/poly/poly.osm.pbf  r165479
+processing:  us-wi -100000000000165466
+executing: /osm/sh/osm_getpolygon.sh /osm/service/End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+na/us-wi/poly/poly.osm.pbf  r165466
+processing:  us-wv -100000000000162068
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-wv/poly/poly.osm.pbf  r162068
+processing:  us-wy -100000000000161991
+executing: /osm/sh/osm_getpolygon.sh /osm/service/na/us-wy/poly/poly.osm.pbf  r161991
+------start setup_map.py ------
+Creating output file that is 288P x 224L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 224
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 243P x 267L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 243, 267
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 357P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 357, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 261P x 221L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 261, 221
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 203L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 203
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 244P x 222L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 244, 222
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 330P x 192L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 330, 192
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 277P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 277, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 306P x 161L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 306, 161
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 294P x 217L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 294, 217
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 360P x 180L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 360, 180
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 213L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 213
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 217P x 276L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 217, 276
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Generating background map:  bm -100000000001993208 288 224 Bermuda
+mapdata: 288 224 -64.41 32.6 -65.13 32.04
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -65.13 32.04 -64.41 32.6  -ts 288 224   -of GTiff   /osm/ne/ne.tif /osm/service/na/bm/img/nebackground.geotif  
+Generating background map:  ca-ab -100000000000391186 243 267 Alberta
+mapdata: 243 267 -109.885 60.115 -120.01 48.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -120.01 48.99 -109.885 60.115  -ts 243 267   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-ab/img/nebackground.geotif  
+Generating background map:  ca-bc -100000000000390867 357 168 British Columbia
+mapdata: 357 168 -113.56 60.22 -139.06 48.22
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -139.06 48.22 -113.56 60.22  -ts 357 168   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-bc/img/nebackground.geotif  
+Generating background map:  ca-mb -100000000000390841 261 221 Manitoba
+mapdata: 261 221 -88.96 60.04 -102.01 48.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -102.01 48.99 -88.96 60.04  -ts 261 221   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-mb/img/nebackground.geotif  
+Generating background map:  ca-nb -100000000000068942 308 203 New Brunswick
+mapdata: 308 203 -63.56 48.175 -69.06 44.55
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -69.06 44.55 -63.56 48.175  -ts 308 203   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-nb/img/nebackground.geotif  
+Generating background map:  ca-nl -100000000000391196 244 222 Newfoundland and Labrador
+mapdata: 244 222 -52.58 60.475 -67.83 46.6
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -67.83 46.6 -52.58 60.475  -ts 244 222   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-nl/img/nebackground.geotif  
+Generating background map:  ca-ns -100000000000390558 330 192 Nova Scotia
+mapdata: 330 192 -59.575 47.27 -66.45 43.27
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -66.45 43.27 -59.575 47.27  -ts 330 192   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-ns/img/nebackground.geotif  
+Generating background map:  ca-nt -100000000000391220 277 154 Northwest Territories
+mapdata: 277 154 -101.965 79.24 -136.59 59.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -136.59 59.99 -101.965 79.24  -ts 277 154   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-nt/img/nebackground.geotif  
+Generating background map:  ca-nu -100000000000390840 306 161 Nunavut
+mapdata: 306 161 -59.49 83.35 -120.69 51.15
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -120.69 51.15 -59.49 83.35  -ts 306 161   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-nu/img/nebackground.geotif  
+Generating background map:  ca-on -100000000000068841 294 217 Ontario
+mapdata: 294 217 -74.16 57.17 -95.16 41.67
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -95.16 41.67 -74.16 57.17  -ts 294 217   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-on/img/nebackground.geotif  
+Generating background map:  ca-pe -100000000000391115 360 180 Prince Edward Island
+mapdata: 360 180 -61.95 47.1 -64.45 45.85
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -64.45 45.85 -61.95 47.1  -ts 360 180   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-pe/img/nebackground.geotif  
+Generating background map:  ca-qc -100000000000061549 273 213 Québec
+mapdata: 273 213 -57.03 62.74 -79.78 44.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -79.78 44.99 -57.03 62.74  -ts 273 213   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-qc/img/nebackground.geotif  
+Generating background map:  ca-sk -100000000000391178 217 276 Saskatchewan
+mapdata: 217 276 -101.33 60.03 -110.01 48.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -110.01 48.99 -101.33 60.03  -ts 217 276   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-sk/img/nebackground.geotif  
+Generating background map:  ca-yt -100000000000391455 315 180 Yukon
+mapdata: 315 180 -123.51 69.99 -141.01 59.99
+<mapnik.Datasource object at 0x7Creating output file that is 315P x 180L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 315, 180
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 240P x 246L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 240, 246
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 387P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 387, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 322P x 184L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 322, 184
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 406P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 406, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 216P x 294L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 216, 294
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 300P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 300, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 259P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 259, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 324P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 324, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 336P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 336, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 253P x 253L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 253, 253
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 189P x 315L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 189, 315
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+f650519c6e0>
+gdalw: gdalwarp    -te -141.01 59.99 -123.51 69.99  -ts 315 180   -of GTiff   /osm/ne/ne.tif /osm/service/na/ca-yt/img/nebackground.geotif  
+Generating background map:  fr-pm -100000000003406826 240 246 Saint-Pierre-et-Miquelon
+mapdata: 240 246 -55.9 47.37 -56.7 46.55
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -56.7 46.55 -55.9 47.37  -ts 240 246   -of GTiff   /osm/ne/ne.tif /osm/service/na/fr-pm/img/nebackground.geotif  
+Generating background map:  gl -100000000002184073 387 147 Kalaallit Nunaat
+mapdata: 387 147 -9.63 84.01 -74.13 59.51
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -74.13 59.51 -9.63 84.01  -ts 387 147   -of GTiff   /osm/ne/ne.tif /osm/service/na/gl/img/nebackground.geotif  
+Generating background map:  mx -100000000000114686 322 184 México
+mapdata: 322 184 -86.4 32.78 -118.6 14.38
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -118.6 14.38 -86.4 32.78  -ts 322 184   -of GTiff   /osm/ne/ne.tif /osm/service/na/mx/img/nebackground.geotif  
+Generating background map:  us-ak -100000000001116270 406 147 Alaska
+mapdata: 406 147 50.11 72.02 -7.89 51.02
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -7.89 51.02 50.11 72.02  -ts 406 147   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ak/img/nebackground.geotif  
+Generating background map:  us-al -100000000000161950 216 294 Alabama
+mapdata: 216 294 -84.88 35.03 -88.48 30.13
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -88.48 30.13 -84.88 35.03  -ts 216 294   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-al/img/nebackground.geotif  
+Generating background map:  us-ar -100000000000161646 300 210 Arkansas
+mapdata: 300 210 -89.62 36.5 -94.62 33.0
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -94.62 33.0 -89.62 36.5  -ts 300 210   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ar/img/nebackground.geotif  
+Generating background map:  us-az -100000000000162018 252 252 Arizona
+mapdata: 252 252 -108.82 37.33 -114.82 31.33
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -114.82 31.33 -108.82 37.33  -ts 252 252   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-az/img/nebackground.geotif  
+Generating background map:  us-ca -100000000000165475 259 238 California
+mapdata: 259 238 -114.13 42.04 -124.49 32.52
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -124.49 32.52 -114.13 42.04  -ts 259 238   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ca/img/nebackground.geotif  
+Generating background map:  us-co -100000000000161961 324 189 Colorado
+mapdata: 324 189 -101.87 41.19 -109.07 36.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -109.07 36.99 -101.87 41.19  -ts 324 189   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-co/img/nebackground.geotif  
+Generating background map:  us-ct -100000000000165794 336 189 Connecticut
+mapdata: 336 189 -71.73 42.065 -73.73 40.94
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -73.73 40.94 -71.73 42.065  -ts 336 189   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ct/img/nebackground.geotif  
+Generating background map:  us-dc -100000000000162069 253 253 District of Columbia
+mapdata: 253 253 -76.9 39.01 -77.12 38.79
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -77.12 38.79 -76.9 39.01  -ts 253 253   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-dc/img/nebackground.geotif  
+Generating background map:  us-de -100000000000162110 189 315 Delaware
+mapdata: 189 315 -74.95 39.85 -75.79 38.45
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -75.79 38.45 -74.95 39.85  -ts 189 315   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-de/img/nebackground.geotif  
+Generating background map:  us-fl -100000000000162050 273 238 Florida
+mapdata: 273 238 -79.84 31.19 -87.64 24.39
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -87.64 24.39 -79.84 31.19  -ts 273 238   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-fl/img/nebackground.geotif  
+Generating background map:  us-ga -10000000000016Creating output file that is 260P x 247L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 247
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 380P x 156L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 380, 156
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 363P x 176L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 363, 176
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 225P x 261L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 225, 261
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 226P x 277L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 226, 277
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 238P x 272L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 238, 272
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 374P x 151L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 374, 151
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 403P x 143L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 403, 143
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 286P x 221L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 286, 221
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 365P x 171L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 365, 171
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 362P x 148L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 362, 148
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 238P x 259L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 238, 259
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 268P x 212L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 268, 212
+0...10...20...30...40...50...60...70...80...90...100 - done.
+1957 260 247 Georgia
+mapdata: 260 247 -80.61 35.1 -85.61 30.35
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -85.61 30.35 -80.61 35.1  -ts 260 247   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ga/img/nebackground.geotif  
+Generating background map:  us-hi -100000000000166563 380 156 Hawaii
+mapdata: 380 156 -154.7 28.61 -178.45 18.86
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -178.45 18.86 -154.7 28.61  -ts 380 156   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-hi/img/nebackground.geotif  
+Generating background map:  us-ia -100000000000161650 363 176 Iowa
+mapdata: 363 176 -90.04 43.57 -96.64 40.37
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -96.64 40.37 -90.04 43.57  -ts 363 176   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ia/img/nebackground.geotif  
+Generating background map:  us-id -100000000000162116 225 261 Idaho
+mapdata: 225 261 -111.0 49.23 -117.25 41.98
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -117.25 41.98 -111.0 49.23  -ts 225 261   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-id/img/nebackground.geotif  
+Generating background map:  us-il -100000000000122586 226 277 Illinois
+mapdata: 226 277 -87.0 42.51 -91.52 36.97
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -91.52 36.97 -87.0 42.51  -ts 226 277   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-il/img/nebackground.geotif  
+Generating background map:  us-in -100000000000161816 238 272 Indiana
+mapdata: 238 272 -84.6 41.77 -88.1 37.77
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -88.1 37.77 -84.6 41.77  -ts 238 272   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-in/img/nebackground.geotif  
+Generating background map:  us-ks -100000000000161644 374 151 Kansas
+mapdata: 374 151 -94.58 40.01 -102.06 36.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -102.06 36.99 -94.58 40.01  -ts 374 151   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ks/img/nebackground.geotif  
+Generating background map:  us-ky -100000000000161655 403 143 Kentucky
+mapdata: 403 143 -81.83 39.24 -89.58 36.49
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -89.58 36.49 -81.83 39.24  -ts 403 143   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ky/img/nebackground.geotif  
+Generating background map:  us-la -100000000000224922 286 221 Louisiana
+mapdata: 286 221 -88.55 33.1 -94.05 28.85
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -94.05 28.85 -88.55 33.1  -ts 286 221   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-la/img/nebackground.geotif  
+Generating background map:  us-ma -100000000000061315 365 171 Massachusetts
+mapdata: 365 171 -69.86 42.89 -73.51 41.18
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -73.51 41.18 -69.86 42.89  -ts 365 171   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ma/img/nebackground.geotif  
+Generating background map:  us-md -100000000000162112 362 148 Maryland
+mapdata: 362 148 -74.965 39.73 -79.49 37.88
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -79.49 37.88 -74.965 39.73  -ts 362 148   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-md/img/nebackground.geotif  
+Generating background map:  us-me -100000000000063512 238 259 Maine
+mapdata: 238 259 -66.84 47.545 -71.09 42.92
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -71.09 42.92 -66.84 47.545  -ts 238 259   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-me/img/nebackground.geotif  
+Generating background map:  us-mi -100000000000165789 268 212 Michigan
+mapdata: 268 212 -82.045 48.315 -90.42 41.69
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -90.42 41.69 -82.045 48.315  -ts 268 212   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-mi/img/nebackground.geotif  
+Generating background map:  us-mn -100000000000165471 288 216 Minnesota
+mapdata: 288 216 -89.24 49.49 -97.24 43.49
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -97.24 43.49 -89.24 49.49  -ts 288 216   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-mn/img/Creating output file that is 288P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 297P x 209L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 297, 209
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 216P x 294L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 216, 294
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 388P x 152L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 388, 152
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 447P x 142L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 447, 142
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 375P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 375, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 426P x 150L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 426, 150
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 216P x 297L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 216, 297
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 204P x 309L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 204, 309
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 243P x 228L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 243, 228
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 228P x 285L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 228, 285
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 320P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 320, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 261P x 237L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 261, 237
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 387P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 387, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+nebackground.geotif  
+Generating background map:  us-mo -100000000000161638 297 209 Missouri
+mapdata: 297 209 -89.03 40.74 -95.78 35.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -95.78 35.99 -89.03 40.74  -ts 297 209   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-mo/img/nebackground.geotif  
+Generating background map:  us-ms -100000000000161943 216 294 Mississippi
+mapdata: 216 294 -88.06 35.04 -91.66 30.14
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -91.66 30.14 -88.06 35.04  -ts 216 294   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ms/img/nebackground.geotif  
+Generating background map:  us-mt -100000000000162115 388 152 Montana
+mapdata: 388 152 -103.925 49.1 -116.05 44.35
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -116.05 44.35 -103.925 49.1  -ts 388 152   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-mt/img/nebackground.geotif  
+Generating background map:  us-nc -100000000000224045 447 142 North Carolina
+mapdata: 447 142 -75.39 36.59 -84.33 33.75
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -84.33 33.75 -75.39 36.59  -ts 447 142   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nc/img/nebackground.geotif  
+Generating background map:  us-nd -100000000000161653 375 154 North Dakota
+mapdata: 375 154 -96.55 49.01 -104.05 45.93
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -104.05 45.93 -96.55 49.01  -ts 375 154   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nd/img/nebackground.geotif  
+Generating background map:  us-ne -100000000000161648 426 150 Nebraska
+mapdata: 426 150 -95.185 43.115 -104.06 39.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -104.06 39.99 -95.185 43.115  -ts 426 150   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ne/img/nebackground.geotif  
+Generating background map:  us-nh -100000000000067213 216 297 New Hampshire
+mapdata: 216 297 -70.56 45.44 -72.56 42.69
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -72.56 42.69 -70.56 45.44  -ts 216 297   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nh/img/nebackground.geotif  
+Generating background map:  us-nj -100000000000224951 204 309 New Jersey
+mapdata: 204 309 -73.87 41.365 -75.57 38.79
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -75.57 38.79 -73.87 41.365  -ts 204 309   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nj/img/nebackground.geotif  
+Generating background map:  us-nm -100000000000162014 243 228 New Mexico
+mapdata: 243 228 -102.985 37.03 -109.06 31.33
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -109.06 31.33 -102.985 37.03  -ts 243 228   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nm/img/nebackground.geotif  
+Generating background map:  us-nv -100000000000165473 228 285 Nevada
+mapdata: 228 285 -114.01 42.5 -120.01 35.0
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -120.01 35.0 -114.01 42.5  -ts 228 285   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-nv/img/nebackground.geotif  
+Generating background map:  us-ny -100000000000061320 320 182 New York
+mapdata: 320 182 -71.77 45.02 -79.77 40.47
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -79.77 40.47 -71.77 45.02  -ts 320 182   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ny/img/nebackground.geotif  
+Generating background map:  us-oh -100000000000162061 261 237 Ohio
+mapdata: 261 237 -80.48 42.35 -84.83 38.4
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -84.83 38.4 -80.48 42.35  -ts 261 237   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-oh/img/nebackground.geotif  
+Generating background map:  us-ok -100000000000161645 387 153 Oklahoma
+mapdata: 387 153 -94.41 37.01 -103.01 33.61
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -103.01 33.61 -94.41 37.01  -ts 387 153   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ok/img/nebackground.geotif  
+Generating background map:  us-or -100000000000165476 330 173 Oregon
+mapdata: 330 173 -116.46 46.315 -124.71 41.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalwCreating output file that is 330P x 173L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 330, 173
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 351P x 171L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 351, 171
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 231P x 266L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 231, 266
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 312P x 208L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 312, 208
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 372P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 372, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 560P x 112L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 560, 112
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 263P x 214L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 263, 214
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 251P x 251L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 251, 251
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 426P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 426, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 230P x 276L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 230, 276
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 384P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 384, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 301P x 215L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 301, 215
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 297P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 297, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 324P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 324, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+: gdalwarp    -te -124.71 41.99 -116.46 46.315  -ts 330 173   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-or/img/nebackground.geotif  
+Generating background map:  us-pa -100000000000162109 351 171 Pennsylvania
+mapdata: 351 171 -74.68 42.56 -80.53 39.71
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -80.53 39.71 -74.68 42.56  -ts 351 171   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-pa/img/nebackground.geotif  
+Generating background map:  us-ri -100000000000392915 231 266 Rhode Island
+mapdata: 231 266 -71.085 42.04 -71.91 41.09
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -71.91 41.09 -71.085 42.04  -ts 231 266   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ri/img/nebackground.geotif  
+Generating background map:  us-sc -100000000000224040 312 208 South Carolina
+mapdata: 312 208 -78.485 35.28 -83.36 32.03
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -83.36 32.03 -78.485 35.28  -ts 312 208   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-sc/img/nebackground.geotif  
+Generating background map:  us-sd -100000000000161652 372 168 South Dakota
+mapdata: 372 168 -96.31 45.97 -104.06 42.47
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -104.06 42.47 -96.31 45.97  -ts 372 168   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-sd/img/nebackground.geotif  
+Generating background map:  us-tn -100000000000161838 560 112 Tennessee
+mapdata: 560 112 -81.57 36.73 -90.32 34.98
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -90.32 34.98 -81.57 36.73  -ts 560 112   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-tn/img/nebackground.geotif  
+Generating background map:  us-tx -100000000000114690 263 214 Texas
+mapdata: 263 214 -93.5 36.53 -106.65 25.83
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -106.65 25.83 -93.5 36.53  -ts 263 214   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-tx/img/nebackground.geotif  
+Generating background map:  us-ut -100000000000161993 251 251 Utah
+mapdata: 251 251 -109.04 42.01 -114.06 36.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -114.06 36.99 -109.04 42.01  -ts 251 251   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-ut/img/nebackground.geotif  
+Generating background map:  us-va -100000000000224042 426 147 Virginia
+mapdata: 426 147 -75.16 39.48 -83.68 36.54
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -83.68 36.54 -75.16 39.48  -ts 426 147   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-va/img/nebackground.geotif  
+Generating background map:  us-vt -100000000000060759 230 276 Vermont
+mapdata: 230 276 -71.44 45.12 -73.44 42.72
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -73.44 42.72 -71.44 45.12  -ts 230 276   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-vt/img/nebackground.geotif  
+Generating background map:  us-wa -100000000000165479 384 168 Washington
+mapdata: 384 168 -116.84 49.04 -124.84 45.54
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -124.84 45.54 -116.84 49.04  -ts 384 168   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-wa/img/nebackground.geotif  
+Generating background map:  us-wi -100000000000165466 301 215 Wisconsin
+mapdata: 301 215 -85.89 47.49 -92.89 42.49
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -92.89 42.49 -85.89 47.49  -ts 301 215   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-wi/img/nebackground.geotif  
+Generating background map:  us-wv -100000000000162068 297 207 West Virginia
+mapdata: 297 207 -77.7 40.65 -82.65 37.2
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -82.65 37.2 -77.7 40.65  -ts 297 207   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-wv/img/nebackground.geotif  
+Generating background map:  us-wy -100000000000161991 324 189 Wyoming
+mapdata: 324 189 -103.86 45.19 -111.06 40.99
+<mapnik.Datasource object at 0x7f650519c6e0>
+gdalw: gdalwarp    -te -111.06 40.99 -103.86 45.19  -ts 324 189   -of GTiff   /osm/ne/ne.tif /osm/service/na/us-wy/img/nebackground.geotif  
+------start setup_config.py -----
+Generating taginfo-config:  bm -100000000001993208 288 224 Bermuda  ;  Bermuda
+mapdata: 288 224 -64.41 32.6 -65.13 32.04 Bermuda Bermuda
+Generating taginfo-config:  ca-ab -100000000000391186 243 267 Alberta  ;  Alberta
+mapdata: 243 267 -109.885 60.115 -120.01 48.99 Alberta Alberta
+Generating taginfo-config:  ca-bc -100000000000390867 357 168 British Columbia  ;  British Columbia
+mapdata: 357 168 -113.56 60.22 -139.06 48.22 British Columbia British Columbia
+Generating taginfo-config:  ca-mb -100000000000390841 261 221 Manitoba  ;  Manitoba
+mapdata: 261 221 -88.96 60.04 -102.01 48.99 Manitoba Manitoba
+Generating taginfo-config:  ca-nb -100000000000068942 308 203 New Brunswick  ;  New Brunswick
+mapdata: 308 203 -63.56 48.175 -69.06 44.55 New Brunswick New Brunswick
+Generating taginfo-config:  ca-nl -100000000000391196 244 222 Newfoundland and Labrador  ;  Newfoundland and Labrador
+mapdata: 244 222 -52.58 60.475 -67.83 46.6 Newfoundland and Labrador Newfoundland and Labrador
+Generating taginfo-config:  ca-ns -100000000000390558 330 192 Nova Scotia  ;  Nova Scotia
+mapdata: 330 192 -59.575 47.27 -66.45 43.27 Nova Scotia Nova Scotia
+Generating taginfo-config:  ca-nt -100000000000391220 277 154 Northwest Territories  ;  Northwest Territories
+mapdata: 277 154 -101.965 79.24 -136.59 59.99 Northwest Territories Northwest Territories
+Generating taginfo-config:  ca-nu -100000000000390840 306 161 Nunavut  ;  Nunavut
+mapdata: 306 161 -59.49 83.35 -120.69 51.15 Nunavut Nunavut
+Generating taginfo-config:  ca-on -100000000000068841 294 217 Ontario  ;  Ontario
+mapdata: 294 217 -74.16 57.17 -95.16 41.67 Ontario Ontario
+Generating taginfo-config:  ca-pe -100000000000391115 360 180 Prince Edward Island  ;  Prince Edward Island
+mapdata: 360 180 -61.95 47.1 -64.45 45.85 Prince Edward Island Prince Edward Island
+Generating taginfo-config:  ca-qc -100000000000061549 273 213 Québec  ;  Quebec
+mapdata: 273 213 -57.03 62.74 -79.78 44.99 Québec Quebec
+Generating taginfo-config:  ca-sk -100000000000391178 217 276 Saskatchewan  ;  Saskatchewan
+mapdata: 217 276 -101.33 60.03 -110.01 48.99 Saskatchewan Saskatchewan
+Generating taginfo-config:  ca-yt -100000000000391455 315 180 Yukon  ;  Yukon
+mapdata: 315 180 -123.51 69.99 -141.01 59.99 Yukon Yukon
+Generating taginfo-config:  fr-pm -100000000003406826 240 246 Saint-Pierre-et-Miquelon  ;  Saint Pierre and Miquelon
+mapdata: 240 246 -55.9 47.37 -56.7 46.55 Saint-Pierre-et-Miquelon Saint Pierre and Miquelon
+Generating taginfo-config:  gl -100000000002184073 387 147 Kalaallit Nunaat  ;  Greenland
+mapdata: 387 147 -9.63 84.01 -74.13 59.51 Kalaallit Nunaat Greenland
+Generating taginfo-config:  mx -100000000000114686 322 184 México  ;  Mexico
+mapdata: 322 184 -86.4 32.78 -118.6 14.38 México Mexico
+Generating taginfo-config:  us-ak -100000000001116270 406 147 Alaska  ;  Alaska
+mapdata: 406 147 50.11 72.02 -7.89 51.02 Alaska Alaska
+Generating taginfo-config:  us-al -100000000000161950 216 294 Alabama  ;  Alabama
+mapdata: 216 294 -84.88 35.03 -88.48 30.13 Alabama Alabama
+Generating taginfo-config:  us-ar -100000000000161646 300 210 Arkansas  ;  Arkansas
+mapdata: 300 210 -89.62 36.5 -94.62 33.0 Arkansas Arkansas
+Generating taginfo-config:  us-az -100000000000162018 252 252 Arizona  ;  Arizona
+mapdata: 252 252 -108.82 37.33 -114.82 31.33 Arizona Arizona
+Generating taginfo-config:  us-ca -100000000000165475 259 238 California  ;  California
+mapdata: 259 238 -114.13 42.04 -124.49 32.52 California California
+Generating taginfo-config:  us-co -100000000000161961 324 189 Colorado  ;  Colorado
+mapdata: 324 189 -101.87 41.19 -109.07 36.99 Colorado Colorado
+Generating taginfo-config:  us-ct -100000000000165794 336 189 Connecticut  ;  Connecticut
+mapdata: 336 189 -71.73 42.065 -73.73 40.94 Connecticut Connecticut
+Generating taginfo-config:  us-dc -100000000000162069 253 253 District of Columbia  ;  District of Columbia
+mapdata: 253 253 -76.9 39.01 -77.12 38.79 District of Columbia District of Columbia
+Generating taginfo-config:  us-de -100000000000162110 189 315 Delaware  ;  Delaware
+mapdata: 189 315 -74.95 39.85 -75.79 38.45 Delaware Delaware
+Generating taginfo-config:  us-fl -100000000000162050 273 238 Florida  ;  Florida
+mapdata: 273 238 -79.84 31.19 -87.64 24.39 Florida Florida
+Generating taginfo-config:  us-ga -100000000000161957 260 247 Georgia  ;  Georgia
+mapdata: 260 247 -80.61 35.1 -85.61 30.35 Georgia Georgia
+Generating taginfo-config:  us-hi -100000000000166563 380 156 Hawaii  ;  Hawaii
+mapdata: 380 156 -154.7 28.61 -178.45 18.86 Hawaii Hawaii
+Generating taginfo-config:  us-ia -100000000000161650 363 176 Iowa  ;  Iowa
+mapdata: 363 176 -90.04 43.57 -96.64 40.37 Iowa Iowa
+Generating taginfo-config:  us-id -100000000000162116 225 261 Idaho  ;  Idaho
+mapdata: 225 261 -111.0 49.23 -117.25 41.98 Idaho Idaho
+Generating taginfo-config:  us-il -100000000000122586 226 277 Illinois  ;  Illinois
+mapdata: 226 277 -87.0 42.51 -91.52 36.97 Illinois Illinois
+Generating taginfo-config:  us-in -100000000000161816 238 272 Indiana  ;  Indiana
+mapdata: 238 272 -84.6 41.77 -88.1 37.77 Indiana Indiana
+Generating taginfo-config:  us-ks -100000000000161644 374 151 Kansas  ;  Kansas
+mapdata: 374 151 -94.58 40.01 -102.06 36.99 Kansas Kansas
+Generating taginfo-config:  us-ky -100000000000161655 403 143 Kentucky  ;  Kentucky
+mapdata: 403 143 -81.83 39.24 -89.58 36.49 Kentucky Kentucky
+Generating taginfo-config:  us-la -100000000000224922 286 221 Louisiana  ;  Louisiana
+mapdata: 286 221 -88.55 33.1 -94.05 28.85 Louisiana Louisiana
+Generating taginfo-config:  us-ma -100000000000061315 365 171 Massachusetts  ;  Massachusetts
+mapdata: 365 171 -69.86 42.89 -73.51 41.18 Massachusetts Massachusetts
+Generating taginfo-config:  us-md -100000000000162112 362 148 Maryland  ;  Maryland
+mapdata: 362 148 -74.965 39.73 -79.49 37.88 Maryland Maryland
+Generating taginfo-config:  us-me -100000000000063512 238 259 Maine  ;  Maine
+mapdata: 238 259 -66.84 47.545 -71.09 42.92 Maine Maine
+Generating taginfo-config:  us-mi -100000000000165789 268 212 Michigan  ;  Michigan
+mapdata: 268 212 -82.045 48.315 -90.42 41.69 Michigan Michigan
+Generating taginfo-config:  us-mn -100000000000165471 288 216 Minnesota  ;  Minnesota
+mapdata: 288 216 -89.24 49.49 -97.24 43.49 Minnesota Minnesota
+Generating taginfo-config:  us-mo -100000000000161638 297 209 Missouri  ;  Missouri
+mapdata: 297 209 -89.03 40.74 -95.78 35.99 Missouri Missouri
+Generating taginfo-config:  us-ms -100000000000161943 216 294 Mississippi  ;  Mississippi
+mapdata: 216 294 -88.06 35.04 -91.66 30.14 Mississippi Mississippi
+Generating taginfo-config:  us-mt -100000000000162115 388 152 Montana  ;  Montana
+mapdata: 388 152 -103.925 49.1 -116.05 44.35 Montana Montana
+Generating taginfo-config:  us-nc -100000000000224045 447 142 North Carolina  ;  North Carolina
+mapdata: 447 142 -75.39 36.59 -84.33 33.75 North Carolina North Carolina
+Generating taginfo-config:  us-nd -100000000000161653 375 154 North Dakota  ;  North Dakota
+mapdata: 375 154 -96.55 49.01 -104.05 45.93 North Dakota North Dakota
+Generating taginfo-config:  us-ne -100000000000161648 426 150 Nebraska  ;  Nebraska
+mapdata: 426 150 -95.185 43.115 -104.06 39.99 Nebraska Nebraska
+Generating taginfo-config:  us-nh -100000000000067213 216 297 New Hampshire  ;  New Hampshire
+mapdata: 216 297 -70.56 45.44 -72.56 42.69 New Hampshire New Hampshire
+Generating taginfo-config:  us-nj -100000000000224951 204 309 New Jersey  ;  New Jersey
+mapdata: 204 309 -73.87 41.365 -75.57 38.79 New Jersey New Jersey
+Generating taginfo-config:  us-nm -100000000000162014 243 228 New Mexico  ;  New Mexico
+mapdata: 243 228 -102.985 37.03 -109.06 31.33 New Mexico New Mexico
+Generating taginfo-config:  us-nv -100000000000165473 228 285 Nevada  ;  Nevada
+mapdata: 228 285 -114.01 42.5 -120.01 35.0 Nevada Nevada
+Generating taginfo-config:  us-ny -100000000000061320 320 182 New York  ;  New York
+mapdata: 320 182 -71.77 45.02 -79.77 40.47 New York New York
+Generating taginfo-config:  us-oh -100000000000162061 261 237 Ohio  ;  Ohio
+mapdata: 261 237 -80.48 42.35 -84.83 38.4 Ohio Ohio
+Generating taginfo-config:  us-ok -100000000000161645 387 153 Oklahoma  ;  Oklahoma
+mapdata: 387 153 -94.41 37.01 -103.01 33.61 Oklahoma Oklahoma
+Generating taginfo-config:  us-or -100000000000165476 330 173 Oregon  ;  Oregon
+mapdata: 330 173 -116.46 46.315 -124.71 41.99 Oregon Oregon
+Generating taginfo-config:  us-pa -100000000000162109 351 171 Pennsylvania  ;  Pennsylvania
+mapdata: 351 171 -74.68 42.56 -80.53 39.71 Pennsylvania Pennsylvania
+Generating taginfo-config:  us-ri -100000000000392915 231 266 Rhode Island  ;  Rhode Island
+mapdata: 231 266 -71.085 42.04 -71.91 41.09 Rhode Island Rhode Island
+Generating taginfo-config:  us-sc -100000000000224040 312 208 South Carolina  ;  South Carolina
+mapdata: 312 208 -78.485 35.28 -83.36 32.03 South Carolina South Carolina
+Generating taginfo-config:  us-sd -100000000000161652 372 168 South Dakota  ;  South Dakota
+mapdata: 372 168 -96.31 45.97 -104.06 42.47 South Dakota South Dakota
+Generating taginfo-config:  us-tn -100000000000161838 560 112 Tennessee  ;  Tennessee
+mapdata: 560 112 -81.57 36.73 -90.32 34.98 Tennessee Tennessee
+Generating taginfo-config:  us-tx -100000000000114690 263 214 Texas  ;  Texas
+mapdata: 263 214 -93.5 36.53 -106.65 25.83 Texas Texas
+Generating taginfo-config:  us-ut -100000000000161993 251 251 Utah  ;  Utah
+mapdata: 251 251 -109.04 42.01 -114.06 36.99 Utah Utah
+Generating taginfo-config:  us-va -100000000000224042 426 147 Virginia  ;  Virginia
+mapdata: 426 147 -75.16 39.48 -83.68 36.54 Virginia Virginia
+Generating taginfo-config:  us-vt -100000000000060759 230 276 Vermont  ;  Vermont
+mapdata: 230 276 -71.44 45.12 -73.44 42.72 Vermont Vermont
+Generating taginfo-config:  us-wa -100000000000165479 384 168 Washington  ;  Washington
+mapdata: 384 168 -116.84 49.04 -124.84 45.54 Washington Washington
+Generating taginfo-config:  us-wi -100000000000165466 301 215 Wisconsin  ;  Wisconsin
+mapdata: 301 215 -85.89 47.49 -92.89 42.49 Wisconsin Wisconsin
+Generating taginfo-config:  us-wv -100000000000162068 297 207 West Virginia  ;  West Virginia
+mapdata: 297 207 -77.7 40.65 -82.65 37.2 West Virginia West Virginia
+Generating taginfo-config:  us-wy -100000000000161991 324 189 Wyoming  ;  Wyoming
+mapdata: 324 189 -103.86 45.19 -111.06 40.99 Wyoming Wyoming
+------start setup_docker.py ----- 
+------chmod settings -----
+:: generated services
+# generated : 2018-07-25:09:10  // template : ./setup/service_create.sh.jinja2
+
+export CURRENT_UID="$(id -u):$(id -g)" 
+
+
+ docker-compose up --no-start taginfo-na-bm
+ docker-compose up --no-start taginfo-na-ca-ab
+ docker-compose up --no-start taginfo-na-ca-bc
+ docker-compose up --no-start taginfo-na-ca-mb
+ docker-compose up --no-start taginfo-na-ca-nb
+ docker-compose up --no-start taginfo-na-ca-nl
+ docker-compose up --no-start taginfo-na-ca-ns
+ docker-compose up --no-start taginfo-na-ca-nt
+ docker-compose up --no-start taginfo-na-ca-nu
+ docker-compose up --no-start taginfo-na-ca-on
+ docker-compose up --no-start taginfo-na-ca-pe
+ docker-compose up --no-start taginfo-na-ca-qc
+ docker-compose up --no-start taginfo-na-ca-sk
+ docker-compose up --no-start taginfo-na-ca-yt
+ docker-compose up --no-start taginfo-na-fr-pm
+ docker-compose up --no-start taginfo-na-gl
+ docker-compose up --no-start taginfo-na-mx
+ docker-compose up --no-start taginfo-na-us-ak
+ docker-compose up --no-start taginfo-na-us-al
+ docker-compose up --no-start taginfo-na-us-ar
+ docker-compose up --no-start taginfo-na-us-az
+ docker-compose up --no-start taginfo-na-us-ca
+ docker-compose up --no-start taginfo-na-us-co
+ docker-compose up --no-start taginfo-na-us-ct
+ docker-compose up --no-start taginfo-na-us-dc
+ docker-compose up --no-start taginfo-na-us-de
+ docker-compose up --no-start taginfo-na-us-fl
+ docker-compose up --no-start taginfo-na-us-ga
+ docker-compose up --no-start taginfo-na-us-hi
+ docker-compose up --no-start taginfo-na-us-ia
+ docker-compose up --no-start taginfo-na-us-id
+ docker-compose up --no-start taginfo-na-us-il
+ docker-compose up --no-start taginfo-na-us-in
+ docker-compose up --no-start taginfo-na-us-ks
+ docker-compose up --no-start taginfo-na-us-ky
+ docker-compose up --no-start taginfo-na-us-la
+ docker-compose up --no-start taginfo-na-us-ma
+ docker-compose up --no-start taginfo-na-us-md
+ docker-compose up --no-start taginfo-na-us-me
+ docker-compose up --no-start taginfo-na-us-mi
+ docker-compose up --no-start taginfo-na-us-mn
+ docker-compose up --no-start taginfo-na-us-mo
+ docker-compose up --no-start taginfo-na-us-ms
+ docker-compose up --no-start taginfo-na-us-mt
+ docker-compose up --no-start taginfo-na-us-nc
+ docker-compose up --no-start taginfo-na-us-nd
+ docker-compose up --no-start taginfo-na-us-ne
+ docker-compose up --no-start taginfo-na-us-nh
+ docker-compose up --no-start taginfo-na-us-nj
+ docker-compose up --no-start taginfo-na-us-nm
+ docker-compose up --no-start taginfo-na-us-nv
+ docker-compose up --no-start taginfo-na-us-ny
+ docker-compose up --no-start taginfo-na-us-oh
+ docker-compose up --no-start taginfo-na-us-ok
+ docker-compose up --no-start taginfo-na-us-or
+ docker-compose up --no-start taginfo-na-us-pa
+ docker-compose up --no-start taginfo-na-us-ri
+ docker-compose up --no-start taginfo-na-us-sc
+ docker-compose up --no-start taginfo-na-us-sd
+ docker-compose up --no-start taginfo-na-us-tn
+ docker-compose up --no-start taginfo-na-us-tx
+ docker-compose up --no-start taginfo-na-us-ut
+ docker-compose up --no-start taginfo-na-us-va
+ docker-compose up --no-start taginfo-na-us-vt
+ docker-compose up --no-start taginfo-na-us-wa
+ docker-compose up --no-start taginfo-na-us-wi
+ docker-compose up --no-start taginfo-na-us-wv
+ docker-compose up --no-start taginfo-na-us-wy
+ 
+# generated : 2018-07-25:09:10:: don't forget copy hugo files

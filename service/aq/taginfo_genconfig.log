@@ -1,0 +1,139 @@
+=========================================
+DATETIME=20180725T0816  1532499366
+CONTINENT_LONG=antarctica
+CONTINENT=aq
+START_PORT=12000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=--
+ISO_SERVICE_FILTER=1=1 
+=========================================
+:: gen new configs
+Starting dockerized-taginfo_db_1 ... 
+[1A[2KStarting dockerized-taginfo_db_1 ... [32mdone[0m[1Bcheck db connection
+CONTINENT_LONG=antarctica
+CONTINENT=aq
+START_PORT=12000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=--
+ISO_SERVICE_FILTER=1=1
+CONTINENT_LONG=antarctica
+CONTINENT=aq
+-------- antarctica ----------- 
+--2018-07-25 06:16:09--  http://download.geofabrik.de/antarctica.kml
+Resolving download.geofabrik.de (download.geofabrik.de)... 88.99.24.113, 88.99.105.98
+Connecting to download.geofabrik.de (download.geofabrik.de)|88.99.24.113|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 501 [application/vnd.google-earth.kml+xml]
+Saving to: 'antarctica.kml'
+
+     0K                                                       100% 48.8M=0s
+
+2018-07-25 06:16:09 (48.8 MB/s) - 'antarctica.kml' saved [501/501]
+
+==================================
+DROP TABLE IF EXISTS xtaginfo;
+DROP TABLE
+CREATE TABLE xtaginfo (
+	"name" varchar NULL,
+	name_en varchar NULL,
+	iso text NULL,
+	id int8 NULL,
+	gdname text NULL,
+	osmid text NULL,
+	admin_level int4 NULL,
+	dx float8 NULL,
+	wikidata varchar NULL,
+	wikipedia varchar NULL,
+	flag varchar NULL,
+	port_order int8 NULL,
+	geometry geometry NULL,
+	txmin numeric NULL,
+	txmax numeric NULL,
+	tymin numeric NULL,
+	tymax numeric NULL,
+	ttype text NULL,
+	area_pct numeric ,
+	service text,
+	taginfo_scale numeric[] NULL
+);
+CREATE TABLE
+INSERT INTO xtaginfo
+     ("name",       name_en    ,gdname,  iso,  port_order , area_pct, ttype,service, taginfo_scale, id  ) VALUES
+     ('Antarctica', 'Antarctica','antarctica', 'aq', 1,  1.0, 'normal', 'yes',   '{360,30,-180,180,-90,-60 }',    0   ) ;
+INSERT 0 1
+\d+ xtaginfo
+                                          Table "public.xtaginfo"
+    Column     |       Type        | Collation | Nullable | Default | Storage  | Stats target | Description 
+---------------+-------------------+-----------+----------+---------+----------+--------------+-------------
+ name          | character varying |           |          |         | extended |              | 
+ name_en       | character varying |           |          |         | extended |              | 
+ iso           | text              |           |          |         | extended |              | 
+ id            | bigint            |           |          |         | plain    |              | 
+ gdname        | text              |           |          |         | extended |              | 
+ osmid         | text              |           |          |         | extended |              | 
+ admin_level   | integer           |           |          |         | plain    |              | 
+ dx            | double precision  |           |          |         | plain    |              | 
+ wikidata      | character varying |           |          |         | extended |              | 
+ wikipedia     | character varying |           |          |         | extended |              | 
+ flag          | character varying |           |          |         | extended |              | 
+ port_order    | bigint            |           |          |         | plain    |              | 
+ geometry      | geometry          |           |          |         | main     |              | 
+ txmin         | numeric           |           |          |         | main     |              | 
+ txmax         | numeric           |           |          |         | main     |              | 
+ tymin         | numeric           |           |          |         | main     |              | 
+ tymax         | numeric           |           |          |         | main     |              | 
+ ttype         | text              |           |          |         | extended |              | 
+ area_pct      | numeric           |           |          |         | main     |              | 
+ service       | text              |           |          |         | extended |              | 
+ taginfo_scale | numeric[]         |           |          |         | extended |              | 
+
+\x
+Expanded display is on.
+select * from xtaginfo ;
+-[ RECORD 1 ]-+--------------------------
+name          | Antarctica
+name_en       | Antarctica
+iso           | aq
+id            | 0
+gdname        | antarctica
+osmid         | 
+admin_level   | 
+dx            | 
+wikidata      | 
+wikipedia     | 
+flag          | 
+port_order    | 1
+geometry      | 
+txmin         | 
+txmax         | 
+tymin         | 
+tymax         | 
+ttype         | normal
+area_pct      | 1.0
+service       | yes
+taginfo_scale | {360,30,-180,180,-90,-60}
+
+------start setup_map.py ------
+Creating output file that is 360P x 30L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 360, 30
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Generating background map:  aq 0 360 30 Antarctica
+mapdata: 360 30 180.0 -60.0 -180.0 -90.0
+<mapnik.Datasource object at 0x7f95311c66e0>
+gdalw: gdalwarp    -te -180.0 -90.0 180.0 -60.0  -ts 360 30   -of GTiff   /osm/ne/ne.tif /osm/service/aq/aq/img/nebackground.geotif  
+------start setup_config.py -----
+Generating taginfo-config:  aq 0 360 30 Antarctica  ;  Antarctica
+mapdata: 360 30 180.0 -60.0 -180.0 -90.0 Antarctica Antarctica
+------start setup_docker.py ----- 
+------chmod settings -----
+:: generated services
+# generated : 2018-07-25:06:16  // template : ./setup/service_create.sh.jinja2
+
+export CURRENT_UID="$(id -u):$(id -g)" 
+
+
+ docker-compose up --no-start taginfo-aq-aq
+ 
+# generated : 2018-07-25:06:16:: don't forget copy hugo files

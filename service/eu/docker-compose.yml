@@ -1,0 +1,4192 @@
+# generated : 2018-07-25:08:48  // template : ./setup/template/docker-compose.jinja2
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  #---------------------------------------------------------
+  # Service for : "ad"-"Andorra" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ad:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20001:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ad.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20001
+    volumes:
+     - ./ad/data:/osm/data
+     - ./ad/download:/osm/download
+     - ./ad:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "al"-"Albania" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-al:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20002:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-al.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20002
+    volumes:
+     - ./al/data:/osm/data
+     - ./al/download:/osm/download
+     - ./al:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "at"-"Austria" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-at:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20003:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-at.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20003
+    volumes:
+     - ./at/data:/osm/data
+     - ./at/download:/osm/download
+     - ./at:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ax"-"Åland Islands" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ax:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20004:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ax.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20004
+    volumes:
+     - ./ax/data:/osm/data
+     - ./ax/download:/osm/download
+     - ./ax:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ba"-"Bosnia and Herzegovina" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ba:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20005:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ba.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20005
+    volumes:
+     - ./ba/data:/osm/data
+     - ./ba/download:/osm/download
+     - ./ba:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "be"-"Belgium" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-be:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20006:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-be.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20006
+    volumes:
+     - ./be/data:/osm/data
+     - ./be/download:/osm/download
+     - ./be:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "bg"-"Bulgaria" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-bg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20007:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-bg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20007
+    volumes:
+     - ./bg/data:/osm/data
+     - ./bg/download:/osm/download
+     - ./bg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "by"-"Belarus" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-by:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20008:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-by.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20008
+    volumes:
+     - ./by/data:/osm/data
+     - ./by/download:/osm/download
+     - ./by:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ch"-"Switzerland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ch:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20009:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ch.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20009
+    volumes:
+     - ./ch/data:/osm/data
+     - ./ch/download:/osm/download
+     - ./ch:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "cy"-"Cyprus" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-cy:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20010:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-cy.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20010
+    volumes:
+     - ./cy/data:/osm/data
+     - ./cy/download:/osm/download
+     - ./cy:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "cz"-"Czechia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-cz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20011:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-cz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20011
+    volumes:
+     - ./cz/data:/osm/data
+     - ./cz/download:/osm/download
+     - ./cz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-bb"-"Brandenburg" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-bb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20012:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-bb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20012
+    volumes:
+     - ./de-bb/data:/osm/data
+     - ./de-bb/download:/osm/download
+     - ./de-bb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-be"-"Berlin" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-be:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20013:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-be.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20013
+    volumes:
+     - ./de-be/data:/osm/data
+     - ./de-be/download:/osm/download
+     - ./de-be:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-bw"-"Baden-Württemberg" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-bw:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20014:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-bw.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20014
+    volumes:
+     - ./de-bw/data:/osm/data
+     - ./de-bw/download:/osm/download
+     - ./de-bw:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-by"-"Bavaria" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-by:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20015:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-by.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20015
+    volumes:
+     - ./de-by/data:/osm/data
+     - ./de-by/download:/osm/download
+     - ./de-by:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-hb"-"Bremen" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-hb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20016:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-hb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20016
+    volumes:
+     - ./de-hb/data:/osm/data
+     - ./de-hb/download:/osm/download
+     - ./de-hb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-he"-"Hesse" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-he:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20017:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-he.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20017
+    volumes:
+     - ./de-he/data:/osm/data
+     - ./de-he/download:/osm/download
+     - ./de-he:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-hh"-"Hamburg" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-hh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20018:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-hh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20018
+    volumes:
+     - ./de-hh/data:/osm/data
+     - ./de-hh/download:/osm/download
+     - ./de-hh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-mv"-"Mecklenburg-Vorpommern" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-mv:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20019:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-mv.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20019
+    volumes:
+     - ./de-mv/data:/osm/data
+     - ./de-mv/download:/osm/download
+     - ./de-mv:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-ni"-"Lower Saxony" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-ni:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20020:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-ni.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20020
+    volumes:
+     - ./de-ni/data:/osm/data
+     - ./de-ni/download:/osm/download
+     - ./de-ni:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-nw"-"North Rhine-Westphalia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-nw:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20021:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-nw.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20021
+    volumes:
+     - ./de-nw/data:/osm/data
+     - ./de-nw/download:/osm/download
+     - ./de-nw:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-rp"-"Rhineland-Palatinate" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-rp:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20022:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-rp.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20022
+    volumes:
+     - ./de-rp/data:/osm/data
+     - ./de-rp/download:/osm/download
+     - ./de-rp:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-sh"-"Schleswig-Holstein" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-sh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20023:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-sh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20023
+    volumes:
+     - ./de-sh/data:/osm/data
+     - ./de-sh/download:/osm/download
+     - ./de-sh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-sl"-"Saarland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-sl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20024:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-sl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20024
+    volumes:
+     - ./de-sl/data:/osm/data
+     - ./de-sl/download:/osm/download
+     - ./de-sl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-sn"-"Saxony" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-sn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20025:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-sn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20025
+    volumes:
+     - ./de-sn/data:/osm/data
+     - ./de-sn/download:/osm/download
+     - ./de-sn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-st"-"Saxony-Anhalt" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-st:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20026:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-st.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20026
+    volumes:
+     - ./de-st/data:/osm/data
+     - ./de-st/download:/osm/download
+     - ./de-st:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "de-th"-"Thuringia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-de-th:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20027:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-de-th.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20027
+    volumes:
+     - ./de-th/data:/osm/data
+     - ./de-th/download:/osm/download
+     - ./de-th:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "dk"-"Denmark" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-dk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20028:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-dk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20028
+    volumes:
+     - ./dk/data:/osm/data
+     - ./dk/download:/osm/download
+     - ./dk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ee"-"Estonia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ee:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20029:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ee.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20029
+    volumes:
+     - ./ee/data:/osm/data
+     - ./ee/download:/osm/download
+     - ./ee:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "es"-"Spain" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-es:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20030:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-es.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20030
+    volumes:
+     - ./es/data:/osm/data
+     - ./es/download:/osm/download
+     - ./es:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fi"-"Finland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fi:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20031:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fi.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20031
+    volumes:
+     - ./fi/data:/osm/data
+     - ./fi/download:/osm/download
+     - ./fi:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fo"-"Faroe Islands" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fo:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20032:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fo.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20032
+    volumes:
+     - ./fo/data:/osm/data
+     - ./fo/download:/osm/download
+     - ./fo:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-01"-"Ain" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-01:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20033:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-01.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20033
+    volumes:
+     - ./fr-01/data:/osm/data
+     - ./fr-01/download:/osm/download
+     - ./fr-01:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-02"-"Aisne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-02:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20034:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-02.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20034
+    volumes:
+     - ./fr-02/data:/osm/data
+     - ./fr-02/download:/osm/download
+     - ./fr-02:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-03"-"Allier" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-03:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20035:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-03.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20035
+    volumes:
+     - ./fr-03/data:/osm/data
+     - ./fr-03/download:/osm/download
+     - ./fr-03:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-04"-"Alpes-de-Haute-Provence" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-04:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20036:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-04.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20036
+    volumes:
+     - ./fr-04/data:/osm/data
+     - ./fr-04/download:/osm/download
+     - ./fr-04:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-05"-"Hautes-Alpes" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-05:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20037:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-05.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20037
+    volumes:
+     - ./fr-05/data:/osm/data
+     - ./fr-05/download:/osm/download
+     - ./fr-05:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-06"-"Maritime Alps" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-06:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20038:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-06.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20038
+    volumes:
+     - ./fr-06/data:/osm/data
+     - ./fr-06/download:/osm/download
+     - ./fr-06:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-07"-"Ardèche" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-07:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20039:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-07.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20039
+    volumes:
+     - ./fr-07/data:/osm/data
+     - ./fr-07/download:/osm/download
+     - ./fr-07:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-08"-"Ardennes" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-08:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20040:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-08.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20040
+    volumes:
+     - ./fr-08/data:/osm/data
+     - ./fr-08/download:/osm/download
+     - ./fr-08:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-09"-"Ariège" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-09:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20041:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-09.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20041
+    volumes:
+     - ./fr-09/data:/osm/data
+     - ./fr-09/download:/osm/download
+     - ./fr-09:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-10"-"Aube" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-10:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20042:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-10.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20042
+    volumes:
+     - ./fr-10/data:/osm/data
+     - ./fr-10/download:/osm/download
+     - ./fr-10:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-11"-"Aude" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-11:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20043:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-11.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20043
+    volumes:
+     - ./fr-11/data:/osm/data
+     - ./fr-11/download:/osm/download
+     - ./fr-11:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-12"-"Aveyron" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-12:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20044:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-12.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20044
+    volumes:
+     - ./fr-12/data:/osm/data
+     - ./fr-12/download:/osm/download
+     - ./fr-12:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-13"-"Bouches-du-Rhône" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-13:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20045:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-13.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20045
+    volumes:
+     - ./fr-13/data:/osm/data
+     - ./fr-13/download:/osm/download
+     - ./fr-13:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-14"-"Calvados" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-14:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20046:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-14.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20046
+    volumes:
+     - ./fr-14/data:/osm/data
+     - ./fr-14/download:/osm/download
+     - ./fr-14:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-15"-"Cantal" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-15:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20047:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-15.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20047
+    volumes:
+     - ./fr-15/data:/osm/data
+     - ./fr-15/download:/osm/download
+     - ./fr-15:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-16"-"Charente" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-16:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20048:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-16.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20048
+    volumes:
+     - ./fr-16/data:/osm/data
+     - ./fr-16/download:/osm/download
+     - ./fr-16:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-17"-"Charente-Maritime" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-17:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20049:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-17.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20049
+    volumes:
+     - ./fr-17/data:/osm/data
+     - ./fr-17/download:/osm/download
+     - ./fr-17:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-18"-"Cher" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-18:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20050:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-18.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20050
+    volumes:
+     - ./fr-18/data:/osm/data
+     - ./fr-18/download:/osm/download
+     - ./fr-18:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-19"-"Corrèze" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-19:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20051:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-19.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20051
+    volumes:
+     - ./fr-19/data:/osm/data
+     - ./fr-19/download:/osm/download
+     - ./fr-19:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-21"-"Côte-d'Or" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-21:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20052:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-21.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20052
+    volumes:
+     - ./fr-21/data:/osm/data
+     - ./fr-21/download:/osm/download
+     - ./fr-21:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-22"-"Côtes-d'Armor" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-22:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20053:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-22.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20053
+    volumes:
+     - ./fr-22/data:/osm/data
+     - ./fr-22/download:/osm/download
+     - ./fr-22:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-23"-"Creuse" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-23:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20054:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-23.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20054
+    volumes:
+     - ./fr-23/data:/osm/data
+     - ./fr-23/download:/osm/download
+     - ./fr-23:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-24"-"Dordogne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-24:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20055:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-24.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20055
+    volumes:
+     - ./fr-24/data:/osm/data
+     - ./fr-24/download:/osm/download
+     - ./fr-24:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-25"-"Doubs" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-25:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20056:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-25.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20056
+    volumes:
+     - ./fr-25/data:/osm/data
+     - ./fr-25/download:/osm/download
+     - ./fr-25:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-26"-"Drôme" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-26:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20057:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-26.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20057
+    volumes:
+     - ./fr-26/data:/osm/data
+     - ./fr-26/download:/osm/download
+     - ./fr-26:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-27"-"Eure" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-27:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20058:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-27.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20058
+    volumes:
+     - ./fr-27/data:/osm/data
+     - ./fr-27/download:/osm/download
+     - ./fr-27:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-28"-"Eure-et-Loir" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-28:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20059:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-28.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20059
+    volumes:
+     - ./fr-28/data:/osm/data
+     - ./fr-28/download:/osm/download
+     - ./fr-28:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-29"-"Finistère" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-29:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20060:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-29.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20060
+    volumes:
+     - ./fr-29/data:/osm/data
+     - ./fr-29/download:/osm/download
+     - ./fr-29:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-2a"-"South Corsica" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-2a:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20061:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-2a.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20061
+    volumes:
+     - ./fr-2a/data:/osm/data
+     - ./fr-2a/download:/osm/download
+     - ./fr-2a:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-2b"-"Haute-Corse" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-2b:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20062:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-2b.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20062
+    volumes:
+     - ./fr-2b/data:/osm/data
+     - ./fr-2b/download:/osm/download
+     - ./fr-2b:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-30"-"Gard" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-30:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20063:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-30.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20063
+    volumes:
+     - ./fr-30/data:/osm/data
+     - ./fr-30/download:/osm/download
+     - ./fr-30:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-31"-"Haute-Garonne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-31:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20064:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-31.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20064
+    volumes:
+     - ./fr-31/data:/osm/data
+     - ./fr-31/download:/osm/download
+     - ./fr-31:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-32"-"Gers" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-32:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20065:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-32.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20065
+    volumes:
+     - ./fr-32/data:/osm/data
+     - ./fr-32/download:/osm/download
+     - ./fr-32:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-33"-"Gironde" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-33:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20066:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-33.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20066
+    volumes:
+     - ./fr-33/data:/osm/data
+     - ./fr-33/download:/osm/download
+     - ./fr-33:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-34"-"Hérault" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-34:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20067:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-34.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20067
+    volumes:
+     - ./fr-34/data:/osm/data
+     - ./fr-34/download:/osm/download
+     - ./fr-34:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-35"-"Ille-et-Vilaine" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-35:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20068:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-35.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20068
+    volumes:
+     - ./fr-35/data:/osm/data
+     - ./fr-35/download:/osm/download
+     - ./fr-35:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-36"-"Indre" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-36:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20069:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-36.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20069
+    volumes:
+     - ./fr-36/data:/osm/data
+     - ./fr-36/download:/osm/download
+     - ./fr-36:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-37"-"Indre-et-Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-37:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20070:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-37.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20070
+    volumes:
+     - ./fr-37/data:/osm/data
+     - ./fr-37/download:/osm/download
+     - ./fr-37:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-38"-"Isère" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-38:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20071:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-38.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20071
+    volumes:
+     - ./fr-38/data:/osm/data
+     - ./fr-38/download:/osm/download
+     - ./fr-38:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-39"-"Jura" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-39:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20072:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-39.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20072
+    volumes:
+     - ./fr-39/data:/osm/data
+     - ./fr-39/download:/osm/download
+     - ./fr-39:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-40"-"Landes" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-40:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20073:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-40.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20073
+    volumes:
+     - ./fr-40/data:/osm/data
+     - ./fr-40/download:/osm/download
+     - ./fr-40:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-41"-"Loir-et-Cher" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-41:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20074:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-41.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20074
+    volumes:
+     - ./fr-41/data:/osm/data
+     - ./fr-41/download:/osm/download
+     - ./fr-41:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-42"-"Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-42:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20075:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-42.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20075
+    volumes:
+     - ./fr-42/data:/osm/data
+     - ./fr-42/download:/osm/download
+     - ./fr-42:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-43"-"Haute-Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-43:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20076:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-43.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20076
+    volumes:
+     - ./fr-43/data:/osm/data
+     - ./fr-43/download:/osm/download
+     - ./fr-43:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-44"-"Loire-Atlantique" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-44:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20077:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-44.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20077
+    volumes:
+     - ./fr-44/data:/osm/data
+     - ./fr-44/download:/osm/download
+     - ./fr-44:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-45"-"Loiret" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-45:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20078:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-45.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20078
+    volumes:
+     - ./fr-45/data:/osm/data
+     - ./fr-45/download:/osm/download
+     - ./fr-45:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-46"-"Lot" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-46:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20079:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-46.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20079
+    volumes:
+     - ./fr-46/data:/osm/data
+     - ./fr-46/download:/osm/download
+     - ./fr-46:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-47"-"Lot-et-Garonne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-47:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20080:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-47.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20080
+    volumes:
+     - ./fr-47/data:/osm/data
+     - ./fr-47/download:/osm/download
+     - ./fr-47:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-48"-"Lozère" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-48:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20081:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-48.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20081
+    volumes:
+     - ./fr-48/data:/osm/data
+     - ./fr-48/download:/osm/download
+     - ./fr-48:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-49"-"Maine-et-Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-49:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20082:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-49.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20082
+    volumes:
+     - ./fr-49/data:/osm/data
+     - ./fr-49/download:/osm/download
+     - ./fr-49:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-50"-"Manche" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-50:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20083:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-50.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20083
+    volumes:
+     - ./fr-50/data:/osm/data
+     - ./fr-50/download:/osm/download
+     - ./fr-50:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-51"-"Marne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-51:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20084:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-51.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20084
+    volumes:
+     - ./fr-51/data:/osm/data
+     - ./fr-51/download:/osm/download
+     - ./fr-51:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-52"-"Haute-Marne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-52:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20085:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-52.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20085
+    volumes:
+     - ./fr-52/data:/osm/data
+     - ./fr-52/download:/osm/download
+     - ./fr-52:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-53"-"Mayenne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-53:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20086:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-53.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20086
+    volumes:
+     - ./fr-53/data:/osm/data
+     - ./fr-53/download:/osm/download
+     - ./fr-53:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-54"-"Meurthe-et-Moselle" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-54:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20087:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-54.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20087
+    volumes:
+     - ./fr-54/data:/osm/data
+     - ./fr-54/download:/osm/download
+     - ./fr-54:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-55"-"Meuse" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-55:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20088:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-55.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20088
+    volumes:
+     - ./fr-55/data:/osm/data
+     - ./fr-55/download:/osm/download
+     - ./fr-55:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-56"-"Morbihan" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-56:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20089:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-56.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20089
+    volumes:
+     - ./fr-56/data:/osm/data
+     - ./fr-56/download:/osm/download
+     - ./fr-56:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-57"-"Moselle" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-57:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20090:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-57.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20090
+    volumes:
+     - ./fr-57/data:/osm/data
+     - ./fr-57/download:/osm/download
+     - ./fr-57:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-58"-"Nièvre" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-58:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20091:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-58.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20091
+    volumes:
+     - ./fr-58/data:/osm/data
+     - ./fr-58/download:/osm/download
+     - ./fr-58:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-59"-"Nord" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-59:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20092:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-59.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20092
+    volumes:
+     - ./fr-59/data:/osm/data
+     - ./fr-59/download:/osm/download
+     - ./fr-59:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-60"-"Oise" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-60:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20093:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-60.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20093
+    volumes:
+     - ./fr-60/data:/osm/data
+     - ./fr-60/download:/osm/download
+     - ./fr-60:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-61"-"Orne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-61:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20094:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-61.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20094
+    volumes:
+     - ./fr-61/data:/osm/data
+     - ./fr-61/download:/osm/download
+     - ./fr-61:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-62"-"Pas-de-Calais" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-62:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20095:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-62.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20095
+    volumes:
+     - ./fr-62/data:/osm/data
+     - ./fr-62/download:/osm/download
+     - ./fr-62:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-63"-"Puy-de-Dôme" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-63:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20096:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-63.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20096
+    volumes:
+     - ./fr-63/data:/osm/data
+     - ./fr-63/download:/osm/download
+     - ./fr-63:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-64"-"Pyrénées-Atlantiques" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-64:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20097:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-64.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20097
+    volumes:
+     - ./fr-64/data:/osm/data
+     - ./fr-64/download:/osm/download
+     - ./fr-64:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-65"-"Hautespyrenees" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-65:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20098:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-65.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20098
+    volumes:
+     - ./fr-65/data:/osm/data
+     - ./fr-65/download:/osm/download
+     - ./fr-65:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-66"-"Pyrénées-Orientales" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-66:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20099:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-66.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20099
+    volumes:
+     - ./fr-66/data:/osm/data
+     - ./fr-66/download:/osm/download
+     - ./fr-66:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-67"-"Bas-Rhin" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-67:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20100:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-67.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20100
+    volumes:
+     - ./fr-67/data:/osm/data
+     - ./fr-67/download:/osm/download
+     - ./fr-67:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-68"-"Haut-Rhin" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-68:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20101:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-68.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20101
+    volumes:
+     - ./fr-68/data:/osm/data
+     - ./fr-68/download:/osm/download
+     - ./fr-68:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-69"-"Departemental constituency of Rhône" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-69:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20102:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-69.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20102
+    volumes:
+     - ./fr-69/data:/osm/data
+     - ./fr-69/download:/osm/download
+     - ./fr-69:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-70"-"Haute-Saône" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-70:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20103:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-70.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20103
+    volumes:
+     - ./fr-70/data:/osm/data
+     - ./fr-70/download:/osm/download
+     - ./fr-70:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-71"-"Saône-et-Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-71:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20104:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-71.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20104
+    volumes:
+     - ./fr-71/data:/osm/data
+     - ./fr-71/download:/osm/download
+     - ./fr-71:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-72"-"Sarthe" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-72:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20105:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-72.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20105
+    volumes:
+     - ./fr-72/data:/osm/data
+     - ./fr-72/download:/osm/download
+     - ./fr-72:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-73"-"Savoy" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-73:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20106:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-73.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20106
+    volumes:
+     - ./fr-73/data:/osm/data
+     - ./fr-73/download:/osm/download
+     - ./fr-73:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-74"-"Upper Savoy" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-74:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20107:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-74.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20107
+    volumes:
+     - ./fr-74/data:/osm/data
+     - ./fr-74/download:/osm/download
+     - ./fr-74:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-75"-"Paris" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-75:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20108:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-75.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20108
+    volumes:
+     - ./fr-75/data:/osm/data
+     - ./fr-75/download:/osm/download
+     - ./fr-75:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-76"-"Seine-Maritime" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-76:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20109:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-76.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20109
+    volumes:
+     - ./fr-76/data:/osm/data
+     - ./fr-76/download:/osm/download
+     - ./fr-76:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-77"-"Seine-et-Marne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-77:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20110:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-77.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20110
+    volumes:
+     - ./fr-77/data:/osm/data
+     - ./fr-77/download:/osm/download
+     - ./fr-77:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-78"-"Yvelines" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-78:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20111:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-78.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20111
+    volumes:
+     - ./fr-78/data:/osm/data
+     - ./fr-78/download:/osm/download
+     - ./fr-78:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-79"-"Deux-Sèvres" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-79:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20112:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-79.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20112
+    volumes:
+     - ./fr-79/data:/osm/data
+     - ./fr-79/download:/osm/download
+     - ./fr-79:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-80"-"Somme" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-80:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20113:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-80.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20113
+    volumes:
+     - ./fr-80/data:/osm/data
+     - ./fr-80/download:/osm/download
+     - ./fr-80:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-81"-"Tarn" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-81:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20114:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-81.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20114
+    volumes:
+     - ./fr-81/data:/osm/data
+     - ./fr-81/download:/osm/download
+     - ./fr-81:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-82"-"Tarn-et-Garonne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-82:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20115:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-82.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20115
+    volumes:
+     - ./fr-82/data:/osm/data
+     - ./fr-82/download:/osm/download
+     - ./fr-82:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-83"-"Var" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-83:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20116:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-83.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20116
+    volumes:
+     - ./fr-83/data:/osm/data
+     - ./fr-83/download:/osm/download
+     - ./fr-83:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-84"-"Vaucluse" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-84:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20117:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-84.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20117
+    volumes:
+     - ./fr-84/data:/osm/data
+     - ./fr-84/download:/osm/download
+     - ./fr-84:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-85"-"Vendée" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-85:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20118:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-85.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20118
+    volumes:
+     - ./fr-85/data:/osm/data
+     - ./fr-85/download:/osm/download
+     - ./fr-85:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-86"-"Vienne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-86:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20119:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-86.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20119
+    volumes:
+     - ./fr-86/data:/osm/data
+     - ./fr-86/download:/osm/download
+     - ./fr-86:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-87"-"Haute-Vienne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-87:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20120:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-87.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20120
+    volumes:
+     - ./fr-87/data:/osm/data
+     - ./fr-87/download:/osm/download
+     - ./fr-87:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-88"-"Vosges" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-88:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20121:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-88.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20121
+    volumes:
+     - ./fr-88/data:/osm/data
+     - ./fr-88/download:/osm/download
+     - ./fr-88:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-89"-"Yonne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-89:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20122:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-89.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20122
+    volumes:
+     - ./fr-89/data:/osm/data
+     - ./fr-89/download:/osm/download
+     - ./fr-89:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-90"-"Territoire-de-Belfort" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-90:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20123:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-90.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20123
+    volumes:
+     - ./fr-90/data:/osm/data
+     - ./fr-90/download:/osm/download
+     - ./fr-90:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-91"-"Essonne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-91:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20124:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-91.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20124
+    volumes:
+     - ./fr-91/data:/osm/data
+     - ./fr-91/download:/osm/download
+     - ./fr-91:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-92"-"Hauts-de-Seine" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-92:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20125:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-92.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20125
+    volumes:
+     - ./fr-92/data:/osm/data
+     - ./fr-92/download:/osm/download
+     - ./fr-92:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-93"-"Seine-Saint-Denis" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-93:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20126:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-93.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20126
+    volumes:
+     - ./fr-93/data:/osm/data
+     - ./fr-93/download:/osm/download
+     - ./fr-93:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-94"-"Val-de-Marne" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-94:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20127:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-94.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20127
+    volumes:
+     - ./fr-94/data:/osm/data
+     - ./fr-94/download:/osm/download
+     - ./fr-94:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-95"-"Val-d'Oise" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-95:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20128:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-95.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20128
+    volumes:
+     - ./fr-95/data:/osm/data
+     - ./fr-95/download:/osm/download
+     - ./fr-95:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-ara"-"Auvergne-Rhône-Alpes" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-ara:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20129:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-ara.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20129
+    volumes:
+     - ./fr-ara/data:/osm/data
+     - ./fr-ara/download:/osm/download
+     - ./fr-ara:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-bfc"-"Bourgogne-Franche-Comté" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-bfc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20130:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-bfc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20130
+    volumes:
+     - ./fr-bfc/data:/osm/data
+     - ./fr-bfc/download:/osm/download
+     - ./fr-bfc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-bre"-"Brittany" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-bre:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20131:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-bre.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20131
+    volumes:
+     - ./fr-bre/data:/osm/data
+     - ./fr-bre/download:/osm/download
+     - ./fr-bre:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-cor"-"Corsica" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-cor:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20132:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-cor.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20132
+    volumes:
+     - ./fr-cor/data:/osm/data
+     - ./fr-cor/download:/osm/download
+     - ./fr-cor:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-cvl"-"Centre-Loire Valley" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-cvl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20133:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-cvl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20133
+    volumes:
+     - ./fr-cvl/data:/osm/data
+     - ./fr-cvl/download:/osm/download
+     - ./fr-cvl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-ges"-"Grand Est" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-ges:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20134:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-ges.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20134
+    volumes:
+     - ./fr-ges/data:/osm/data
+     - ./fr-ges/download:/osm/download
+     - ./fr-ges:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-hdf"-"Hauts-de-France" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-hdf:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20135:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-hdf.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20135
+    volumes:
+     - ./fr-hdf/data:/osm/data
+     - ./fr-hdf/download:/osm/download
+     - ./fr-hdf:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-idf"-"Ile-de-France" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-idf:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20136:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-idf.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20136
+    volumes:
+     - ./fr-idf/data:/osm/data
+     - ./fr-idf/download:/osm/download
+     - ./fr-idf:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-naq"-"New Aquitaine" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-naq:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20137:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-naq.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20137
+    volumes:
+     - ./fr-naq/data:/osm/data
+     - ./fr-naq/download:/osm/download
+     - ./fr-naq:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-nor"-"Normandy" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-nor:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20138:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-nor.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20138
+    volumes:
+     - ./fr-nor/data:/osm/data
+     - ./fr-nor/download:/osm/download
+     - ./fr-nor:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-occ"-"Occitania" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-occ:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20139:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-occ.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20139
+    volumes:
+     - ./fr-occ/data:/osm/data
+     - ./fr-occ/download:/osm/download
+     - ./fr-occ:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-pac"-"Provence-Alpes-Côte d'Azur" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-pac:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20140:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-pac.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20140
+    volumes:
+     - ./fr-pac/data:/osm/data
+     - ./fr-pac/download:/osm/download
+     - ./fr-pac:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-pdl"-"Pays de la Loire" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-fr-pdl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20141:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-fr-pdl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20141
+    volumes:
+     - ./fr-pdl/data:/osm/data
+     - ./fr-pdl/download:/osm/download
+     - ./fr-pdl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "gb"-"United Kingdom" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-gb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20142:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-gb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20142
+    volumes:
+     - ./gb/data:/osm/data
+     - ./gb/download:/osm/download
+     - ./gb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ge"-"Georgia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ge:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20143:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ge.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20143
+    volumes:
+     - ./ge/data:/osm/data
+     - ./ge/download:/osm/download
+     - ./ge:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "gg"-"Guernsey" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-gg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20144:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-gg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20144
+    volumes:
+     - ./gg/data:/osm/data
+     - ./gg/download:/osm/download
+     - ./gg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "gi"-"Gibraltar" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-gi:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20145:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-gi.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20145
+    volumes:
+     - ./gi/data:/osm/data
+     - ./gi/download:/osm/download
+     - ./gi:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "gr"-"Greece" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-gr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20146:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-gr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20146
+    volumes:
+     - ./gr/data:/osm/data
+     - ./gr/download:/osm/download
+     - ./gr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "hr"-"Croatia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-hr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20147:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-hr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20147
+    volumes:
+     - ./hr/data:/osm/data
+     - ./hr/download:/osm/download
+     - ./hr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "hu"-"Hungary" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-hu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20148:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-hu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20148
+    volumes:
+     - ./hu/data:/osm/data
+     - ./hu/download:/osm/download
+     - ./hu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ie"-"Ireland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ie:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20149:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ie.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20149
+    volumes:
+     - ./ie/data:/osm/data
+     - ./ie/download:/osm/download
+     - ./ie:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "im"-"Isle of Man" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-im:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20150:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-im.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20150
+    volumes:
+     - ./im/data:/osm/data
+     - ./im/download:/osm/download
+     - ./im:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "is"-"Iceland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-is:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20151:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-is.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20151
+    volumes:
+     - ./is/data:/osm/data
+     - ./is/download:/osm/download
+     - ./is:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "it"-"Italy" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-it:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20152:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-it.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20152
+    volumes:
+     - ./it/data:/osm/data
+     - ./it/download:/osm/download
+     - ./it:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "it-32"-"Trentino-Alto Adige/Südtirol" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-it-32:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20153:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-it-32.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20153
+    volumes:
+     - ./it-32/data:/osm/data
+     - ./it-32/download:/osm/download
+     - ./it-32:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "it-88"-"Sardinia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-it-88:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20154:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-it-88.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20154
+    volumes:
+     - ./it-88/data:/osm/data
+     - ./it-88/download:/osm/download
+     - ./it-88:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "je"-"Jersey" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-je:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20155:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-je.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20155
+    volumes:
+     - ./je/data:/osm/data
+     - ./je/download:/osm/download
+     - ./je:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "li"-"Liechtenstein" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-li:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20156:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-li.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20156
+    volumes:
+     - ./li/data:/osm/data
+     - ./li/download:/osm/download
+     - ./li:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "lt"-"Lithuania" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-lt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20157:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-lt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20157
+    volumes:
+     - ./lt/data:/osm/data
+     - ./lt/download:/osm/download
+     - ./lt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "lu"-"Luxembourg" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-lu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20158:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-lu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20158
+    volumes:
+     - ./lu/data:/osm/data
+     - ./lu/download:/osm/download
+     - ./lu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "lv"-"Latvia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-lv:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20159:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-lv.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20159
+    volumes:
+     - ./lv/data:/osm/data
+     - ./lv/download:/osm/download
+     - ./lv:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mc"-"Monaco" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-mc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20160:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-mc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20160
+    volumes:
+     - ./mc/data:/osm/data
+     - ./mc/download:/osm/download
+     - ./mc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "md"-"Moldova" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-md:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20161:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-md.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20161
+    volumes:
+     - ./md/data:/osm/data
+     - ./md/download:/osm/download
+     - ./md:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "me"-"Montenegro" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-me:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20162:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-me.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20162
+    volumes:
+     - ./me/data:/osm/data
+     - ./me/download:/osm/download
+     - ./me:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mk"-"Macedonia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-mk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20163:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-mk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20163
+    volumes:
+     - ./mk/data:/osm/data
+     - ./mk/download:/osm/download
+     - ./mk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mt"-"Malta" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-mt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20164:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-mt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20164
+    volumes:
+     - ./mt/data:/osm/data
+     - ./mt/download:/osm/download
+     - ./mt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl"-"The Netherlands" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20165:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20165
+    volumes:
+     - ./nl/data:/osm/data
+     - ./nl/download:/osm/download
+     - ./nl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-dr"-"Drenthe" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-dr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20166:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-dr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20166
+    volumes:
+     - ./nl-dr/data:/osm/data
+     - ./nl-dr/download:/osm/download
+     - ./nl-dr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-fl"-"Flevoland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-fl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20167:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-fl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20167
+    volumes:
+     - ./nl-fl/data:/osm/data
+     - ./nl-fl/download:/osm/download
+     - ./nl-fl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-fr"-"Friesland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-fr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20168:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-fr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20168
+    volumes:
+     - ./nl-fr/data:/osm/data
+     - ./nl-fr/download:/osm/download
+     - ./nl-fr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-ge"-"Gelderland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-ge:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20169:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-ge.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20169
+    volumes:
+     - ./nl-ge/data:/osm/data
+     - ./nl-ge/download:/osm/download
+     - ./nl-ge:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-gr"-"Groningen" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-gr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20170:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-gr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20170
+    volumes:
+     - ./nl-gr/data:/osm/data
+     - ./nl-gr/download:/osm/download
+     - ./nl-gr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-li"-"Limburg" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-li:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20171:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-li.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20171
+    volumes:
+     - ./nl-li/data:/osm/data
+     - ./nl-li/download:/osm/download
+     - ./nl-li:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-nb"-"North Brabant" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-nb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20172:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-nb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20172
+    volumes:
+     - ./nl-nb/data:/osm/data
+     - ./nl-nb/download:/osm/download
+     - ./nl-nb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-nh"-"North Holland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-nh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20173:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-nh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20173
+    volumes:
+     - ./nl-nh/data:/osm/data
+     - ./nl-nh/download:/osm/download
+     - ./nl-nh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-ov"-"Overijssel" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-ov:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20174:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-ov.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20174
+    volumes:
+     - ./nl-ov/data:/osm/data
+     - ./nl-ov/download:/osm/download
+     - ./nl-ov:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-ut"-"Utrecht" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-ut:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20175:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-ut.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20175
+    volumes:
+     - ./nl-ut/data:/osm/data
+     - ./nl-ut/download:/osm/download
+     - ./nl-ut:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-ze"-"Zeeland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-ze:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20176:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-ze.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20176
+    volumes:
+     - ./nl-ze/data:/osm/data
+     - ./nl-ze/download:/osm/download
+     - ./nl-ze:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "nl-zh"-"South Holland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-nl-zh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20177:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-nl-zh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20177
+    volumes:
+     - ./nl-zh/data:/osm/data
+     - ./nl-zh/download:/osm/download
+     - ./nl-zh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "no"-"Norway" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-no:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20178:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-no.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20178
+    volumes:
+     - ./no/data:/osm/data
+     - ./no/download:/osm/download
+     - ./no:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "pl"-"Poland" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-pl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20179:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-pl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20179
+    volumes:
+     - ./pl/data:/osm/data
+     - ./pl/download:/osm/download
+     - ./pl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "pt"-"Portugal" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-pt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20180:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-pt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20180
+    volumes:
+     - ./pt/data:/osm/data
+     - ./pt/download:/osm/download
+     - ./pt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ro"-"Romania" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ro:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20181:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ro.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20181
+    volumes:
+     - ./ro/data:/osm/data
+     - ./ro/download:/osm/download
+     - ./ro:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "rs"-"Serbia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-rs:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20182:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-rs.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20182
+    volumes:
+     - ./rs/data:/osm/data
+     - ./rs/download:/osm/download
+     - ./rs:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "se"-"Sweden" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-se:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20183:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-se.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20183
+    volumes:
+     - ./se/data:/osm/data
+     - ./se/download:/osm/download
+     - ./se:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "si"-"Slovenia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-si:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20184:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-si.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20184
+    volumes:
+     - ./si/data:/osm/data
+     - ./si/download:/osm/download
+     - ./si:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "sk"-"Slovakia" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-sk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20185:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-sk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20185
+    volumes:
+     - ./sk/data:/osm/data
+     - ./sk/download:/osm/download
+     - ./sk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "sm"-"San Marino" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-sm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20186:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-sm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20186
+    volumes:
+     - ./sm/data:/osm/data
+     - ./sm/download:/osm/download
+     - ./sm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "tr"-"Turkey" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-tr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20187:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-tr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20187
+    volumes:
+     - ./tr/data:/osm/data
+     - ./tr/download:/osm/download
+     - ./tr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ua"-"Ukraine" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-ua:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20188:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-ua.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20188
+    volumes:
+     - ./ua/data:/osm/data
+     - ./ua/download:/osm/download
+     - ./ua:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "va"-"Vatican City" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-va:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20189:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-va.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20189
+    volumes:
+     - ./va/data:/osm/data
+     - ./va/download:/osm/download
+     - ./va:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "xk"-"Kosovo" + taginfo-dev.opengeodata.hu
+  #               continent: "eu"
+
+  taginfo-eu-xk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "20190:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=eu-xk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=20190
+    volumes:
+     - ./xk/data:/osm/data
+     - ./xk/download:/osm/download
+     - ./xk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+
+# generated : 2018-07-25:08:48  // template : /setup/docker-compose.jinja2

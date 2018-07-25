@@ -1,0 +1,1508 @@
+# generated : 2018-07-25:09:10  // template : ./setup/template/docker-compose.jinja2
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  #---------------------------------------------------------
+  # Service for : "bm"-"Bermuda" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-bm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22001:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-bm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22001
+    volumes:
+     - ./bm/data:/osm/data
+     - ./bm/download:/osm/download
+     - ./bm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-ab"-"Alberta" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-ab:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22002:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-ab.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22002
+    volumes:
+     - ./ca-ab/data:/osm/data
+     - ./ca-ab/download:/osm/download
+     - ./ca-ab:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-bc"-"British Columbia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-bc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22003:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-bc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22003
+    volumes:
+     - ./ca-bc/data:/osm/data
+     - ./ca-bc/download:/osm/download
+     - ./ca-bc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-mb"-"Manitoba" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-mb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22004:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-mb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22004
+    volumes:
+     - ./ca-mb/data:/osm/data
+     - ./ca-mb/download:/osm/download
+     - ./ca-mb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-nb"-"New Brunswick" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-nb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22005:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-nb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22005
+    volumes:
+     - ./ca-nb/data:/osm/data
+     - ./ca-nb/download:/osm/download
+     - ./ca-nb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-nl"-"Newfoundland and Labrador" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-nl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22006:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-nl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22006
+    volumes:
+     - ./ca-nl/data:/osm/data
+     - ./ca-nl/download:/osm/download
+     - ./ca-nl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-ns"-"Nova Scotia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-ns:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22007:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-ns.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22007
+    volumes:
+     - ./ca-ns/data:/osm/data
+     - ./ca-ns/download:/osm/download
+     - ./ca-ns:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-nt"-"Northwest Territories" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-nt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22008:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-nt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22008
+    volumes:
+     - ./ca-nt/data:/osm/data
+     - ./ca-nt/download:/osm/download
+     - ./ca-nt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-nu"-"Nunavut" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-nu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22009:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-nu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22009
+    volumes:
+     - ./ca-nu/data:/osm/data
+     - ./ca-nu/download:/osm/download
+     - ./ca-nu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-on"-"Ontario" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-on:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22010:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-on.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22010
+    volumes:
+     - ./ca-on/data:/osm/data
+     - ./ca-on/download:/osm/download
+     - ./ca-on:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-pe"-"Prince Edward Island" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-pe:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22011:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-pe.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22011
+    volumes:
+     - ./ca-pe/data:/osm/data
+     - ./ca-pe/download:/osm/download
+     - ./ca-pe:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-qc"-"Quebec" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-qc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22012:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-qc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22012
+    volumes:
+     - ./ca-qc/data:/osm/data
+     - ./ca-qc/download:/osm/download
+     - ./ca-qc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-sk"-"Saskatchewan" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-sk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22013:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-sk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22013
+    volumes:
+     - ./ca-sk/data:/osm/data
+     - ./ca-sk/download:/osm/download
+     - ./ca-sk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ca-yt"-"Yukon" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-ca-yt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22014:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-ca-yt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22014
+    volumes:
+     - ./ca-yt/data:/osm/data
+     - ./ca-yt/download:/osm/download
+     - ./ca-yt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "fr-pm"-"Saint Pierre and Miquelon" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-fr-pm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22015:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-fr-pm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22015
+    volumes:
+     - ./fr-pm/data:/osm/data
+     - ./fr-pm/download:/osm/download
+     - ./fr-pm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "gl"-"Greenland" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-gl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22016:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-gl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22016
+    volumes:
+     - ./gl/data:/osm/data
+     - ./gl/download:/osm/download
+     - ./gl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mx"-"Mexico" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-mx:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22017:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-mx.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22017
+    volumes:
+     - ./mx/data:/osm/data
+     - ./mx/download:/osm/download
+     - ./mx:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ak"-"Alaska" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ak:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22018:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ak.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22018
+    volumes:
+     - ./us-ak/data:/osm/data
+     - ./us-ak/download:/osm/download
+     - ./us-ak:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-al"-"Alabama" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-al:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22019:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-al.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22019
+    volumes:
+     - ./us-al/data:/osm/data
+     - ./us-al/download:/osm/download
+     - ./us-al:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ar"-"Arkansas" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ar:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22020:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ar.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22020
+    volumes:
+     - ./us-ar/data:/osm/data
+     - ./us-ar/download:/osm/download
+     - ./us-ar:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-az"-"Arizona" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-az:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22021:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-az.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22021
+    volumes:
+     - ./us-az/data:/osm/data
+     - ./us-az/download:/osm/download
+     - ./us-az:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ca"-"California" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ca:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22022:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ca.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22022
+    volumes:
+     - ./us-ca/data:/osm/data
+     - ./us-ca/download:/osm/download
+     - ./us-ca:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-co"-"Colorado" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-co:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22023:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-co.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22023
+    volumes:
+     - ./us-co/data:/osm/data
+     - ./us-co/download:/osm/download
+     - ./us-co:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ct"-"Connecticut" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ct:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22024:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ct.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22024
+    volumes:
+     - ./us-ct/data:/osm/data
+     - ./us-ct/download:/osm/download
+     - ./us-ct:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-dc"-"District of Columbia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-dc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22025:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-dc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22025
+    volumes:
+     - ./us-dc/data:/osm/data
+     - ./us-dc/download:/osm/download
+     - ./us-dc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-de"-"Delaware" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-de:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22026:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-de.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22026
+    volumes:
+     - ./us-de/data:/osm/data
+     - ./us-de/download:/osm/download
+     - ./us-de:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-fl"-"Florida" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-fl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22027:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-fl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22027
+    volumes:
+     - ./us-fl/data:/osm/data
+     - ./us-fl/download:/osm/download
+     - ./us-fl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ga"-"Georgia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ga:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22028:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ga.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22028
+    volumes:
+     - ./us-ga/data:/osm/data
+     - ./us-ga/download:/osm/download
+     - ./us-ga:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-hi"-"Hawaii" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-hi:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22029:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-hi.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22029
+    volumes:
+     - ./us-hi/data:/osm/data
+     - ./us-hi/download:/osm/download
+     - ./us-hi:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ia"-"Iowa" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ia:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22030:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ia.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22030
+    volumes:
+     - ./us-ia/data:/osm/data
+     - ./us-ia/download:/osm/download
+     - ./us-ia:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-id"-"Idaho" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-id:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22031:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-id.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22031
+    volumes:
+     - ./us-id/data:/osm/data
+     - ./us-id/download:/osm/download
+     - ./us-id:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-il"-"Illinois" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-il:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22032:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-il.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22032
+    volumes:
+     - ./us-il/data:/osm/data
+     - ./us-il/download:/osm/download
+     - ./us-il:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-in"-"Indiana" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-in:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22033:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-in.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22033
+    volumes:
+     - ./us-in/data:/osm/data
+     - ./us-in/download:/osm/download
+     - ./us-in:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ks"-"Kansas" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ks:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22034:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ks.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22034
+    volumes:
+     - ./us-ks/data:/osm/data
+     - ./us-ks/download:/osm/download
+     - ./us-ks:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ky"-"Kentucky" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ky:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22035:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ky.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22035
+    volumes:
+     - ./us-ky/data:/osm/data
+     - ./us-ky/download:/osm/download
+     - ./us-ky:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-la"-"Louisiana" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-la:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22036:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-la.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22036
+    volumes:
+     - ./us-la/data:/osm/data
+     - ./us-la/download:/osm/download
+     - ./us-la:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ma"-"Massachusetts" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ma:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22037:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ma.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22037
+    volumes:
+     - ./us-ma/data:/osm/data
+     - ./us-ma/download:/osm/download
+     - ./us-ma:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-md"-"Maryland" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-md:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22038:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-md.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22038
+    volumes:
+     - ./us-md/data:/osm/data
+     - ./us-md/download:/osm/download
+     - ./us-md:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-me"-"Maine" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-me:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22039:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-me.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22039
+    volumes:
+     - ./us-me/data:/osm/data
+     - ./us-me/download:/osm/download
+     - ./us-me:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-mi"-"Michigan" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-mi:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22040:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-mi.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22040
+    volumes:
+     - ./us-mi/data:/osm/data
+     - ./us-mi/download:/osm/download
+     - ./us-mi:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-mn"-"Minnesota" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-mn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22041:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-mn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22041
+    volumes:
+     - ./us-mn/data:/osm/data
+     - ./us-mn/download:/osm/download
+     - ./us-mn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-mo"-"Missouri" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-mo:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22042:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-mo.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22042
+    volumes:
+     - ./us-mo/data:/osm/data
+     - ./us-mo/download:/osm/download
+     - ./us-mo:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ms"-"Mississippi" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ms:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22043:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ms.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22043
+    volumes:
+     - ./us-ms/data:/osm/data
+     - ./us-ms/download:/osm/download
+     - ./us-ms:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-mt"-"Montana" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-mt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22044:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-mt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22044
+    volumes:
+     - ./us-mt/data:/osm/data
+     - ./us-mt/download:/osm/download
+     - ./us-mt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nc"-"North Carolina" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22045:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22045
+    volumes:
+     - ./us-nc/data:/osm/data
+     - ./us-nc/download:/osm/download
+     - ./us-nc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nd"-"North Dakota" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nd:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22046:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nd.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22046
+    volumes:
+     - ./us-nd/data:/osm/data
+     - ./us-nd/download:/osm/download
+     - ./us-nd:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ne"-"Nebraska" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ne:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22047:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ne.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22047
+    volumes:
+     - ./us-ne/data:/osm/data
+     - ./us-ne/download:/osm/download
+     - ./us-ne:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nh"-"New Hampshire" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22048:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22048
+    volumes:
+     - ./us-nh/data:/osm/data
+     - ./us-nh/download:/osm/download
+     - ./us-nh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nj"-"New Jersey" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nj:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22049:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nj.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22049
+    volumes:
+     - ./us-nj/data:/osm/data
+     - ./us-nj/download:/osm/download
+     - ./us-nj:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nm"-"New Mexico" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22050:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22050
+    volumes:
+     - ./us-nm/data:/osm/data
+     - ./us-nm/download:/osm/download
+     - ./us-nm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-nv"-"Nevada" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-nv:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22051:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-nv.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22051
+    volumes:
+     - ./us-nv/data:/osm/data
+     - ./us-nv/download:/osm/download
+     - ./us-nv:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ny"-"New York" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ny:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22052:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ny.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22052
+    volumes:
+     - ./us-ny/data:/osm/data
+     - ./us-ny/download:/osm/download
+     - ./us-ny:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-oh"-"Ohio" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-oh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22053:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-oh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22053
+    volumes:
+     - ./us-oh/data:/osm/data
+     - ./us-oh/download:/osm/download
+     - ./us-oh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ok"-"Oklahoma" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ok:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22054:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ok.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22054
+    volumes:
+     - ./us-ok/data:/osm/data
+     - ./us-ok/download:/osm/download
+     - ./us-ok:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-or"-"Oregon" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-or:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22055:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-or.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22055
+    volumes:
+     - ./us-or/data:/osm/data
+     - ./us-or/download:/osm/download
+     - ./us-or:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-pa"-"Pennsylvania" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-pa:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22056:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-pa.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22056
+    volumes:
+     - ./us-pa/data:/osm/data
+     - ./us-pa/download:/osm/download
+     - ./us-pa:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ri"-"Rhode Island" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ri:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22057:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ri.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22057
+    volumes:
+     - ./us-ri/data:/osm/data
+     - ./us-ri/download:/osm/download
+     - ./us-ri:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-sc"-"South Carolina" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-sc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22058:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-sc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22058
+    volumes:
+     - ./us-sc/data:/osm/data
+     - ./us-sc/download:/osm/download
+     - ./us-sc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-sd"-"South Dakota" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-sd:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22059:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-sd.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22059
+    volumes:
+     - ./us-sd/data:/osm/data
+     - ./us-sd/download:/osm/download
+     - ./us-sd:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-tn"-"Tennessee" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-tn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22060:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-tn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22060
+    volumes:
+     - ./us-tn/data:/osm/data
+     - ./us-tn/download:/osm/download
+     - ./us-tn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-tx"-"Texas" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-tx:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22061:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-tx.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22061
+    volumes:
+     - ./us-tx/data:/osm/data
+     - ./us-tx/download:/osm/download
+     - ./us-tx:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-ut"-"Utah" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-ut:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22062:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-ut.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22062
+    volumes:
+     - ./us-ut/data:/osm/data
+     - ./us-ut/download:/osm/download
+     - ./us-ut:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-va"-"Virginia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-va:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22063:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-va.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22063
+    volumes:
+     - ./us-va/data:/osm/data
+     - ./us-va/download:/osm/download
+     - ./us-va:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-vt"-"Vermont" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-vt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22064:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-vt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22064
+    volumes:
+     - ./us-vt/data:/osm/data
+     - ./us-vt/download:/osm/download
+     - ./us-vt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-wa"-"Washington" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-wa:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22065:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-wa.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22065
+    volumes:
+     - ./us-wa/data:/osm/data
+     - ./us-wa/download:/osm/download
+     - ./us-wa:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-wi"-"Wisconsin" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-wi:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22066:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-wi.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22066
+    volumes:
+     - ./us-wi/data:/osm/data
+     - ./us-wi/download:/osm/download
+     - ./us-wi:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-wv"-"West Virginia" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-wv:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22067:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-wv.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22067
+    volumes:
+     - ./us-wv/data:/osm/data
+     - ./us-wv/download:/osm/download
+     - ./us-wv:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "us-wy"-"Wyoming" + taginfo-dev.opengeodata.hu
+  #               continent: "na"
+
+  taginfo-na-us-wy:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "22068:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=na-us-wy.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=22068
+    volumes:
+     - ./us-wy/data:/osm/data
+     - ./us-wy/download:/osm/download
+     - ./us-wy:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+
+# generated : 2018-07-25:09:10  // template : /setup/docker-compose.jinja2

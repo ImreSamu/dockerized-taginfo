@@ -1,0 +1,1593 @@
+# generated : 2018-07-25:09:10  // template : ./setup/template/docker-compose-job.jinja2
+
+# For jobs ...
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  # for downloading geofabrik osm extract  
+  taginfo_download:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+
+
+  #---------------------------------------------------------
+  # Service for : "bm" - "Bermuda"
+  #            continent: "na"
+  #
+  taginfo-job-na-bm:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./bm/data:/osm/data
+     - ./bm/download:/osm/download
+     - ./bm/sources:/osm/sources:rw
+     - ./bm:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=bm
+     - AREA_NAME="Bermuda"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-ab" - "Alberta"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-ab:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-ab/data:/osm/data
+     - ./ca-ab/download:/osm/download
+     - ./ca-ab/sources:/osm/sources:rw
+     - ./ca-ab:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-ab
+     - AREA_NAME="Alberta"
+     - GDNAME=${GDNAME:-canada}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-bc" - "British Columbia"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-bc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-bc/data:/osm/data
+     - ./ca-bc/download:/osm/download
+     - ./ca-bc/sources:/osm/sources:rw
+     - ./ca-bc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-bc
+     - AREA_NAME="British Columbia"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-mb" - "Manitoba"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-mb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-mb/data:/osm/data
+     - ./ca-mb/download:/osm/download
+     - ./ca-mb/sources:/osm/sources:rw
+     - ./ca-mb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-mb
+     - AREA_NAME="Manitoba"
+     - GDNAME=${GDNAME:-manitoba}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-nb" - "New Brunswick"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-nb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-nb/data:/osm/data
+     - ./ca-nb/download:/osm/download
+     - ./ca-nb/sources:/osm/sources:rw
+     - ./ca-nb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-nb
+     - AREA_NAME="New Brunswick"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-nl" - "Newfoundland and Labrador"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-nl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-nl/data:/osm/data
+     - ./ca-nl/download:/osm/download
+     - ./ca-nl/sources:/osm/sources:rw
+     - ./ca-nl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-nl
+     - AREA_NAME="Newfoundland and Labrador"
+     - GDNAME=${GDNAME:-newfoundland-and-labrador}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-ns" - "Nova Scotia"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-ns:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-ns/data:/osm/data
+     - ./ca-ns/download:/osm/download
+     - ./ca-ns/sources:/osm/sources:rw
+     - ./ca-ns:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-ns
+     - AREA_NAME="Nova Scotia"
+     - GDNAME=${GDNAME:-nova-scotia}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-nt" - "Northwest Territories"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-nt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-nt/data:/osm/data
+     - ./ca-nt/download:/osm/download
+     - ./ca-nt/sources:/osm/sources:rw
+     - ./ca-nt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-nt
+     - AREA_NAME="Northwest Territories"
+     - GDNAME=${GDNAME:-canada}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-nu" - "Nunavut"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-nu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-nu/data:/osm/data
+     - ./ca-nu/download:/osm/download
+     - ./ca-nu/sources:/osm/sources:rw
+     - ./ca-nu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-nu
+     - AREA_NAME="Nunavut"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-on" - "Ontario"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-on:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-on/data:/osm/data
+     - ./ca-on/download:/osm/download
+     - ./ca-on/sources:/osm/sources:rw
+     - ./ca-on:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-on
+     - AREA_NAME="Ontario"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-pe" - "Prince Edward Island"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-pe:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-pe/data:/osm/data
+     - ./ca-pe/download:/osm/download
+     - ./ca-pe/sources:/osm/sources:rw
+     - ./ca-pe:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-pe
+     - AREA_NAME="Prince Edward Island"
+     - GDNAME=${GDNAME:-canada}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-qc" - "Quebec"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-qc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-qc/data:/osm/data
+     - ./ca-qc/download:/osm/download
+     - ./ca-qc/sources:/osm/sources:rw
+     - ./ca-qc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-qc
+     - AREA_NAME="Quebec"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-sk" - "Saskatchewan"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-sk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-sk/data:/osm/data
+     - ./ca-sk/download:/osm/download
+     - ./ca-sk/sources:/osm/sources:rw
+     - ./ca-sk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-sk
+     - AREA_NAME="Saskatchewan"
+     - GDNAME=${GDNAME:-saskatchewan}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "ca-yt" - "Yukon"
+  #            continent: "na"
+  #
+  taginfo-job-na-ca-yt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ca-yt/data:/osm/data
+     - ./ca-yt/download:/osm/download
+     - ./ca-yt/sources:/osm/sources:rw
+     - ./ca-yt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ca-yt
+     - AREA_NAME="Yukon"
+     - GDNAME=${GDNAME:-canada}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "fr-pm" - "Saint Pierre and Miquelon"
+  #            continent: "na"
+  #
+  taginfo-job-na-fr-pm:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-pm/data:/osm/data
+     - ./fr-pm/download:/osm/download
+     - ./fr-pm/sources:/osm/sources:rw
+     - ./fr-pm:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-pm
+     - AREA_NAME="Saint Pierre and Miquelon"
+     - GDNAME=${GDNAME:-canada}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "gl" - "Greenland"
+  #            continent: "na"
+  #
+  taginfo-job-na-gl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./gl/data:/osm/data
+     - ./gl/download:/osm/download
+     - ./gl/sources:/osm/sources:rw
+     - ./gl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=gl
+     - AREA_NAME="Greenland"
+     - GDNAME=${GDNAME:-greenland}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "mx" - "Mexico"
+  #            continent: "na"
+  #
+  taginfo-job-na-mx:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./mx/data:/osm/data
+     - ./mx/download:/osm/download
+     - ./mx/sources:/osm/sources:rw
+     - ./mx:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=mx
+     - AREA_NAME="Mexico"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ak" - "Alaska"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ak:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ak/data:/osm/data
+     - ./us-ak/download:/osm/download
+     - ./us-ak/sources:/osm/sources:rw
+     - ./us-ak:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ak
+     - AREA_NAME="Alaska"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-al" - "Alabama"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-al:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-al/data:/osm/data
+     - ./us-al/download:/osm/download
+     - ./us-al/sources:/osm/sources:rw
+     - ./us-al:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-al
+     - AREA_NAME="Alabama"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ar" - "Arkansas"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ar:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ar/data:/osm/data
+     - ./us-ar/download:/osm/download
+     - ./us-ar/sources:/osm/sources:rw
+     - ./us-ar:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ar
+     - AREA_NAME="Arkansas"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-az" - "Arizona"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-az:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-az/data:/osm/data
+     - ./us-az/download:/osm/download
+     - ./us-az/sources:/osm/sources:rw
+     - ./us-az:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-az
+     - AREA_NAME="Arizona"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ca" - "California"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ca:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ca/data:/osm/data
+     - ./us-ca/download:/osm/download
+     - ./us-ca/sources:/osm/sources:rw
+     - ./us-ca:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ca
+     - AREA_NAME="California"
+     - GDNAME=${GDNAME:-california}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-co" - "Colorado"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-co:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-co/data:/osm/data
+     - ./us-co/download:/osm/download
+     - ./us-co/sources:/osm/sources:rw
+     - ./us-co:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-co
+     - AREA_NAME="Colorado"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ct" - "Connecticut"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ct:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ct/data:/osm/data
+     - ./us-ct/download:/osm/download
+     - ./us-ct/sources:/osm/sources:rw
+     - ./us-ct:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ct
+     - AREA_NAME="Connecticut"
+     - GDNAME=${GDNAME:-us-northeast}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-dc" - "District of Columbia"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-dc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-dc/data:/osm/data
+     - ./us-dc/download:/osm/download
+     - ./us-dc/sources:/osm/sources:rw
+     - ./us-dc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-dc
+     - AREA_NAME="District of Columbia"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-de" - "Delaware"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-de:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-de/data:/osm/data
+     - ./us-de/download:/osm/download
+     - ./us-de/sources:/osm/sources:rw
+     - ./us-de:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-de
+     - AREA_NAME="Delaware"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-fl" - "Florida"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-fl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-fl/data:/osm/data
+     - ./us-fl/download:/osm/download
+     - ./us-fl/sources:/osm/sources:rw
+     - ./us-fl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-fl
+     - AREA_NAME="Florida"
+     - GDNAME=${GDNAME:-florida}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ga" - "Georgia"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ga:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ga/data:/osm/data
+     - ./us-ga/download:/osm/download
+     - ./us-ga/sources:/osm/sources:rw
+     - ./us-ga:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ga
+     - AREA_NAME="Georgia"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-hi" - "Hawaii"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-hi:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-hi/data:/osm/data
+     - ./us-hi/download:/osm/download
+     - ./us-hi/sources:/osm/sources:rw
+     - ./us-hi:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-hi
+     - AREA_NAME="Hawaii"
+     - GDNAME=${GDNAME:-us-pacific}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ia" - "Iowa"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ia:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ia/data:/osm/data
+     - ./us-ia/download:/osm/download
+     - ./us-ia/sources:/osm/sources:rw
+     - ./us-ia:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ia
+     - AREA_NAME="Iowa"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-id" - "Idaho"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-id:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-id/data:/osm/data
+     - ./us-id/download:/osm/download
+     - ./us-id/sources:/osm/sources:rw
+     - ./us-id:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-id
+     - AREA_NAME="Idaho"
+     - GDNAME=${GDNAME:-us-west}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-il" - "Illinois"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-il:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-il/data:/osm/data
+     - ./us-il/download:/osm/download
+     - ./us-il/sources:/osm/sources:rw
+     - ./us-il:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-il
+     - AREA_NAME="Illinois"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-in" - "Indiana"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-in:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-in/data:/osm/data
+     - ./us-in/download:/osm/download
+     - ./us-in/sources:/osm/sources:rw
+     - ./us-in:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-in
+     - AREA_NAME="Indiana"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ks" - "Kansas"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ks:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ks/data:/osm/data
+     - ./us-ks/download:/osm/download
+     - ./us-ks/sources:/osm/sources:rw
+     - ./us-ks:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ks
+     - AREA_NAME="Kansas"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ky" - "Kentucky"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ky:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ky/data:/osm/data
+     - ./us-ky/download:/osm/download
+     - ./us-ky/sources:/osm/sources:rw
+     - ./us-ky:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ky
+     - AREA_NAME="Kentucky"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-la" - "Louisiana"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-la:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-la/data:/osm/data
+     - ./us-la/download:/osm/download
+     - ./us-la/sources:/osm/sources:rw
+     - ./us-la:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-la
+     - AREA_NAME="Louisiana"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ma" - "Massachusetts"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ma:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ma/data:/osm/data
+     - ./us-ma/download:/osm/download
+     - ./us-ma/sources:/osm/sources:rw
+     - ./us-ma:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ma
+     - AREA_NAME="Massachusetts"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-md" - "Maryland"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-md:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-md/data:/osm/data
+     - ./us-md/download:/osm/download
+     - ./us-md/sources:/osm/sources:rw
+     - ./us-md:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-md
+     - AREA_NAME="Maryland"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-me" - "Maine"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-me:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-me/data:/osm/data
+     - ./us-me/download:/osm/download
+     - ./us-me/sources:/osm/sources:rw
+     - ./us-me:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-me
+     - AREA_NAME="Maine"
+     - GDNAME=${GDNAME:-us-northeast}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-mi" - "Michigan"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-mi:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-mi/data:/osm/data
+     - ./us-mi/download:/osm/download
+     - ./us-mi/sources:/osm/sources:rw
+     - ./us-mi:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-mi
+     - AREA_NAME="Michigan"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-mn" - "Minnesota"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-mn:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-mn/data:/osm/data
+     - ./us-mn/download:/osm/download
+     - ./us-mn/sources:/osm/sources:rw
+     - ./us-mn:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-mn
+     - AREA_NAME="Minnesota"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-mo" - "Missouri"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-mo:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-mo/data:/osm/data
+     - ./us-mo/download:/osm/download
+     - ./us-mo/sources:/osm/sources:rw
+     - ./us-mo:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-mo
+     - AREA_NAME="Missouri"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ms" - "Mississippi"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ms:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ms/data:/osm/data
+     - ./us-ms/download:/osm/download
+     - ./us-ms/sources:/osm/sources:rw
+     - ./us-ms:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ms
+     - AREA_NAME="Mississippi"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-mt" - "Montana"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-mt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-mt/data:/osm/data
+     - ./us-mt/download:/osm/download
+     - ./us-mt/sources:/osm/sources:rw
+     - ./us-mt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-mt
+     - AREA_NAME="Montana"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nc" - "North Carolina"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nc/data:/osm/data
+     - ./us-nc/download:/osm/download
+     - ./us-nc/sources:/osm/sources:rw
+     - ./us-nc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nc
+     - AREA_NAME="North Carolina"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nd" - "North Dakota"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nd:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nd/data:/osm/data
+     - ./us-nd/download:/osm/download
+     - ./us-nd/sources:/osm/sources:rw
+     - ./us-nd:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nd
+     - AREA_NAME="North Dakota"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ne" - "Nebraska"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ne:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ne/data:/osm/data
+     - ./us-ne/download:/osm/download
+     - ./us-ne/sources:/osm/sources:rw
+     - ./us-ne:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ne
+     - AREA_NAME="Nebraska"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nh" - "New Hampshire"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nh/data:/osm/data
+     - ./us-nh/download:/osm/download
+     - ./us-nh/sources:/osm/sources:rw
+     - ./us-nh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nh
+     - AREA_NAME="New Hampshire"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nj" - "New Jersey"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nj:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nj/data:/osm/data
+     - ./us-nj/download:/osm/download
+     - ./us-nj/sources:/osm/sources:rw
+     - ./us-nj:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nj
+     - AREA_NAME="New Jersey"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nm" - "New Mexico"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nm:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nm/data:/osm/data
+     - ./us-nm/download:/osm/download
+     - ./us-nm/sources:/osm/sources:rw
+     - ./us-nm:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nm
+     - AREA_NAME="New Mexico"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-nv" - "Nevada"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-nv:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-nv/data:/osm/data
+     - ./us-nv/download:/osm/download
+     - ./us-nv/sources:/osm/sources:rw
+     - ./us-nv:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-nv
+     - AREA_NAME="Nevada"
+     - GDNAME=${GDNAME:-us-west}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ny" - "New York"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ny:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ny/data:/osm/data
+     - ./us-ny/download:/osm/download
+     - ./us-ny/sources:/osm/sources:rw
+     - ./us-ny:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ny
+     - AREA_NAME="New York"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-oh" - "Ohio"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-oh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-oh/data:/osm/data
+     - ./us-oh/download:/osm/download
+     - ./us-oh/sources:/osm/sources:rw
+     - ./us-oh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-oh
+     - AREA_NAME="Ohio"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ok" - "Oklahoma"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ok:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ok/data:/osm/data
+     - ./us-ok/download:/osm/download
+     - ./us-ok/sources:/osm/sources:rw
+     - ./us-ok:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ok
+     - AREA_NAME="Oklahoma"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-or" - "Oregon"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-or:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-or/data:/osm/data
+     - ./us-or/download:/osm/download
+     - ./us-or/sources:/osm/sources:rw
+     - ./us-or:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-or
+     - AREA_NAME="Oregon"
+     - GDNAME=${GDNAME:-us-west}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-pa" - "Pennsylvania"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-pa:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-pa/data:/osm/data
+     - ./us-pa/download:/osm/download
+     - ./us-pa/sources:/osm/sources:rw
+     - ./us-pa:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-pa
+     - AREA_NAME="Pennsylvania"
+     - GDNAME=${GDNAME:-us-northeast}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ri" - "Rhode Island"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ri:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ri/data:/osm/data
+     - ./us-ri/download:/osm/download
+     - ./us-ri/sources:/osm/sources:rw
+     - ./us-ri:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ri
+     - AREA_NAME="Rhode Island"
+     - GDNAME=${GDNAME:-us-northeast}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-sc" - "South Carolina"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-sc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-sc/data:/osm/data
+     - ./us-sc/download:/osm/download
+     - ./us-sc/sources:/osm/sources:rw
+     - ./us-sc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-sc
+     - AREA_NAME="South Carolina"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-sd" - "South Dakota"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-sd:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-sd/data:/osm/data
+     - ./us-sd/download:/osm/download
+     - ./us-sd/sources:/osm/sources:rw
+     - ./us-sd:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-sd
+     - AREA_NAME="South Dakota"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-tn" - "Tennessee"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-tn:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-tn/data:/osm/data
+     - ./us-tn/download:/osm/download
+     - ./us-tn/sources:/osm/sources:rw
+     - ./us-tn:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-tn
+     - AREA_NAME="Tennessee"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-tx" - "Texas"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-tx:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-tx/data:/osm/data
+     - ./us-tx/download:/osm/download
+     - ./us-tx/sources:/osm/sources:rw
+     - ./us-tx:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-tx
+     - AREA_NAME="Texas"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-ut" - "Utah"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-ut:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-ut/data:/osm/data
+     - ./us-ut/download:/osm/download
+     - ./us-ut/sources:/osm/sources:rw
+     - ./us-ut:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-ut
+     - AREA_NAME="Utah"
+     - GDNAME=${GDNAME:-us-west}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-va" - "Virginia"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-va:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-va/data:/osm/data
+     - ./us-va/download:/osm/download
+     - ./us-va/sources:/osm/sources:rw
+     - ./us-va:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-va
+     - AREA_NAME="Virginia"
+     - GDNAME=${GDNAME:-us-south}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-vt" - "Vermont"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-vt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-vt/data:/osm/data
+     - ./us-vt/download:/osm/download
+     - ./us-vt/sources:/osm/sources:rw
+     - ./us-vt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-vt
+     - AREA_NAME="Vermont"
+     - GDNAME=${GDNAME:-us-northeast}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-wa" - "Washington"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-wa:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-wa/data:/osm/data
+     - ./us-wa/download:/osm/download
+     - ./us-wa/sources:/osm/sources:rw
+     - ./us-wa:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-wa
+     - AREA_NAME="Washington"
+     - GDNAME=${GDNAME:-us-west}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-wi" - "Wisconsin"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-wi:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-wi/data:/osm/data
+     - ./us-wi/download:/osm/download
+     - ./us-wi/sources:/osm/sources:rw
+     - ./us-wi:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-wi
+     - AREA_NAME="Wisconsin"
+     - GDNAME=${GDNAME:-us-midwest}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-wv" - "West Virginia"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-wv:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-wv/data:/osm/data
+     - ./us-wv/download:/osm/download
+     - ./us-wv/sources:/osm/sources:rw
+     - ./us-wv:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-wv
+     - AREA_NAME="West Virginia"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+  #---------------------------------------------------------
+  # Service for : "us-wy" - "Wyoming"
+  #            continent: "na"
+  #
+  taginfo-job-na-us-wy:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./us-wy/data:/osm/data
+     - ./us-wy/download:/osm/download
+     - ./us-wy/sources:/osm/sources:rw
+     - ./us-wy:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=us-wy
+     - AREA_NAME="Wyoming"
+     - GDNAME=${GDNAME:-north-america}   
+     - CONTINENT=na
+     - CONTINENT_LONG=north-america
+
+
+# generated : 2018-07-25:09:10  

@@ -1,0 +1,1984 @@
+# generated : 2018-07-25:09:37  // template : ./setup/template/docker-compose-job.jinja2
+
+# For jobs ...
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  # for downloading geofabrik osm extract  
+  taginfo_download:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+
+
+  #---------------------------------------------------------
+  # Service for : "ru-ad" - "Adygea"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ad:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ad/data:/osm/data
+     - ./ru-ad/download:/osm/download
+     - ./ru-ad/sources:/osm/sources:rw
+     - ./ru-ad:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ad
+     - AREA_NAME="Adygea"
+     - GDNAME=${GDNAME:-south-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-al" - "Altai Republic"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-al:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-al/data:/osm/data
+     - ./ru-al/download:/osm/download
+     - ./ru-al/sources:/osm/sources:rw
+     - ./ru-al:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-al
+     - AREA_NAME="Altai Republic"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-alt" - "Altai Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-alt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-alt/data:/osm/data
+     - ./ru-alt/download:/osm/download
+     - ./ru-alt/sources:/osm/sources:rw
+     - ./ru-alt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-alt
+     - AREA_NAME="Altai Krai"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-amu" - "Amur Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-amu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-amu/data:/osm/data
+     - ./ru-amu/download:/osm/download
+     - ./ru-amu/sources:/osm/sources:rw
+     - ./ru-amu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-amu
+     - AREA_NAME="Amur Oblast"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ark" - "Arkhangelsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ark:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ark/data:/osm/data
+     - ./ru-ark/download:/osm/download
+     - ./ru-ark/sources:/osm/sources:rw
+     - ./ru-ark:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ark
+     - AREA_NAME="Arkhangelsk Oblast"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ast" - "Astrakhan Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ast:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ast/data:/osm/data
+     - ./ru-ast/download:/osm/download
+     - ./ru-ast/sources:/osm/sources:rw
+     - ./ru-ast:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ast
+     - AREA_NAME="Astrakhan Oblast"
+     - GDNAME=${GDNAME:-south-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ba" - "Bashkortostan"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ba:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ba/data:/osm/data
+     - ./ru-ba/download:/osm/download
+     - ./ru-ba/sources:/osm/sources:rw
+     - ./ru-ba:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ba
+     - AREA_NAME="Bashkortostan"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-bel" - "Belgorod Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-bel:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-bel/data:/osm/data
+     - ./ru-bel/download:/osm/download
+     - ./ru-bel/sources:/osm/sources:rw
+     - ./ru-bel:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-bel
+     - AREA_NAME="Belgorod Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-bry" - "Bryansk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-bry:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-bry/data:/osm/data
+     - ./ru-bry/download:/osm/download
+     - ./ru-bry/sources:/osm/sources:rw
+     - ./ru-bry:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-bry
+     - AREA_NAME="Bryansk Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-bu" - "Buryatia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-bu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-bu/data:/osm/data
+     - ./ru-bu/download:/osm/download
+     - ./ru-bu/sources:/osm/sources:rw
+     - ./ru-bu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-bu
+     - AREA_NAME="Buryatia"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ce" - "Chechnya"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ce:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ce/data:/osm/data
+     - ./ru-ce/download:/osm/download
+     - ./ru-ce/sources:/osm/sources:rw
+     - ./ru-ce:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ce
+     - AREA_NAME="Chechnya"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-che" - "Chelyabinsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-che:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-che/data:/osm/data
+     - ./ru-che/download:/osm/download
+     - ./ru-che/sources:/osm/sources:rw
+     - ./ru-che:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-che
+     - AREA_NAME="Chelyabinsk Oblast"
+     - GDNAME=${GDNAME:-ural-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-chu" - "Chukotka Autonomous Okrug"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-chu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-chu/data:/osm/data
+     - ./ru-chu/download:/osm/download
+     - ./ru-chu/sources:/osm/sources:rw
+     - ./ru-chu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-chu
+     - AREA_NAME="Chukotka Autonomous Okrug"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-cr" - "Republic of Crimea"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-cr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-cr/data:/osm/data
+     - ./ru-cr/download:/osm/download
+     - ./ru-cr/sources:/osm/sources:rw
+     - ./ru-cr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-cr
+     - AREA_NAME="Republic of Crimea"
+     - GDNAME=${GDNAME:-crimean-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-cu" - "Chuvashia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-cu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-cu/data:/osm/data
+     - ./ru-cu/download:/osm/download
+     - ./ru-cu/sources:/osm/sources:rw
+     - ./ru-cu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-cu
+     - AREA_NAME="Chuvashia"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-da" - "Dagestan"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-da:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-da/data:/osm/data
+     - ./ru-da/download:/osm/download
+     - ./ru-da/sources:/osm/sources:rw
+     - ./ru-da:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-da
+     - AREA_NAME="Dagestan"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-in" - "Ingushetia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-in:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-in/data:/osm/data
+     - ./ru-in/download:/osm/download
+     - ./ru-in/sources:/osm/sources:rw
+     - ./ru-in:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-in
+     - AREA_NAME="Ingushetia"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-irk" - "Irkutsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-irk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-irk/data:/osm/data
+     - ./ru-irk/download:/osm/download
+     - ./ru-irk/sources:/osm/sources:rw
+     - ./ru-irk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-irk
+     - AREA_NAME="Irkutsk Oblast"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-iva" - "Ivanovo Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-iva:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-iva/data:/osm/data
+     - ./ru-iva/download:/osm/download
+     - ./ru-iva/sources:/osm/sources:rw
+     - ./ru-iva:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-iva
+     - AREA_NAME="Ivanovo Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kam" - "Kamchatka Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kam:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kam/data:/osm/data
+     - ./ru-kam/download:/osm/download
+     - ./ru-kam/sources:/osm/sources:rw
+     - ./ru-kam:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kam
+     - AREA_NAME="Kamchatka Krai"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kb" - "Kabardino-Balkaria"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kb/data:/osm/data
+     - ./ru-kb/download:/osm/download
+     - ./ru-kb/sources:/osm/sources:rw
+     - ./ru-kb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kb
+     - AREA_NAME="Kabardino-Balkaria"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kc" - "Karachay-Cherkessia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kc/data:/osm/data
+     - ./ru-kc/download:/osm/download
+     - ./ru-kc/sources:/osm/sources:rw
+     - ./ru-kc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kc
+     - AREA_NAME="Karachay-Cherkessia"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kda" - "Krasnodar Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kda:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kda/data:/osm/data
+     - ./ru-kda/download:/osm/download
+     - ./ru-kda/sources:/osm/sources:rw
+     - ./ru-kda:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kda
+     - AREA_NAME="Krasnodar Krai"
+     - GDNAME=${GDNAME:-south-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kem" - "Kemerovo Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kem:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kem/data:/osm/data
+     - ./ru-kem/download:/osm/download
+     - ./ru-kem/sources:/osm/sources:rw
+     - ./ru-kem:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kem
+     - AREA_NAME="Kemerovo Oblast"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kgd" - "Kaliningrad"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kgd:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kgd/data:/osm/data
+     - ./ru-kgd/download:/osm/download
+     - ./ru-kgd/sources:/osm/sources:rw
+     - ./ru-kgd:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kgd
+     - AREA_NAME="Kaliningrad"
+     - GDNAME=${GDNAME:-kaliningrad}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kgn" - "Kurgan Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kgn:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kgn/data:/osm/data
+     - ./ru-kgn/download:/osm/download
+     - ./ru-kgn/sources:/osm/sources:rw
+     - ./ru-kgn:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kgn
+     - AREA_NAME="Kurgan Oblast"
+     - GDNAME=${GDNAME:-ural-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kha" - "Khabarovsk Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kha:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kha/data:/osm/data
+     - ./ru-kha/download:/osm/download
+     - ./ru-kha/sources:/osm/sources:rw
+     - ./ru-kha:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kha
+     - AREA_NAME="Khabarovsk Krai"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-khm" - "Khanty-Mansiysk Autonomous Okrug – Ugra"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-khm:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-khm/data:/osm/data
+     - ./ru-khm/download:/osm/download
+     - ./ru-khm/sources:/osm/sources:rw
+     - ./ru-khm:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-khm
+     - AREA_NAME="Khanty-Mansiysk Autonomous Okrug – Ugra"
+     - GDNAME=${GDNAME:-ural-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kir" - "Kirov Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kir:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kir/data:/osm/data
+     - ./ru-kir/download:/osm/download
+     - ./ru-kir/sources:/osm/sources:rw
+     - ./ru-kir:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kir
+     - AREA_NAME="Kirov Oblast"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kk" - "Republic of Khakassia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kk/data:/osm/data
+     - ./ru-kk/download:/osm/download
+     - ./ru-kk/sources:/osm/sources:rw
+     - ./ru-kk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kk
+     - AREA_NAME="Republic of Khakassia"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kl" - "Kalmykia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kl/data:/osm/data
+     - ./ru-kl/download:/osm/download
+     - ./ru-kl/sources:/osm/sources:rw
+     - ./ru-kl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kl
+     - AREA_NAME="Kalmykia"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-klu" - "Kaluga Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-klu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-klu/data:/osm/data
+     - ./ru-klu/download:/osm/download
+     - ./ru-klu/sources:/osm/sources:rw
+     - ./ru-klu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-klu
+     - AREA_NAME="Kaluga Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ko" - "Komi Republic"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ko:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ko/data:/osm/data
+     - ./ru-ko/download:/osm/download
+     - ./ru-ko/sources:/osm/sources:rw
+     - ./ru-ko:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ko
+     - AREA_NAME="Komi Republic"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kos" - "Kostroma Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kos:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kos/data:/osm/data
+     - ./ru-kos/download:/osm/download
+     - ./ru-kos/sources:/osm/sources:rw
+     - ./ru-kos:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kos
+     - AREA_NAME="Kostroma Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kr" - "Republic of Karelia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kr/data:/osm/data
+     - ./ru-kr/download:/osm/download
+     - ./ru-kr/sources:/osm/sources:rw
+     - ./ru-kr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kr
+     - AREA_NAME="Republic of Karelia"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-krs" - "Kursk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-krs:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-krs/data:/osm/data
+     - ./ru-krs/download:/osm/download
+     - ./ru-krs/sources:/osm/sources:rw
+     - ./ru-krs:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-krs
+     - AREA_NAME="Kursk Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-kya" - "Krasnoyarsk Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-kya:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-kya/data:/osm/data
+     - ./ru-kya/download:/osm/download
+     - ./ru-kya/sources:/osm/sources:rw
+     - ./ru-kya:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-kya
+     - AREA_NAME="Krasnoyarsk Krai"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-len" - "Leningrad oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-len:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-len/data:/osm/data
+     - ./ru-len/download:/osm/download
+     - ./ru-len/sources:/osm/sources:rw
+     - ./ru-len:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-len
+     - AREA_NAME="Leningrad oblast"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-lip" - "Lipetsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-lip:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-lip/data:/osm/data
+     - ./ru-lip/download:/osm/download
+     - ./ru-lip/sources:/osm/sources:rw
+     - ./ru-lip:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-lip
+     - AREA_NAME="Lipetsk Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-mag" - "Magadan Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-mag:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-mag/data:/osm/data
+     - ./ru-mag/download:/osm/download
+     - ./ru-mag/sources:/osm/sources:rw
+     - ./ru-mag:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-mag
+     - AREA_NAME="Magadan Oblast"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-me" - "Mari El"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-me:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-me/data:/osm/data
+     - ./ru-me/download:/osm/download
+     - ./ru-me/sources:/osm/sources:rw
+     - ./ru-me:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-me
+     - AREA_NAME="Mari El"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-mo" - "Republic of Mordovia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-mo:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-mo/data:/osm/data
+     - ./ru-mo/download:/osm/download
+     - ./ru-mo/sources:/osm/sources:rw
+     - ./ru-mo:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-mo
+     - AREA_NAME="Republic of Mordovia"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-mos" - "Moscow Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-mos:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-mos/data:/osm/data
+     - ./ru-mos/download:/osm/download
+     - ./ru-mos/sources:/osm/sources:rw
+     - ./ru-mos:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-mos
+     - AREA_NAME="Moscow Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-mow" - "Moscow"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-mow:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-mow/data:/osm/data
+     - ./ru-mow/download:/osm/download
+     - ./ru-mow/sources:/osm/sources:rw
+     - ./ru-mow:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-mow
+     - AREA_NAME="Moscow"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-mur" - "Murmansk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-mur:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-mur/data:/osm/data
+     - ./ru-mur/download:/osm/download
+     - ./ru-mur/sources:/osm/sources:rw
+     - ./ru-mur:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-mur
+     - AREA_NAME="Murmansk Oblast"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-nen" - "Nenets Autonomous Okrug"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-nen:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-nen/data:/osm/data
+     - ./ru-nen/download:/osm/download
+     - ./ru-nen/sources:/osm/sources:rw
+     - ./ru-nen:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-nen
+     - AREA_NAME="Nenets Autonomous Okrug"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ngr" - "Novgorod Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ngr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ngr/data:/osm/data
+     - ./ru-ngr/download:/osm/download
+     - ./ru-ngr/sources:/osm/sources:rw
+     - ./ru-ngr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ngr
+     - AREA_NAME="Novgorod Oblast"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-niz" - "Nizhny Novgorod Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-niz:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-niz/data:/osm/data
+     - ./ru-niz/download:/osm/download
+     - ./ru-niz/sources:/osm/sources:rw
+     - ./ru-niz:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-niz
+     - AREA_NAME="Nizhny Novgorod Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-nvs" - "Novosibirsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-nvs:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-nvs/data:/osm/data
+     - ./ru-nvs/download:/osm/download
+     - ./ru-nvs/sources:/osm/sources:rw
+     - ./ru-nvs:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-nvs
+     - AREA_NAME="Novosibirsk Oblast"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-oms" - "Omsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-oms:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-oms/data:/osm/data
+     - ./ru-oms/download:/osm/download
+     - ./ru-oms/sources:/osm/sources:rw
+     - ./ru-oms:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-oms
+     - AREA_NAME="Omsk Oblast"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ore" - "Orenburg Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ore:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ore/data:/osm/data
+     - ./ru-ore/download:/osm/download
+     - ./ru-ore/sources:/osm/sources:rw
+     - ./ru-ore:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ore
+     - AREA_NAME="Orenburg Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-orl" - "Oryol Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-orl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-orl/data:/osm/data
+     - ./ru-orl/download:/osm/download
+     - ./ru-orl/sources:/osm/sources:rw
+     - ./ru-orl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-orl
+     - AREA_NAME="Oryol Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-per" - "Perm Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-per:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-per/data:/osm/data
+     - ./ru-per/download:/osm/download
+     - ./ru-per/sources:/osm/sources:rw
+     - ./ru-per:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-per
+     - AREA_NAME="Perm Krai"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-pnz" - "Penza Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-pnz:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-pnz/data:/osm/data
+     - ./ru-pnz/download:/osm/download
+     - ./ru-pnz/sources:/osm/sources:rw
+     - ./ru-pnz:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-pnz
+     - AREA_NAME="Penza Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-pri" - "Primorsky Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-pri:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-pri/data:/osm/data
+     - ./ru-pri/download:/osm/download
+     - ./ru-pri/sources:/osm/sources:rw
+     - ./ru-pri:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-pri
+     - AREA_NAME="Primorsky Krai"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-psk" - "Pskov Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-psk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-psk/data:/osm/data
+     - ./ru-psk/download:/osm/download
+     - ./ru-psk/sources:/osm/sources:rw
+     - ./ru-psk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-psk
+     - AREA_NAME="Pskov Oblast"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ros" - "Rostov Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ros:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ros/data:/osm/data
+     - ./ru-ros/download:/osm/download
+     - ./ru-ros/sources:/osm/sources:rw
+     - ./ru-ros:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ros
+     - AREA_NAME="Rostov Oblast"
+     - GDNAME=${GDNAME:-south-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-rya" - "Ryazan Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-rya:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-rya/data:/osm/data
+     - ./ru-rya/download:/osm/download
+     - ./ru-rya/sources:/osm/sources:rw
+     - ./ru-rya:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-rya
+     - AREA_NAME="Ryazan Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sa" - "Sakha Republic"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sa:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sa/data:/osm/data
+     - ./ru-sa/download:/osm/download
+     - ./ru-sa/sources:/osm/sources:rw
+     - ./ru-sa:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sa
+     - AREA_NAME="Sakha Republic"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sak" - "Sakhalin Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sak:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sak/data:/osm/data
+     - ./ru-sak/download:/osm/download
+     - ./ru-sak/sources:/osm/sources:rw
+     - ./ru-sak:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sak
+     - AREA_NAME="Sakhalin Oblast"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sam" - "Samara Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sam:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sam/data:/osm/data
+     - ./ru-sam/download:/osm/download
+     - ./ru-sam/sources:/osm/sources:rw
+     - ./ru-sam:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sam
+     - AREA_NAME="Samara Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sar" - "Saratov Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sar:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sar/data:/osm/data
+     - ./ru-sar/download:/osm/download
+     - ./ru-sar/sources:/osm/sources:rw
+     - ./ru-sar:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sar
+     - AREA_NAME="Saratov Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-se" - "North Ossetia–Alania"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-se:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-se/data:/osm/data
+     - ./ru-se/download:/osm/download
+     - ./ru-se/sources:/osm/sources:rw
+     - ./ru-se:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-se
+     - AREA_NAME="North Ossetia–Alania"
+     - GDNAME=${GDNAME:-north-caucasus-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sev" - "Sevastopol"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sev:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sev/data:/osm/data
+     - ./ru-sev/download:/osm/download
+     - ./ru-sev/sources:/osm/sources:rw
+     - ./ru-sev:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sev
+     - AREA_NAME="Sevastopol"
+     - GDNAME=${GDNAME:-crimean-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-smo" - "Smolensk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-smo:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-smo/data:/osm/data
+     - ./ru-smo/download:/osm/download
+     - ./ru-smo/sources:/osm/sources:rw
+     - ./ru-smo:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-smo
+     - AREA_NAME="Smolensk Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-spe" - "Saint Petersburg"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-spe:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-spe/data:/osm/data
+     - ./ru-spe/download:/osm/download
+     - ./ru-spe/sources:/osm/sources:rw
+     - ./ru-spe:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-spe
+     - AREA_NAME="Saint Petersburg"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sta" - "Stavropol Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sta:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sta/data:/osm/data
+     - ./ru-sta/download:/osm/download
+     - ./ru-sta/sources:/osm/sources:rw
+     - ./ru-sta:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sta
+     - AREA_NAME="Stavropol Krai"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-sve" - "Sverdlovsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-sve:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-sve/data:/osm/data
+     - ./ru-sve/download:/osm/download
+     - ./ru-sve/sources:/osm/sources:rw
+     - ./ru-sve:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-sve
+     - AREA_NAME="Sverdlovsk Oblast"
+     - GDNAME=${GDNAME:-ural-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ta" - "Tatarstan"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ta:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ta/data:/osm/data
+     - ./ru-ta/download:/osm/download
+     - ./ru-ta/sources:/osm/sources:rw
+     - ./ru-ta:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ta
+     - AREA_NAME="Tatarstan"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-tam" - "Tambov Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-tam:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-tam/data:/osm/data
+     - ./ru-tam/download:/osm/download
+     - ./ru-tam/sources:/osm/sources:rw
+     - ./ru-tam:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-tam
+     - AREA_NAME="Tambov Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-tom" - "Tomsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-tom:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-tom/data:/osm/data
+     - ./ru-tom/download:/osm/download
+     - ./ru-tom/sources:/osm/sources:rw
+     - ./ru-tom:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-tom
+     - AREA_NAME="Tomsk Oblast"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-tul" - "Tula Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-tul:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-tul/data:/osm/data
+     - ./ru-tul/download:/osm/download
+     - ./ru-tul/sources:/osm/sources:rw
+     - ./ru-tul:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-tul
+     - AREA_NAME="Tula Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-tve" - "Tver Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-tve:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-tve/data:/osm/data
+     - ./ru-tve/download:/osm/download
+     - ./ru-tve/sources:/osm/sources:rw
+     - ./ru-tve:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-tve
+     - AREA_NAME="Tver Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ty" - "Tuva Republic"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ty:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ty/data:/osm/data
+     - ./ru-ty/download:/osm/download
+     - ./ru-ty/sources:/osm/sources:rw
+     - ./ru-ty:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ty
+     - AREA_NAME="Tuva Republic"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-tyu" - "Tyumen Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-tyu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-tyu/data:/osm/data
+     - ./ru-tyu/download:/osm/download
+     - ./ru-tyu/sources:/osm/sources:rw
+     - ./ru-tyu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-tyu
+     - AREA_NAME="Tyumen Oblast"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-ud" - "Udmurtia"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-ud:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-ud/data:/osm/data
+     - ./ru-ud/download:/osm/download
+     - ./ru-ud/sources:/osm/sources:rw
+     - ./ru-ud:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-ud
+     - AREA_NAME="Udmurtia"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-uly" - "Ulyanovsk Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-uly:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-uly/data:/osm/data
+     - ./ru-uly/download:/osm/download
+     - ./ru-uly/sources:/osm/sources:rw
+     - ./ru-uly:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-uly
+     - AREA_NAME="Ulyanovsk Oblast"
+     - GDNAME=${GDNAME:-volga-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-vgg" - "Volgograd Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-vgg:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-vgg/data:/osm/data
+     - ./ru-vgg/download:/osm/download
+     - ./ru-vgg/sources:/osm/sources:rw
+     - ./ru-vgg:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-vgg
+     - AREA_NAME="Volgograd Oblast"
+     - GDNAME=${GDNAME:-russia}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-vla" - "Vladimir Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-vla:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-vla/data:/osm/data
+     - ./ru-vla/download:/osm/download
+     - ./ru-vla/sources:/osm/sources:rw
+     - ./ru-vla:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-vla
+     - AREA_NAME="Vladimir Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-vlg" - "Vologda Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-vlg:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-vlg/data:/osm/data
+     - ./ru-vlg/download:/osm/download
+     - ./ru-vlg/sources:/osm/sources:rw
+     - ./ru-vlg:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-vlg
+     - AREA_NAME="Vologda Oblast"
+     - GDNAME=${GDNAME:-northwestern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-vor" - "Voronezh Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-vor:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-vor/data:/osm/data
+     - ./ru-vor/download:/osm/download
+     - ./ru-vor/sources:/osm/sources:rw
+     - ./ru-vor:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-vor
+     - AREA_NAME="Voronezh Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-yan" - "Yamalo-Nenets Autonomous Okrug"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-yan:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-yan/data:/osm/data
+     - ./ru-yan/download:/osm/download
+     - ./ru-yan/sources:/osm/sources:rw
+     - ./ru-yan:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-yan
+     - AREA_NAME="Yamalo-Nenets Autonomous Okrug"
+     - GDNAME=${GDNAME:-ural-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-yar" - "Yaroslavl Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-yar:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-yar/data:/osm/data
+     - ./ru-yar/download:/osm/download
+     - ./ru-yar/sources:/osm/sources:rw
+     - ./ru-yar:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-yar
+     - AREA_NAME="Yaroslavl Oblast"
+     - GDNAME=${GDNAME:-central-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-yev" - "Jewish Autonomous Oblast"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-yev:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-yev/data:/osm/data
+     - ./ru-yev/download:/osm/download
+     - ./ru-yev/sources:/osm/sources:rw
+     - ./ru-yev:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-yev
+     - AREA_NAME="Jewish Autonomous Oblast"
+     - GDNAME=${GDNAME:-far-eastern-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+  #---------------------------------------------------------
+  # Service for : "ru-zab" - "Zabaykalsky Krai"
+  #            continent: "ru"
+  #
+  taginfo-job-ru-ru-zab:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ru-zab/data:/osm/data
+     - ./ru-zab/download:/osm/download
+     - ./ru-zab/sources:/osm/sources:rw
+     - ./ru-zab:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ru-zab
+     - AREA_NAME="Zabaykalsky Krai"
+     - GDNAME=${GDNAME:-siberian-fed-district}   
+     - CONTINENT=ru
+     - CONTINENT_LONG=russia
+
+
+# generated : 2018-07-25:09:37  

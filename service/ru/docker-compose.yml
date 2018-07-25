@@ -1,0 +1,1882 @@
+# generated : 2018-07-25:09:37  // template : ./setup/template/docker-compose.jinja2
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  #---------------------------------------------------------
+  # Service for : "ru-ad"-"Adygea" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ad:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24001:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ad.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24001
+    volumes:
+     - ./ru-ad/data:/osm/data
+     - ./ru-ad/download:/osm/download
+     - ./ru-ad:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-al"-"Altai Republic" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-al:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24002:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-al.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24002
+    volumes:
+     - ./ru-al/data:/osm/data
+     - ./ru-al/download:/osm/download
+     - ./ru-al:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-alt"-"Altai Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-alt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24003:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-alt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24003
+    volumes:
+     - ./ru-alt/data:/osm/data
+     - ./ru-alt/download:/osm/download
+     - ./ru-alt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-amu"-"Amur Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-amu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24004:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-amu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24004
+    volumes:
+     - ./ru-amu/data:/osm/data
+     - ./ru-amu/download:/osm/download
+     - ./ru-amu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ark"-"Arkhangelsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ark:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24005:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ark.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24005
+    volumes:
+     - ./ru-ark/data:/osm/data
+     - ./ru-ark/download:/osm/download
+     - ./ru-ark:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ast"-"Astrakhan Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ast:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24006:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ast.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24006
+    volumes:
+     - ./ru-ast/data:/osm/data
+     - ./ru-ast/download:/osm/download
+     - ./ru-ast:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ba"-"Bashkortostan" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ba:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24007:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ba.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24007
+    volumes:
+     - ./ru-ba/data:/osm/data
+     - ./ru-ba/download:/osm/download
+     - ./ru-ba:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-bel"-"Belgorod Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-bel:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24008:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-bel.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24008
+    volumes:
+     - ./ru-bel/data:/osm/data
+     - ./ru-bel/download:/osm/download
+     - ./ru-bel:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-bry"-"Bryansk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-bry:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24009:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-bry.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24009
+    volumes:
+     - ./ru-bry/data:/osm/data
+     - ./ru-bry/download:/osm/download
+     - ./ru-bry:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-bu"-"Buryatia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-bu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24010:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-bu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24010
+    volumes:
+     - ./ru-bu/data:/osm/data
+     - ./ru-bu/download:/osm/download
+     - ./ru-bu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ce"-"Chechnya" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ce:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24011:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ce.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24011
+    volumes:
+     - ./ru-ce/data:/osm/data
+     - ./ru-ce/download:/osm/download
+     - ./ru-ce:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-che"-"Chelyabinsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-che:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24012:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-che.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24012
+    volumes:
+     - ./ru-che/data:/osm/data
+     - ./ru-che/download:/osm/download
+     - ./ru-che:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-chu"-"Chukotka Autonomous Okrug" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-chu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24013:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-chu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24013
+    volumes:
+     - ./ru-chu/data:/osm/data
+     - ./ru-chu/download:/osm/download
+     - ./ru-chu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-cr"-"Republic of Crimea" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-cr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24014:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-cr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24014
+    volumes:
+     - ./ru-cr/data:/osm/data
+     - ./ru-cr/download:/osm/download
+     - ./ru-cr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-cu"-"Chuvashia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-cu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24015:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-cu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24015
+    volumes:
+     - ./ru-cu/data:/osm/data
+     - ./ru-cu/download:/osm/download
+     - ./ru-cu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-da"-"Dagestan" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-da:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24016:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-da.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24016
+    volumes:
+     - ./ru-da/data:/osm/data
+     - ./ru-da/download:/osm/download
+     - ./ru-da:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-in"-"Ingushetia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-in:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24017:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-in.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24017
+    volumes:
+     - ./ru-in/data:/osm/data
+     - ./ru-in/download:/osm/download
+     - ./ru-in:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-irk"-"Irkutsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-irk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24018:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-irk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24018
+    volumes:
+     - ./ru-irk/data:/osm/data
+     - ./ru-irk/download:/osm/download
+     - ./ru-irk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-iva"-"Ivanovo Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-iva:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24019:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-iva.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24019
+    volumes:
+     - ./ru-iva/data:/osm/data
+     - ./ru-iva/download:/osm/download
+     - ./ru-iva:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kam"-"Kamchatka Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kam:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24020:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kam.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24020
+    volumes:
+     - ./ru-kam/data:/osm/data
+     - ./ru-kam/download:/osm/download
+     - ./ru-kam:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kb"-"Kabardino-Balkaria" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24021:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24021
+    volumes:
+     - ./ru-kb/data:/osm/data
+     - ./ru-kb/download:/osm/download
+     - ./ru-kb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kc"-"Karachay-Cherkessia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kc:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24022:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kc.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24022
+    volumes:
+     - ./ru-kc/data:/osm/data
+     - ./ru-kc/download:/osm/download
+     - ./ru-kc:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kda"-"Krasnodar Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kda:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24023:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kda.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24023
+    volumes:
+     - ./ru-kda/data:/osm/data
+     - ./ru-kda/download:/osm/download
+     - ./ru-kda:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kem"-"Kemerovo Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kem:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24024:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kem.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24024
+    volumes:
+     - ./ru-kem/data:/osm/data
+     - ./ru-kem/download:/osm/download
+     - ./ru-kem:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kgd"-"Kaliningrad" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kgd:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24025:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kgd.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24025
+    volumes:
+     - ./ru-kgd/data:/osm/data
+     - ./ru-kgd/download:/osm/download
+     - ./ru-kgd:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kgn"-"Kurgan Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kgn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24026:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kgn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24026
+    volumes:
+     - ./ru-kgn/data:/osm/data
+     - ./ru-kgn/download:/osm/download
+     - ./ru-kgn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kha"-"Khabarovsk Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kha:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24027:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kha.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24027
+    volumes:
+     - ./ru-kha/data:/osm/data
+     - ./ru-kha/download:/osm/download
+     - ./ru-kha:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-khm"-"Khanty-Mansiysk Autonomous Okrug – Ugra" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-khm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24028:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-khm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24028
+    volumes:
+     - ./ru-khm/data:/osm/data
+     - ./ru-khm/download:/osm/download
+     - ./ru-khm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kir"-"Kirov Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kir:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24029:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kir.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24029
+    volumes:
+     - ./ru-kir/data:/osm/data
+     - ./ru-kir/download:/osm/download
+     - ./ru-kir:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kk"-"Republic of Khakassia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24030:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24030
+    volumes:
+     - ./ru-kk/data:/osm/data
+     - ./ru-kk/download:/osm/download
+     - ./ru-kk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kl"-"Kalmykia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24031:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24031
+    volumes:
+     - ./ru-kl/data:/osm/data
+     - ./ru-kl/download:/osm/download
+     - ./ru-kl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-klu"-"Kaluga Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-klu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24032:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-klu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24032
+    volumes:
+     - ./ru-klu/data:/osm/data
+     - ./ru-klu/download:/osm/download
+     - ./ru-klu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ko"-"Komi Republic" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ko:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24033:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ko.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24033
+    volumes:
+     - ./ru-ko/data:/osm/data
+     - ./ru-ko/download:/osm/download
+     - ./ru-ko:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kos"-"Kostroma Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kos:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24034:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kos.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24034
+    volumes:
+     - ./ru-kos/data:/osm/data
+     - ./ru-kos/download:/osm/download
+     - ./ru-kos:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kr"-"Republic of Karelia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24035:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24035
+    volumes:
+     - ./ru-kr/data:/osm/data
+     - ./ru-kr/download:/osm/download
+     - ./ru-kr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-krs"-"Kursk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-krs:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24036:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-krs.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24036
+    volumes:
+     - ./ru-krs/data:/osm/data
+     - ./ru-krs/download:/osm/download
+     - ./ru-krs:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-kya"-"Krasnoyarsk Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-kya:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24037:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-kya.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24037
+    volumes:
+     - ./ru-kya/data:/osm/data
+     - ./ru-kya/download:/osm/download
+     - ./ru-kya:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-len"-"Leningrad oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-len:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24038:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-len.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24038
+    volumes:
+     - ./ru-len/data:/osm/data
+     - ./ru-len/download:/osm/download
+     - ./ru-len:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-lip"-"Lipetsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-lip:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24039:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-lip.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24039
+    volumes:
+     - ./ru-lip/data:/osm/data
+     - ./ru-lip/download:/osm/download
+     - ./ru-lip:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-mag"-"Magadan Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-mag:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24040:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-mag.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24040
+    volumes:
+     - ./ru-mag/data:/osm/data
+     - ./ru-mag/download:/osm/download
+     - ./ru-mag:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-me"-"Mari El" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-me:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24041:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-me.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24041
+    volumes:
+     - ./ru-me/data:/osm/data
+     - ./ru-me/download:/osm/download
+     - ./ru-me:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-mo"-"Republic of Mordovia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-mo:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24042:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-mo.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24042
+    volumes:
+     - ./ru-mo/data:/osm/data
+     - ./ru-mo/download:/osm/download
+     - ./ru-mo:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-mos"-"Moscow Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-mos:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24043:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-mos.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24043
+    volumes:
+     - ./ru-mos/data:/osm/data
+     - ./ru-mos/download:/osm/download
+     - ./ru-mos:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-mow"-"Moscow" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-mow:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24044:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-mow.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24044
+    volumes:
+     - ./ru-mow/data:/osm/data
+     - ./ru-mow/download:/osm/download
+     - ./ru-mow:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-mur"-"Murmansk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-mur:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24045:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-mur.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24045
+    volumes:
+     - ./ru-mur/data:/osm/data
+     - ./ru-mur/download:/osm/download
+     - ./ru-mur:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-nen"-"Nenets Autonomous Okrug" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-nen:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24046:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-nen.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24046
+    volumes:
+     - ./ru-nen/data:/osm/data
+     - ./ru-nen/download:/osm/download
+     - ./ru-nen:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ngr"-"Novgorod Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ngr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24047:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ngr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24047
+    volumes:
+     - ./ru-ngr/data:/osm/data
+     - ./ru-ngr/download:/osm/download
+     - ./ru-ngr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-niz"-"Nizhny Novgorod Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-niz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24048:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-niz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24048
+    volumes:
+     - ./ru-niz/data:/osm/data
+     - ./ru-niz/download:/osm/download
+     - ./ru-niz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-nvs"-"Novosibirsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-nvs:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24049:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-nvs.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24049
+    volumes:
+     - ./ru-nvs/data:/osm/data
+     - ./ru-nvs/download:/osm/download
+     - ./ru-nvs:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-oms"-"Omsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-oms:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24050:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-oms.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24050
+    volumes:
+     - ./ru-oms/data:/osm/data
+     - ./ru-oms/download:/osm/download
+     - ./ru-oms:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ore"-"Orenburg Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ore:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24051:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ore.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24051
+    volumes:
+     - ./ru-ore/data:/osm/data
+     - ./ru-ore/download:/osm/download
+     - ./ru-ore:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-orl"-"Oryol Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-orl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24052:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-orl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24052
+    volumes:
+     - ./ru-orl/data:/osm/data
+     - ./ru-orl/download:/osm/download
+     - ./ru-orl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-per"-"Perm Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-per:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24053:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-per.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24053
+    volumes:
+     - ./ru-per/data:/osm/data
+     - ./ru-per/download:/osm/download
+     - ./ru-per:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-pnz"-"Penza Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-pnz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24054:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-pnz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24054
+    volumes:
+     - ./ru-pnz/data:/osm/data
+     - ./ru-pnz/download:/osm/download
+     - ./ru-pnz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-pri"-"Primorsky Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-pri:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24055:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-pri.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24055
+    volumes:
+     - ./ru-pri/data:/osm/data
+     - ./ru-pri/download:/osm/download
+     - ./ru-pri:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-psk"-"Pskov Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-psk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24056:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-psk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24056
+    volumes:
+     - ./ru-psk/data:/osm/data
+     - ./ru-psk/download:/osm/download
+     - ./ru-psk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ros"-"Rostov Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ros:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24057:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ros.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24057
+    volumes:
+     - ./ru-ros/data:/osm/data
+     - ./ru-ros/download:/osm/download
+     - ./ru-ros:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-rya"-"Ryazan Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-rya:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24058:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-rya.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24058
+    volumes:
+     - ./ru-rya/data:/osm/data
+     - ./ru-rya/download:/osm/download
+     - ./ru-rya:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sa"-"Sakha Republic" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sa:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24059:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sa.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24059
+    volumes:
+     - ./ru-sa/data:/osm/data
+     - ./ru-sa/download:/osm/download
+     - ./ru-sa:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sak"-"Sakhalin Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sak:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24060:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sak.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24060
+    volumes:
+     - ./ru-sak/data:/osm/data
+     - ./ru-sak/download:/osm/download
+     - ./ru-sak:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sam"-"Samara Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sam:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24061:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sam.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24061
+    volumes:
+     - ./ru-sam/data:/osm/data
+     - ./ru-sam/download:/osm/download
+     - ./ru-sam:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sar"-"Saratov Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sar:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24062:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sar.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24062
+    volumes:
+     - ./ru-sar/data:/osm/data
+     - ./ru-sar/download:/osm/download
+     - ./ru-sar:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-se"-"North Ossetia–Alania" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-se:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24063:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-se.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24063
+    volumes:
+     - ./ru-se/data:/osm/data
+     - ./ru-se/download:/osm/download
+     - ./ru-se:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sev"-"Sevastopol" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sev:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24064:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sev.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24064
+    volumes:
+     - ./ru-sev/data:/osm/data
+     - ./ru-sev/download:/osm/download
+     - ./ru-sev:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-smo"-"Smolensk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-smo:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24065:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-smo.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24065
+    volumes:
+     - ./ru-smo/data:/osm/data
+     - ./ru-smo/download:/osm/download
+     - ./ru-smo:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-spe"-"Saint Petersburg" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-spe:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24066:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-spe.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24066
+    volumes:
+     - ./ru-spe/data:/osm/data
+     - ./ru-spe/download:/osm/download
+     - ./ru-spe:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sta"-"Stavropol Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sta:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24067:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sta.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24067
+    volumes:
+     - ./ru-sta/data:/osm/data
+     - ./ru-sta/download:/osm/download
+     - ./ru-sta:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-sve"-"Sverdlovsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-sve:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24068:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-sve.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24068
+    volumes:
+     - ./ru-sve/data:/osm/data
+     - ./ru-sve/download:/osm/download
+     - ./ru-sve:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ta"-"Tatarstan" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ta:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24069:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ta.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24069
+    volumes:
+     - ./ru-ta/data:/osm/data
+     - ./ru-ta/download:/osm/download
+     - ./ru-ta:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-tam"-"Tambov Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-tam:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24070:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-tam.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24070
+    volumes:
+     - ./ru-tam/data:/osm/data
+     - ./ru-tam/download:/osm/download
+     - ./ru-tam:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-tom"-"Tomsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-tom:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24071:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-tom.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24071
+    volumes:
+     - ./ru-tom/data:/osm/data
+     - ./ru-tom/download:/osm/download
+     - ./ru-tom:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-tul"-"Tula Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-tul:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24072:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-tul.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24072
+    volumes:
+     - ./ru-tul/data:/osm/data
+     - ./ru-tul/download:/osm/download
+     - ./ru-tul:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-tve"-"Tver Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-tve:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24073:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-tve.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24073
+    volumes:
+     - ./ru-tve/data:/osm/data
+     - ./ru-tve/download:/osm/download
+     - ./ru-tve:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ty"-"Tuva Republic" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ty:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24074:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ty.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24074
+    volumes:
+     - ./ru-ty/data:/osm/data
+     - ./ru-ty/download:/osm/download
+     - ./ru-ty:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-tyu"-"Tyumen Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-tyu:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24075:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-tyu.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24075
+    volumes:
+     - ./ru-tyu/data:/osm/data
+     - ./ru-tyu/download:/osm/download
+     - ./ru-tyu:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-ud"-"Udmurtia" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-ud:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24076:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-ud.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24076
+    volumes:
+     - ./ru-ud/data:/osm/data
+     - ./ru-ud/download:/osm/download
+     - ./ru-ud:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-uly"-"Ulyanovsk Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-uly:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24077:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-uly.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24077
+    volumes:
+     - ./ru-uly/data:/osm/data
+     - ./ru-uly/download:/osm/download
+     - ./ru-uly:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-vgg"-"Volgograd Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-vgg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24078:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-vgg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24078
+    volumes:
+     - ./ru-vgg/data:/osm/data
+     - ./ru-vgg/download:/osm/download
+     - ./ru-vgg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-vla"-"Vladimir Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-vla:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24079:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-vla.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24079
+    volumes:
+     - ./ru-vla/data:/osm/data
+     - ./ru-vla/download:/osm/download
+     - ./ru-vla:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-vlg"-"Vologda Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-vlg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24080:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-vlg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24080
+    volumes:
+     - ./ru-vlg/data:/osm/data
+     - ./ru-vlg/download:/osm/download
+     - ./ru-vlg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-vor"-"Voronezh Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-vor:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24081:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-vor.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24081
+    volumes:
+     - ./ru-vor/data:/osm/data
+     - ./ru-vor/download:/osm/download
+     - ./ru-vor:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-yan"-"Yamalo-Nenets Autonomous Okrug" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-yan:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24082:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-yan.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24082
+    volumes:
+     - ./ru-yan/data:/osm/data
+     - ./ru-yan/download:/osm/download
+     - ./ru-yan:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-yar"-"Yaroslavl Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-yar:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24083:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-yar.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24083
+    volumes:
+     - ./ru-yar/data:/osm/data
+     - ./ru-yar/download:/osm/download
+     - ./ru-yar:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-yev"-"Jewish Autonomous Oblast" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-yev:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24084:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-yev.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24084
+    volumes:
+     - ./ru-yev/data:/osm/data
+     - ./ru-yev/download:/osm/download
+     - ./ru-yev:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ru-zab"-"Zabaykalsky Krai" + taginfo-dev.opengeodata.hu
+  #               continent: "ru"
+
+  taginfo-ru-ru-zab:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "24085:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=ru-ru-zab.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=24085
+    volumes:
+     - ./ru-zab/data:/osm/data
+     - ./ru-zab/download:/osm/download
+     - ./ru-zab:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+
+# generated : 2018-07-25:09:37  // template : /setup/docker-compose.jinja2

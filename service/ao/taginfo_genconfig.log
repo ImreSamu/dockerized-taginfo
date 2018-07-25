@@ -1,0 +1,711 @@
+=========================================
+DATETIME=20180725T0901  1532502084
+CONTINENT_LONG=australia-oceania
+CONTINENT=ao
+START_PORT=16000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','us') 
+ISO_SERVICE_FILTER=1=1 
+=========================================
+:: gen new configs
+Starting dockerized-taginfo_db_1 ... 
+[1A[2KStarting dockerized-taginfo_db_1 ... [32mdone[0m[1Bcheck db connection
+CONTINENT_LONG=australia-oceania
+CONTINENT=ao
+START_PORT=16000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','us')
+ISO_SERVICE_FILTER=1=1
+CONTINENT_LONG=australia-oceania
+CONTINENT=ao
+-------- australia-oceania ----------- 
+--2018-07-25 07:01:26--  http://download.geofabrik.de/australia-oceania.kml
+Resolving download.geofabrik.de (download.geofabrik.de)... 88.99.105.98, 88.99.24.113
+Connecting to download.geofabrik.de (download.geofabrik.de)|88.99.105.98|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 678 [application/vnd.google-earth.kml+xml]
+Saving to: 'australia-oceania.kml'
+
+     0K                                                       100% 74.1M=0s
+
+2018-07-25 07:01:26 (74.1 MB/s) - 'australia-oceania.kml' saved [678/678]
+
+==================================
+;
+;
+;
+;
+;
+;
+;
+CREATE OR REPLACE FUNCTION imposmid2shortid (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN 'n'|| id::text
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN 'w'|| (abs(id))::text   
+   WHEN  (id <  -1e17 )               THEN 'r'|| (abs(id) -1e17)::text   
+   ELSE 'error'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION imposmid2weburl (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN format('<a href="http://www.osm.org/node/%1$s">n%1$s</a>'     , id::text )
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN format('<a href="http://www.osm.org/way/%1$s">w%1$s</a>'      , (abs(id))::text )   
+   WHEN  (id <  -1e17 )               THEN format('<a href="http://www.osm.org/relation/%1$s">r%1$s</a>' , (abs(id) -1e17)::text )  
+   ELSE 'error_url'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION get_xtaginfo(iso text, xmin  numeric, xmax  numeric, ymin  numeric, ymax numeric ) 
+      RETURNS numeric[]   AS
+$BODY$
+DECLARE
+    i  integer ;
+    xs numeric ;
+    ys numeric ; 
+    last_ok integer ;
+    xd numeric;
+    yd numeric;
+    zzz numeric;
+    xppd numeric;
+    yppd numeric;
+    moda numeric[] ;
+BEGIN
+    moda= ARRAY [
+                 0.000,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009
+                ,0.010,0.011,0.012,0.013,0.014,0.015,0.016,0.017,0.018,0.019
+                ,0.020,0.021,0.022,0.023,0.024,0.025,0.026,0.027,0.028,0.029
+                ,0.030,0.031,0.032,0.033,0.034,0.035,0.036,0.037,0.038,0.039
+                ,0.040,0.041,0.042,0.043,0.044,0.045,0.046,0.047,0.048,0.049
+                ,0.050,0.051,0.052,0.053,0.054,0.055,0.056,0.057,0.058,0.059
+                ,0.060,0.061,0.062,0.063,0.064,0.065,0.066,0.067,0.068,0.069
+                ,0.070,0.071,0.072,0.073,0.074,0.075,0.076,0.077,0.078,0.079
+                ,0.080,0.081,0.082,0.083,0.084,0.085,0.086,0.087,0.088,0.089
+                ,0.090,0.091,0.092,0.093,0.094,0.095,0.096,0.097,0.098,0.099 
+                
+                ,0.100,0.101,0.102,0.103,0.104,0.105,0.106,0.107,0.108,0.109
+                ,0.110,0.111,0.112,0.113,0.114,0.115,0.116,0.117,0.118,0.119
+                ,0.120,0.121,0.122,0.123,0.124,0.125,0.126,0.127,0.128,0.129
+                ,0.130,0.131,0.132,0.133,0.134,0.135,0.136,0.137,0.138,0.139
+                ,0.140,0.141,0.142,0.143,0.144,0.145,0.146,0.147,0.148,0.149
+                ,0.150,0.151,0.152,0.153,0.154,0.155,0.156,0.157,0.158,0.159
+                ,0.160,0.161,0.162,0.163,0.164,0.165,0.166,0.167,0.168,0.169
+                ,0.170,0.171,0.172,0.173,0.174,0.175,0.176,0.177,0.178,0.179
+                ,0.180,0.181,0.182,0.183,0.184,0.185,0.186,0.187,0.188,0.189
+                ,0.190,0.191,0.192,0.193,0.194,0.195,0.196,0.197,0.198,0.199 
+
+                ,0.200,0.201,0.202,0.203,0.204,0.205,0.206,0.207,0.208,0.209
+                ,0.210,0.211,0.212,0.213,0.214,0.215,0.216,0.217,0.218,0.219
+                ,0.220,0.221,0.222,0.223,0.224,0.225,0.226,0.227,0.228,0.229
+                ,0.230,0.231,0.232,0.233,0.234,0.235,0.236,0.237,0.238,0.239
+                ,0.240,0.241,0.242,0.243,0.244,0.245,0.246,0.247,0.248,0.249
+                ,0.250,0.251,0.252,0.253,0.254,0.255,0.256,0.257,0.258,0.259
+                ,0.260,0.261,0.262,0.263,0.264,0.265,0.266,0.267,0.268,0.269
+                ,0.270,0.271,0.272,0.273,0.274,0.275,0.276,0.277,0.278,0.279
+                ,0.280,0.281,0.282,0.283,0.284,0.285,0.286,0.287,0.288,0.289
+                ,0.290,0.291,0.292,0.293,0.294,0.295,0.296,0.297,0.298,0.299  
+
+                ,0.300,0.301,0.302,0.303,0.304,0.305,0.306,0.307,0.308,0.309
+                ,0.310,0.311,0.312,0.313,0.314,0.315,0.316,0.317,0.318,0.319
+                ,0.320,0.321,0.322,0.323,0.324,0.325,0.326,0.327,0.328,0.329
+                ,0.330,0.331,0.332,0.333,0.334,0.335,0.336,0.337,0.338,0.339
+                ,0.340,0.341,0.342,0.343,0.344,0.345,0.346,0.347,0.348,0.349
+                ,0.350,0.351,0.352,0.353,0.354,0.355,0.356,0.357,0.358,0.359
+                ,0.360,0.361,0.362,0.363,0.364,0.365,0.366,0.367,0.368,0.369
+                ,0.370,0.371,0.372,0.373,0.374,0.375,0.376,0.377,0.378,0.379
+                ,0.380,0.381,0.382,0.383,0.384,0.385,0.386,0.387,0.388,0.389
+                ,0.390,0.391,0.392,0.393,0.394,0.395,0.396,0.397,0.398,0.399 
+
+                ,0.400,0.401,0.402,0.403,0.404,0.405,0.406,0.407,0.408,0.409
+                ,0.410,0.411,0.412,0.413,0.414,0.415,0.416,0.417,0.418,0.419
+                ,0.420,0.421,0.422,0.423,0.424,0.425,0.426,0.427,0.428,0.429
+                ,0.430,0.431,0.432,0.433,0.434,0.435,0.436,0.437,0.438,0.439
+                ,0.440,0.441,0.442,0.443,0.444,0.445,0.446,0.447,0.448,0.449
+                ,0.450,0.451,0.452,0.453,0.454,0.455,0.456,0.457,0.458,0.459
+                ,0.460,0.461,0.462,0.463,0.464,0.465,0.466,0.467,0.468,0.469
+                ,0.470,0.471,0.472,0.473,0.474,0.475,0.476,0.477,0.478,0.479
+                ,0.480,0.481,0.482,0.483,0.484,0.485,0.486,0.487,0.488,0.489
+                ,0.490,0.491,0.492,0.493,0.494,0.495,0.496,0.497,0.498,0.499 
+
+                ,0.500,0.501,0.502,0.503,0.504,0.505,0.506,0.507,0.508,0.509
+                ,0.510,0.511,0.512,0.513,0.514,0.515,0.516,0.517,0.518,0.519
+                ,0.520,0.521,0.522,0.523,0.524,0.525,0.526,0.527,0.528,0.529
+                ,0.530,0.531,0.532,0.533,0.534,0.535,0.536,0.537,0.538,0.539
+                ,0.540,0.541,0.542,0.543,0.544,0.545,0.546,0.547,0.548,0.549
+                ,0.550,0.551,0.552,0.553,0.554,0.555,0.556,0.557,0.558,0.559
+                ,0.560,0.561,0.562,0.563,0.564,0.565,0.566,0.567,0.568,0.569
+                ,0.570,0.571,0.572,0.573,0.574,0.575,0.576,0.577,0.578,0.579
+                ,0.580,0.581,0.582,0.583,0.584,0.585,0.586,0.587,0.588,0.589
+                ,0.590,0.591,0.592,0.593,0.594,0.595,0.596,0.597,0.598,0.599 
+
+                ];
+    last_ok =0 ;
+    xd = xmax-xmin;  
+    yd = ymax-ymin; 
+    FOR i IN 1..30000 LOOP
+        xs = i * xd ;
+        ys = i * yd ;
+
+        IF  xs * ys  >= ( 255*255) THEN
+
+        FOR ri IN REVERSE i..0 LOOP
+           FOREACH  yppd IN ARRAY moda LOOP
+             FOREACH  xppd IN ARRAY moda  LOOP
+                 
+                  xs=ri* (xd+   xppd ) ;
+                  ys=ri* (yd+   yppd ) ; 
+
+                  IF     
+                             xs=round(xs) 
+                         and ys=round(ys) 
+                         and (  xs * ys ) <= (255*255) 
+                         and xs>0 
+                         and ys>0
+                         THEN
+                         RAISE NOTICE 'OK   R# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                        -- Reverse Antimeridian shift.
+                         IF xmax+xppd > 180 THEN
+                            xmax= xmax -180;
+                            xmin= xmin -180;
+                            RAISE NOTICE 'Reversed# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                            IF xmin <  -180  THEN
+                                RAISE NOTICE 'ERROR: XMIN < -180# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+                            END IF ;
+                         END IF ;
+                         RETURN  ARRAY[ round(xs) , round(ys) , xmin, xmax+xppd , ymin, ymax+yppd ] ;
+                   END IF;               
+             END LOOP;
+           END LOOP ;
+        END LOOP;   
+        
+        RETURN ARRAY[-2,0,0,0,0,0];
+
+           
+        END IF;
+
+        
+        IF  xs * ys  >= ( 255*255) 
+        THEN  
+           RETURN ARRAY[0,0,0,0,0,0]  ;
+        END IF;   
+        
+    END LOOP;
+       
+    RETURN ARRAY[-1,0,0,0,0,0]  ;
+END
+$BODY$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT PARALLEL SAFE ;
+CREATE FUNCTION
+DROP TABLE IF EXISTS  osm_admin2_continent_all ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent_all as
+select a.*   
+    ,st_area( ST_Intersection(  c.wkb_geometry  ,   a.geometry )) / st_area(  a.geometry )  as area_pct
+    ,case 
+            when a.iso3166_2!=''  then lower(a.iso3166_2) 
+                                  else lower(a.iso3166_1)
+            end   
+            as iso
+from KMLX_CONTINENT as c,
+        osm_admin   as a
+where 
+        ( length(a.iso3166_1) = 2  or length(a.iso3166_2) > 3 )
+    and 
+        ST_Contains (c.wkb_geometry , St_PointOnSurface( a.geometry ))
+;
+SELECT 96
+;
+DROP TABLE IF EXISTS  osm_admin2_continent ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent as
+select * 
+from osm_admin2_continent_all   
+  where length(iso)=2 or substr(iso,1,2) in ('fr','nl','es','us') 
+order by iso
+;
+SELECT 22
+;
+                                         Table "public.osm_admin2_continent"
+      Column      |          Type           | Collation | Nullable | Default | Storage  | Stats target | Description 
+------------------+-------------------------+-----------+----------+---------+----------+--------------+-------------
+ id               | bigint                  |           |          |         | plain    |              | 
+ admin_level      | integer                 |           |          |         | plain    |              | 
+ name             | character varying       |           |          |         | extended |              | 
+ int_name         | character varying       |           |          |         | extended |              | 
+ official_name    | character varying       |           |          |         | extended |              | 
+ name_en          | character varying       |           |          |         | extended |              | 
+ maritime         | character varying       |           |          |         | extended |              | 
+ border_type      | character varying       |           |          |         | extended |              | 
+ iso3166_1        | character varying       |           |          |         | extended |              | 
+ iso3166_2        | character varying       |           |          |         | extended |              | 
+ iso3166_1alpha3  | character varying       |           |          |         | extended |              | 
+ default_language | character varying       |           |          |         | extended |              | 
+ wikipedia        | character varying       |           |          |         | extended |              | 
+ wikidata         | character varying       |           |          |         | extended |              | 
+ flag             | character varying       |           |          |         | extended |              | 
+ boundary         | character varying       |           |          |         | extended |              | 
+ geometry         | geometry(Geometry,4326) |           |          |         | main     |              | 
+ area_pct         | double precision        |           |          |         | plain    |              | 
+ iso              | text                    |           |          |         | extended |              | 
+
+update osm_admin2_continent set name_en=name  where name_en='' ;
+UPDATE 2
+select count(*) as iso_admin_numbers from osm_admin2_continent;
+ iso_admin_numbers 
+-------------------
+                22
+(1 row)
+
+DROP TABLE IF EXISTS iso_gdname CASCADE;
+DROP TABLE
+CREATE TABLE iso_gdname as
+SELECT distinct on (t.iso) 
+       t.iso, t."name" as iso_name , g."name" as gdname, st_area(g.wkb_geometry) as area
+FROM osm_admin2_continent  as t
+    ,gkml                  as g
+where
+     ST_Contains (   g.wkb_geometry  ,  t.geometry   )
+order by t.iso, area NULLS LAST
+;
+SELECT 16
+Drop table IF EXISTS xtaginfo CASCADE;
+DROP TABLE
+create table xtaginfo as
+with pdata as
+(
+    select distinct on (osm.iso) 
+         osm.iso 
+        ,name
+        ,name_en
+        ,id
+        ,area_pct
+        ,iso_gdname.gdname    as gdname
+        ,imposmid2shortid(id) as osmid
+        ,admin_level 
+        ,row_number() OVER ( ORDER BY osm.iso ) as port_order 
+        ,st_xmax( geometry)  - st_xmin( geometry)  as dx 
+        ,wikidata
+        ,wikipedia
+        ,flag
+        ,geometry
+        ,st_area(geometry) as iso_area
+        ,case when  (  1=1   )  then 'yes'
+                                               else ''
+         end as service     
+    from osm_admin2_continent as osm
+    left join iso_gdname on osm.iso=iso_gdname.iso
+    ORDER BY osm.iso, iso_area DESC NULLS LAST
+)
+, normal_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( geometry) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( geometry) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( geometry) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( geometry) +  0.0051)::numeric, 2 ) as tymax
+       ,'normal'::text as ttype
+       from pdata 
+       where dx < 200 
+       )
+, antimerdian_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as tymax
+       ,'shifted'::text as ttype
+       from pdata 
+       where dx >= 200 
+       )
+       select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  normal_data       
+union  select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  antimerdian_data
+order by iso 
+;
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = au, 2 , 192.000 , 93.000 ,0.010 ,0.250
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = cc, 380 , 209.000 , 304.000 ,0.020 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = cx, 425 , 255.000 , 238.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = fm, 16 , 418.000 , 152.000 ,0.105 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = fr-nc, 26 , 377.000 , 156.000 ,0.170 ,0.450
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = fr-tf, 6 , 231.000 , 234.000 ,0.060 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = hm, 210 , 420.000 , 147.000 ,0.040 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = mh, 22 , 264.000 , 242.000 ,0.210 ,0.490
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = nf, 460 , 253.000 , 253.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = nr, 550 , 253.000 , 253.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = pg, 16 , 302.000 , 182.000 ,0.015 ,0.065
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = pw, 56 , 210.000 , 308.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = sb, 22 , 341.000 , 187.000 ,0.410 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-gu, 500 , 225.000 , 265.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-mp, 80 , 108.000 , 528.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = us-um, 520 , 260.000 , 247.000 ,0.010 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = vu, 45 , 189.000 , 342.000 ,0.070 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = fj, 28 , 217.000 , 273.000 ,0.170 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = fj, 28 , 217.000 , 273.000 ,0.170 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ki, 9 , 369.000 , 153.000 ,0.310 ,0.440
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = ki, 9 , 369.000 , 153.000 ,0.310 ,0.440
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = nz, 11 , 209.000 , 264.000 ,0.090 ,0.200
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = nz, 11 , 209.000 , 264.000 ,0.090 ,0.200
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = tv, 50 , 212.000 , 279.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = tv, 50 , 212.000 , 279.000 ,0.010 ,0.010
+SELECT 21
+select iso, taginfo_scale,ttype, area_pct,  service  from xtaginfo order by iso ;
+  iso  |              taginfo_scale              |  ttype  |     area_pct      | service 
+-------+-----------------------------------------+---------+-------------------+---------
+ au    | {192,93,72.24,168.240,-55.33,-8.830}    | normal  |                 1 | yes
+ cc    | {209,304,96.61,97.160,-12.41,-11.610}   | normal  |                 1 | yes
+ cx    | {255,238,105.33,105.930,-10.77,-10.210} | normal  |                 1 | yes
+ fj    | {217,273,-5.58,2.170,-21.95,-12.200}    | shifted | 0.512794350054068 | yes
+ fm    | {418,152,137.22,163.345,0.82,10.320}    | normal  |                 1 | yes
+ fr-nc | {377,156,157.98,172.480,-23.23,-17.230} | normal  |                 1 | yes
+ fr-tf | {231,234,39.41,77.910,-50.22,-11.220}   | normal  | 0.851765780087834 | yes
+ hm    | {420,147,72.24,74.240,-53.40,-52.700}   | normal  |                 1 | yes
+ ki    | {369,153,-10.68,30.320,-11.65,5.350}    | shifted | 0.568998639219037 | yes
+ mh    | {264,242,160.59,172.590,4.37,15.370}    | normal  |                 1 | yes
+ nf    | {253,253,167.68,168.230,-29.34,-28.790} | normal  |                 1 | yes
+ nr    | {253,253,166.70,167.160,-0.76,-0.300}   | normal  |                 1 | yes
+ nz    | {209,264,-14.45,4.550,-52.83,-28.830}   | shifted | 0.956666121562465 | yes
+ pg    | {302,182,140.84,159.715,-11.86,-0.485}  | normal  |                 1 | yes
+ pw    | {210,308,131.06,134.810,2.74,8.240}     | normal  |                 1 | yes
+ sb    | {341,187,155.31,170.810,-13.25,-4.750}  | normal  |                 1 | yes
+ tv    | {212,279,-4.15,0.090,-11.00,-5.420}     | shifted | 0.968564723074941 | yes
+ us-gu | {225,265,144.56,145.010,13.18,13.710}   | normal  |                 1 | yes
+ us-mp | {108,528,144.81,146.160,14.03,20.630}   | normal  |                 1 | yes
+ us-um | {260,247,166.38,166.880,19.06,19.535}   | normal  |                 1 | yes
+ vu    | {189,342,166.33,170.530,-20.47,-12.870} | normal  |                 1 | yes
+(21 rows)
+
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+processing:  au -100000000000080500
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/au/poly/poly.osm.pbf  r80500
+processing:  cc -100000000000082636
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/cc/poly/poly.osm.pbf  r82636
+processing:  cx -100000000002177207
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/cx/poly/poly.osm.pbf  r2177207
+processing:  fj -100000000000571747
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/fj/poly/poly.osm.pbf  r571747
+processing:  fm -100000000000571802
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/fm/poly/poly.osm.pbf  r571802
+processing:  fr-nc -100000000003407643
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/fr-nc/poly/poly.osm.pbf  r3407643
+processing:  fr-tf -100000000002186658
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/fr-tf/poly/poly.osm.pbf  r2186658
+processing:  hm -100000000002177227
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/hm/poly/poly.osm.pbf  r2177227
+processing:  ki -100000000000571178
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/ki/poly/poly.osm.pbf  r571178
+processing:  mh -100000000000571771
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/mh/poly/poly.osm.pbf  r571771
+processing:  nf -184710937
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/nf/poly/poly.osm.pbf  w184710937
+processing:  nr -100000000000571804
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/nr/poly/poly.osm.pbf  r571804
+processing:  nz -100000000000556706
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/nz/poly/poly.osm.pbf  r556706
+processing:  pg -100000000000307866
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/pg/poly/poly.osm.pbf  r307866
+processing:  pw -100000000000571805
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/pw/poly/poly.osm.pbf  r571805
+processing:  sb -100000000001857436
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/sb/poly/poly.osm.pbf  r1857436
+processing:  tv -100000000002177266
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/tv/poly/poly.osm.pbf  r2177266
+processing:  us-gu -100000000000306001
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/us-gu/poly/poly.osm.pbf  r306001
+processing:  us-mp -100000000000306004
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/us-mp/poly/poly.osm.pbf  r306004
+processing:  us-um -42294763
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/us-um/poly/poly.osm.pbf  w42294763
+processing:  vu -100000000002177246
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ao/vu/poly/poly.osm.pbf  r2177246
+------start setup_map.py ------
+Creating output file that is 192P x 93L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 192, 93
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 209P x 304L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 209, 304
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 217P x 273L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 217, 273
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 418P x 152L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 418, 152
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 377P x 156L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 377, 156
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 231P x 234L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 231, 234
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 420P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 420, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 369P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 369, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 264P x 242L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 264, 242
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 253P x 253L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 253, 253
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 253P x 253L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 253, 253
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 209P x 264L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 209, 264
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Generating background map:  au -100000000000080500 192 93 Australia
+mapdata: 192 93 168.24 -8.83 72.24 -55.33
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 72.24 -55.33 168.24 -8.83  -ts 192 93   -of GTiff   /osm/ne/ne.tif /osm/service/ao/au/img/nebackground.geotif  
+Generating background map:  cc -100000000000082636 209 304 Cocos (Keeling) Islands
+mapdata: 209 304 97.16 -11.61 96.61 -12.41
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 96.61 -12.41 97.16 -11.61  -ts 209 304   -of GTiff   /osm/ne/ne.tif /osm/service/ao/cc/img/nebackground.geotif  
+Generating background map:  cx -100000000002177207 255 238 Christmas Island
+mapdata: 255 238 105.93 -10.21 105.33 -10.77
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 105.33 -10.77 105.93 -10.21  -ts 255 238   -of GTiff   /osm/ne/ne.tif /osm/service/ao/cx/img/nebackground.geotif  
+Generating background map:  fj -100000000000571747 217 273 Viti
+mapdata: 217 273 2.17 -12.2 -5.58 -21.95
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te -5.58 -21.95 2.17 -12.2  -ts 217 273   -of GTiff   /osm/ne/ne.tif /osm/service/ao/fj/img/nebackground.geotif  
+Generating background map:  fm -100000000000571802 418 152 Micronesia
+mapdata: 418 152 163.345 10.32 137.22 0.82
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 137.22 0.82 163.345 10.32  -ts 418 152   -of GTiff   /osm/ne/ne.tif /osm/service/ao/fm/img/nebackground.geotif  
+Generating background map:  fr-nc -100000000003407643 377 156 Nouvelle-Calédonie
+mapdata: 377 156 172.48 -17.23 157.98 -23.23
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 157.98 -23.23 172.48 -17.23  -ts 377 156   -of GTiff   /osm/ne/ne.tif /osm/service/ao/fr-nc/img/nebackground.geotif  
+Generating background map:  fr-tf -100000000002186658 231 234 Terres australes et antarctiques françaises
+mapdata: 231 234 77.91 -11.22 39.41 -50.22
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 39.41 -50.22 77.91 -11.22  -ts 231 234   -of GTiff   /osm/ne/ne.tif /osm/service/ao/fr-tf/img/nebackground.geotif  
+Generating background map:  hm -100000000002177227 420 147 Heard Island and McDonald Islands
+mapdata: 420 147 74.24 -52.7 72.24 -53.4
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 72.24 -53.4 74.24 -52.7  -ts 420 147   -of GTiff   /osm/ne/ne.tif /osm/service/ao/hm/img/nebackground.geotif  
+Generating background map:  ki -100000000000571178 369 153 Kiribati
+mapdata: 369 153 30.32 5.35 -10.68 -11.65
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te -10.68 -11.65 30.32 5.35  -ts 369 153   -of GTiff   /osm/ne/ne.tif /osm/service/ao/ki/img/nebackground.geotif  
+Generating background map:  mh -100000000000571771 264 242 M̧ajeļ
+mapdata: 264 242 172.59 15.37 160.59 4.37
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 160.59 4.37 172.59 15.37  -ts 264 242   -of GTiff   /osm/ne/ne.tif /osm/service/ao/mh/img/nebackground.geotif  
+Generating background map:  nf -184710937 253 253 
+mapdata: 253 253 168.23 -28.79 167.68 -29.34
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 167.68 -29.34 168.23 -28.79  -ts 253 253   -of GTiff   /osm/ne/ne.tif /osm/service/ao/nf/img/nebackground.geotif  
+Generating background map:  nr -100000000000571804 253 253 Naoero
+mapdata: 253 253 167.16 -0.3 166.7 -0.76
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 166.7 -0.76 167.16 -0.3  -ts 253 253   -of GTiff   /osm/ne/ne.tif /osm/service/ao/nr/img/nebackground.geotif  
+Generating background map:  nz -100000000000556706 209 264 New Zealand/Aotearoa
+mapdata: 209 264 4.55 -28.83 -14.45 -52.83
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te -14.45 -52.83 4.55 -28.83  -ts 209 264   -of GTiff   /osm/ne/ne.tif /osm/service/ao/nz/img/nebackground.geotif  
+Generating background map:  pg -100000000000307866 302 182 Papua Niugini
+mapdata: 302 182 159.715 -0.485 140.84 -11.86
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 140.84 -11.86 159.715Creating output file that is 302P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 302, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 210P x 308L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 210, 308
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 341P x 187L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 341, 187
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 212P x 279L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 212, 279
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 225P x 265L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 225, 265
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 108P x 528L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 108, 528
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 247L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 247
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 189P x 342L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 189, 342
+0...10...20...30...40...50...60...70...80...90...100 - done.
+ -0.485  -ts 302 182   -of GTiff   /osm/ne/ne.tif /osm/service/ao/pg/img/nebackground.geotif  
+Generating background map:  pw -100000000000571805 210 308 Belau
+mapdata: 210 308 134.81 8.24 131.06 2.74
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 131.06 2.74 134.81 8.24  -ts 210 308   -of GTiff   /osm/ne/ne.tif /osm/service/ao/pw/img/nebackground.geotif  
+Generating background map:  sb -100000000001857436 341 187 Solomon Islands
+mapdata: 341 187 170.81 -4.75 155.31 -13.25
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 155.31 -13.25 170.81 -4.75  -ts 341 187   -of GTiff   /osm/ne/ne.tif /osm/service/ao/sb/img/nebackground.geotif  
+Generating background map:  tv -100000000002177266 212 279 Tuvalu
+mapdata: 212 279 0.09 -5.42 -4.15 -11.0
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te -4.15 -11.0 0.09 -5.42  -ts 212 279   -of GTiff   /osm/ne/ne.tif /osm/service/ao/tv/img/nebackground.geotif  
+Generating background map:  us-gu -100000000000306001 225 265 Guam
+mapdata: 225 265 145.01 13.71 144.56 13.18
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 144.56 13.18 145.01 13.71  -ts 225 265   -of GTiff   /osm/ne/ne.tif /osm/service/ao/us-gu/img/nebackground.geotif  
+Generating background map:  us-mp -100000000000306004 108 528 Northern Mariana Islands
+mapdata: 108 528 146.16 20.63 144.81 14.03
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 144.81 14.03 146.16 20.63  -ts 108 528   -of GTiff   /osm/ne/ne.tif /osm/service/ao/us-mp/img/nebackground.geotif  
+Generating background map:  us-um -42294763 260 247 United States of America (Minor Outlying Islands)
+mapdata: 260 247 166.88 19.535 166.38 19.06
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 166.38 19.06 166.88 19.535  -ts 260 247   -of GTiff   /osm/ne/ne.tif /osm/service/ao/us-um/img/nebackground.geotif  
+Generating background map:  vu -100000000002177246 189 342 Vanuatu
+mapdata: 189 342 170.53 -12.87 166.33 -20.47
+<mapnik.Datasource object at 0x7fbc2b50d6e0>
+gdalw: gdalwarp    -te 166.33 -20.47 170.53 -12.87  -ts 189 342   -of GTiff   /osm/ne/ne.tif /osm/service/ao/vu/img/nebackground.geotif  
+------start setup_config.py -----
+Generating taginfo-config:  au -100000000000080500 192 93 Australia  ;  Australia
+mapdata: 192 93 168.24 -8.83 72.24 -55.33 Australia Australia
+Generating taginfo-config:  cc -100000000000082636 209 304 Cocos (Keeling) Islands  ;  Cocos (Keeling) Islands
+mapdata: 209 304 97.16 -11.61 96.61 -12.41 Cocos (Keeling) Islands Cocos (Keeling) Islands
+Generating taginfo-config:  cx -100000000002177207 255 238 Christmas Island  ;  Christmas Island
+mapdata: 255 238 105.93 -10.21 105.33 -10.77 Christmas Island Christmas Island
+Generating taginfo-config:  fj -100000000000571747 217 273 Viti  ;  Fiji
+mapdata: 217 273 2.17 -12.2 -5.58 -21.95 Viti Fiji
+Generating taginfo-config:  fm -100000000000571802 418 152 Micronesia  ;  Federated States of Micronesia
+mapdata: 418 152 163.345 10.32 137.22 0.82 Micronesia Federated States of Micronesia
+Generating taginfo-config:  fr-nc -100000000003407643 377 156 Nouvelle-Calédonie  ;  New Caledonia
+mapdata: 377 156 172.48 -17.23 157.98 -23.23 Nouvelle-Calédonie New Caledonia
+Generating taginfo-config:  fr-tf -100000000002186658 231 234 Terres australes et antarctiques françaises  ;  French Southern and Antarctic Lands
+mapdata: 231 234 77.91 -11.22 39.41 -50.22 Terres australes et antarctiques françaises French Southern and Antarctic Lands
+Generating taginfo-config:  hm -100000000002177227 420 147 Heard Island and McDonald Islands  ;  Heard Island and McDonald Islands
+mapdata: 420 147 74.24 -52.7 72.24 -53.4 Heard Island and McDonald Islands Heard Island and McDonald Islands
+Generating taginfo-config:  ki -100000000000571178 369 153 Kiribati  ;  Kiribati
+mapdata: 369 153 30.32 5.35 -10.68 -11.65 Kiribati Kiribati
+Generating taginfo-config:  mh -100000000000571771 264 242 M̧ajeļ  ;  Marshall Islands
+mapdata: 264 242 172.59 15.37 160.59 4.37 M̧ajeļ Marshall Islands
+Generating taginfo-config:  nf -184710937 253 253   ;  
+mapdata: 253 253 168.23 -28.79 167.68 -29.34  
+Generating taginfo-config:  nr -100000000000571804 253 253 Naoero  ;  Nauru
+mapdata: 253 253 167.16 -0.3 166.7 -0.76 Naoero Nauru
+Generating taginfo-config:  nz -100000000000556706 209 264 New Zealand/Aotearoa  ;  New Zealand
+mapdata: 209 264 4.55 -28.83 -14.45 -52.83 New Zealand/Aotearoa New Zealand
+Generating taginfo-config:  pg -100000000000307866 302 182 Papua Niugini  ;  Papua New Guinea
+mapdata: 302 182 159.715 -0.485 140.84 -11.86 Papua Niugini Papua New Guinea
+Generating taginfo-config:  pw -100000000000571805 210 308 Belau  ;  Palau
+mapdata: 210 308 134.81 8.24 131.06 2.74 Belau Palau
+Generating taginfo-config:  sb -100000000001857436 341 187 Solomon Islands  ;  Solomon Islands
+mapdata: 341 187 170.81 -4.75 155.31 -13.25 Solomon Islands Solomon Islands
+Generating taginfo-config:  tv -100000000002177266 212 279 Tuvalu  ;  Tuvalu
+mapdata: 212 279 0.09 -5.42 -4.15 -11.0 Tuvalu Tuvalu
+Generating taginfo-config:  us-gu -100000000000306001 225 265 Guam  ;  Guam
+mapdata: 225 265 145.01 13.71 144.56 13.18 Guam Guam
+Generating taginfo-config:  us-mp -100000000000306004 108 528 Northern Mariana Islands  ;  Northern Mariana Islands
+mapdata: 108 528 146.16 20.63 144.81 14.03 Northern Mariana Islands Northern Mariana Islands
+Generating taginfo-config:  us-um -42294763 260 247 United States of America (Minor Outlying Islands)  ;  United States of America (Minor Outlying Islands)
+mapdata: 260 247 166.88 19.535 166.38 19.06 United States of America (Minor Outlying Islands) United States of America (Minor Outlying Islands)
+Generating taginfo-config:  vu -100000000002177246 189 342 Vanuatu  ;  Vanuatu
+mapdata: 189 342 170.53 -12.87 166.33 -20.47 Vanuatu Vanuatu
+------start setup_docker.py ----- 
+------chmod settings -----
+:: generated services
+# generated : 2018-07-25:07:08  // template : ./setup/service_create.sh.jinja2
+
+export CURRENT_UID="$(id -u):$(id -g)" 
+
+
+ docker-compose up --no-start taginfo-ao-au
+ docker-compose up --no-start taginfo-ao-cc
+ docker-compose up --no-start taginfo-ao-cx
+ docker-compose up --no-start taginfo-ao-fj
+ docker-compose up --no-start taginfo-ao-fm
+ docker-compose up --no-start taginfo-ao-fr-nc
+ docker-compose up --no-start taginfo-ao-fr-tf
+ docker-compose up --no-start taginfo-ao-hm
+ docker-compose up --no-start taginfo-ao-ki
+ docker-compose up --no-start taginfo-ao-mh
+ docker-compose up --no-start taginfo-ao-nf
+ docker-compose up --no-start taginfo-ao-nr
+ docker-compose up --no-start taginfo-ao-nz
+ docker-compose up --no-start taginfo-ao-pg
+ docker-compose up --no-start taginfo-ao-pw
+ docker-compose up --no-start taginfo-ao-sb
+ docker-compose up --no-start taginfo-ao-tv
+ docker-compose up --no-start taginfo-ao-us-gu
+ docker-compose up --no-start taginfo-ao-us-mp
+ docker-compose up --no-start taginfo-ao-us-um
+ docker-compose up --no-start taginfo-ao-vu
+ 
+# generated : 2018-07-25:07:08:: don't forget copy hugo files

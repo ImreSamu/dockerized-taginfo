@@ -1,0 +1,955 @@
+select iso, name_en,area_pct,name,wikidata from osm_admin2_continent_all order by iso ;
+  iso   |                   name_en                    |     area_pct      |                        name                        | wikidata  
+--------+----------------------------------------------+-------------------+----------------------------------------------------+-----------
+ ao     | Angola                                       |                 1 | Angola                                             | Q916
+ ao-bgo |                                              |                 1 | Bengo                                              | Q191299
+ ao-bgu |                                              |                 1 | Benguela                                           | Q212786
+ ao-bie |                                              |                 1 | Bié                                                | Q213977
+ ao-cab |                                              |                 1 | Cabinda                                            | Q168787
+ ao-ccu |                                              |                 1 | Cuando Cubango                                     | Q215268
+ ao-cnn |                                              |                 1 | Cunene                                             | Q216987
+ ao-cno |                                              |                 1 | Cuanza Norte                                       | Q216834
+ ao-cus |                                              |                 1 | Cuanza Sul                                         | Q216998
+ ao-hua |                                              |                 1 | Huambo                                             | Q218848
+ ao-hui |                                              |                 1 | Huíla                                              | Q214572
+ ao-lno |                                              |                 1 | Lunda Norte                                        | Q214221
+ ao-lsu |                                              |                 1 | Lunda Sul                                          | Q219648
+ ao-lua |                                              |                 1 | Luanda                                             | Q190066
+ ao-mal |                                              |                 1 | Malanje                                            | Q219072
+ ao-mox |                                              |                 1 | Moxico                                             | Q173988
+ ao-nam | Namibe                                       |                 1 | Namibe                                             | Q216819
+ ao-uig |                                              |                 1 | Uíge                                               | Q216972
+ ao-zai |                                              |                 1 | Zaire                                              | Q196674
+ bf     | Burkina Faso                                 |                 1 | Burkina Faso                                       | Q965
+ bf-01  | Boucle du Mouhoun                            |                 1 | Boucle du Mouhoun                                  | Q527093
+ bf-02  | Waterfalls                                   |                 1 | Cascades                                           | Q850043
+ bf-03  | Centre                                       |                 1 | Centre                                             | Q515655
+ bf-04  | Central-East                                 |                 1 | Centre-Est                                         | Q543006
+ bf-05  | Central-North                                |                 1 | Centre-Nord                                        | Q850064
+ bf-06  | Central-West                                 |                 1 | Centre-Ouest                                       | Q850075
+ bf-07  | Central-South                                |                 1 | Centre-Sud                                         | Q853405
+ bf-08  | East                                         |                 1 | Est                                                | Q850088
+ bf-09  | Upper-Basins                                 |                 1 | Hauts-Bassins                                      | Q845303
+ bf-10  | North                                        |                 1 | Nord                                               | Q502320
+ bf-11  | Central-Plateau                              |                 1 | Plateau-Central                                    | Q862606
+ bf-12  | Sahel                                        |                 1 | Sahel                                              | Q665514
+ bf-13  | Southwest                                    |                 1 | Sud-Ouest                                          | Q429149
+ bf-bal |                                              |                 1 | Balé                                               | Q805913
+ bf-bam |                                              |                 1 | Bam                                                | Q620710
+ bf-ban |                                              |                 1 | Banwa                                              | Q674664
+ bf-baz |                                              |                 1 | Bazèga                                             | Q619764
+ bf-bgr |                                              |                 1 | Bougouriba                                         | Q676641
+ bf-blg |                                              |                 1 | Boulgou                                            | Q895097
+ bf-blk |                                              |                 1 | Boulkiemdé                                         | Q895102
+ bf-com |                                              |                 1 | Comoé                                              | Q1074496
+ bf-gan |                                              |                 1 | Ganzourgou                                         | Q182889
+ bf-gna |                                              |                 1 | Gnagna                                             | Q1074144
+ bf-gou |                                              |                 1 | Gourma                                             | Q432317
+ bf-hou |                                              |                 1 | Houet                                              | Q1074161
+ bf-iob |                                              |                 1 | Ioba                                               | Q1074154
+ bf-kad |                                              |                 1 | Kadiogo                                            | Q1074530
+ bf-ken |                                              |                 1 | Kénédougou                                         | Q1150901
+ bf-kmd |                                              |                 1 | Komondjari                                         | Q1074479
+ bf-kmp |                                              |                 1 | Kompienga                                          | Q1142059
+ bf-kop |                                              |                 1 | Koulpélogo                                         | Q934923
+ bf-kos |                                              |                 1 | Kossi                                              | Q1074485
+ bf-kot |                                              |                 1 | Kouritenga                                         | Q1141767
+ bf-kow |                                              |                 1 | Kourwéogo                                          | Q661376
+ bf-ler |                                              |                 1 | Léraba                                             | Q977607
+ bf-lor |                                              |                 1 | Loroum                                             | Q1142054
+ bf-mou |                                              |                 1 | Mouhoun                                            | Q1142050
+ bf-nam |                                              |                 1 | Namentenga                                         | Q1142044
+ bf-nao |                                              |                 1 | Nahouri                                            | Q1142003
+ bf-nay |                                              |                 1 | Nayala                                             | Q1141776
+ bf-nou |                                              |                 1 | Noumbiel                                           | Q646647
+ bf-oub |                                              |                 1 | Oubritenga                                         | Q1142026
+ bf-oud |                                              |                 1 | Oudalan                                            | Q514173
+ bf-pas |                                              |                 1 | Passoré                                            | Q1142008
+ bf-pon |                                              |                 1 | Poni                                               | Q953657
+ bf-sen |                                              |                 1 | Séno                                               | Q1061214
+ bf-sis |                                              |                 1 | Sissili                                            | Q964281
+ bf-smt |                                              |                 1 | Sanmatenga                                         | Q1142039
+ bf-sng |                                              |                 1 | Sanguié                                            | Q1142014
+ bf-som |                                              |                 1 | Soum                                               | Q385973
+ bf-sor |                                              |                 1 | Sourou                                             | Q558703
+ bf-tap |                                              |                 1 | Tapoa                                              | Q621983
+ bf-tui |                                              |                 1 | Tuy                                                | Q627844
+ bf-yag |                                              |                 1 | Yagha                                              | Q1074466
+ bf-yat |                                              |                 1 | Yatenga                                            | Q1074521
+ bf-zir |                                              |                 1 | Ziro                                               | Q206019
+ bf-zon |                                              |                 1 | Zondoma                                            | Q219859
+ bf-zou |                                              |                 1 | Zoundwéogo                                         | Q227059
+ bi     | Burundi                                      |                 1 | Burundi                                            | Q967
+ bi-bb  |                                              |                 1 | Bubanza                                            | Q460538
+ bi-bl  |                                              |                 1 | Bujumbura Rural                                    | Q645043
+ bi-bm  |                                              |                 1 | Bujumbura Mairie                                   | Q1816580
+ bi-br  |                                              |                 1 | Bururi                                             | Q431385
+ bi-ca  |                                              |                 1 | Cankuzo                                            | Q645033
+ bi-ci  |                                              |                 1 | Cibitoke                                           | Q505596
+ bi-gi  |                                              |                 1 | Gitega                                             | Q720843
+ bi-ki  |                                              |                 1 | Kirundo                                            | Q600840
+ bi-kr  |                                              |                 1 | Karuzi                                             | Q735463
+ bi-ky  |                                              |                 1 | Kayanza                                            | Q720848
+ bi-ma  |                                              |                 1 | Makamba                                            | Q823740
+ bi-mu  |                                              |                 1 | Muramvya                                           | Q671086
+ bi-mw  |                                              |                 1 | Mwaro                                              | Q847718
+ bi-my  |                                              |                 1 | Muyinga                                            | Q822571
+ bi-ng  |                                              |                 1 | Ngozi                                              | Q720852
+ bi-rm  |                                              |                 1 | Rumonge                                            | Q20669646
+ bi-rt  |                                              |                 1 | Rutana                                             | Q822566
+ bi-ry  |                                              |                 1 | Ruyigi                                             | Q822578
+ bj     | Benin                                        |                 1 | Bénin                                              | Q962
+ bj-ak  |                                              |                 1 | Atakora                                            | Q29154
+ bj-al  |                                              |                 1 | Alibori                                            | Q29165
+ bj-aq  |                                              |                 1 | Atlantique                                         | Q29147
+ bj-bo  |                                              |                 1 | Borgou                                             | Q29136
+ bj-co  |                                              |                 1 | Collines                                           | Q29141
+ bj-do  |                                              |                 1 | Donga                                              | Q29161
+ bj-ko  |                                              |                 1 | Kouffo                                             | Q29173
+ bj-li  |                                              |                 1 | Littoral                                           | Q29158
+ bj-mo  |                                              |                 1 | Mono                                               | Q29135
+ bj-ou  |                                              |                 1 | Ouémé                                              | Q29169
+ bj-pl  |                                              |                 1 | Plateau                                            | Q32108
+ bj-zo  |                                              |                 1 | Zou                                                | Q29172
+ bv     | Bouvet Island                                |                 1 | Bouvetøya                                          | Q23408
+ bw     | Botswana                                     |                 1 | Botswana                                           | Q963
+ bw-ce  | Central District                             |                 1 | Central District                                   | Q57525
+ bw-ch  |                                              |                 1 | Chobe District                                     | Q165536
+ bw-gh  | Ghanzi District                              |                 1 | Ghanzi District                                    | Q57571
+ bw-kg  | Kgalagadi District                           |                 1 | Kgalagadi District                                 | Q57581
+ bw-kl  | Kgatleng District                            |                 1 | Kgatleng District                                  | Q57593
+ bw-kw  | Kweneng District                             |                 1 | Kweneng District                                   | Q57599
+ bw-ne  | North-East District                          |                 1 | North-East District                                | Q57636
+ bw-nw  | North-West District                          |                 1 | North-West District                                | Q57617
+ bw-se  | South-East District                          |                 1 | South-East District                                | Q57695
+ bw-so  | Southern District                            |                 1 | Southern District                                  | Q57609
+ cd     | Democratic Republic of the Congo             |                 1 | République démocratique du Congo                   | Q974
+ cd-bc  |                                              |                 1 | Kongo-Central                                      | Q130588
+ cd-bu  | Lower Uele                                   |                 1 | Bas-Uele                                           | Q652056
+ cd-eq  |                                              |                 1 | Équateur                                           | Q988104
+ cd-hk  |                                              |                 1 | Haut-Katanga                                       | Q130268
+ cd-hl  |                                              |                 1 | Haut-Lomami                                        | Q605672
+ cd-hu  | Upper Uele                                   |                 1 | Haut-Uele                                          | Q751632
+ cd-it  |                                              |                 1 | Ituri                                              | Q750659
+ cd-kc  | Central Kasai                                |                 1 | Kasaï-Central                                      | Q6702952
+ cd-ke  | Kasai-Oriental                               |                 1 | Kasaï-Oriental                                     | Q917992
+ cd-kg  |                                              |                 1 | Kwango                                             | Q757095
+ cd-kl  |                                              |                 1 | Kwilu                                              | Q559537
+ cd-kn  |                                              |                 1 | Kinshasa                                           | Q3838
+ cd-ks  | Kasai                                        |                 1 | Kasaï                                              | Q255655
+ cd-lo  |                                              |                 1 | Lomami                                             | Q241886
+ cd-lu  |                                              |                 1 | Lualaba                                            | Q130684
+ cd-ma  | Maniema                                      |                 1 | Maniema                                            | Q130566
+ cd-mn  |                                              |                 1 | Mai-Ndombe                                         | Q130679
+ cd-mo  |                                              |                 1 | Mongala                                            | Q847527
+ cd-nk  | North Kivu                                   |                 1 | Nord-Kivu                                          | Q130625
+ cd-nu  |                                              |                 1 | Nord-Ubangi                                        | Q843312
+ cd-sa  |                                              |                 1 | Sankuru                                            | Q209829
+ cd-sk  | South Kivu                                   |                 1 | Sud-Kivu                                           | Q488326
+ cd-su  |                                              |                 1 | Sud-Ubangi                                         | Q834551
+ cd-ta  |                                              |                 1 | Tanganyika                                         | Q826585
+ cd-to  |                                              |                 1 | Tshopo                                             | Q630900
+ cd-tu  |                                              |                 1 | Tshuapa                                            | Q427246
+ cf     | Central African Republic                     |                 1 | Ködörösêse tî Bêafrîka - République Centrafricaine | Q929
+ cf-ac  |                                              |                 1 | Ouham                                              | Q726620
+ cf-bb  |                                              |                 1 | Bamingui-Bangoran                                  | Q741025
+ cf-bgf |                                              |                 1 | Bangui                                             | Q3832
+ cf-bk  |                                              |                 1 | Basse-Kotto                                        | Q810484
+ cf-hk  |                                              |                 1 | Haute-Kotto                                        | Q848596
+ cf-hm  |                                              |                 1 | Haut-Mbomou                                        | Q848578
+ cf-hs  |                                              |                 1 | Mambéré-Kadéï                                      | Q848567
+ cf-kb  |                                              |                 1 | Nana-Grébizi                                       | Q856227
+ cf-kg  |                                              |                 1 | Kémo                                               | Q848572
+ cf-lb  |                                              |                 1 | Lobaye                                             | Q821037
+ cf-mb  |                                              |                 1 | Mbomou                                             | Q848582
+ cf-mp  |                                              |                 1 | Ombella M'Poko                                     | Q378970
+ cf-nm  |                                              |                 1 | Nana-Mambéré                                       | Q742455
+ cf-op  |                                              |                 1 | Ouham-Pendé                                        | Q848591
+ cf-se  |                                              |                 1 | Sangha-Mbaéré                                      | Q856237
+ cf-uk  |                                              |                 1 | Ouaka                                              | Q848560
+ cf-vk  |                                              |                 1 | Vakaga                                             | Q848585
+ cg     | Congo-Brazzaville                            |                 1 | Congo                                              | Q971
+ cg-11  |                                              |                 1 | Bouenza                                            | Q827015
+ cg-12  |                                              |                 1 | Pool                                               | Q864647
+ cg-13  |                                              |                 1 | Sangha                                             | Q775410
+ cg-14  |                                              |                 1 | Plateaux                                           | Q765370
+ cg-15  |                                              |                 1 | Cuvette-Ouest                                      | Q125711
+ cg-16  |                                              |                 1 | Pointe-Noire                                       | Q42749862
+ cg-2   |                                              |                 1 | Likouala                                           | Q863554
+ cg-5   |                                              |                 1 | Kouilou                                            | Q855327
+ cg-7   |                                              |                 1 | Lékoumou                                           | Q862753
+ cg-8   |                                              |                 1 | Cuvette                                            | Q780884
+ cg-9   |                                              |                 1 | Niari                                              | Q969317
+ cg-bzv |                                              |                 1 | Brazzaville                                        | Q3844
+ ci     | Côte d'Ivoire                                |                 1 | Côte d’Ivoire                                      | Q1008
+ ci-ab  | Abidjan                                      |                 1 | Abidjan                                            | Q4667612
+ ci-bs  |                                              |                 1 | Bas-Sassandra                                      | Q20980352
+ ci-cm  |                                              |                 1 | Comoé                                              | Q16629374
+ ci-dn  |                                              |                 1 | Denguélé                                           | Q20980374
+ ci-gd  |                                              |                 1 | Gôh-Djiboua                                        | Q21003640
+ ci-lc  |                                              |                 1 | Lacs                                               | Q20980363
+ ci-lg  |                                              |                 1 | Lagunes                                            | Q20980365
+ ci-mg  |                                              |                 1 | Montagnes                                          | Q20980366
+ ci-sm  |                                              |                 1 | Sassandra-Marahoué                                 | Q20365127
+ ci-sv  |                                              |                 1 | Savanes                                            | Q21002161
+ ci-vb  |                                              |                 1 | Vallée du Bandama                                  | Q21002356
+ ci-wr  |                                              |                 1 | Woroba                                             | Q20980371
+ ci-ym  |                                              |                 1 | Yamoussoukro                                       | Q8048095
+ ci-zz  |                                              |                 1 | Zanzan                                             | Q21003689
+ cm     | Cameroon                                     |                 1 | Cameroun                                           | Q1009
+ cm-ad  | Adamawa                                      |                 1 | Adamaoua                                           | Q351514
+ cm-ce  | Centre                                       |                 1 | Centre                                             | Q739951
+ cm-en  | Far-North                                    |                 1 | Extrême-Nord                                       | Q823976
+ cm-es  | East                                         |                 1 | Est                                                | Q845168
+ cm-lt  | Littoral                                     |                 1 | Littoral                                           | Q845172
+ cm-no  | North                                        |                 1 | Nord                                               | Q502341
+ cm-nw  | Northwest                                    |                 1 | Nord-Ouest                                         | Q823946
+ cm-ou  | West                                         |                 1 | Ouest                                              | Q165784
+ cm-su  | South                                        |                 1 | Sud                                                | Q857122
+ cm-sw  | Southwest                                    |                 1 | Sud-Ouest                                          | Q607499
+ cv     | Cape Verde                                   |                 1 | Cabo Verde                                         | Q1011
+ dj     | Djibouti                                     | 0.986442180772115 | Djibouti جيبوتي                                    | Q977
+ dj-ar  | Arta                                         |                 1 | Arta ارتا                                          | Q705941
+ dj-as  | Ali Sabieh                                   |                 1 | Ali Sabieh علي صبيح                                | Q821008
+ dj-di  | Dikhil                                       |                 1 | Dikhil دخيل                                        | Q283979
+ dj-dj  | Djibouti                                     |                 1 | Djibouti جيبوتي                                    | Q3604
+ dj-ob  | Obock                                        |                 1 | Obock أوبوك                                        | Q844929
+ dj-ta  | Tadjourah                                    |                 1 | تاجورة Tadjourah                                   | Q645896
+ dz     | Algeria                                      |                 1 | ⵍⵣⵣⴰⵢⴻⵔ الجزائر                                    | Q262
+ dz-01  | Adrar                                        |                 1 | Adrar أدرار                                        | Q188166
+ dz-02  | Chlef                                        |                 1 | Chlef - الشلف‎                                      | Q231752
+ dz-03  | Laghouat                                     |                 1 | Laghouat - الأغواط                                 | Q231748
+ dz-04  | Oum El Bouaghi                               |                 1 | Oum El Bouaghi - أم الـبـواقي                      | Q235705
+ dz-05  | Batna                                        |                 1 | Batna باتنة                                        | Q215452
+ dz-06  | Bejaia                                       |                 1 | Béjaïa بجاية                                       | Q233665
+ dz-07  | Biskra                                       |                 1 | Biskra - بسكرة                                     | Q458402
+ dz-08  | Béchar                                       |                 1 | Béchar بشار                                        | Q215467
+ dz-09  | Blida                                        |                 1 | Blida - البليدة                                    | Q233637
+ dz-10  | Bouira                                       |                 1 | Bouira - البويرة                                   | Q233655
+ dz-11  | Tamanrasset                                  |                 1 | Tamanrasset تمنراست                                | Q229467
+ dz-12  | Tébessa                                      |                 1 | Tébessa - تبسة                                     | Q267224
+ dz-13  | Tlemcen                                      |                 1 | Tlemcen تلمسان                                     | Q233632
+ dz-14  | Tiaret                                       |                 1 | Tiaret تيارت‎                                       | Q233258
+ dz-15  | Tizi Ouzou                                   |                 1 | Tizi Ouzou تيزي وزو                                | Q233645
+ dz-16  | Algiers                                      |                 1 | Alger - الجزائر                                    | Q141026
+ dz-17  | Djelfa                                       |                 1 | Djelfa الجلفة                                      | Q233233
+ dz-18  | Jijel                                        |                 1 | Jijel - جيجل                                       | Q235718
+ dz-19  | Setif                                        |                 1 | Sétif - سطيف‎                                       | Q237164
+ dz-20  | Saïda                                        |                 1 | Saïda - سعيدة                                      | Q233640
+ dz-21  | Skikda                                       |                 1 | Skikda - سكيكدة                                    | Q234227
+ dz-22  | Sidi Bel Abbès                               |                 1 | Sidi Bel Abbès - سيدي بلعباس                       | Q235714
+ dz-23  | Annaba                                       |                 1 | Annaba - عنابة‎                                     | Q213944
+ dz-24  | Guelma                                       |                 1 | Guelma ڤالمة‎                                       | Q235727
+ dz-25  | Constantine                                  |                 1 | Constantine - قسنطينة                              | Q232043
+ dz-26  | Médéa                                        |                 1 | Médéa - المدية                                     | Q235810
+ dz-27  | Mostaganem                                   |                 1 | Mostaganem مستغانم                                 | Q221445
+ dz-28  | M'Sila                                       |                 1 | M'Sila - المسيلة                                   | Q240870
+ dz-29  | Mascara                                      |                 1 | Mascara - معسكر                                    | Q236776
+ dz-30  | Ouargla                                      |                 1 | Ouargla ورقلة                                      | Q235709
+ dz-31  | Oran                                         |                 1 | Oran - وهران                                       | Q231331
+ dz-32  | El Bayadh                                    |                 1 | El Bayadh البيض                                    | Q235703
+ dz-33  | Illizi                                       |                 1 | Illizi إلـيـزي                                     | Q233659
+ dz-34  | Bordj Bou Arreridj‎                           |                 1 | Bordj Bou Arreridj‎ - برج بوعريريج‎                  | Q266411
+ dz-35  | Boumerdès                                    |                 1 | Boumerdès - بومرداس                                | Q236752
+ dz-36  | El Tarf                                      |                 1 | El Tarf الطارف                                     | Q236788
+ dz-37  | Tindouf                                      |                 1 | Tindouf تندوف                                      | Q231151
+ dz-38  | Tissemsilt                                   |                 1 | Tissemsilt - تسمسيلت                               | Q235805
+ dz-39  | El Oued                                      |                 1 | El Oued الوادي                                     | Q233651
+ dz-40  | Khenchela                                    |                 1 | Khenchela خنشلة                                    | Q213950
+ dz-41  | Souk Ahras                                   |                 1 | Souk Ahras - سوق أهراس                             | Q236772
+ dz-42  | Tipaza                                       |                 1 | Tipaza - تيبازة                                    | Q235814
+ dz-43  | Mila                                         |                 1 | Mila - ميلة                                        | Q235723
+ dz-44  | Aïn Defla                                    |                 1 | Aïn Defla - عين الدفلى                             | Q168953
+ dz-45  | Naâma                                        |                 1 | Naâma النعامة                                      | Q233675
+ dz-46  | Aïn Témouchent                               |                 1 | Aïn Témouchent - عين تموشنت                        | Q233670
+ dz-47  | Ghardaia                                     |                 1 | Ghardaïa غرداية                                    | Q17601
+ dz-48  | Relizane                                     |                 1 | Relizane - غليزان                                  | Q236758
+ eg     | Egypt                                        | 0.996201340721516 | مصر                                                | Q79
+ eg-alx | Alexandria Governorate                       |                 1 | الإسكندرية                                         | Q29943
+ eg-asn | Aswan Governorate                            |                 1 | محافظة أسوان                                       | Q29937
+ eg-ast | Asyut Governorate                            |                 1 | أسيوط                                              | Q29965
+ eg-ba  | Red Sea Governorate                          | 0.973868246957906 | البحر الأحممر                                      | Q30831
+ eg-bh  | Beheira Governorate                          |                 1 | ‏البحيرة‎                                            | Q30630
+ eg-bns | Beni Suef Governorate                        |                 1 | ‏محافظة بنى سويف                                    | Q30683
+ eg-c   | Cairo Governorate                            |                 1 | محافظة القاهرة                                     | Q30805
+ eg-dk  | Dakahlia Governorate                         |                 1 | الدقهلية                                           | Q31068
+ eg-dt  | Damietta Governorate                         |                 1 | دمياط                                              | Q30644
+ eg-fym | Faiyum Governorate                           |                 1 | محافظة الفيوم                                      | Q30656
+ eg-gh  | Gharbiyya Governorate                        |                 1 | ‏محافظة الغربية                                     | Q30835
+ eg-gz  | Giza Governorate                             |                 1 | محافظة الجيزة‎                                      | Q30832
+ eg-is  | Ismailia Governorate                         |                 1 | الإسماعيلية                                        | Q31067
+ eg-js  | South Sinai Governorate                      |                 1 | جنوب سيناء                                         | Q30815
+ eg-kb  | Qalyubia Governorate                         |                 1 | القليوبية                                          | Q31075
+ eg-kfs | Kafr el-Sheikh Governorate                   |                 1 | كفر الشيخ                                          | Q30946
+ eg-kn  | Qena Governorate                             |                 1 | محافظة قنا                                         | Q31065
+ eg-lx  | Luxor Governate                              |                 1 | الأقصر                                             | Q30797
+ eg-mn  | Minya Governate                              |                 1 | محافظة المنيا‎                                      | Q30675
+ eg-mnf | Monufia Governorate                          |                 1 | محافظة المنوفية                                    | Q30786
+ eg-mt  | Matrouh Governorate                          |                 1 | مطروح                                              | Q30682
+ eg-pts | Port Said Governorate                        |                 1 | ‏محافظة بورسعيد                                     | Q31079
+ eg-shg | Sohag Governorate                            |                 1 | سوهاج‎                                              | Q30669
+ eg-shr | Al Sharqia Governorate                       |                 1 | الشرقية‎‎                                            | Q31074
+ eg-sin | North Sinai Governorate                      |                 1 | شمال سيناء                                         | Q30662
+ eg-suz | Suez Governorate                             |                 1 | الغربية                                            | Q31070
+ eg-wad | New Valley Governorate                       |                 1 | الوادي الجديد                                      | Q30650
+ er     | Eritrea                                      | 0.939894612438314 | ኤርትራ إرتريا                                        | Q986
+ er-an  | Anseba Region                                |                 1 | عنسبا ዞባ ዓንሰባ                                      | Q569468
+ er-dk  | Southern Red Sea Region                      | 0.935174830508089 | منطقة البحر الأحمر الجنوب ዞባ ደቡባዊ ቀይሕ ባሕሪ          | Q27928
+ er-du  | Debub Region                                 |                 1 | المنطقة الجنوبية Debub                             | Q27728
+ er-gb  | Gash-Barka Region                            |                 1 | القاش وبركا ጋሽ-ባርካ                                 | Q873012
+ er-ma  | Maekel Region                                |                 1 | المنطقة المركزية ዞባ ማእከል                           | Q27710
+ er-sk  | Northen Red Sea Region                       | 0.879038015961481 | منطقة البحر الأحمر الشمال ዞባ ሰሜናዊ ቀይሕ ባሕሪ          | Q27910
+ es-ce  |                                              |                 1 | Ceuta                                              | Q5823
+ es-cn  | Canary Islands                               |                 1 | Canarias                                           | Q5813
+ es-gc  |                                              |                 1 | Las Palmas                                         | Q95080
+ es-ml  |                                              |                 1 | Melilla                                            | Q5831
+ es-tf  |                                              |                 1 | Santa Cruz de Tenerife                             | Q99976
+ et     | Ethiopia                                     |                 1 | ኢትዮጵያ                                              | Q115
+ et-aa  | Addis Ababa                                  |                 1 | Addis Abeba                                        | Q3624
+ et-af  | Afar Region                                  |                 1 | Afar                                               | Q193494
+ et-am  | Amhara                                       |                 1 | አማራ                                                | Q203009
+ et-be  | Benishangul-Gumuz Region                     |                 1 | Bīnshangul-Gumuz Kilil                             | Q207635
+ et-dd  | Dire Dawa                                    |                 1 | ድሬ ዳዋ                                              | Q193486
+ et-ga  |                                              |                 1 | Gambela                                            | Q207638
+ et-ha  | Harari Region                                |                 1 | ሀረሪ ሁስኒ/Harari                                     | Q1033855
+ et-or  | Oromia Region                                |                 1 | Oromia                                             | Q202107
+ et-sn  | Southern Nations                             |                 1 | Southern Nations                                   | Q203193
+ et-so  | Somali Region                                |                 1 | Somali                                             | Q202800
+ et-ti  | Tigray Region                                |                 1 | Tigray                                             | Q200127
+ fr-may | Mayotte                                      |                 1 | Mayotte                                            | Q17063
+ fr-yt  |                                              |                 1 | Mayotte                                            | Q17063
+ ga     | Gabon                                        |                 1 | Gabon                                              | Q1000
+ ga-1   |                                              |                 1 | Estuaire                                           | Q281109
+ ga-2   |                                              |                 1 | Haut-Ogooué                                        | Q654438
+ ga-3   |                                              |                 1 | Moyen-Ogooué                                       | Q590802
+ ga-4   |                                              |                 1 | Ngounié                                            | Q823774
+ ga-5   |                                              |                 1 | Nyanga                                             | Q846017
+ ga-6   |                                              |                 1 | Ogooué-Ivindo                                      | Q823822
+ ga-7   |                                              |                 1 | Ogooué-Lolo                                        | Q823762
+ ga-8   |                                              |                 1 | Ogooué-Maritime                                    | Q823751
+ ga-9   |                                              |                 1 | Woleu-Ntem                                         | Q823800
+ gh     | Ghana                                        |                 1 | Ghana                                              | Q117
+ gh-aa  | Greater Accra Region                         |                 1 | Greater Accra Region                               | Q431729
+ gh-ah  | Ashanti Region                               |                 1 | Ashanti Region                                     | Q398417
+ gh-ba  | Brong-Ahafo Region                           |                 1 | Brong-Ahafo Region                                 | Q397737
+ gh-cp  | Central Region                               |                 1 | Central Region                                     | Q846323
+ gh-ep  | Eastern Region                               |                 1 | Eastern Region                                     | Q405670
+ gh-np  | Northern Region                              |                 1 | Northern Region                                    | Q502215
+ gh-tv  | Volta Region                                 |                 1 | Volta Region                                       | Q712832
+ gh-ue  | Upper East Region                            |                 1 | Upper East Region                                  | Q712828
+ gh-uw  | Upper West Region                            |                 1 | Upper West Region                                  | Q715805
+ gh-wp  | Western Region                               |                 1 | Western Region                                     | Q870155
+ gm     | Gambia                                       |                 1 | Gambia                                             | Q1005
+ gm-l   |                                              |                 1 | Lower River                                        | Q824421
+ gm-m   |                                              |                 1 | Central River                                      | Q824431
+ gm-n   |                                              |                 1 | North Bank                                         | Q846161
+ gm-u   |                                              |                 1 | Upper River                                        | Q824373
+ gm-w   |                                              |                 1 | West Coast                                         | Q846158
+ gn     | Guinea                                       |                 1 | Guinée                                             | Q1006
+ gn-b   |                                              |                 1 | Boké                                               | Q862611
+ gn-c   |                                              |                 1 | Conakry                                            | Q3733
+ gn-d   |                                              |                 1 | Kindia                                             | Q868520
+ gn-f   |                                              |                 1 | Faranah                                            | Q870166
+ gn-k   |                                              |                 1 | Kankan                                             | Q870191
+ gn-l   |                                              |                 1 | Labé                                               | Q868515
+ gn-m   |                                              |                 1 | Mamou                                              | Q1043650
+ gn-n   |                                              |                 1 | Nzérékoré                                          | Q870146
+ gq     | Equatorial Guinea                            |                 1 | Guinea Ecuatorial                                  | Q983
+ gq-an  |                                              |                 1 | Annobón                                            | Q3736616
+ gq-bn  |                                              |                 1 | Bioko Norte                                        | Q845834
+ gq-bs  |                                              |                 1 | Bioko Sur                                          | Q845817
+ gq-c   |                                              |                 1 | Región Continental                                 | 
+ gq-cs  | Centro Sur Province                          |                 1 | Centro Sur                                         | Q845823
+ gq-i   |                                              |                 1 | Región Insular                                     | 
+ gq-kn  | Kié-Ntem Province                            |                 1 | Kié-Ntem                                           | Q853393
+ gq-li  | Litoral Province                             |                 1 | Litoral                                            | Q203873
+ gq-wn  | Wele-Nzas Province                           |                 1 | Wele-Nzas                                          | Q853400
+ gw     | Guinea-Bissau                                |                 1 | Guiné-Bissau                                       | Q1007
+ gw-ba  |                                              |                 1 | Região de Bafatá                                   | Q799791
+ gw-bl  |                                              |                 1 | Região de Bolama                                   | Q151909
+ gw-bm  |                                              |                 1 | Região de Biombo                                   | Q872228
+ gw-bs  | Bissau Autonomous Sector                     |                 1 | Sector autónomo de Bissau                          | Q1318549
+ gw-ca  |                                              |                 1 | Região de Cacheu                                   | Q780838
+ gw-ga  |                                              |                 1 | Região de Gabu                                     | Q872212
+ gw-l   |                                              |                 1 | Provincia Leste                                    | Q13378473
+ gw-n   |                                              |                 1 | Provincia Norte                                    | Q13378475
+ gw-oi  |                                              |                 1 | Região de Oio                                      | Q853991
+ gw-qu  |                                              |                 1 | Região de Quinara                                  | Q862617
+ gw-s   |                                              |                 1 | Provincia Sul                                      | Q13378476
+ gw-to  |                                              |                 1 | Região de Tombali                                  | Q1047255
+ ke     | Kenya                                        |                 1 | Kenya                                              | Q114
+ ke-01  |                                              |                 1 | Baringo                                            | Q808201
+ ke-02  |                                              |                 1 | Bomet                                              | Q891952
+ ke-03  |                                              |                 1 | Bungoma                                            | Q2928204
+ ke-04  |                                              |                 1 | Busia                                              | Q1017519
+ ke-05  |                                              |                 1 | Elegeyo-Marakwet                                   | Q15216433
+ ke-06  | Embu County                                  |                 1 | Embu                                               | Q1335242
+ ke-07  | Garissa County                               |                 1 | Garissa                                            | Q1494292
+ ke-08  |                                              |                 1 | Homa Bay                                           | Q1625834
+ ke-09  | Isiolo County                                |                 1 | Isiolo                                             | Q1499046
+ ke-10  | Kajiado County                               |                 1 | Kajiado                                            | Q285072
+ ke-11  |                                              |                 1 | Kakamega                                           | Q1721867
+ ke-12  |                                              |                 1 | Kericho                                            | Q1739252
+ ke-13  | Kiambu County                                |                 1 | Kiambu                                             | Q2575594
+ ke-14  |                                              |                 1 | Kilifi                                             | Q1741307
+ ke-15  | Kirinyaga County                             |                 1 | Kirinyaga                                          | Q2230311
+ ke-16  |                                              |                 1 | Kisii                                              | Q1743730
+ ke-17  |                                              |                 1 | Kisumu                                             | Q1743809
+ ke-18  |                                              |                 1 | Kitui                                              | Q1722597
+ ke-19  |                                              |                 1 | Kwale                                              | Q952571
+ ke-20  |                                              |                 1 | Laikipia                                           | Q1800699
+ ke-21  |                                              |                 1 | Lamu                                               | Q783117
+ ke-22  |                                              |                 1 | Machakos                                           | Q1882639
+ ke-23  |                                              |                 1 | Makueni                                            | Q473717
+ ke-24  |                                              |                 1 | Mandera                                            | Q1477874
+ ke-25  |                                              |                 1 | Marsabit                                           | Q1323683
+ ke-26  |                                              |                 1 | Meru                                               | Q15045704
+ ke-27  |                                              |                 1 | Migori                                             | Q429955
+ ke-28  |                                              |                 1 | Mombasa                                            | Q225641
+ ke-29  |                                              |                 1 | Murang`a                                           | Q1781723
+ ke-30  |                                              |                 1 | Nairobi                                            | Q3335223
+ ke-31  |                                              |                 1 | Nakuru                                             | Q1852202
+ ke-32  |                                              |                 1 | Nandi                                              | Q1964569
+ ke-33  |                                              |                 1 | Narok                                              | Q1852220
+ ke-34  |                                              |                 1 | Nyamira                                            | Q1569613
+ ke-35  |                                              |                 1 | Nyandarua                                          | Q1714352
+ ke-36  |                                              |                 1 | Nyeri                                              | Q749665
+ ke-37  |                                              |                 1 | Samburu                                            | Q2096419
+ ke-38  |                                              |                 1 | Siaya                                              | Q3482913
+ ke-39  |                                              |                 1 | Taita Taveta                                       | Q7193788
+ ke-40  |                                              |                 1 | Tana River                                         | Q383150
+ ke-41  |                                              |                 1 | Tharaka-Nithi                                      | Q2189432
+ ke-42  |                                              |                 1 | Trans Nzoia                                        | Q1278653
+ ke-43  |                                              |                 1 | Turkana                                            | Q1633078
+ ke-44  |                                              |                 1 | Uasin Gishu                                        | Q1121429
+ ke-45  |                                              |                 1 | Vihiga                                             | Q1313202
+ ke-46  |                                              |                 1 | Wajir                                              | Q1852209
+ ke-47  |                                              |                 1 | West Pokot                                         | Q590860
+ km     | Comoros                                      |                 1 | Comores Komori جزر القمر                           | Q970
+ km-a   | Anjouan                                      |                 1 | Nzwani أنجوان                                      | Q231324
+ km-g   | Grande Comore                                |                 1 | Ngazidja القمر الكبرى                              | Q244978
+ km-m   | Moheli                                       |                 1 | موهيلي Mwali                                       | Q271797
+ lr     | Liberia                                      |                 1 | Liberia                                            | Q1014
+ lr-bg  |                                              |                 1 | Bong County                                        | Q877578
+ lr-bm  |                                              |                 1 | Bomi County                                        | Q844127
+ lr-cm  | Grand Cape Mount County                      |                 1 | Grand Cape Mount County                            | Q1047921
+ lr-gb  |                                              |                 1 | Grand Bassa County                                 | Q1047895
+ lr-gg  |                                              |                 1 | Grand Gedeh County                                 | Q950841
+ lr-gk  | Grand Kru County                             |                 1 | Grand Kru County                                   | Q574952
+ lr-gp  | Gbarpolu County                              |                 1 | Gbarpolu County                                    | Q592251
+ lr-lo  | Lofa County                                  |                 1 | Lofa County                                        | Q870130
+ lr-mg  |                                              |                 1 | Margibi County                                     | Q1052737
+ lr-mo  |                                              |                 1 | Montserrado County                                 | Q862608
+ lr-my  |                                              |                 1 | Maryland County                                    | Q870138
+ lr-ni  |                                              |                 1 | Nimba County                                       | Q868497
+ lr-rg  |                                              |                 1 | River Gee County                                   | Q1047875
+ lr-ri  |                                              |                 1 | River Cess County                                  | Q955095
+ lr-si  |                                              |                 1 | Sinoe County                                       | Q1043644
+ ls     | Lesotho                                      |                 1 | Lesotho                                            | Q1013
+ ls-a   |                                              |                 1 | Maseru District                                    | Q844921
+ ls-b   |                                              |                 1 | Butha-Buthe District                               | Q535632
+ ls-c   |                                              |                 1 | Leribe District                                    | Q819987
+ ls-d   |                                              |                 1 | Berea District                                     | Q737086
+ ls-e   |                                              |                 1 | Mafeteng District                                  | Q817342
+ ls-f   |                                              |                 1 | Mohale's Hoek District                             | Q839074
+ ls-g   |                                              |                 1 | Quthing District                                   | Q839060
+ ls-h   |                                              |                 1 | Qacha's Nek District                               | Q850423
+ ls-j   |                                              |                 1 | Mokhotlong District                                | Q817340
+ ls-k   |                                              |                 1 | Thaba-Tseka District                               | Q817327
+ ly     | Libya                                        |                 1 | ليبيا                                              | Q1016
+ ly-ba  | Benghazi                                     |                 1 | بنغازي                                             | Q33507
+ ly-bu  | Butnan                                       |                 1 | البطنان                                            | Q25931
+ ly-dr  | Derna                                        |                 1 | درنة                                               | Q26124
+ ly-gt  | Ghat                                         |                 1 | غات                                                | Q48236
+ ly-ja  | Jabal al Akhdar                              |                 1 | الجبل الأخضر                                       | Q32841
+ ly-jg  | Jabal al Gharbi                              |                 1 | الجبل الغربي                                       | Q25632
+ ly-ji  | Jafara                                       |                 1 | الجفارة                                            | Q329060
+ ly-ju  | Jufra                                        |                 1 | الجفرة                                             | Q48247
+ ly-kf  | Kufra                                        |                 1 | الكفرة                                             | Q48200
+ ly-mb  | Murqub                                       |                 1 | المرقب                                             | Q209778
+ ly-mi  | Misrata                                      |                 1 | مصراتة                                             | Q32845
+ ly-mj  | Marj                                         |                 1 | المرج                                              | Q26023
+ ly-mq  | Murzuq                                       |                 1 | مرزق                                               | Q48239
+ ly-nl  | Nalut                                        |                 1 | نالوت                                              | Q27659
+ ly-nq  | Nuqat al Khams                               |                 1 | النقاط الخمس                                       | Q26161
+ ly-sb  | Sabha                                        |                 1 | سبها                                               | Q26132
+ ly-sr  | Sirte                                        |                 1 | سرت                                                | Q26417
+ ly-tb  | Tripoli                                      |                 1 | طرابلس                                             | Q32837
+ ly-wa  | Al Wahat                                     |                 1 | الواحات                                            | Q26000
+ ly-wd  | Wadi al Hayaa                                |                 1 | وادي الحياة                                        | Q48233
+ ly-ws  | Wadi al Shatii                               |                 1 | وادي الشاطئ                                        | Q48232
+ ly-za  | Zawiya                                       |                 1 | الزاوية                                            | Q26153
+ ma     | Morocco                                      |                 1 | Maroc ⵍⵎⵖⵔⵉⴱ المغرب                                | Q1028
+ mg     | Madagascar                                   |                 1 | Madagasikara                                       | Q1019
+ mg-a   | Toamasina Province                           |                 1 | Province de Tamatave                               | Q639418
+ mg-d   | Antsiranana Province                         |                 1 | Province d'Antsiranana                             | Q656073
+ mg-f   |                                              |                 1 | Province de Fianarantsoa                           | Q841197
+ mg-m   |                                              |                 1 | Province de Mahajanga                              | Q669259
+ mg-t   |                                              |                 1 | Province d’Antananarivo                            | Q489821
+ mg-u   |                                              |                 1 | Province de Toliara                                | Q162020
+ ml     | Mali                                         |                 1 | Mali                                               | Q912
+ ml-1   | Kayes                                        |                 1 | Kayes                                              | Q332113
+ ml-2   | Koulikoro                                    |                 1 | Koulikoro                                          | Q287789
+ ml-3   | Sikasso                                      |                 1 | Sikasso                                            | Q461298
+ ml-4   | Ségou                                        |                 1 | Ségou                                              | Q656845
+ ml-5   | Mopti                                        |                 1 | Mopti                                              | Q214155
+ ml-6   | Timbuktu                                     |                 1 | Tombouctou                                         | Q339462
+ ml-7   | Gao                                          |                 1 | Gao                                                | Q332392
+ ml-8   | Kidal                                        |                 1 | Kidal                                              | Q338988
+ ml-bko | Bamako                                       |                 1 | Bamako                                             | Q3703
+ mr     | Mauritania                                   |                 1 | موريتانيا                                          | Q1025
+ mr-01  | Hodh Ech Chargui                             |                 1 | الحوض الشرقي                                       | Q12621
+ mr-02  | Hodh El Gharbi                               |                 1 | الحوض الغربي                                       | Q850435
+ mr-03  | Assaba                                       |                 1 | العصابة                                            | Q738546
+ mr-04  | Gorgol                                       |                 1 | كوركول                                             | Q859831
+ mr-05  | Brakna                                       |                 1 | البراكنة                                           | Q12632
+ mr-06  | Trarza                                       |                 1 | الترارزة                                           | Q859581
+ mr-07  | Adrar                                        |                 1 | أدرار                                              | Q366626
+ mr-08  | Dakhlet Nouadhibou                           |                 1 | داخلة نواذيبو                                      | Q859573
+ mr-09  | Tagant                                       |                 1 | تكانت                                              | Q843903
+ mr-10  | Guidimaka                                    |                 1 | غيديماغا                                           | Q768119
+ mr-11  | Tiris Zemmour                                |                 1 | تيرس زمور                                          | Q859567
+ mr-12  | Inchiri                                      |                 1 | إينشيري                                            | Q850022
+ mr-nkc | Nouakchott                                   |                 1 | نواكشوط                                            | Q3688
+ mu     | Mauritius                                    |                 1 | Mauritius                                          | Q1027
+ mu-ag  |                                              |                 1 | Agaléga                                            | 
+ mu-bl  | Black River                                  |                 1 | Black River                                        | Q873740
+ mu-cc  |                                              |                 1 | Saint Brandon                                      | 
+ mu-fl  | Flacq                                        |                 1 | Flacq                                              | Q911651
+ mu-gp  | Grand Port                                   |                 1 | Grand Port                                         | Q911635
+ mu-mo  | Moka                                         |                 1 | Moka                                               | Q911643
+ mu-pa  | Pamplemousses                                |                 1 | Pamplemousses                                      | Q934126
+ mu-pl  | Port Louis                                   |                 1 | Port Louis                                         | Q960645
+ mu-pw  | Plaines Wilhems                              |                 1 | Plaines Wilhems                                    | Q1053595
+ mu-ro  | Rodrigues                                    |                 1 | Rodrigues                                          | Q208668
+ mu-rr  | Rivière du Rempart                           |                 1 | Rivière du Rempart                                 | Q1053565
+ mu-sa  | Savanne                                      |                 1 | Savanne                                            | Q1053600
+ mw     | Malawi                                       |                 1 | Malawi                                             | Q1020
+ mw-ba  |                                              |                 1 | Balaka                                             | Q870044
+ mw-bl  |                                              |                 1 | Blantyre                                           | Q1059262
+ mw-c   |                                              |                 1 | Central Region                                     | Q860758
+ mw-ck  |                                              |                 1 | Chikwawa                                           | Q722509
+ mw-cr  |                                              |                 1 | Chiradzulu                                         | Q722501
+ mw-ct  |                                              |                 1 | Chitipa                                            | Q1044337
+ mw-de  |                                              |                 1 | Dedza                                              | Q667153
+ mw-kr  |                                              |                 1 | Karonga                                            | Q868819
+ mw-ks  |                                              |                 1 |                                                    | Q868778
+ mw-li  |                                              |                 1 | Lilongwe                                           | Q1058453
+ mw-lk  |                                              |                 1 | Likoma                                             | Q740622
+ mw-mc  |                                              |                 1 | Mchinji                                            | Q868792
+ mw-mg  |                                              |                 1 | Mangochi                                           | Q722505
+ mw-mh  |                                              |                 1 | Machinga                                           | Q198585
+ mw-mu  |                                              |                 1 | Mulanje                                            | Q509097
+ mw-mw  |                                              |                 1 | Mwanza                                             | Q797933
+ mw-mz  |                                              |                 1 | Mzimba                                             | Q1045435
+ mw-n   |                                              |                 1 | Northern Region                                    | Q868827
+ mw-nb  |                                              |                 1 | Nkhata Bay                                         | Q1051505
+ mw-nk  |                                              |                 1 |                                                    | Q687248
+ mw-ns  |                                              |                 1 | Nsanje                                             | Q198587
+ mw-nu  |                                              |                 1 | Ntcheu                                             | Q797937
+ mw-ph  |                                              |                 1 | Phalombe                                           | Q538991
+ mw-ru  |                                              |                 1 | Rumphi                                             | Q1044312
+ mw-s   |                                              |                 1 | Southern Region                                    | Q868784
+ mw-sa  |                                              |                 1 | Salima                                             | Q195353
+ mw-th  |                                              |                 1 | Thyolo                                             | Q722515
+ mw-zo  |                                              |                 1 | Zomba                                              | Q1058442
+ mz     | Mozambique                                   |                 1 | Moçambique                                         | Q1029
+ mz-a   |                                              |                 1 | Niassa                                             | Q622799
+ mz-b   |                                              |                 1 | Manica                                             | Q622792
+ mz-g   |                                              |                 1 | Gaza                                               | Q466526
+ mz-i   |                                              |                 1 | Inhambane                                          | Q466547
+ mz-l   |                                              |                 1 | Maputo                                             | Q379658
+ mz-n   |                                              |                 1 | Nampula                                            | Q622794
+ mz-p   |                                              |                 1 | Cabo Delgado                                       | Q466538
+ mz-q   |                                              |                 1 | Zambézia                                           | Q622803
+ mz-s   |                                              |                 1 | Sofala                                             | Q622801
+ mz-t   |                                              |                 1 | Tete                                               | Q605787
+ na     | Namibia                                      |                 1 | Namibia                                            | Q1030
+ na-ca  | Zambezi                                      |                 1 | Zambezi Region                                     | Q473190
+ na-er  |                                              |                 1 | Erongo Region                                      | Q648753
+ na-ha  | Hardap                                       |                 1 | Hardap Region                                      | Q752676
+ na-ka  | Karas                                        |                 1 | ǁKaras Region                                      | Q573467
+ na-ke  | Kavango East                                 |                 1 | Kavango-East Region                                | Q14824032
+ na-kh  | Khomas                                       |                 1 | Khomas Region                                      | Q834508
+ na-ku  | Kunene Region                                |                 1 | Kunene Region                                      | Q834513
+ na-kw  | Kavango West                                 |                 1 | Kavango-West Region                                | Q14824027
+ na-od  | Otjozondjupa                                 |                 1 | Otjozondjupa Region                                | Q876506
+ na-oh  | Omaheke                                      |                 1 | Omaheke Region                                     | Q838775
+ na-on  | Oshana                                       |                 1 | Oshana Region                                      | Q534528
+ na-os  | Omusati                                      |                 1 | Omusati Region                                     | Q764385
+ na-ot  | Oshikoto                                     |                 1 | Oshikoto Region                                    | Q876512
+ na-ow  | Ohangwena                                    |                 1 | Ohangwena Region                                   | Q845702
+ ne     | Niger                                        |                 1 | Niger                                              | Q1032
+ ne-1   |                                              |                 1 | Agadez                                             | Q389944
+ ne-2   |                                              |                 1 | Diffa                                              | Q1053302
+ ne-3   |                                              |                 1 | Dosso                                              | Q850055
+ ne-4   |                                              |                 1 | Maradi                                             | Q850036
+ ne-5   |                                              |                 1 | Tahoua                                             | Q871083
+ ne-6   |                                              |                 1 | Tillabéri                                          | Q861914
+ ne-7   |                                              |                 1 | Zinder                                             | Q204367
+ ne-8   |                                              |                 1 | Niamey                                             | Q3674
+ ng     | Nigeria                                      |                 1 | Nigeria                                            | Q1033
+ ng-ab  |                                              |                 1 | Abia                                               | Q320852
+ ng-ad  |                                              |                 1 | Adamawa                                            | Q337514
+ ng-ak  |                                              |                 1 | Akwa Ibom                                          | Q424388
+ ng-an  |                                              |                 1 | Anambra                                            | Q117714
+ ng-ba  |                                              |                 1 | Bauchi                                             | Q503936
+ ng-be  |                                              |                 1 | Benue                                              | Q429908
+ ng-bo  |                                              |                 1 | Borno                                              | Q130626
+ ng-by  |                                              |                 1 | Bayelsa                                            | Q532153
+ ng-cr  |                                              |                 1 | Cross River                                        | Q739676
+ ng-de  |                                              |                 1 | Delta                                              | Q503910
+ ng-eb  |                                              |                 1 | Ebonyi                                             | Q506808
+ ng-ed  |                                              |                 1 | Edo                                                | Q682704
+ ng-ek  |                                              |                 1 | Ekiti                                              | Q534917
+ ng-en  |                                              |                 1 | Enugu                                              | Q3817714
+ ng-fc  |                                              |                 1 | Federal Capital Territory                          | Q509300
+ ng-go  |                                              |                 1 | Gombe                                              | Q376241
+ ng-im  |                                              |                 1 | Imo                                                | Q842939
+ ng-ji  |                                              |                 1 | Jigawa                                             | Q682691
+ ng-kd  |                                              |                 1 | Kaduna                                             | Q878284
+ ng-ke  |                                              |                 1 | Kebbi                                              | Q748523
+ ng-kn  |                                              |                 1 | Kano                                               | Q682571
+ ng-ko  |                                              |                 1 | Kogi                                               | Q387745
+ ng-kt  |                                              |                 1 | Katsina                                            | Q657821
+ ng-kw  |                                              |                 1 | Kwara                                              | Q464953
+ ng-la  |                                              |                 1 | Lagos                                              | Q815913
+ ng-na  |                                              |                 1 | Nasarawa                                           | Q836645
+ ng-ni  |                                              |                 1 | Niger                                              | Q503932
+ ng-og  |                                              |                 1 | Ogun                                               | Q836657
+ ng-on  |                                              |                 1 | Ondo                                               | Q836654
+ ng-os  |                                              |                 1 | Osun                                               | Q682721
+ ng-oy  |                                              |                 1 | Oyo                                                | Q503905
+ ng-pl  |                                              |                 1 | Plateau                                            | Q503928
+ ng-ri  |                                              |                 1 | Rivers                                             | Q503923
+ ng-so  |                                              |                 1 | Sokoto                                             | Q503941
+ ng-ta  |                                              |                 1 | Taraba                                             | Q463959
+ ng-yo  |                                              |                 1 | Yobe                                               | Q682777
+ ng-za  |                                              |                 1 | Zamfara                                            | Q145793
+ ps-rfh | Rafah Governorate                            | 0.812458121893101 | محافظة رفح                                         | Q1074341
+ re     | Réunion                                      |                 1 | La Réunion                                         | Q17070
+ rw     | Rwanda                                       |                 1 | Rwanda                                             | Q1037
+ rw-01  | Kigali City                                  |                 1 | Umujyi wa Kigali                                   | Q3859
+ rw-02  | East Province                                |                 1 | Iburasirasuba                                      | Q853152
+ rw-03  | Northern Province                            |                 1 | Majyaruguru                                        | Q845807
+ rw-04  | Western Province                             |                 1 | Iburengerazuba                                     | Q737354
+ rw-05  | Southern Province                            |                 1 | Amajvepfo                                          | Q853162
+ sc     | Seychelles                                   |                 1 | Sesel                                              | Q1042
+ sd     | Sudan                                        | 0.998536912983161 | السودان                                            | Q1049
+ sd-dc  | Central Darfur                               |                 1 | ولاية وسط دارفور                                   | Q4116493
+ sd-de  | East Darfur State                            |                 1 | ولاية شرق دارفور                                   | Q3545641
+ sd-dn  | North Darfur State                           |                 1 | ولاية شمال دارفور                                  | Q688306
+ sd-ds  | South Darfur State                           |                 1 | ولاية جنوب دارفور                                  | Q838778
+ sd-dw  | West Darfur State                            |                 1 | ولاية غرب دارفور                                   | Q846331
+ sd-gd  | Gedarif State                                |                 1 | ولاية القضارف                                      | Q309478
+ sd-gk  | West Kurdufan                                |                 1 | ولاية غرب كردفان                                   | Q536396
+ sd-gz  | Gezira State                                 |                 1 | ولاية الجزيرة                                      | Q309469
+ sd-ka  | Kassala State                                |                 1 | ولاية كسلا                                         | Q954963
+ sd-kh  | Khartoum State                               |                 1 | ولاية الخرطوم                                      | Q310385
+ sd-kn  | North Kordofan State                         |                 1 | ولاية شمال كردفان                                  | Q864093
+ sd-ks  | South Kordofan State                         |                 1 | ولاية جنوب كردفان                                  | Q465490
+ sd-nb  | Blue Nile State                              |                 1 | ولاية النيل الأزرق                                 | Q309489
+ sd-no  | Northern State                               |                 1 | الولاية الشمالية                                   | Q310118
+ sd-nr  | River Nile State                             |                 1 | ولاية نهر النيل                                    | Q849297
+ sd-nw  | White Nile State                             |                 1 | ولاية النيل الأبيض                                 | Q311371
+ sd-rs  | Red Sea State                                | 0.987979603610429 | ولاية البحر الأحمر                                 | Q310120
+ sd-si  | Sennar State                                 |                 1 | ولاية سنار                                         | Q865534
+ sh     | Saint Helena, Ascension and Tristan da Cunha |                 1 | Saint Helena, Ascension and Tristan da Cunha       | Q192184
+ sh-ac  | Ascension                                    |                 1 | Ascension                                          | Q46197
+ sh-hl  | Saint Helena                                 |                 1 | Saint Helena                                       | Q34497
+ sh-ta  |                                              |                 1 | Tristan da Cunha                                   | Q220982
+ sl     | Sierra Leone                                 |                 1 | Sierra Leone                                       | Q1044
+ sl-e   | Eastern Province                             |                 1 | Eastern Province                                   | Q1050497
+ sl-n   |                                              |                 1 | Northern Province                                  | Q912359
+ sl-s   |                                              |                 1 | Southern Province                                  | Q772185
+ sl-w   |                                              |                 1 | Western Area                                       | Q1050475
+ sn     | Senegal                                      |                 1 | Sénégal                                            | Q1041
+ sn-db  | Diourbel Region                              |                 1 | Région de Diourbel                                 | Q856261
+ sn-dk  | Dakar                                        |                 1 | Région de Dakar                                    | Q856268
+ sn-fk  | Fatick Region                                |                 1 | Fatick                                             | Q856282
+ sn-ka  | Kaffrine Region                              |                 1 | Kaffrine                                           | Q1059694
+ sn-kd  | Kolda Region                                 |                 1 | Kolda                                              | Q738081
+ sn-ke  | Kédougou Region                              |                 1 | Kédougou                                           | Q1046666
+ sn-kl  | Kaolack Region                               |                 1 | Kaolack                                            | Q847671
+ sn-lg  | Louga Region                                 |                 1 | Louga                                              | Q738061
+ sn-mt  | Matam Region                                 |                 1 | Matam                                              | Q856275
+ sn-se  | Sédhiou Region                               |                 1 | Sédhiou                                            | Q589848
+ sn-sl  | Saint-Louis Region                           |                 1 | Saint-Louis                                        | Q178872
+ sn-tc  | Tambacounda Region                           |                 1 | Tambacounda                                        | Q848554
+ sn-th  | Thiès Region                                 |                 1 | Thiès                                              | Q847682
+ sn-zg  | Ziguinchor Region                            |                 1 | Ziguinchor                                         | Q822692
+ so     | Somalia                                      |                 1 | Soomaaliya الصومال                                 | Q1045
+ so-aw  | Awdal                                        |                 1 | عدل ‎‎ Awdal                                         | Q791667
+ so-bk  | Bakool                                       |                 1 | Bakool باكول                                       | Q282471
+ so-bn  | Banaadir                                     |                 1 | Banadir بنادر                                      | Q806070
+ so-br  | Bari                                         |                 1 | ‎‎ Bariباري                                          | Q729170
+ so-by  | Bay                                          |                 1 | Bay باي                                            | Q812064
+ so-ga  | Galgaduud                                    |                 1 | Galgaduud جلجدود                                   | Q876772
+ so-ge  | Gedo                                         |                 1 | Gedo جدو                                           | Q856719
+ so-hi  | Hiiraan                                      |                 1 | Hiiraan هيران                                      | Q660040
+ so-jd  | Middle Juba                                  |                 1 | Jubbada Dhexe جوبا الوسطى                          | Q1046324
+ so-jh  | Lower Juba                                   |                 1 | Jubbada Hoose جوبا السفلى                          | Q877042
+ so-mu  | Mudug                                        |                 1 | Mudug مدج                                          | Q877034
+ so-nu  | Nugaal                                       |                 1 | Nugaal نوجال                                       | Q1046329
+ so-sa  | Sanaag                                       |                 1 | سناج Sanaag                                        | Q751387
+ so-sd  | Middle Shebelle                              |                 1 | Shabeellaha Dhexe شبيلي الوسطى                     | Q678435
+ so-sh  | Lower Shebelle                               |                 1 | Shabeellaha Hoose شبيلي السفلى                     | Q877028
+ so-so  | Sool                                         |                 1 | Sool سول                                           | Q848864
+ so-to  | Togdheer                                     |                 1 | توجدير Togdheer                                    | Q865590
+ so-wo  | Woqooyi Galbeed                              |                 1 | وقويي جالبيد Woqooyi Galbeed                       | Q877021
+ ss     | South Sudan                                  |                 1 | South Sudan                                        | Q958
+ ss-bn  | Northern Bahr el Ghazal                      |                 1 | Northern Bahr el Ghazal                            | Q491111
+ ss-bw  | Western Bahr el Ghazal                       |                 1 | Western Bahr el Ghazal                             | Q332095
+ ss-ec  | Central Equatoria                            |                 1 | Central Equatoria                                  | Q487709
+ ss-ee  | Eastern Equatoria                            |                 1 | Eastern Equatoria                                  | Q488519
+ ss-ew  | Western Equatoria                            |                 1 | Western Equatoria                                  | Q319979
+ ss-jg  | Jonglei                                      |                 1 | Jonglei                                            | Q488904
+ ss-lk  | Lakes                                        |                 1 | Lakes                                              | Q491096
+ ss-nu  | Upper Nile                                   |                 1 | Upper Nile                                         | Q487702
+ ss-uy  | Unity                                        |                 1 | Unity                                              | Q319965
+ ss-wr  | Warrap                                       |                 1 | Warrap                                             | Q491138
+ st     | São Tomé and Príncipe                        |                 1 | São Tomé e Príncipe                                | Q1039
+ st-p   | Príncipe Province                            |                 1 | Província de Príncipe                              | Q2366966
+ st-s   | São Tomé Province                            |                 1 | Província de São Tomé                              | Q6710363
+ sz     | eSwatini                                     |                 1 | eSwatini                                           | Q1050
+ sz-hh  |                                              |                 1 | Hhohho                                             | Q735570
+ sz-lu  |                                              |                 1 | Lubombo                                            | Q856657
+ sz-ma  |                                              |                 1 | Manzini                                            | Q305395
+ sz-sh  |                                              |                 1 | Shiselweni                                         | Q845934
+ td     | Chad                                         |                 1 | Tchad تشاد                                         | Q657
+ td-ba  | Batha                                        |                 1 | Batha البطحة                                       | Q180414
+ td-bg  | Bahr el Gazel                                |                 1 | Barh el Gazel بحر الغزال                           | Q1050621
+ td-bo  | Borkou                                       |                 1 | Borkou بوركو                                       | Q1139666
+ td-cb  | Chari-Baguirmi                               |                 1 | Chari-Baguirmi شاري باقرمي                         | Q843975
+ td-ee  | Ennedi-Est                                   |                 1 | Ennedi Est إنيدي الشرقية                           | Q16632169
+ td-eo  | Ennedi-Ouest                                 |                 1 | Ennedi Ouest إنيدي الغربية                         | Q16632172
+ td-gr  | Guéra                                        |                 1 | Guéra قيرا                                         | Q175706
+ td-hl  | Hadjer-Lamis                                 |                 1 | Hadjer-Lamis حجر لميس                              | Q1042437
+ td-ka  | Kanem                                        |                 1 | Kanem كانم                                         | Q849841
+ td-lc  | Lac                                          |                 1 | Lac البحيرة                                        | Q867869
+ td-lo  | Logone Occidental                            |                 1 | لوقون الغربية Logone Occidental                    | Q305257
+ td-lr  | Logone Oriental                              |                 1 | Logone Oriental لوقون الشرقية                      | Q167514
+ td-ma  | Mandoul                                      |                 1 | Mandoul ماندول                                     | Q597410
+ td-mc  | Moyen-Chari                                  |                 1 | Moyen-Chari شاري الأوسط                            | Q177799
+ td-me  | Mayo-Kebbi Est                               |                 1 | Mayo-Kebbi Est مايو كيبي الشرقية                   | Q911421
+ td-mo  | Mayo-Kebbi Ouest                             |                 1 | Mayo-Kebbi Ouest مايو كيبي الغربية                 | Q910393
+ td-nd  | N'Djamena Region                             |                 1 | N'Djaména انجمينا                                  | Q3659
+ td-od  | Ouaddaï                                      |                 1 | Ouaddaï وداي                                       | Q841338
+ td-sa  | Salamat                                      |                 1 | Salamat سلامات                                     | Q385584
+ td-si  | Sila                                         |                 1 | Sila سيلا                                          | Q1149611
+ td-ta  | Tandjilé                                     |                 1 | Tandjilé تانجلي                                    | Q867856
+ td-ti  | Tibesti                                      |                 1 | Tibesti تيبستي                                     | Q737711
+ td-wf  | Wadi Fira                                    |                 1 | Wadi Fira وادي فيرا                                | Q860813
+ tg     | Togo                                         |                 1 | Togo                                               | Q945
+ tg-c   | Centrale Region                              |                 1 | Région Centrale                                    | Q316220
+ tg-k   | Kara Region                                  |                 1 | Région de la Kara                                  | Q316216
+ tg-m   | Maritime Region                              |                 1 | Région Maritime                                    | Q316291
+ tg-p   | Plateaux Region                              |                 1 | Région des Plateaux                                | Q316306
+ tg-s   | Savanes Region                               |                 1 | Région des Savanes                                 | Q279945
+ tn     | Tunisia                                      | 0.993482703996136 | تونس                                               | Q948
+ tn-11  | Tunis                                        |                 1 | تونس                                               | Q328109
+ tn-12  | Ariana                                       |                 1 | أريانة                                             | Q233116
+ tn-13  | Ben Arous                                    |                 1 | بن عروس                                            | Q238555
+ tn-14  | Manouba                                      |                 1 | منوبة                                              | Q734328
+ tn-21  | Nabeul                                       |                 1 | نابل                                               | Q328145
+ tn-22  | Zaghouan                                     |                 1 | زغوان                                              | Q27916
+ tn-23  | Bizerte                                      |                 1 | بنزرت                                              | Q241129
+ tn-31  | Béja                                         |                 1 | باجة                                               | Q814982
+ tn-32  | Jendouba                                     |                 1 | جندوبة                                             | Q276580
+ tn-33  | El Kef                                       |                 1 | الكاف                                              | Q328199
+ tn-34  | Siliana                                      |                 1 | سليانة                                             | Q328115
+ tn-41  | Kairouan                                     |                 1 | القيروان                                           | Q276574
+ tn-42  | Kasserine                                    |                 1 | القصرين                                            | Q388047
+ tn-43  | Sidi Bouzid                                  |                 1 | سيدي بوزيد                                         | Q327097
+ tn-51  | Sousse                                       |                 1 | سوسة                                               | Q276565
+ tn-52  | Monastir                                     |                 1 | المنستير                                           | Q318102
+ tn-53  | Mahdia                                       |                 1 | المهدية                                            | Q328164
+ tn-61  | Sfax                                         |                 1 | صفاقس                                              | Q241145
+ tn-71  | Gafsa                                        |                 1 | قفصة                                               | Q269968
+ tn-72  | Tozeur                                       |                 1 | توزر                                               | Q388059
+ tn-73  | Kébili                                       |                 1 | قبلي                                               | Q286063
+ tn-81  | Gabès                                        |                 1 | قابس                                               | Q242263
+ tn-82  | Médenine                                     |                 1 | مدنين                                              | Q327087
+ tn-83  | Tataouine                                    |                 1 | تطاوين                                             | Q327045
+ tz     | Tanzania                                     |                 1 | Tanzania                                           | Q924
+ tz-01  | Arusha                                       |                 1 | Arusha                                             | Q329261
+ tz-02  |                                              |                 1 | Dar es Salaam                                      | Q557539
+ tz-03  |                                              |                 1 | Dodoma                                             | Q213268
+ tz-04  |                                              |                 1 | Iringa                                             | Q309352
+ tz-05  |                                              |                 1 | Kagera                                             | Q309190
+ tz-06  | North Pemba                                  |                 1 | Kaskazini Pemba                                    | Q498073
+ tz-07  | Zanzibar North                               |                 1 | Unguja Kaskazini                                   | Q147116
+ tz-08  |                                              |                 1 | Kigoma                                             | Q747943
+ tz-09  | Kilimanjaro                                  |                 1 | Kilimanjaro                                        | Q328922
+ tz-10  | South Pemba                                  |                 1 | Kusini Pemba                                       | Q498067
+ tz-11  | Zanzibar South & Central                     |                 1 | Unguja Kusini                                      | Q643120
+ tz-12  |                                              |                 1 | Lindi                                              | Q309339
+ tz-13  |                                              |                 1 | Mara                                               | Q458406
+ tz-14  |                                              |                 1 | Mbeya                                              | Q458382
+ tz-15  | Zanzibar Urban/West                          |                 1 | Unguja Mjini Magharibi                             | Q180822
+ tz-16  |                                              |                 1 | Morogoro                                           | Q458388
+ tz-17  |                                              |                 1 | Mtwara                                             | Q499465
+ tz-18  |                                              |                 1 | Mwanza                                             | Q331153
+ tz-19  |                                              |                 1 | Pwani                                              | Q458412
+ tz-20  |                                              |                 1 | Rukwa                                              | Q153329
+ tz-21  |                                              |                 1 | Ruvuma                                             | Q115318
+ tz-22  |                                              |                 1 | Shinyanga                                          | Q153339
+ tz-23  |                                              |                 1 | Singida                                            | Q153326
+ tz-24  |                                              |                 1 | Tabora                                             | Q153335
+ tz-25  |                                              |                 1 | Tanga                                              | Q389737
+ tz-26  |                                              |                 1 | Manyara                                            | Q331117
+ tz-27  | Geita                                        |                 1 | Geita                                              | Q1848521
+ tz-28  |                                              |                 1 | Katavi                                             | Q2682731
+ tz-29  |                                              |                 1 | Njombe                                             | Q2086273
+ tz-30  |                                              |                 1 | Simiyu                                             | Q2787568
+ ug     | Uganda                                       |                 1 | Uganda                                             | Q1036
+ ug-102 |                                              |                 1 | Kampala                                            | Q926417
+ ug-103 |                                              |                 1 | Kiboga                                             | Q892064
+ ug-104 |                                              |                 1 | Luweero                                            | Q1364817
+ ug-105 |                                              |                 1 | Masaka                                             | Q1032233
+ ug-106 |                                              |                 1 | Mpigi                                              | Q1362109
+ ug-107 |                                              |                 1 | Mubende                                            | Q891962
+ ug-108 |                                              |                 1 | Mukono                                             | Q1151066
+ ug-109 |                                              |                 1 | Nakasongola                                        | Q976859
+ ug-110 |                                              |                 1 | Rakai                                              | Q976873
+ ug-111 |                                              |                 1 | Sembabule                                          | Q976883
+ ug-112 |                                              |                 1 | Kayunga                                            | Q1207391
+ ug-113 |                                              |                 1 | Wakiso                                             | Q976848
+ ug-114 |                                              |                 1 | Lyantonde                                          | Q1375878
+ ug-115 |                                              |                 1 | Mityana                                            | Q1230005
+ ug-116 |                                              |                 1 | Nakaseke                                           | Q432438
+ ug-117 |                                              |                 1 | Buikwe                                             | Q3321631
+ ug-118 |                                              |                 1 | Bukomansimbi                                       | Q3321599
+ ug-119 |                                              |                 1 | Butambala                                          | Q3321622
+ ug-120 |                                              |                 1 | Buvuma                                             | Q3321608
+ ug-121 |                                              |                 1 | Gomba                                              | Q3321637
+ ug-122 |                                              |                 1 | Kalungu                                            | Q3321614
+ ug-123 |                                              |                 1 | Kyankwanzi                                         | Q534203
+ ug-124 |                                              |                 1 | Lwengo                                             | Q1114954
+ ug-201 |                                              |                 1 | Bugiri                                             | Q1229798
+ ug-202 |                                              |                 1 | Busia                                              | Q1229800
+ ug-203 |                                              |                 1 | Iganga                                             | Q1229869
+ ug-204 |                                              |                 1 | Jinja                                              | Q983748
+ ug-205 |                                              |                 1 | Kamuli                                             | Q164474
+ ug-206 |                                              |                 1 | Kapchorwa                                          | Q1229921
+ ug-207 |                                              |                 1 | Katakwi                                            | Q1229930
+ ug-208 |                                              |                 1 | Kumi                                               | Q1151062
+ ug-209 |                                              |                 1 | Mbale                                              | Q581822
+ ug-210 |                                              |                 1 | Pallisa                                            | Q1375843
+ ug-211 |                                              |                 1 | Soroti                                             | Q1091337
+ ug-212 |                                              |                 1 | Tororo                                             | Q1186541
+ ug-213 |                                              |                 1 | Kaberamaido                                        | Q1229906
+ ug-214 |                                              |                 1 | Mayuge                                             | Q1364824
+ ug-215 |                                              |                 1 | Sironko                                            | Q1375835
+ ug-216 |                                              |                 1 | Amuria                                             | Q1375762
+ ug-217 |                                              |                 1 | Budaka                                             | Q1362085
+ ug-218 |                                              |                 1 | Bududa                                             | Q1365449
+ ug-219 |                                              |                 1 | Bukedea                                            | Q1375812
+ ug-220 |                                              |                 1 | Bukwo                                              | Q1375868
+ ug-221 |                                              |                 1 | Butaleja                                           | Q1375755
+ ug-222 |                                              |                 1 | Kaliro                                             | Q1375859
+ ug-223 |                                              |                 1 | Manafwa                                            | Q1375789
+ ug-224 |                                              |                 1 | Namutumba                                          | Q1375819
+ ug-225 |                                              |                 1 | Bulambuli                                          | Q1114868
+ ug-226 |                                              |                 1 | Buyende                                            | Q1114938
+ ug-227 |                                              |                 1 | Kibuku                                             | Q1114885
+ ug-228 |                                              |                 1 | Kween                                              | Q3321998
+ ug-229 |                                              |                 1 | Luuka                                              | Q1114977
+ ug-230 |                                              |                 1 | Namayingo                                          | Q1114915
+ ug-231 |                                              |                 1 | Ngora                                              | Q1114903
+ ug-232 |                                              |                 1 | Serere                                             | Q1114927
+ ug-301 |                                              |                 1 | Adjumani                                           | Q1229734
+ ug-302 |                                              |                 1 | Apac                                               | Q1229750
+ ug-303 |                                              |                 1 | Arua                                               | Q1229758
+ ug-304 |                                              |                 1 | Gulu                                               | Q1028215
+ ug-305 |                                              |                 1 | Kitgum                                             | Q500162
+ ug-306 |                                              |                 1 | Kotido                                             | Q1318843
+ ug-307 |                                              |                 1 | Apac                                               | Q206519
+ ug-308 |                                              |                 1 | Moroto                                             | Q1375850
+ ug-309 |                                              |                 1 | Moyo                                               | Q2183668
+ ug-310 |                                              |                 1 | Nebbi                                              | Q1375825
+ ug-311 |                                              |                 1 | Nakapiripirit                                      | Q1375853
+ ug-312 |                                              |                 1 | Pader                                              | Q1230035
+ ug-313 |                                              |                 1 | Yumbe                                              | Q1362587
+ ug-314 |                                              |                 1 | Abim                                               | Q1375780
+ ug-315 |                                              |                 1 | Amolatar                                           | Q1318822
+ ug-316 |                                              |                 1 | Amuru                                              | Q1375771
+ ug-317 |                                              |                 1 | Dokolo                                             | Q1318872
+ ug-318 |                                              |                 1 | Kaabong                                            | Q1229881
+ ug-319 |                                              |                 1 | Koboko                                             | Q1318857
+ ug-320 |                                              |                 1 | Maracha                                            | Q588927
+ ug-321 |                                              |                 1 | Oyam                                               | Q1318833
+ ug-322 |                                              |                 1 | Agago                                              | Q3536053
+ ug-323 |                                              |                 1 | Alebtong                                           | Q3536082
+ ug-324 |                                              |                 1 | Amudat                                             | Q3536116
+ ug-325 |                                              |                 1 | Kole                                               | Q3539151
+ ug-326 |                                              |                 1 | Lamwo                                              | Q3539277
+ ug-327 |                                              |                 1 | Napak                                              | Q3539495
+ ug-328 |                                              |                 1 | Nwoya                                              | Q3539572
+ ug-329 |                                              |                 1 | Otuke                                              | Q3539602
+ ug-330 |                                              |                 1 | Zombo                                              | Q3539730
+ ug-401 |                                              |                 1 | Bundibugyo                                         | Q1362129
+ ug-402 |                                              |                 1 | Bushenyi                                           | Q1229797
+ ug-403 |                                              |                 1 | Hoima                                              | Q1186535
+ ug-404 |                                              |                 1 | Kabale                                             | Q3526470
+ ug-405 |                                              |                 1 | Kabarole                                           | Q1229910
+ ug-406 |                                              |                 1 | Kasese                                             | Q1229919
+ ug-407 |                                              |                 1 | Kibaale                                            | Q604966
+ ug-408 |                                              |                 1 | Kisoro                                             | Q580538
+ ug-409 |                                              |                 1 | Masindi                                            | Q1032238
+ ug-410 |                                              |                 1 | Mbarara                                            | Q1091595
+ ug-411 |                                              |                 1 | Ntungamo                                           | Q204642
+ ug-412 |                                              |                 1 | Rukungiri                                          | Q289419
+ ug-413 |                                              |                 1 | Kamwenge                                           | Q1318806
+ ug-414 |                                              |                 1 | Kanungu                                            | Q1032245
+ ug-415 |                                              |                 1 | Kyenjojo                                           | Q1318815
+ ug-416 |                                              |                 1 | Buliisa                                            | Q1229793
+ ug-417 |                                              |                 1 | Ibanda                                             | Q1318877
+ ug-418 |                                              |                 1 | Isingiro                                           | Q1318887
+ ug-419 |                                              |                 1 | Kiruhura                                           | Q1318865
+ ug-420 |                                              |                 1 | Buhweju                                            | Q3537661
+ ug-421 |                                              |                 1 | Kiryandongo                                        | Q3539116
+ ug-422 |                                              |                 1 | Kyegegwa                                           | Q3539256
+ ug-423 |                                              |                 1 | Mitooma                                            | Q3539414
+ ug-424 |                                              |                 1 | Ntoroko                                            | Q3539547
+ ug-425 |                                              |                 1 | Rubirizi                                           | Q3539648
+ ug-426 |                                              |                 1 | Sheema                                             | Q3539711
+ ug-c   |                                              |                 1 | Central Region                                     | Q429685
+ ug-e   |                                              |                 1 | Eastern Region                                     | Q2559220
+ ug-n   |                                              |                 1 | Northern Region                                    | Q2559686
+ ug-w   |                                              |                 1 | Western Region                                     | Q2559188
+ yt     | Mayotte                                      |                 1 | Mayotte                                            | Q17063
+ za     | South Africa                                 |                 1 | South Africa                                       | Q258
+ za-ec  |                                              |                 1 | Eastern Cape                                       | Q130840
+ za-fs  | Free State                                   |                 1 | Free State                                         | Q160284
+ za-gt  |                                              |                 1 | Gauteng                                            | Q133083
+ za-lp  |                                              |                 1 | Limpopo                                            | Q134907
+ za-mp  |                                              |                 1 | Mpumalanga                                         | Q132410
+ za-nc  |                                              |                 1 | Northern Cape                                      | Q132418
+ za-nl  |                                              |                 1 | KwaZulu-Natal                                      | Q81725
+ za-nw  |                                              |                 1 | North West                                         | Q165956
+ za-wc  |                                              |                 1 | Western Cape                                       | Q127167
+ zm     | Zambia                                       |                 1 | Zambia                                             | Q953
+ zm-01  |                                              |                 1 | Western Province                                   | Q748486
+ zm-02  |                                              |                 1 | Central Province                                   | Q190718
+ zm-03  | Eastern Province                             |                 1 | Luangwa                                            | Q823810
+ zm-04  |                                              |                 1 | Luapula Province                                   | Q386667
+ zm-05  |                                              |                 1 | Northern Province                                  | Q778738
+ zm-06  |                                              |                 1 | North-Western Province                             | Q846320
+ zm-07  |                                              |                 1 | Southern Province                                  | Q738382
+ zm-08  |                                              |                 1 | Copperbelt Province                                | Q1131523
+ zm-09  |                                              |                 1 | Lusaka Province                                    | Q819998
+ zm-10  |                                              |                 1 | Muchinga Province                                  | Q6714242
+ zw     | Zimbabwe                                     |                 1 | Zimbabwe                                           | Q954
+ zw-bu  | Bulawayo Province                            |                 1 | Bulawayo Province                                  | Q193250
+ zw-ha  |                                              |                 1 | Harare Province                                    | Q3921
+ zw-ma  |                                              |                 1 | Manicaland                                         | Q465847
+ zw-mc  |                                              |                 1 | Mashonaland Central                                | Q596156
+ zw-me  |                                              |                 1 | Mashonaland East                                   | Q465853
+ zw-mi  |                                              |                 1 | Midlands                                           | Q456556
+ zw-mn  |                                              |                 1 | Matabeleland North                                 | Q456562
+ zw-ms  |                                              |                 1 | Matabeleland South                                 | Q498355
+ zw-mv  |                                              |                 1 | Masvingo                                           | Q498351
+ zw-mw  |                                              |                 1 | Mashonaland West                                   | Q457189
+(950 rows)
+

@@ -1,0 +1,2850 @@
+# generated : 2018-07-25:07:01  // template : ./setup/template/docker-compose.jinja2
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  #---------------------------------------------------------
+  # Service for : "ae"-"United Arab Emirates" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ae:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14001:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ae.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14001
+    volumes:
+     - ./ae/data:/osm/data
+     - ./ae/download:/osm/download
+     - ./ae:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "af"-"Afghanistan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-af:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14002:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-af.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14002
+    volumes:
+     - ./af/data:/osm/data
+     - ./af/download:/osm/download
+     - ./af:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "am"-"Armenia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-am:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14003:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-am.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14003
+    volumes:
+     - ./am/data:/osm/data
+     - ./am/download:/osm/download
+     - ./am:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "az"-"Azerbaijan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-az:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14004:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-az.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14004
+    volumes:
+     - ./az/data:/osm/data
+     - ./az/download:/osm/download
+     - ./az:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "bd"-"Bangladesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-bd:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14005:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-bd.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14005
+    volumes:
+     - ./bd/data:/osm/data
+     - ./bd/download:/osm/download
+     - ./bd:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "bh"-"Bahrain" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-bh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14006:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-bh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14006
+    volumes:
+     - ./bh/data:/osm/data
+     - ./bh/download:/osm/download
+     - ./bh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "bn"-"Brunei" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-bn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14007:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-bn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14007
+    volumes:
+     - ./bn/data:/osm/data
+     - ./bn/download:/osm/download
+     - ./bn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "bt"-"Bhutan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-bt:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14008:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-bt.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14008
+    volumes:
+     - ./bt/data:/osm/data
+     - ./bt/download:/osm/download
+     - ./bt:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "cn"-"China" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-cn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14009:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-cn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14009
+    volumes:
+     - ./cn/data:/osm/data
+     - ./cn/download:/osm/download
+     - ./cn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ge"-"Georgia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ge:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14010:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ge.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14010
+    volumes:
+     - ./ge/data:/osm/data
+     - ./ge/download:/osm/download
+     - ./ge:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "id"-"Indonesia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-id:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14011:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-id.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14011
+    volumes:
+     - ./id/data:/osm/data
+     - ./id/download:/osm/download
+     - ./id:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "il"-"Israel" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-il:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14012:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-il.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14012
+    volumes:
+     - ./il/data:/osm/data
+     - ./il/download:/osm/download
+     - ./il:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-an"-"Andaman and Nicobar Islands" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-an:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14013:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-an.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14013
+    volumes:
+     - ./in-an/data:/osm/data
+     - ./in-an/download:/osm/download
+     - ./in-an:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ap"-"Andhra Pradesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ap:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14014:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ap.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14014
+    volumes:
+     - ./in-ap/data:/osm/data
+     - ./in-ap/download:/osm/download
+     - ./in-ap:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ar"-"Arunachal Pradesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ar:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14015:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ar.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14015
+    volumes:
+     - ./in-ar/data:/osm/data
+     - ./in-ar/download:/osm/download
+     - ./in-ar:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-as"-"Assam" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-as:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14016:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-as.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14016
+    volumes:
+     - ./in-as/data:/osm/data
+     - ./in-as/download:/osm/download
+     - ./in-as:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-br"-"Bihar" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-br:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14017:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-br.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14017
+    volumes:
+     - ./in-br/data:/osm/data
+     - ./in-br/download:/osm/download
+     - ./in-br:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ch"-"Chandigarh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ch:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14018:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ch.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14018
+    volumes:
+     - ./in-ch/data:/osm/data
+     - ./in-ch/download:/osm/download
+     - ./in-ch:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ct"-"Chhattisgarh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ct:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14019:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ct.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14019
+    volumes:
+     - ./in-ct/data:/osm/data
+     - ./in-ct/download:/osm/download
+     - ./in-ct:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-dd"-"Daman and Diu" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-dd:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14020:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-dd.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14020
+    volumes:
+     - ./in-dd/data:/osm/data
+     - ./in-dd/download:/osm/download
+     - ./in-dd:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-dl"-"Delhi" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-dl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14021:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-dl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14021
+    volumes:
+     - ./in-dl/data:/osm/data
+     - ./in-dl/download:/osm/download
+     - ./in-dl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-dn"-"Dadra and Nagar Haveli" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-dn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14022:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-dn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14022
+    volumes:
+     - ./in-dn/data:/osm/data
+     - ./in-dn/download:/osm/download
+     - ./in-dn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ga"-"Goa" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ga:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14023:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ga.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14023
+    volumes:
+     - ./in-ga/data:/osm/data
+     - ./in-ga/download:/osm/download
+     - ./in-ga:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-gj"-"Gujarat" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-gj:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14024:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-gj.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14024
+    volumes:
+     - ./in-gj/data:/osm/data
+     - ./in-gj/download:/osm/download
+     - ./in-gj:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-hp"-"Himachal Pradesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-hp:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14025:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-hp.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14025
+    volumes:
+     - ./in-hp/data:/osm/data
+     - ./in-hp/download:/osm/download
+     - ./in-hp:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-hr"-"Haryana" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-hr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14026:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-hr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14026
+    volumes:
+     - ./in-hr/data:/osm/data
+     - ./in-hr/download:/osm/download
+     - ./in-hr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-jh"-"Jharkhand" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-jh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14027:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-jh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14027
+    volumes:
+     - ./in-jh/data:/osm/data
+     - ./in-jh/download:/osm/download
+     - ./in-jh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-jk"-"Jammu and Kashmir" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-jk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14028:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-jk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14028
+    volumes:
+     - ./in-jk/data:/osm/data
+     - ./in-jk/download:/osm/download
+     - ./in-jk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ka"-"Karnataka" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ka:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14029:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ka.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14029
+    volumes:
+     - ./in-ka/data:/osm/data
+     - ./in-ka/download:/osm/download
+     - ./in-ka:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-kl"-"Kerala" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-kl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14030:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-kl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14030
+    volumes:
+     - ./in-kl/data:/osm/data
+     - ./in-kl/download:/osm/download
+     - ./in-kl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ld"-"Lakshadweep" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ld:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14031:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ld.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14031
+    volumes:
+     - ./in-ld/data:/osm/data
+     - ./in-ld/download:/osm/download
+     - ./in-ld:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-mh"-"Maharashtra" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-mh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14032:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-mh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14032
+    volumes:
+     - ./in-mh/data:/osm/data
+     - ./in-mh/download:/osm/download
+     - ./in-mh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ml"-"Meghalaya" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ml:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14033:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ml.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14033
+    volumes:
+     - ./in-ml/data:/osm/data
+     - ./in-ml/download:/osm/download
+     - ./in-ml:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-mn"-"Manipur" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-mn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14034:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-mn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14034
+    volumes:
+     - ./in-mn/data:/osm/data
+     - ./in-mn/download:/osm/download
+     - ./in-mn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-mp"-"Madhya Pradesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-mp:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14035:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-mp.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14035
+    volumes:
+     - ./in-mp/data:/osm/data
+     - ./in-mp/download:/osm/download
+     - ./in-mp:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-mz"-"Mizoram" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-mz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14036:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-mz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14036
+    volumes:
+     - ./in-mz/data:/osm/data
+     - ./in-mz/download:/osm/download
+     - ./in-mz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-nl"-"Nagaland" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-nl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14037:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-nl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14037
+    volumes:
+     - ./in-nl/data:/osm/data
+     - ./in-nl/download:/osm/download
+     - ./in-nl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-or"-"Odisha" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-or:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14038:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-or.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14038
+    volumes:
+     - ./in-or/data:/osm/data
+     - ./in-or/download:/osm/download
+     - ./in-or:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-pb"-"Punjab" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-pb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14039:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-pb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14039
+    volumes:
+     - ./in-pb/data:/osm/data
+     - ./in-pb/download:/osm/download
+     - ./in-pb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-py"-"Puducherry" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-py:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14040:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-py.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14040
+    volumes:
+     - ./in-py/data:/osm/data
+     - ./in-py/download:/osm/download
+     - ./in-py:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-rj"-"Rajasthan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-rj:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14041:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-rj.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14041
+    volumes:
+     - ./in-rj/data:/osm/data
+     - ./in-rj/download:/osm/download
+     - ./in-rj:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-sk"-"Sikkim" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-sk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14042:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-sk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14042
+    volumes:
+     - ./in-sk/data:/osm/data
+     - ./in-sk/download:/osm/download
+     - ./in-sk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-tg"-"Telangana" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-tg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14043:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-tg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14043
+    volumes:
+     - ./in-tg/data:/osm/data
+     - ./in-tg/download:/osm/download
+     - ./in-tg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-tn"-"Tamil Nadu" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-tn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14044:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-tn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14044
+    volumes:
+     - ./in-tn/data:/osm/data
+     - ./in-tn/download:/osm/download
+     - ./in-tn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-tr"-"Tripura" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-tr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14045:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-tr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14045
+    volumes:
+     - ./in-tr/data:/osm/data
+     - ./in-tr/download:/osm/download
+     - ./in-tr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-up"-"Uttar Pradesh" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-up:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14046:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-up.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14046
+    volumes:
+     - ./in-up/data:/osm/data
+     - ./in-up/download:/osm/download
+     - ./in-up:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-ut"-"Uttarakhand" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-ut:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14047:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-ut.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14047
+    volumes:
+     - ./in-ut/data:/osm/data
+     - ./in-ut/download:/osm/download
+     - ./in-ut:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "in-wb"-"West Bengal" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-in-wb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14048:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-in-wb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14048
+    volumes:
+     - ./in-wb/data:/osm/data
+     - ./in-wb/download:/osm/download
+     - ./in-wb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "io"-"British Indian Ocean Territory" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-io:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14049:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-io.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14049
+    volumes:
+     - ./io/data:/osm/data
+     - ./io/download:/osm/download
+     - ./io:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "iq"-"Iraq" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-iq:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14050:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-iq.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14050
+    volumes:
+     - ./iq/data:/osm/data
+     - ./iq/download:/osm/download
+     - ./iq:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ir"-"Iran" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ir:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14051:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ir.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14051
+    volumes:
+     - ./ir/data:/osm/data
+     - ./ir/download:/osm/download
+     - ./ir:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jo"-"Jordan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jo:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14052:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jo.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14052
+    volumes:
+     - ./jo/data:/osm/data
+     - ./jo/download:/osm/download
+     - ./jo:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-01"-"Hokkaidō Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-01:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14053:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-01.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14053
+    volumes:
+     - ./jp-01/data:/osm/data
+     - ./jp-01/download:/osm/download
+     - ./jp-01:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-02"-"Aomori Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-02:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14054:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-02.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14054
+    volumes:
+     - ./jp-02/data:/osm/data
+     - ./jp-02/download:/osm/download
+     - ./jp-02:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-03"-"Iwate Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-03:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14055:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-03.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14055
+    volumes:
+     - ./jp-03/data:/osm/data
+     - ./jp-03/download:/osm/download
+     - ./jp-03:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-04"-"Miyagi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-04:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14056:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-04.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14056
+    volumes:
+     - ./jp-04/data:/osm/data
+     - ./jp-04/download:/osm/download
+     - ./jp-04:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-05"-"Akita Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-05:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14057:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-05.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14057
+    volumes:
+     - ./jp-05/data:/osm/data
+     - ./jp-05/download:/osm/download
+     - ./jp-05:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-06"-"Yamagata Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-06:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14058:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-06.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14058
+    volumes:
+     - ./jp-06/data:/osm/data
+     - ./jp-06/download:/osm/download
+     - ./jp-06:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-07"-"Fukushima Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-07:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14059:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-07.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14059
+    volumes:
+     - ./jp-07/data:/osm/data
+     - ./jp-07/download:/osm/download
+     - ./jp-07:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-08"-"Ibaraki Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-08:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14060:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-08.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14060
+    volumes:
+     - ./jp-08/data:/osm/data
+     - ./jp-08/download:/osm/download
+     - ./jp-08:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-09"-"Tochigi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-09:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14061:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-09.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14061
+    volumes:
+     - ./jp-09/data:/osm/data
+     - ./jp-09/download:/osm/download
+     - ./jp-09:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-10"-"Gunma Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-10:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14062:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-10.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14062
+    volumes:
+     - ./jp-10/data:/osm/data
+     - ./jp-10/download:/osm/download
+     - ./jp-10:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-11"-"Saitama Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-11:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14063:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-11.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14063
+    volumes:
+     - ./jp-11/data:/osm/data
+     - ./jp-11/download:/osm/download
+     - ./jp-11:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-12"-"Chiba Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-12:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14064:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-12.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14064
+    volumes:
+     - ./jp-12/data:/osm/data
+     - ./jp-12/download:/osm/download
+     - ./jp-12:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-13"-"Tokyo" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-13:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14065:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-13.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14065
+    volumes:
+     - ./jp-13/data:/osm/data
+     - ./jp-13/download:/osm/download
+     - ./jp-13:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-14"-"Kanagawa Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-14:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14066:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-14.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14066
+    volumes:
+     - ./jp-14/data:/osm/data
+     - ./jp-14/download:/osm/download
+     - ./jp-14:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-15"-"Niigata Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-15:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14067:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-15.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14067
+    volumes:
+     - ./jp-15/data:/osm/data
+     - ./jp-15/download:/osm/download
+     - ./jp-15:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-16"-"Toyama Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-16:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14068:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-16.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14068
+    volumes:
+     - ./jp-16/data:/osm/data
+     - ./jp-16/download:/osm/download
+     - ./jp-16:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-17"-"Ishikawa Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-17:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14069:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-17.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14069
+    volumes:
+     - ./jp-17/data:/osm/data
+     - ./jp-17/download:/osm/download
+     - ./jp-17:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-18"-"Fukui Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-18:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14070:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-18.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14070
+    volumes:
+     - ./jp-18/data:/osm/data
+     - ./jp-18/download:/osm/download
+     - ./jp-18:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-19"-"Yamanashi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-19:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14071:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-19.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14071
+    volumes:
+     - ./jp-19/data:/osm/data
+     - ./jp-19/download:/osm/download
+     - ./jp-19:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-20"-"Nagano Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-20:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14072:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-20.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14072
+    volumes:
+     - ./jp-20/data:/osm/data
+     - ./jp-20/download:/osm/download
+     - ./jp-20:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-21"-"Gifu Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-21:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14073:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-21.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14073
+    volumes:
+     - ./jp-21/data:/osm/data
+     - ./jp-21/download:/osm/download
+     - ./jp-21:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-22"-"Shizuoka Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-22:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14074:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-22.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14074
+    volumes:
+     - ./jp-22/data:/osm/data
+     - ./jp-22/download:/osm/download
+     - ./jp-22:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-23"-"Aichi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-23:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14075:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-23.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14075
+    volumes:
+     - ./jp-23/data:/osm/data
+     - ./jp-23/download:/osm/download
+     - ./jp-23:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-24"-"Mie Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-24:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14076:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-24.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14076
+    volumes:
+     - ./jp-24/data:/osm/data
+     - ./jp-24/download:/osm/download
+     - ./jp-24:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-25"-"Shiga Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-25:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14077:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-25.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14077
+    volumes:
+     - ./jp-25/data:/osm/data
+     - ./jp-25/download:/osm/download
+     - ./jp-25:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-26"-"Kyoto Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-26:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14078:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-26.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14078
+    volumes:
+     - ./jp-26/data:/osm/data
+     - ./jp-26/download:/osm/download
+     - ./jp-26:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-27"-"Osaka Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-27:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14079:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-27.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14079
+    volumes:
+     - ./jp-27/data:/osm/data
+     - ./jp-27/download:/osm/download
+     - ./jp-27:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-28"-"Hyogo Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-28:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14080:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-28.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14080
+    volumes:
+     - ./jp-28/data:/osm/data
+     - ./jp-28/download:/osm/download
+     - ./jp-28:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-29"-"Nara Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-29:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14081:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-29.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14081
+    volumes:
+     - ./jp-29/data:/osm/data
+     - ./jp-29/download:/osm/download
+     - ./jp-29:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-30"-"Wakayama Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-30:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14082:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-30.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14082
+    volumes:
+     - ./jp-30/data:/osm/data
+     - ./jp-30/download:/osm/download
+     - ./jp-30:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-31"-"Tottori Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-31:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14083:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-31.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14083
+    volumes:
+     - ./jp-31/data:/osm/data
+     - ./jp-31/download:/osm/download
+     - ./jp-31:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-32"-"Shimane Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-32:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14084:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-32.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14084
+    volumes:
+     - ./jp-32/data:/osm/data
+     - ./jp-32/download:/osm/download
+     - ./jp-32:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-33"-"Okayama Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-33:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14085:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-33.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14085
+    volumes:
+     - ./jp-33/data:/osm/data
+     - ./jp-33/download:/osm/download
+     - ./jp-33:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-34"-"Hiroshima Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-34:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14086:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-34.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14086
+    volumes:
+     - ./jp-34/data:/osm/data
+     - ./jp-34/download:/osm/download
+     - ./jp-34:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-35"-"Yamaguchi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-35:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14087:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-35.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14087
+    volumes:
+     - ./jp-35/data:/osm/data
+     - ./jp-35/download:/osm/download
+     - ./jp-35:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-36"-"Tokushima Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-36:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14088:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-36.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14088
+    volumes:
+     - ./jp-36/data:/osm/data
+     - ./jp-36/download:/osm/download
+     - ./jp-36:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-37"-"Kagawa Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-37:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14089:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-37.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14089
+    volumes:
+     - ./jp-37/data:/osm/data
+     - ./jp-37/download:/osm/download
+     - ./jp-37:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-38"-"Ehime Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-38:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14090:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-38.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14090
+    volumes:
+     - ./jp-38/data:/osm/data
+     - ./jp-38/download:/osm/download
+     - ./jp-38:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-39"-"Kochi Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-39:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14091:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-39.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14091
+    volumes:
+     - ./jp-39/data:/osm/data
+     - ./jp-39/download:/osm/download
+     - ./jp-39:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-40"-"Fukuoka Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-40:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14092:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-40.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14092
+    volumes:
+     - ./jp-40/data:/osm/data
+     - ./jp-40/download:/osm/download
+     - ./jp-40:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-41"-"Saga Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-41:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14093:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-41.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14093
+    volumes:
+     - ./jp-41/data:/osm/data
+     - ./jp-41/download:/osm/download
+     - ./jp-41:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-42"-"Nagasaki Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-42:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14094:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-42.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14094
+    volumes:
+     - ./jp-42/data:/osm/data
+     - ./jp-42/download:/osm/download
+     - ./jp-42:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-43"-"Kumamoto Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-43:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14095:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-43.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14095
+    volumes:
+     - ./jp-43/data:/osm/data
+     - ./jp-43/download:/osm/download
+     - ./jp-43:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-44"-"Oita Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-44:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14096:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-44.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14096
+    volumes:
+     - ./jp-44/data:/osm/data
+     - ./jp-44/download:/osm/download
+     - ./jp-44:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-45"-"Miyazaki Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-45:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14097:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-45.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14097
+    volumes:
+     - ./jp-45/data:/osm/data
+     - ./jp-45/download:/osm/download
+     - ./jp-45:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-46"-"Kagoshima Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-46:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14098:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-46.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14098
+    volumes:
+     - ./jp-46/data:/osm/data
+     - ./jp-46/download:/osm/download
+     - ./jp-46:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "jp-47"-"Okinawa Prefecture" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-jp-47:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14099:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-jp-47.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14099
+    volumes:
+     - ./jp-47/data:/osm/data
+     - ./jp-47/download:/osm/download
+     - ./jp-47:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kg"-"Kyrgyzstan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14100:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14100
+    volumes:
+     - ./kg/data:/osm/data
+     - ./kg/download:/osm/download
+     - ./kg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kh"-"Cambodia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kh:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14101:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kh.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14101
+    volumes:
+     - ./kh/data:/osm/data
+     - ./kh/download:/osm/download
+     - ./kh:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kp"-"North Korea" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kp:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14102:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kp.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14102
+    volumes:
+     - ./kp/data:/osm/data
+     - ./kp/download:/osm/download
+     - ./kp:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kr"-"South Korea" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kr:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14103:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kr.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14103
+    volumes:
+     - ./kr/data:/osm/data
+     - ./kr/download:/osm/download
+     - ./kr:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kw"-"Kuwait" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kw:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14104:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kw.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14104
+    volumes:
+     - ./kw/data:/osm/data
+     - ./kw/download:/osm/download
+     - ./kw:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "kz"-"Kazakhstan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-kz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14105:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-kz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14105
+    volumes:
+     - ./kz/data:/osm/data
+     - ./kz/download:/osm/download
+     - ./kz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "la"-"Laos" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-la:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14106:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-la.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14106
+    volumes:
+     - ./la/data:/osm/data
+     - ./la/download:/osm/download
+     - ./la:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "lb"-"Lebanon" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-lb:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14107:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-lb.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14107
+    volumes:
+     - ./lb/data:/osm/data
+     - ./lb/download:/osm/download
+     - ./lb:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "lk"-"Sri Lanka" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-lk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14108:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-lk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14108
+    volumes:
+     - ./lk/data:/osm/data
+     - ./lk/download:/osm/download
+     - ./lk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mm"-"Myanmar" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-mm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14109:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-mm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14109
+    volumes:
+     - ./mm/data:/osm/data
+     - ./mm/download:/osm/download
+     - ./mm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mn"-"Mongolia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-mn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14110:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-mn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14110
+    volumes:
+     - ./mn/data:/osm/data
+     - ./mn/download:/osm/download
+     - ./mn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "mv"-"Maldives" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-mv:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14111:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-mv.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14111
+    volumes:
+     - ./mv/data:/osm/data
+     - ./mv/download:/osm/download
+     - ./mv:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "my"-"Malaysia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-my:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14112:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-my.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14112
+    volumes:
+     - ./my/data:/osm/data
+     - ./my/download:/osm/download
+     - ./my:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "np"-"Nepal" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-np:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14113:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-np.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14113
+    volumes:
+     - ./np/data:/osm/data
+     - ./np/download:/osm/download
+     - ./np:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "om"-"Oman" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-om:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14114:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-om.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14114
+    volumes:
+     - ./om/data:/osm/data
+     - ./om/download:/osm/download
+     - ./om:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ph"-"Philippines" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ph:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14115:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ph.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14115
+    volumes:
+     - ./ph/data:/osm/data
+     - ./ph/download:/osm/download
+     - ./ph:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "pk"-"Pakistan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-pk:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14116:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-pk.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14116
+    volumes:
+     - ./pk/data:/osm/data
+     - ./pk/download:/osm/download
+     - ./pk:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ps"-"Palestinian Territories" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ps:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14117:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ps.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14117
+    volumes:
+     - ./ps/data:/osm/data
+     - ./ps/download:/osm/download
+     - ./ps:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "qa"-"Qatar" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-qa:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14118:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-qa.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14118
+    volumes:
+     - ./qa/data:/osm/data
+     - ./qa/download:/osm/download
+     - ./qa:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "sa"-"Saudi Arabia" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-sa:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14119:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-sa.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14119
+    volumes:
+     - ./sa/data:/osm/data
+     - ./sa/download:/osm/download
+     - ./sa:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "sg"-"Singapore" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-sg:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14120:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-sg.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14120
+    volumes:
+     - ./sg/data:/osm/data
+     - ./sg/download:/osm/download
+     - ./sg:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "sy"-"Syria" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-sy:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14121:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-sy.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14121
+    volumes:
+     - ./sy/data:/osm/data
+     - ./sy/download:/osm/download
+     - ./sy:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "th"-"Thailand" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-th:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14122:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-th.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14122
+    volumes:
+     - ./th/data:/osm/data
+     - ./th/download:/osm/download
+     - ./th:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "tj"-"Tajikistan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-tj:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14123:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-tj.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14123
+    volumes:
+     - ./tj/data:/osm/data
+     - ./tj/download:/osm/download
+     - ./tj:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "tl"-"East Timor" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-tl:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14124:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-tl.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14124
+    volumes:
+     - ./tl/data:/osm/data
+     - ./tl/download:/osm/download
+     - ./tl:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "tm"-"Turkmenistan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-tm:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14125:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-tm.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14125
+    volumes:
+     - ./tm/data:/osm/data
+     - ./tm/download:/osm/download
+     - ./tm:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "tw"-"Taiwan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-tw:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14126:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-tw.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14126
+    volumes:
+     - ./tw/data:/osm/data
+     - ./tw/download:/osm/download
+     - ./tw:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "uz"-"Uzbekistan" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-uz:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14127:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-uz.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14127
+    volumes:
+     - ./uz/data:/osm/data
+     - ./uz/download:/osm/download
+     - ./uz:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "vn"-"Vietnam" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-vn:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14128:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-vn.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14128
+    volumes:
+     - ./vn/data:/osm/data
+     - ./vn/download:/osm/download
+     - ./vn:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+  #---------------------------------------------------------
+  # Service for : "ye"-"Yemen" + taginfo-dev.opengeodata.hu
+  #               continent: "as"
+
+  taginfo-as-ye:
+    user: ${CURRENT_UID}
+    restart: always
+    image: taginfo_view
+    ports:
+      - "14129:4567"
+    networks:
+      - taginfo
+    environment:
+      - VIRTUAL_HOST=as-ye.taginfo-dev.opengeodata.hu
+      - VIRTUAL_PORT=4567
+      - MAPPED_PORT=14129
+    volumes:
+     - ./ye/data:/osm/data
+     - ./ye/download:/osm/download
+     - ./ye:/osm/cfg
+     - ../../sh:/osm/sh:ro
+
+
+# generated : 2018-07-25:07:01  // template : /setup/docker-compose.jinja2

@@ -1,0 +1,1796 @@
+=========================================
+DATETIME=20180725T1110  1532509822
+CONTINENT_LONG=russia
+CONTINENT=ru
+START_PORT=24000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where iso like 'ru-%' and length(iso)>2 
+ISO_SERVICE_FILTER=1=1 
+=========================================
+:: gen new configs
+Starting dockerized-taginfo_db_1 ... 
+[1A[2KStarting dockerized-taginfo_db_1 ... [32mdone[0m[1Bcheck db connection
+CONTINENT_LONG=russia
+CONTINENT=ru
+START_PORT=24000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where iso like 'ru-%' and length(iso)>2
+ISO_SERVICE_FILTER=1=1
+CONTINENT_LONG=russia
+CONTINENT=ru
+-------- russia ----------- 
+--2018-07-25 09:10:24--  http://download.geofabrik.de/russia.kml
+Resolving download.geofabrik.de (download.geofabrik.de)... 88.99.105.98, 88.99.24.113
+Connecting to download.geofabrik.de (download.geofabrik.de)|88.99.105.98|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 25309 (25K) [application/vnd.google-earth.kml+xml]
+Saving to: 'russia.kml'
+
+     0K .......... .......... ....                            100%  732K=0.03s
+
+2018-07-25 09:10:24 (732 KB/s) - 'russia.kml' saved [25309/25309]
+
+==================================
+;
+;
+;
+;
+;
+;
+;
+CREATE OR REPLACE FUNCTION imposmid2shortid (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN 'n'|| id::text
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN 'w'|| (abs(id))::text   
+   WHEN  (id <  -1e17 )               THEN 'r'|| (abs(id) -1e17)::text   
+   ELSE 'error'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION imposmid2weburl (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN format('<a href="http://www.osm.org/node/%1$s">n%1$s</a>'     , id::text )
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN format('<a href="http://www.osm.org/way/%1$s">w%1$s</a>'      , (abs(id))::text )   
+   WHEN  (id <  -1e17 )               THEN format('<a href="http://www.osm.org/relation/%1$s">r%1$s</a>' , (abs(id) -1e17)::text )  
+   ELSE 'error_url'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION get_xtaginfo(iso text, xmin  numeric, xmax  numeric, ymin  numeric, ymax numeric ) 
+      RETURNS numeric[]   AS
+$BODY$
+DECLARE
+    i  integer ;
+    xs numeric ;
+    ys numeric ; 
+    last_ok integer ;
+    xd numeric;
+    yd numeric;
+    zzz numeric;
+    xppd numeric;
+    yppd numeric;
+    moda numeric[] ;
+BEGIN
+    moda= ARRAY [
+                 0.000,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009
+                ,0.010,0.011,0.012,0.013,0.014,0.015,0.016,0.017,0.018,0.019
+                ,0.020,0.021,0.022,0.023,0.024,0.025,0.026,0.027,0.028,0.029
+                ,0.030,0.031,0.032,0.033,0.034,0.035,0.036,0.037,0.038,0.039
+                ,0.040,0.041,0.042,0.043,0.044,0.045,0.046,0.047,0.048,0.049
+                ,0.050,0.051,0.052,0.053,0.054,0.055,0.056,0.057,0.058,0.059
+                ,0.060,0.061,0.062,0.063,0.064,0.065,0.066,0.067,0.068,0.069
+                ,0.070,0.071,0.072,0.073,0.074,0.075,0.076,0.077,0.078,0.079
+                ,0.080,0.081,0.082,0.083,0.084,0.085,0.086,0.087,0.088,0.089
+                ,0.090,0.091,0.092,0.093,0.094,0.095,0.096,0.097,0.098,0.099 
+                
+                ,0.100,0.101,0.102,0.103,0.104,0.105,0.106,0.107,0.108,0.109
+                ,0.110,0.111,0.112,0.113,0.114,0.115,0.116,0.117,0.118,0.119
+                ,0.120,0.121,0.122,0.123,0.124,0.125,0.126,0.127,0.128,0.129
+                ,0.130,0.131,0.132,0.133,0.134,0.135,0.136,0.137,0.138,0.139
+                ,0.140,0.141,0.142,0.143,0.144,0.145,0.146,0.147,0.148,0.149
+                ,0.150,0.151,0.152,0.153,0.154,0.155,0.156,0.157,0.158,0.159
+                ,0.160,0.161,0.162,0.163,0.164,0.165,0.166,0.167,0.168,0.169
+                ,0.170,0.171,0.172,0.173,0.174,0.175,0.176,0.177,0.178,0.179
+                ,0.180,0.181,0.182,0.183,0.184,0.185,0.186,0.187,0.188,0.189
+                ,0.190,0.191,0.192,0.193,0.194,0.195,0.196,0.197,0.198,0.199 
+
+                ,0.200,0.201,0.202,0.203,0.204,0.205,0.206,0.207,0.208,0.209
+                ,0.210,0.211,0.212,0.213,0.214,0.215,0.216,0.217,0.218,0.219
+                ,0.220,0.221,0.222,0.223,0.224,0.225,0.226,0.227,0.228,0.229
+                ,0.230,0.231,0.232,0.233,0.234,0.235,0.236,0.237,0.238,0.239
+                ,0.240,0.241,0.242,0.243,0.244,0.245,0.246,0.247,0.248,0.249
+                ,0.250,0.251,0.252,0.253,0.254,0.255,0.256,0.257,0.258,0.259
+                ,0.260,0.261,0.262,0.263,0.264,0.265,0.266,0.267,0.268,0.269
+                ,0.270,0.271,0.272,0.273,0.274,0.275,0.276,0.277,0.278,0.279
+                ,0.280,0.281,0.282,0.283,0.284,0.285,0.286,0.287,0.288,0.289
+                ,0.290,0.291,0.292,0.293,0.294,0.295,0.296,0.297,0.298,0.299  
+
+                ,0.300,0.301,0.302,0.303,0.304,0.305,0.306,0.307,0.308,0.309
+                ,0.310,0.311,0.312,0.313,0.314,0.315,0.316,0.317,0.318,0.319
+                ,0.320,0.321,0.322,0.323,0.324,0.325,0.326,0.327,0.328,0.329
+                ,0.330,0.331,0.332,0.333,0.334,0.335,0.336,0.337,0.338,0.339
+                ,0.340,0.341,0.342,0.343,0.344,0.345,0.346,0.347,0.348,0.349
+                ,0.350,0.351,0.352,0.353,0.354,0.355,0.356,0.357,0.358,0.359
+                ,0.360,0.361,0.362,0.363,0.364,0.365,0.366,0.367,0.368,0.369
+                ,0.370,0.371,0.372,0.373,0.374,0.375,0.376,0.377,0.378,0.379
+                ,0.380,0.381,0.382,0.383,0.384,0.385,0.386,0.387,0.388,0.389
+                ,0.390,0.391,0.392,0.393,0.394,0.395,0.396,0.397,0.398,0.399 
+
+                ,0.400,0.401,0.402,0.403,0.404,0.405,0.406,0.407,0.408,0.409
+                ,0.410,0.411,0.412,0.413,0.414,0.415,0.416,0.417,0.418,0.419
+                ,0.420,0.421,0.422,0.423,0.424,0.425,0.426,0.427,0.428,0.429
+                ,0.430,0.431,0.432,0.433,0.434,0.435,0.436,0.437,0.438,0.439
+                ,0.440,0.441,0.442,0.443,0.444,0.445,0.446,0.447,0.448,0.449
+                ,0.450,0.451,0.452,0.453,0.454,0.455,0.456,0.457,0.458,0.459
+                ,0.460,0.461,0.462,0.463,0.464,0.465,0.466,0.467,0.468,0.469
+                ,0.470,0.471,0.472,0.473,0.474,0.475,0.476,0.477,0.478,0.479
+                ,0.480,0.481,0.482,0.483,0.484,0.485,0.486,0.487,0.488,0.489
+                ,0.490,0.491,0.492,0.493,0.494,0.495,0.496,0.497,0.498,0.499 
+
+                ,0.500,0.501,0.502,0.503,0.504,0.505,0.506,0.507,0.508,0.509
+                ,0.510,0.511,0.512,0.513,0.514,0.515,0.516,0.517,0.518,0.519
+                ,0.520,0.521,0.522,0.523,0.524,0.525,0.526,0.527,0.528,0.529
+                ,0.530,0.531,0.532,0.533,0.534,0.535,0.536,0.537,0.538,0.539
+                ,0.540,0.541,0.542,0.543,0.544,0.545,0.546,0.547,0.548,0.549
+                ,0.550,0.551,0.552,0.553,0.554,0.555,0.556,0.557,0.558,0.559
+                ,0.560,0.561,0.562,0.563,0.564,0.565,0.566,0.567,0.568,0.569
+                ,0.570,0.571,0.572,0.573,0.574,0.575,0.576,0.577,0.578,0.579
+                ,0.580,0.581,0.582,0.583,0.584,0.585,0.586,0.587,0.588,0.589
+                ,0.590,0.591,0.592,0.593,0.594,0.595,0.596,0.597,0.598,0.599 
+
+                ];
+    last_ok =0 ;
+    xd = xmax-xmin;  
+    yd = ymax-ymin; 
+    FOR i IN 1..30000 LOOP
+        xs = i * xd ;
+        ys = i * yd ;
+
+        IF  xs * ys  >= ( 255*255) THEN
+
+        FOR ri IN REVERSE i..0 LOOP
+           FOREACH  yppd IN ARRAY moda LOOP
+             FOREACH  xppd IN ARRAY moda  LOOP
+                 
+                  xs=ri* (xd+   xppd ) ;
+                  ys=ri* (yd+   yppd ) ; 
+
+                  IF     
+                             xs=round(xs) 
+                         and ys=round(ys) 
+                         and (  xs * ys ) <= (255*255) 
+                         and xs>0 
+                         and ys>0
+                         THEN
+                         RAISE NOTICE 'OK   R# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                        -- Reverse Antimeridian shift.
+                         IF xmax+xppd > 180 THEN
+                            xmax= xmax -180;
+                            xmin= xmin -180;
+                            RAISE NOTICE 'Reversed# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                            IF xmin <  -180  THEN
+                                RAISE NOTICE 'ERROR: XMIN < -180# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+                            END IF ;
+                         END IF ;
+                         RETURN  ARRAY[ round(xs) , round(ys) , xmin, xmax+xppd , ymin, ymax+yppd ] ;
+                   END IF;               
+             END LOOP;
+           END LOOP ;
+        END LOOP;   
+        
+        RETURN ARRAY[-2,0,0,0,0,0];
+
+           
+        END IF;
+
+        
+        IF  xs * ys  >= ( 255*255) 
+        THEN  
+           RETURN ARRAY[0,0,0,0,0,0]  ;
+        END IF;   
+        
+    END LOOP;
+       
+    RETURN ARRAY[-1,0,0,0,0,0]  ;
+END
+$BODY$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT PARALLEL SAFE ;
+CREATE FUNCTION
+DROP TABLE IF EXISTS  osm_admin2_continent_all ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent_all as
+select a.*   
+    ,st_area( ST_Intersection(  c.wkb_geometry  ,   a.geometry )) / st_area(  a.geometry )  as area_pct
+    ,case 
+            when a.iso3166_2!=''  then lower(a.iso3166_2) 
+                                  else lower(a.iso3166_1)
+            end   
+            as iso
+from KMLX_CONTINENT as c,
+        osm_admin   as a
+where 
+        ( length(a.iso3166_1) = 2  or length(a.iso3166_2) > 3 )
+    and 
+        ST_Contains (c.wkb_geometry , St_PointOnSurface( a.geometry ))
+;
+SELECT 89
+;
+DROP TABLE IF EXISTS  osm_admin2_continent ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent as
+select * 
+from osm_admin2_continent_all   
+  where iso like 'ru-%' and length(iso)>2 
+order by iso
+;
+SELECT 85
+;
+                                         Table "public.osm_admin2_continent"
+      Column      |          Type           | Collation | Nullable | Default | Storage  | Stats target | Description 
+------------------+-------------------------+-----------+----------+---------+----------+--------------+-------------
+ id               | bigint                  |           |          |         | plain    |              | 
+ admin_level      | integer                 |           |          |         | plain    |              | 
+ name             | character varying       |           |          |         | extended |              | 
+ int_name         | character varying       |           |          |         | extended |              | 
+ official_name    | character varying       |           |          |         | extended |              | 
+ name_en          | character varying       |           |          |         | extended |              | 
+ maritime         | character varying       |           |          |         | extended |              | 
+ border_type      | character varying       |           |          |         | extended |              | 
+ iso3166_1        | character varying       |           |          |         | extended |              | 
+ iso3166_2        | character varying       |           |          |         | extended |              | 
+ iso3166_1alpha3  | character varying       |           |          |         | extended |              | 
+ default_language | character varying       |           |          |         | extended |              | 
+ wikipedia        | character varying       |           |          |         | extended |              | 
+ wikidata         | character varying       |           |          |         | extended |              | 
+ flag             | character varying       |           |          |         | extended |              | 
+ boundary         | character varying       |           |          |         | extended |              | 
+ geometry         | geometry(Geometry,4326) |           |          |         | main     |              | 
+ area_pct         | double precision        |           |          |         | plain    |              | 
+ iso              | text                    |           |          |         | extended |              | 
+
+update osm_admin2_continent set name_en=name  where name_en='' ;
+UPDATE 0
+select count(*) as iso_admin_numbers from osm_admin2_continent;
+ iso_admin_numbers 
+-------------------
+                85
+(1 row)
+
+DROP TABLE IF EXISTS iso_gdname CASCADE;
+DROP TABLE
+CREATE TABLE iso_gdname as
+SELECT distinct on (t.iso) 
+       t.iso, t."name" as iso_name , g."name" as gdname, st_area(g.wkb_geometry) as area
+FROM osm_admin2_continent  as t
+    ,gkml                  as g
+where
+     ST_Contains (   g.wkb_geometry  ,  t.geometry   )
+order by t.iso, area NULLS LAST
+;
+SELECT 83
+Drop table IF EXISTS xtaginfo CASCADE;
+DROP TABLE
+create table xtaginfo as
+with pdata as
+(
+    select distinct on (osm.iso) 
+         osm.iso 
+        ,name
+        ,name_en
+        ,id
+        ,area_pct
+        ,iso_gdname.gdname    as gdname
+        ,imposmid2shortid(id) as osmid
+        ,admin_level 
+        ,row_number() OVER ( ORDER BY osm.iso ) as port_order 
+        ,st_xmax( geometry)  - st_xmin( geometry)  as dx 
+        ,wikidata
+        ,wikipedia
+        ,flag
+        ,geometry
+        ,st_area(geometry) as iso_area
+        ,case when  (  1=1   )  then 'yes'
+                                               else ''
+         end as service     
+    from osm_admin2_continent as osm
+    left join iso_gdname on osm.iso=iso_gdname.iso
+    ORDER BY osm.iso, iso_area DESC NULLS LAST
+)
+, normal_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( geometry) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( geometry) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( geometry) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( geometry) +  0.0051)::numeric, 2 ) as tymax
+       ,'normal'::text as ttype
+       from pdata 
+       where dx < 200 
+       )
+, antimerdian_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as tymax
+       ,'shifted'::text as ttype
+       from pdata 
+       where dx >= 200 
+       )
+       select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  normal_data       
+union  select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  antimerdian_data
+order by iso 
+;
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ad, 140 , 294.000 , 210.000 ,0.000 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-al, 52 , 312.000 , 195.000 ,0.060 ,0.150
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-alt, 40 , 372.000 , 154.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-amu, 22 , 341.000 , 187.000 ,0.220 ,0.280
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ark, 9 , 315.000 , 198.000 ,0.300 ,0.570
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ast, 57 , 285.000 , 228.000 ,0.070 ,0.390
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ba, 43 , 301.000 , 215.000 ,0.140 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-bel, 96 , 384.000 , 168.000 ,0.030 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-bry, 80 , 328.000 , 176.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-bu, 20 , 367.000 , 146.000 ,0.040 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ce, 150 , 276.000 , 231.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-che, 48 , 300.000 , 216.000 ,0.020 ,0.120
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-cr, 80 , 360.000 , 166.000 ,0.010 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-cu, 120 , 303.000 , 207.000 ,0.005 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-da, 65 , 247.000 , 260.000 ,0.080 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-in, 280 , 224.000 , 287.000 ,0.020 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-irk, 14 , 329.000 , 189.000 ,0.000 ,0.290
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-iva, 105 , 420.000 , 147.000 ,0.040 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kam, 15 , 291.000 , 216.000 ,0.090 ,0.140
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kb, 160 , 336.000 , 184.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kc, 150 , 303.000 , 198.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kda, 56 , 294.000 , 217.000 ,0.030 ,0.085
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kem, 52 , 260.000 , 247.000 ,0.030 ,0.070
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kgd, 128 , 448.000 , 144.000 ,0.020 ,0.045
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kgn, 56 , 385.000 , 154.000 ,0.105 ,0.080
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kha, 15 , 255.000 , 240.000 ,0.160 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-khm, 16 , 430.000 , 116.000 ,0.095 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kir, 40 , 308.000 , 201.000 ,0.020 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kk, 60 , 243.000 , 252.000 ,0.000 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kl, 52 , 325.000 , 195.000 ,0.050 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-klu, 88 , 341.000 , 187.000 ,0.035 ,0.035
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ko, 18 , 378.000 , 171.000 ,0.130 ,0.260
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kos, 60 , 435.000 , 144.000 ,0.000 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kr, 35 , 308.000 , 210.000 ,0.150 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-krs, 90 , 405.000 , 144.000 ,0.060 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-kya, 7 , 280.000 , 210.000 ,0.240 ,0.290
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-len, 48 , 450.000 , 144.000 ,0.105 ,0.080
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-lip, 105 , 336.000 , 189.000 ,0.150 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-mag, 20 , 376.000 , 155.000 ,0.020 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-me, 90 , 414.000 , 144.000 ,0.010 ,0.070
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-mo, 90 , 414.000 , 144.000 ,0.030 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-mos, 65 , 338.000 , 182.000 ,0.130 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-mow, 240 , 282.000 , 216.000 ,0.005 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-mur, 30 , 423.000 , 135.000 ,0.000 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-nen, 22 , 539.000 , 110.000 ,0.130 ,0.080
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ngr, 60 , 399.000 , 153.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-niz, 52 , 325.000 , 195.000 ,0.240 ,0.110
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-nvs, 40 , 402.000 , 158.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-oms, 45 , 270.000 , 234.000 ,0.040 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ore, 38 , 418.000 , 152.000 ,0.070 ,0.120
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-orl, 104 , 351.000 , 182.000 ,0.095 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-per, 36 , 279.000 , 207.000 ,0.030 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-pnz, 85 , 425.000 , 153.000 ,0.090 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-pri, 32 , 288.000 , 204.000 ,0.080 ,0.075
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-psk, 64 , 272.000 , 224.000 ,0.040 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ros, 48 , 294.000 , 210.000 ,0.015 ,0.105
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-rya, 80 , 324.000 , 166.000 ,0.010 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sa, 7 , 406.000 , 154.000 ,0.390 ,0.160
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sak, 18 , 288.000 , 207.000 ,0.080 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sam, 65 , 312.000 , 195.000 ,0.160 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sar, 50 , 417.000 , 151.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-se, 175 , 280.000 , 231.000 ,0.020 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sev, 300 , 252.000 , 228.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-smo, 70 , 329.000 , 189.000 ,0.050 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-spe, 272 , 374.000 , 170.000 ,0.035 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sta, 70 , 343.000 , 182.000 ,0.020 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-sve, 34 , 306.000 , 204.000 ,0.030 ,0.100
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ta, 56 , 399.000 , 154.000 ,0.085 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-tam, 90 , 306.000 , 207.000 ,0.060 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-tom, 28 , 406.000 , 154.000 ,0.170 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-tul, 100 , 307.000 , 192.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-tve, 50 , 381.000 , 162.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ty, 38 , 399.000 , 152.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-tyu, 35 , 364.000 , 175.000 ,0.020 ,0.150
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-ud, 80 , 266.000 , 216.000 ,0.005 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-uly, 76 , 342.000 , 190.000 ,0.040 ,0.130
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-vgg, 50 , 314.000 , 191.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-vla, 88 , 418.000 , 154.000 ,0.030 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-vlg, 40 , 498.000 , 126.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-vor, 70 , 343.000 , 182.000 ,0.080 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-yan, 15 , 363.000 , 174.000 ,0.190 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-yar, 80 , 312.000 , 196.000 ,0.020 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-yev, 84 , 378.000 , 168.000 ,0.020 ,0.150
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-zab, 20 , 289.000 , 186.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ru-chu, 12 , 402.000 , 123.000 ,0.200 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  Reversed# = ru-chu, 12 , 402.000 , 123.000 ,0.200 ,0.040
+SELECT 85
+select iso, taginfo_scale,ttype, area_pct,  service  from xtaginfo order by iso ;
+  iso   |             taginfo_scale             |  ttype  |     area_pct      | service 
+--------+---------------------------------------+---------+-------------------+---------
+ ru-ad  | {294,210,38.68,40.780,43.76,45.260}   | normal  |                 1 | yes
+ ru-al  | {312,195,83.93,89.930,49.07,52.820}   | normal  |                 1 | yes
+ ru-alt | {372,154,77.88,87.180,50.63,54.480}   | normal  |                 1 | yes
+ ru-amu | {341,187,119.65,135.150,48.85,57.350} | normal  |                 1 | yes
+ ru-ark | {315,198,35.26,70.260,60.63,82.630}   | normal  | 0.999664164612644 | yes
+ ru-ast | {285,228,44.96,49.960,45.26,49.260}   | normal  |                 1 | yes
+ ru-ba  | {301,215,53.15,60.150,51.56,56.560}   | normal  |                 1 | yes
+ ru-bel | {384,168,35.32,39.320,49.79,51.540}   | normal  |                 1 | yes
+ ru-bry | {328,176,31.24,35.340,51.84,54.040}   | normal  |                 1 | yes
+ ru-bu  | {367,146,98.62,116.970,49.96,57.260}  | normal  |                 1 | yes
+ ru-ce  | {276,231,44.83,46.670,42.47,44.010}   | normal  |                 1 | yes
+ ru-che | {300,216,57.13,63.380,51.99,56.490}   | normal  |                 1 | yes
+ ru-chu | {402,123,-22.27,11.230,61.60,71.850}  | shifted | 0.999199309377555 | yes
+ ru-cr  | {360,166,32.20,36.700,44.18,46.255}   | normal  |                 1 | yes
+ ru-cu  | {303,207,45.91,48.435,54.62,56.345}   | normal  |                 1 | yes
+ ru-da  | {247,260,45.10,48.900,41.18,45.180}   | normal  |                 1 | yes
+ ru-in  | {224,287,44.47,45.270,42.61,43.635}   | normal  |                 1 | yes
+ ru-irk | {329,189,95.64,119.140,51.12,64.620}  | normal  |                 1 | yes
+ ru-iva | {420,147,39.37,43.370,56.35,57.750}   | normal  |                 1 | yes
+ ru-kam | {291,216,155.21,174.610,50.68,65.080} | normal  |                 1 | yes
+ ru-kb  | {336,184,42.39,44.490,42.88,44.030}   | normal  |                 1 | yes
+ ru-kc  | {303,198,40.67,42.690,43.18,44.500}   | normal  |                 1 | yes
+ ru-kda | {294,217,36.53,41.780,43.22,47.095}   | normal  |                 1 | yes
+ ru-kem | {260,247,84.44,89.440,52.16,56.910}   | normal  |                 1 | yes
+ ru-kgd | {448,144,19.41,22.910,54.31,55.435}   | normal  |                 1 | yes
+ ru-kgn | {385,154,61.96,68.835,54.18,56.930}   | normal  |                 1 | yes
+ ru-kha | {255,240,130.38,147.380,46.63,62.630} | normal  |                 1 | yes
+ ru-khm | {430,116,59.20,86.075,58.57,65.820}   | normal  |                 1 | yes
+ ru-kir | {308,201,46.26,53.960,56.06,61.085}   | normal  |                 1 | yes
+ ru-kk  | {243,252,87.88,91.930,51.28,55.480}   | normal  |                 1 | yes
+ ru-kl  | {325,195,41.63,47.880,44.71,48.460}   | normal  |                 1 | yes
+ ru-klu | {341,187,33.44,37.315,53.27,55.395}   | normal  |                 1 | yes
+ ru-ko  | {378,171,45.39,66.390,59.19,68.690}   | normal  |                 1 | yes
+ ru-kos | {435,144,40.39,47.640,57.27,59.670}   | normal  |                 1 | yes
+ ru-kr  | {308,210,29.30,38.100,60.67,66.670}   | normal  |                 1 | yes
+ ru-krs | {405,144,34.08,38.580,50.90,52.500}   | normal  |                 1 | yes
+ ru-kya | {280,210,74.98,114.980,51.77,81.770}  | normal  |                 1 | yes
+ ru-len | {450,144,26.44,35.815,58.41,61.410}   | normal  |                 1 | yes
+ ru-lip | {336,189,37.72,40.920,51.88,53.680}   | normal  |                 1 | yes
+ ru-mag | {376,155,144.72,163.520,58.63,66.380} | normal  |                 1 | yes
+ ru-me  | {414,144,45.62,50.220,55.82,57.420}   | normal  |                 1 | yes
+ ru-mo  | {414,144,42.16,46.760,53.64,55.240}   | normal  |                 1 | yes
+ ru-mos | {338,182,35.14,40.340,54.25,57.050}   | normal  |                 1 | yes
+ ru-mow | {282,216,36.80,37.975,55.14,56.040}   | normal  |                 1 | yes
+ ru-mur | {423,135,28.41,42.510,65.69,70.190}   | normal  |                 1 | yes
+ ru-nen | {539,110,41.31,65.810,65.82,70.820}   | normal  |                 1 | yes
+ ru-ngr | {399,153,29.61,36.260,56.90,59.450}   | normal  |                 1 | yes
+ ru-niz | {325,195,41.77,48.020,54.46,58.210}   | normal  |                 1 | yes
+ ru-nvs | {402,158,75.08,85.130,53.29,57.240}   | normal  |                 1 | yes
+ ru-oms | {270,234,70.35,76.350,53.43,58.630}   | normal  |                 1 | yes
+ ru-ore | {418,152,50.76,61.760,50.49,54.490}   | normal  |                 1 | yes
+ ru-orl | {351,182,34.79,38.165,51.93,53.680}   | normal  |                 1 | yes
+ ru-per | {279,207,51.77,59.520,56.10,61.850}   | normal  |                 1 | yes
+ ru-pnz | {425,153,42.08,47.080,52.29,54.090}   | normal  |                 1 | yes
+ ru-pri | {288,204,130.39,139.390,42.17,48.545} | normal  |                 1 | yes
+ ru-psk | {272,224,27.31,31.560,55.58,59.080}   | normal  |                 1 | yes
+ ru-ros | {294,210,38.22,44.345,45.95,50.325}   | normal  |                 1 | yes
+ ru-rya | {324,166,38.66,42.710,53.30,55.375}   | normal  |                 1 | yes
+ ru-sa  | {406,154,105.50,163.500,55.48,77.480} | normal  |                 1 | yes
+ ru-sak | {288,207,140.92,156.920,43.17,54.670} | normal  |                 1 | yes
+ ru-sam | {312,195,47.93,52.730,51.77,54.770}   | normal  |                 1 | yes
+ ru-sar | {417,151,42.50,50.840,49.80,52.820}   | normal  |                 1 | yes
+ ru-se  | {280,231,43.39,44.990,42.54,43.860}   | normal  |                 1 | yes
+ ru-sev | {252,228,33.09,33.930,44.19,44.950}   | normal  |                 1 | yes
+ ru-smo | {329,189,30.75,35.450,53.40,56.100}   | normal  |                 1 | yes
+ ru-spe | {374,170,29.42,30.795,59.63,60.255}   | normal  |                 1 | yes
+ ru-sta | {343,182,40.84,45.740,43.65,46.250}   | normal  |                 1 | yes
+ ru-sve | {306,204,57.22,66.220,56.05,62.050}   | normal  |                 1 | yes
+ ru-ta  | {399,154,47.23,54.355,53.97,56.720}   | normal  |                 1 | yes
+ ru-tam | {306,207,39.91,43.310,51.58,53.880}   | normal  |                 1 | yes
+ ru-tom | {406,154,75.05,89.550,55.60,61.100}   | normal  |                 1 | yes
+ ru-tul | {307,192,35.89,38.960,52.94,54.860}   | normal  |                 1 | yes
+ ru-tve | {381,162,30.72,38.340,55.63,58.870}   | normal  |                 1 | yes
+ ru-ty  | {399,152,88.79,99.290,49.74,53.740}   | normal  |                 1 | yes
+ ru-tyu | {364,175,64.82,75.220,55.14,60.140}   | normal  |                 1 | yes
+ ru-ud  | {266,216,51.12,54.445,55.85,58.550}   | normal  |                 1 | yes
+ ru-uly | {342,190,45.79,50.290,52.53,55.030}   | normal  |                 1 | yes
+ ru-vgg | {314,191,41.16,47.440,47.44,51.260}   | normal  |                 1 | yes
+ ru-vla | {418,154,38.26,43.010,55.10,56.850}   | normal  |                 1 | yes
+ ru-vlg | {498,126,34.71,47.160,58.47,61.620}   | normal  |                 1 | yes
+ ru-vor | {343,182,38.13,43.030,49.55,52.150}   | normal  |                 1 | yes
+ ru-yan | {363,174,62.00,86.200,62.19,73.790}   | normal  |                 1 | yes
+ ru-yar | {312,196,37.32,41.220,56.53,58.980}   | normal  |                 1 | yes
+ ru-yev | {378,168,130.52,135.020,47.65,49.650} | normal  |                 1 | yes
+ ru-zab | {289,186,107.73,122.180,49.15,58.450} | normal  |                 1 | yes
+(85 rows)
+
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+processing:  ru-ad -100000000000253256
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ad/poly/poly.osm.pbf  r253256
+processing:  ru-al -100000000000145194
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-al/poly/poly.osm.pbf  r145194
+processing:  ru-alt -100000000000144764
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-alt/poly/poly.osm.pbf  r144764
+processing:  ru-amu -100000000000147166
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-amu/poly/poly.osm.pbf  r147166
+processing:  ru-ark -100000000000140337
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ark/poly/poly.osm.pbf  r140337
+processing:  ru-ast -100000000000112819
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ast/poly/poly.osm.pbf  r112819
+processing:  ru-ba -100000000000077677
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ba/poly/poly.osm.pbf  r77677
+processing:  ru-bel -100000000000083184
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-bel/poly/poly.osm.pbf  r83184
+processing:  ru-bry -100000000000081997
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-bry/poly/poly.osm.pbf  r81997
+processing:  ru-bu -100000000000145729
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-bu/poly/poly.osm.pbf  r145729
+processing:  ru-ce -100000000000109877
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ce/poly/poly.osm.pbf  r109877
+processing:  ru-che -100000000000077687
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-che/poly/poly.osm.pbf  r77687
+processing:  ru-chu -100000000000151231
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-chu/poly/poly.osm.pbf  r151231
+processing:  ru-cr -100000000003795586
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-cr/poly/poly.osm.pbf  r3795586
+processing:  ru-cu -100000000000080513
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-cu/poly/poly.osm.pbf  r80513
+processing:  ru-da -100000000000109876
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-da/poly/poly.osm.pbf  r109876
+processing:  ru-in -100000000000253252
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-in/poly/poly.osm.pbf  r253252
+processing:  ru-irk -100000000000145454
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-irk/poly/poly.osm.pbf  r145454
+processing:  ru-iva -100000000000085617
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-iva/poly/poly.osm.pbf  r85617
+processing:  ru-kam -100000000000151233
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kam/poly/poly.osm.pbf  r151233
+processing:  ru-kb -100000000000109879
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kb/poly/poly.osm.pbf  r109879
+processing:  ru-kc -100000000000109878
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kc/poly/poly.osm.pbf  r109878
+processing:  ru-kda -100000000000108082
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kda/poly/poly.osm.pbf  r108082
+processing:  ru-kem -100000000000144763
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kem/poly/poly.osm.pbf  r144763
+processing:  ru-kgd -100000000000103906
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kgd/poly/poly.osm.pbf  r103906
+processing:  ru-kgn -100000000000140290
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kgn/poly/poly.osm.pbf  r140290
+processing:  ru-kha -100000000000151223
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kha/poly/poly.osm.pbf  r151223
+processing:  ru-khm -100000000000140296
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-khm/poly/poly.osm.pbf  r140296
+processing:  ru-kir -100000000000115100
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kir/poly/poly.osm.pbf  r115100
+processing:  ru-kk -100000000000190911
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kk/poly/poly.osm.pbf  r190911
+processing:  ru-kl -100000000000108083
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kl/poly/poly.osm.pbf  r108083
+processing:  ru-klu -100000000000081995
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-klu/poly/poly.osm.pbf  r81995
+processing:  ru-ko -100000000000115136
+executing: /osm/sh/osm_geEnd of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+tpolygon.sh /osm/service/ru/ru-ko/poly/poly.osm.pbf  r115136
+processing:  ru-kos -100000000000085963
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kos/poly/poly.osm.pbf  r85963
+processing:  ru-kr -100000000000393980
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kr/poly/poly.osm.pbf  r393980
+processing:  ru-krs -100000000000072223
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-krs/poly/poly.osm.pbf  r72223
+processing:  ru-kya -100000000000190090
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-kya/poly/poly.osm.pbf  r190090
+processing:  ru-len -100000000000176095
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-len/poly/poly.osm.pbf  r176095
+processing:  ru-lip -100000000000072169
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-lip/poly/poly.osm.pbf  r72169
+processing:  ru-mag -100000000000151228
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-mag/poly/poly.osm.pbf  r151228
+processing:  ru-me -100000000000115114
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-me/poly/poly.osm.pbf  r115114
+processing:  ru-mo -100000000000072196
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-mo/poly/poly.osm.pbf  r72196
+processing:  ru-mos -100000000000051490
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-mos/poly/poly.osm.pbf  r51490
+processing:  ru-mow -100000000000102269
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-mow/poly/poly.osm.pbf  r102269
+processing:  ru-mur -100000000002099216
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-mur/poly/poly.osm.pbf  r2099216
+processing:  ru-nen -100000000000274048
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-nen/poly/poly.osm.pbf  r274048
+processing:  ru-ngr -100000000000089331
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ngr/poly/poly.osm.pbf  r89331
+processing:  ru-niz -100000000000072195
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-niz/poly/poly.osm.pbf  r72195
+processing:  ru-nvs -100000000000140294
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-nvs/poly/poly.osm.pbf  r140294
+processing:  ru-oms -100000000000140292
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-oms/poly/poly.osm.pbf  r140292
+processing:  ru-ore -100000000000077669
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ore/poly/poly.osm.pbf  r77669
+processing:  ru-orl -100000000000072224
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-orl/poly/poly.osm.pbf  r72224
+processing:  ru-per -100000000000115135
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-per/poly/poly.osm.pbf  r115135
+processing:  ru-pnz -100000000000072182
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-pnz/poly/poly.osm.pbf  r72182
+processing:  ru-pri -100000000000151225
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-pri/poly/poly.osm.pbf  r151225
+processing:  ru-psk -100000000000155262
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-psk/poly/poly.osm.pbf  r155262
+processing:  ru-ros -100000000000085606
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ros/poly/poly.osm.pbf  r85606
+processing:  ru-rya -100000000000071950
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-rya/poly/poly.osm.pbf  r71950
+processing:  ru-sa -100000000000151234
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sa/poly/poly.osm.pbf  r151234
+processing:  ru-sak -100000000000394235
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sak/poly/poly.osm.pbf  r394235
+processing:  ru-sam -100000000000072194
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sam/poly/poly.osm.pbf  r72194
+processing:  ru-sar -100000000000072193
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sar/poly/poly.osm.pbf  r72193
+processing:  ru-se -100000000000110032
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-se/poly/poly.osm.pbf  r110032
+processing:  ru-sev -100000000003788485
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sev/poly/poly.osm.pbf  r3788485
+processing:  ru-smo -100000000000081996
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-smo/poly/poly.osm.pbf  rEnd of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+81996
+processing:  ru-spe -100000000000337422
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-spe/poly/poly.osm.pbf  r337422
+processing:  ru-sta -100000000000108081
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sta/poly/poly.osm.pbf  r108081
+processing:  ru-sve -100000000000079379
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-sve/poly/poly.osm.pbf  r79379
+processing:  ru-ta -100000000000079374
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ta/poly/poly.osm.pbf  r79374
+processing:  ru-tam -100000000000072180
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-tam/poly/poly.osm.pbf  r72180
+processing:  ru-tom -100000000000140295
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-tom/poly/poly.osm.pbf  r140295
+processing:  ru-tul -100000000000081993
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-tul/poly/poly.osm.pbf  r81993
+processing:  ru-tve -100000000002095259
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-tve/poly/poly.osm.pbf  r2095259
+processing:  ru-ty -100000000000145195
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ty/poly/poly.osm.pbf  r145195
+processing:  ru-tyu -100000000000140291
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-tyu/poly/poly.osm.pbf  r140291
+processing:  ru-ud -100000000000115134
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-ud/poly/poly.osm.pbf  r115134
+processing:  ru-uly -100000000000072192
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-uly/poly/poly.osm.pbf  r72192
+processing:  ru-vgg -100000000000077665
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-vgg/poly/poly.osm.pbf  r77665
+processing:  ru-vla -100000000000072197
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-vla/poly/poly.osm.pbf  r72197
+processing:  ru-vlg -100000000000115106
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-vlg/poly/poly.osm.pbf  r115106
+processing:  ru-vor -100000000000072181
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-vor/poly/poly.osm.pbf  r72181
+processing:  ru-yan -100000000000191706
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-yan/poly/poly.osm.pbf  r191706
+processing:  ru-yar -100000000000081994
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-yar/poly/poly.osm.pbf  r81994
+processing:  ru-yev -100000000000147167
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-yev/poly/poly.osm.pbf  r147167
+processing:  ru-zab -100000000000145730
+executing: /osm/sh/osm_getpolygon.sh /osm/service/ru/ru-zab/poly/poly.osm.pbf  r145730
+------start setup_map.py ------
+Creating output file that is 294P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 294, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 312P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 312, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 372P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 372, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 341P x 187L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 341, 187
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 315P x 198L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 315, 198
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 285P x 228L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 285, 228
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 301P x 215L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 301, 215
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 384P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 384, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 328P x 176L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 328, 176
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 367P x 146L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 367, 146
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 276P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 276, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 300P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 300, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Generating background map:  ru-ad -100000000000253256 294 210 Адыгея
+mapdata: 294 210 40.78 45.26 38.68 43.76
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 38.68 43.76 40.78 45.26  -ts 294 210   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ad/img/nebackground.geotif  
+Generating background map:  ru-al -100000000000145194 312 195 Республика Алтай
+mapdata: 312 195 89.93 52.82 83.93 49.07
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 83.93 49.07 89.93 52.82  -ts 312 195   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-al/img/nebackground.geotif  
+Generating background map:  ru-alt -100000000000144764 372 154 Алтайский край
+mapdata: 372 154 87.18 54.48 77.88 50.63
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 77.88 50.63 87.18 54.48  -ts 372 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-alt/img/nebackground.geotif  
+Generating background map:  ru-amu -100000000000147166 341 187 Амурская область
+mapdata: 341 187 135.15 57.35 119.65 48.85
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 119.65 48.85 135.15 57.35  -ts 341 187   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-amu/img/nebackground.geotif  
+Generating background map:  ru-ark -100000000000140337 315 198 Архангельская область
+mapdata: 315 198 70.26 82.63 35.26 60.63
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 35.26 60.63 70.26 82.63  -ts 315 198   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ark/img/nebackground.geotif  
+Generating background map:  ru-ast -100000000000112819 285 228 Астраханская область
+mapdata: 285 228 49.96 49.26 44.96 45.26
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 44.96 45.26 49.96 49.26  -ts 285 228   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ast/img/nebackground.geotif  
+Generating background map:  ru-ba -100000000000077677 301 215 Башкортостан
+mapdata: 301 215 60.15 56.56 53.15 51.56
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 53.15 51.56 60.15 56.56  -ts 301 215   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ba/img/nebackground.geotif  
+Generating background map:  ru-bel -100000000000083184 384 168 Белгородская область
+mapdata: 384 168 39.32 51.54 35.32 49.79
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 35.32 49.79 39.32 51.54  -ts 384 168   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-bel/img/nebackground.geotif  
+Generating background map:  ru-bry -100000000000081997 328 176 Брянская область
+mapdata: 328 176 35.34 54.04 31.24 51.84
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 31.24 51.84 35.34 54.04  -ts 328 176   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-bry/img/nebackground.geotif  
+Generating background map:  ru-bu -100000000000145729 367 146 Республика Бурятия
+mapdata: 367 146 116.97 57.26 98.62 49.96
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 98.62 49.96 116.97 57.26  -ts 367 146   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-bu/img/nebackground.geotif  
+Generating background map:  ru-ce -100000000000109877 276 231 Чечня
+mapdata: 276 231 46.67 44.01 44.83 42.47
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 44.83 42.47 46.67 44.01  -ts 276 231   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ce/img/nebackground.geotif  
+Generating background map:  ru-che -100000000000077687 300 216 Челябинская область
+mapdata: 300 216 63.38 56.49 57.13 51.99
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 57.13 51.99 63.38 56.49  -ts 300 216   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-che/img/nebackground.geotif  
+Generating background map:  ru-chu -100000000000151231 402 123 Чукотский автономный округ
+mapdata: 402 123 11.23 71.85 -22.27 61.6
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te -22.27 61.6 11.23 71.85  -ts 402 123   -of GTiff   /osm/ne/ne.tiCreating output file that is 402P x 123L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 402, 123
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 360P x 166L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 360, 166
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 303P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 303, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 247P x 260L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 247, 260
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 224P x 287L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 224, 287
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 329P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 329, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 420P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 420, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 291P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 291, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 336P x 184L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 336, 184
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 303P x 198L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 303, 198
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 294P x 217L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 294, 217
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 247L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 247
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 448P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 448, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+f /osm/service/ru/ru-chu/img/nebackground.geotif  
+Generating background map:  ru-cr -100000000003795586 360 166 Республика Крым
+mapdata: 360 166 36.7 46.255 32.2 44.18
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 32.2 44.18 36.7 46.255  -ts 360 166   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-cr/img/nebackground.geotif  
+Generating background map:  ru-cu -100000000000080513 303 207 Чувашия
+mapdata: 303 207 48.435 56.345 45.91 54.62
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 45.91 54.62 48.435 56.345  -ts 303 207   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-cu/img/nebackground.geotif  
+Generating background map:  ru-da -100000000000109876 247 260 Дагестан
+mapdata: 247 260 48.9 45.18 45.1 41.18
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 45.1 41.18 48.9 45.18  -ts 247 260   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-da/img/nebackground.geotif  
+Generating background map:  ru-in -100000000000253252 224 287 Ингушетия
+mapdata: 224 287 45.27 43.635 44.47 42.61
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 44.47 42.61 45.27 43.635  -ts 224 287   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-in/img/nebackground.geotif  
+Generating background map:  ru-irk -100000000000145454 329 189 Иркутская область
+mapdata: 329 189 119.14 64.62 95.64 51.12
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 95.64 51.12 119.14 64.62  -ts 329 189   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-irk/img/nebackground.geotif  
+Generating background map:  ru-iva -100000000000085617 420 147 Ивановская область
+mapdata: 420 147 43.37 57.75 39.37 56.35
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 39.37 56.35 43.37 57.75  -ts 420 147   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-iva/img/nebackground.geotif  
+Generating background map:  ru-kam -100000000000151233 291 216 Камчатский край
+mapdata: 291 216 174.61 65.08 155.21 50.68
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 155.21 50.68 174.61 65.08  -ts 291 216   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kam/img/nebackground.geotif  
+Generating background map:  ru-kb -100000000000109879 336 184 Кабардино-Балкария
+mapdata: 336 184 44.49 44.03 42.39 42.88
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 42.39 42.88 44.49 44.03  -ts 336 184   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kb/img/nebackground.geotif  
+Generating background map:  ru-kc -100000000000109878 303 198 Карачаево-Черкесия
+mapdata: 303 198 42.69 44.5 40.67 43.18
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 40.67 43.18 42.69 44.5  -ts 303 198   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kc/img/nebackground.geotif  
+Generating background map:  ru-kda -100000000000108082 294 217 Краснодарский край
+mapdata: 294 217 41.78 47.095 36.53 43.22
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 36.53 43.22 41.78 47.095  -ts 294 217   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kda/img/nebackground.geotif  
+Generating background map:  ru-kem -100000000000144763 260 247 Кемеровская область
+mapdata: 260 247 89.44 56.91 84.44 52.16
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 84.44 52.16 89.44 56.91  -ts 260 247   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kem/img/nebackground.geotif  
+Generating background map:  ru-kgd -100000000000103906 448 144 Калининградская область
+mapdata: 448 144 22.91 55.435 19.41 54.31
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 19.41 54.31 22.91 55.435  -ts 448 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kgd/img/nebackground.geotif  
+Generating background map:  ru-kgn -100000000000140290 385 154 Курганская область
+mapdata: 385 154 68.835 56.93 61.96 54.18
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 61.96 54.18 68.835 56.9Creating output file that is 385P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 385, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 240L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 240
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 430P x 116L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 430, 116
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 201L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 201
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 243P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 243, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 325P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 325, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 341P x 187L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 341, 187
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 378P x 171L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 378, 171
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 435P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 435, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 405P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 405, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 280P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 280, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 450P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 450, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+3  -ts 385 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kgn/img/nebackground.geotif  
+Generating background map:  ru-kha -100000000000151223 255 240 Хабаровский край
+mapdata: 255 240 147.38 62.63 130.38 46.63
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 130.38 46.63 147.38 62.63  -ts 255 240   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kha/img/nebackground.geotif  
+Generating background map:  ru-khm -100000000000140296 430 116 Ханты-Мансийский автономный округ - Югра
+mapdata: 430 116 86.075 65.82 59.2 58.57
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 59.2 58.57 86.075 65.82  -ts 430 116   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-khm/img/nebackground.geotif  
+Generating background map:  ru-kir -100000000000115100 308 201 Кировская область
+mapdata: 308 201 53.96 61.085 46.26 56.06
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 46.26 56.06 53.96 61.085  -ts 308 201   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kir/img/nebackground.geotif  
+Generating background map:  ru-kk -100000000000190911 243 252 Республика Хакасия
+mapdata: 243 252 91.93 55.48 87.88 51.28
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 87.88 51.28 91.93 55.48  -ts 243 252   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kk/img/nebackground.geotif  
+Generating background map:  ru-kl -100000000000108083 325 195 Калмыкия
+mapdata: 325 195 47.88 48.46 41.63 44.71
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 41.63 44.71 47.88 48.46  -ts 325 195   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kl/img/nebackground.geotif  
+Generating background map:  ru-klu -100000000000081995 341 187 Калужская область
+mapdata: 341 187 37.315 55.395 33.44 53.27
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 33.44 53.27 37.315 55.395  -ts 341 187   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-klu/img/nebackground.geotif  
+Generating background map:  ru-ko -100000000000115136 378 171 Республика Коми
+mapdata: 378 171 66.39 68.69 45.39 59.19
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 45.39 59.19 66.39 68.69  -ts 378 171   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ko/img/nebackground.geotif  
+Generating background map:  ru-kos -100000000000085963 435 144 Костромская область
+mapdata: 435 144 47.64 59.67 40.39 57.27
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 40.39 57.27 47.64 59.67  -ts 435 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kos/img/nebackground.geotif  
+Generating background map:  ru-kr -100000000000393980 308 210 Республика Карелия
+mapdata: 308 210 38.1 66.67 29.3 60.67
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 29.3 60.67 38.1 66.67  -ts 308 210   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kr/img/nebackground.geotif  
+Generating background map:  ru-krs -100000000000072223 405 144 Курская область
+mapdata: 405 144 38.58 52.5 34.08 50.9
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 34.08 50.9 38.58 52.5  -ts 405 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-krs/img/nebackground.geotif  
+Generating background map:  ru-kya -100000000000190090 280 210 Красноярский край
+mapdata: 280 210 114.98 81.77 74.98 51.77
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 74.98 51.77 114.98 81.77  -ts 280 210   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-kya/img/nebackground.geotif  
+Generating background map:  ru-len -100000000000176095 450 144 Ленинградская область
+mapdata: 450 144 35.815 61.41 26.44 58.41
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 26.44 58.41 35.815 61.41  -ts 450 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-len/img/nebackground.geotif  
+Generating background map:  ru-lip -100000000000072169 336 189 Липецкая область
+mapdata: 336 189 40.92 53.68Creating output file that is 336P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 336, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 376P x 155L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 376, 155
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 414P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 414, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 414P x 144L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 414, 144
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 338P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 338, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 282P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 282, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 423P x 135L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 423, 135
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 539P x 110L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 539, 110
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 399P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 399, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 325P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 325, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 402P x 158L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 402, 158
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 270P x 234L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 270, 234
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 418P x 152L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 418, 152
+0...10...20...30...40...50...60...70...80...90...100 - done.
+ 37.72 51.88
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 37.72 51.88 40.92 53.68  -ts 336 189   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-lip/img/nebackground.geotif  
+Generating background map:  ru-mag -100000000000151228 376 155 Магаданская область
+mapdata: 376 155 163.52 66.38 144.72 58.63
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 144.72 58.63 163.52 66.38  -ts 376 155   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-mag/img/nebackground.geotif  
+Generating background map:  ru-me -100000000000115114 414 144 Марий Эл
+mapdata: 414 144 50.22 57.42 45.62 55.82
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 45.62 55.82 50.22 57.42  -ts 414 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-me/img/nebackground.geotif  
+Generating background map:  ru-mo -100000000000072196 414 144 Мордовия
+mapdata: 414 144 46.76 55.24 42.16 53.64
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 42.16 53.64 46.76 55.24  -ts 414 144   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-mo/img/nebackground.geotif  
+Generating background map:  ru-mos -100000000000051490 338 182 Московская область
+mapdata: 338 182 40.34 57.05 35.14 54.25
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 35.14 54.25 40.34 57.05  -ts 338 182   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-mos/img/nebackground.geotif  
+Generating background map:  ru-mow -100000000000102269 282 216 Москва
+mapdata: 282 216 37.975 56.04 36.8 55.14
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 36.8 55.14 37.975 56.04  -ts 282 216   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-mow/img/nebackground.geotif  
+Generating background map:  ru-mur -100000000002099216 423 135 Мурманская область
+mapdata: 423 135 42.51 70.19 28.41 65.69
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 28.41 65.69 42.51 70.19  -ts 423 135   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-mur/img/nebackground.geotif  
+Generating background map:  ru-nen -100000000000274048 539 110 Ненецкий автономный округ
+mapdata: 539 110 65.81 70.82 41.31 65.82
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 41.31 65.82 65.81 70.82  -ts 539 110   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-nen/img/nebackground.geotif  
+Generating background map:  ru-ngr -100000000000089331 399 153 Новгородская область
+mapdata: 399 153 36.26 59.45 29.61 56.9
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 29.61 56.9 36.26 59.45  -ts 399 153   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ngr/img/nebackground.geotif  
+Generating background map:  ru-niz -100000000000072195 325 195 Нижегородская область
+mapdata: 325 195 48.02 58.21 41.77 54.46
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 41.77 54.46 48.02 58.21  -ts 325 195   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-niz/img/nebackground.geotif  
+Generating background map:  ru-nvs -100000000000140294 402 158 Новосибирская область
+mapdata: 402 158 85.13 57.24 75.08 53.29
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 75.08 53.29 85.13 57.24  -ts 402 158   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-nvs/img/nebackground.geotif  
+Generating background map:  ru-oms -100000000000140292 270 234 Омская область
+mapdata: 270 234 76.35 58.63 70.35 53.43
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 70.35 53.43 76.35 58.63  -ts 270 234   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-oms/img/nebackground.geotif  
+Generating background map:  ru-ore -100000000000077669 418 152 Оренбургская область
+mapdata: 418 152 61.76 54.49 50.76 50.49
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 50.76 50.49 61.76 54.49  -ts 418 152   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ore/img/nebackground.geotif  
+Generating background map:  ru-orl -100000000000072224 351 18Creating output file that is 351P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 351, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 279P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 279, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 425P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 425, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 204L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 204
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 272P x 224L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 272, 224
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 294P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 294, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 324P x 166L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 324, 166
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 406P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 406, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 312P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 312, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 417P x 151L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 417, 151
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 280P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 280, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+2 Орловская область
+mapdata: 351 182 38.165 53.68 34.79 51.93
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 34.79 51.93 38.165 53.68  -ts 351 182   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-orl/img/nebackground.geotif  
+Generating background map:  ru-per -100000000000115135 279 207 Пермский край
+mapdata: 279 207 59.52 61.85 51.77 56.1
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 51.77 56.1 59.52 61.85  -ts 279 207   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-per/img/nebackground.geotif  
+Generating background map:  ru-pnz -100000000000072182 425 153 Пензенская область
+mapdata: 425 153 47.08 54.09 42.08 52.29
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 42.08 52.29 47.08 54.09  -ts 425 153   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-pnz/img/nebackground.geotif  
+Generating background map:  ru-pri -100000000000151225 288 204 Приморский край
+mapdata: 288 204 139.39 48.545 130.39 42.17
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 130.39 42.17 139.39 48.545  -ts 288 204   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-pri/img/nebackground.geotif  
+Generating background map:  ru-psk -100000000000155262 272 224 Псковская область
+mapdata: 272 224 31.56 59.08 27.31 55.58
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 27.31 55.58 31.56 59.08  -ts 272 224   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-psk/img/nebackground.geotif  
+Generating background map:  ru-ros -100000000000085606 294 210 Ростовская область
+mapdata: 294 210 44.345 50.325 38.22 45.95
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 38.22 45.95 44.345 50.325  -ts 294 210   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ros/img/nebackground.geotif  
+Generating background map:  ru-rya -100000000000071950 324 166 Рязанская область
+mapdata: 324 166 42.71 55.375 38.66 53.3
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 38.66 53.3 42.71 55.375  -ts 324 166   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-rya/img/nebackground.geotif  
+Generating background map:  ru-sa -100000000000151234 406 154 Республика Саха (Якутия)
+mapdata: 406 154 163.5 77.48 105.5 55.48
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 105.5 55.48 163.5 77.48  -ts 406 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sa/img/nebackground.geotif  
+Generating background map:  ru-sak -100000000000394235 288 207 Сахалинская область
+mapdata: 288 207 156.92 54.67 140.92 43.17
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 140.92 43.17 156.92 54.67  -ts 288 207   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sak/img/nebackground.geotif  
+Generating background map:  ru-sam -100000000000072194 312 195 Самарская область
+mapdata: 312 195 52.73 54.77 47.93 51.77
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 47.93 51.77 52.73 54.77  -ts 312 195   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sam/img/nebackground.geotif  
+Generating background map:  ru-sar -100000000000072193 417 151 Саратовская область
+mapdata: 417 151 50.84 52.82 42.5 49.8
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 42.5 49.8 50.84 52.82  -ts 417 151   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sar/img/nebackground.geotif  
+Generating background map:  ru-se -100000000000110032 280 231 Северная Осетия - Алания
+mapdata: 280 231 44.99 43.86 43.39 42.54
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 43.39 42.54 44.99 43.86  -ts 280 231   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-se/img/nebackground.geotif  
+Generating background map:  ru-sev -100000000003788485 252 228 Севастополь
+mapdata: 252 228 33.93 44.95 33.09 44.19
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 33.09 44.19 33.93 44.95  -ts 252 228   -of GTiff   /osm/ne/ne.tif /osm/service/ru/Creating output file that is 252P x 228L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 228
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 329P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 329, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 374P x 170L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 374, 170
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 343P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 343, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 306P x 204L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 306, 204
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 399P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 399, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 306P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 306, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 406P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 406, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 307P x 192L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 307, 192
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 381P x 162L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 381, 162
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 399P x 152L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 399, 152
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 364P x 175L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 364, 175
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 266P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 266, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+ru-sev/img/nebackground.geotif  
+Generating background map:  ru-smo -100000000000081996 329 189 Смоленская область
+mapdata: 329 189 35.45 56.1 30.75 53.4
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 30.75 53.4 35.45 56.1  -ts 329 189   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-smo/img/nebackground.geotif  
+Generating background map:  ru-spe -100000000000337422 374 170 Санкт-Петербург
+mapdata: 374 170 30.795 60.255 29.42 59.63
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 29.42 59.63 30.795 60.255  -ts 374 170   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-spe/img/nebackground.geotif  
+Generating background map:  ru-sta -100000000000108081 343 182 Ставропольский край
+mapdata: 343 182 45.74 46.25 40.84 43.65
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 40.84 43.65 45.74 46.25  -ts 343 182   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sta/img/nebackground.geotif  
+Generating background map:  ru-sve -100000000000079379 306 204 Свердловская область
+mapdata: 306 204 66.22 62.05 57.22 56.05
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 57.22 56.05 66.22 62.05  -ts 306 204   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-sve/img/nebackground.geotif  
+Generating background map:  ru-ta -100000000000079374 399 154 Татарстан
+mapdata: 399 154 54.355 56.72 47.23 53.97
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 47.23 53.97 54.355 56.72  -ts 399 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ta/img/nebackground.geotif  
+Generating background map:  ru-tam -100000000000072180 306 207 Тамбовская область
+mapdata: 306 207 43.31 53.88 39.91 51.58
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 39.91 51.58 43.31 53.88  -ts 306 207   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-tam/img/nebackground.geotif  
+Generating background map:  ru-tom -100000000000140295 406 154 Томская область
+mapdata: 406 154 89.55 61.1 75.05 55.6
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 75.05 55.6 89.55 61.1  -ts 406 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-tom/img/nebackground.geotif  
+Generating background map:  ru-tul -100000000000081993 307 192 Тульская область
+mapdata: 307 192 38.96 54.86 35.89 52.94
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 35.89 52.94 38.96 54.86  -ts 307 192   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-tul/img/nebackground.geotif  
+Generating background map:  ru-tve -100000000002095259 381 162 Тверская область
+mapdata: 381 162 38.34 58.87 30.72 55.63
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 30.72 55.63 38.34 58.87  -ts 381 162   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-tve/img/nebackground.geotif  
+Generating background map:  ru-ty -100000000000145195 399 152 Республика Тыва
+mapdata: 399 152 99.29 53.74 88.79 49.74
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 88.79 49.74 99.29 53.74  -ts 399 152   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ty/img/nebackground.geotif  
+Generating background map:  ru-tyu -100000000000140291 364 175 Тюменская область
+mapdata: 364 175 75.22 60.14 64.82 55.14
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 64.82 55.14 75.22 60.14  -ts 364 175   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-tyu/img/nebackground.geotif  
+Generating background map:  ru-ud -100000000000115134 266 216 Удмуртия
+mapdata: 266 216 54.445 58.55 51.12 55.85
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 51.12 55.85 54.445 58.55  -ts 266 216   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-ud/img/nebackground.geotif  
+Generating background map:  ru-uly -100000000000072192 342 190 Ульяновская область
+mapdata: 342 190 50.29 55.03 45.79 52.53
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 45.79 52.53 50.29 55.03  -ts 342 190   -oCreating output file that is 342P x 190L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 342, 190
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 314P x 191L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 314, 191
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 418P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 418, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 498P x 126L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 498, 126
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 343P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 343, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 363P x 174L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 363, 174
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 312P x 196L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 312, 196
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 378P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 378, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 289P x 186L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 289, 186
+0...10...20...30...40...50...60...70...80...90...100 - done.
+f GTiff   /osm/ne/ne.tif /osm/service/ru/ru-uly/img/nebackground.geotif  
+Generating background map:  ru-vgg -100000000000077665 314 191 Волгоградская область
+mapdata: 314 191 47.44 51.26 41.16 47.44
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 41.16 47.44 47.44 51.26  -ts 314 191   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-vgg/img/nebackground.geotif  
+Generating background map:  ru-vla -100000000000072197 418 154 Владимирская область
+mapdata: 418 154 43.01 56.85 38.26 55.1
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 38.26 55.1 43.01 56.85  -ts 418 154   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-vla/img/nebackground.geotif  
+Generating background map:  ru-vlg -100000000000115106 498 126 Вологодская область
+mapdata: 498 126 47.16 61.62 34.71 58.47
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 34.71 58.47 47.16 61.62  -ts 498 126   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-vlg/img/nebackground.geotif  
+Generating background map:  ru-vor -100000000000072181 343 182 Воронежская область
+mapdata: 343 182 43.03 52.15 38.13 49.55
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 38.13 49.55 43.03 52.15  -ts 343 182   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-vor/img/nebackground.geotif  
+Generating background map:  ru-yan -100000000000191706 363 174 Ямало-Ненецкий автономный округ
+mapdata: 363 174 86.2 73.79 62.0 62.19
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 62.0 62.19 86.2 73.79  -ts 363 174   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-yan/img/nebackground.geotif  
+Generating background map:  ru-yar -100000000000081994 312 196 Ярославская область
+mapdata: 312 196 41.22 58.98 37.32 56.53
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 37.32 56.53 41.22 58.98  -ts 312 196   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-yar/img/nebackground.geotif  
+Generating background map:  ru-yev -100000000000147167 378 168 Еврейская автономная область
+mapdata: 378 168 135.02 49.65 130.52 47.65
+<mapnik.Datasource object at 0x7fa988fb1758>
+gdalw: gdalwarp    -te 130.52 47.65 135.02 49.65  -ts 378 168   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-yev/img/nebackground.geotif  
+Generating background map:  ru-zab -100000000000145730 289 186 Забайкальский край
+mapdata: 289 186 122.18 58.45 107.73 49.15
+<mapnik.Datasource object at 0x7fa988fb16e0>
+gdalw: gdalwarp    -te 107.73 49.15 122.18 58.45  -ts 289 186   -of GTiff   /osm/ne/ne.tif /osm/service/ru/ru-zab/img/nebackground.geotif  
+------start setup_config.py -----
+Generating taginfo-config:  ru-ad -100000000000253256 294 210 Адыгея  ;  Adygea
+mapdata: 294 210 40.78 45.26 38.68 43.76 Адыгея Adygea
+Generating taginfo-config:  ru-al -100000000000145194 312 195 Республика Алтай  ;  Altai Republic
+mapdata: 312 195 89.93 52.82 83.93 49.07 Республика Алтай Altai Republic
+Generating taginfo-config:  ru-alt -100000000000144764 372 154 Алтайский край  ;  Altai Krai
+mapdata: 372 154 87.18 54.48 77.88 50.63 Алтайский край Altai Krai
+Generating taginfo-config:  ru-amu -100000000000147166 341 187 Амурская область  ;  Amur Oblast
+mapdata: 341 187 135.15 57.35 119.65 48.85 Амурская область Amur Oblast
+Generating taginfo-config:  ru-ark -100000000000140337 315 198 Архангельская область  ;  Arkhangelsk Oblast
+mapdata: 315 198 70.26 82.63 35.26 60.63 Архангельская область Arkhangelsk Oblast
+Generating taginfo-config:  ru-ast -100000000000112819 285 228 Астраханская область  ;  Astrakhan Oblast
+mapdata: 285 228 49.96 49.26 44.96 45.26 Астраханская область Astrakhan Oblast
+Generating taginfo-config:  ru-ba -100000000000077677 301 215 Башкортостан  ;  Bashkortostan
+mapdata: 301 215 60.15 56.56 53.15 51.56 Башкортостан Bashkortostan
+Generating taginfo-config:  ru-bel -100000000000083184 384 168 Белгородская область  ;  Belgorod Oblast
+mapdata: 384 168 39.32 51.54 35.32 49.79 Белгородская область Belgorod Oblast
+Generating taginfo-config:  ru-bry -100000000000081997 328 176 Брянская область  ;  Bryansk Oblast
+mapdata: 328 176 35.34 54.04 31.24 51.84 Брянская область Bryansk Oblast
+Generating taginfo-config:  ru-bu -100000000000145729 367 146 Республика Бурятия  ;  Buryatia
+mapdata: 367 146 116.97 57.26 98.62 49.96 Республика Бурятия Buryatia
+Generating taginfo-config:  ru-ce -100000000000109877 276 231 Чечня  ;  Chechnya
+mapdata: 276 231 46.67 44.01 44.83 42.47 Чечня Chechnya
+Generating taginfo-config:  ru-che -100000000000077687 300 216 Челябинская область  ;  Chelyabinsk Oblast
+mapdata: 300 216 63.38 56.49 57.13 51.99 Челябинская область Chelyabinsk Oblast
+Generating taginfo-config:  ru-chu -100000000000151231 402 123 Чукотский автономный округ  ;  Chukotka Autonomous Okrug
+mapdata: 402 123 11.23 71.85 -22.27 61.6 Чукотский автономный округ Chukotka Autonomous Okrug
+Generating taginfo-config:  ru-cr -100000000003795586 360 166 Республика Крым  ;  Republic of Crimea
+mapdata: 360 166 36.7 46.255 32.2 44.18 Республика Крым Republic of Crimea
+Generating taginfo-config:  ru-cu -100000000000080513 303 207 Чувашия  ;  Chuvashia
+mapdata: 303 207 48.435 56.345 45.91 54.62 Чувашия Chuvashia
+Generating taginfo-config:  ru-da -100000000000109876 247 260 Дагестан  ;  Dagestan
+mapdata: 247 260 48.9 45.18 45.1 41.18 Дагестан Dagestan
+Generating taginfo-config:  ru-in -100000000000253252 224 287 Ингушетия  ;  Ingushetia
+mapdata: 224 287 45.27 43.635 44.47 42.61 Ингушетия Ingushetia
+Generating taginfo-config:  ru-irk -100000000000145454 329 189 Иркутская область  ;  Irkutsk Oblast
+mapdata: 329 189 119.14 64.62 95.64 51.12 Иркутская область Irkutsk Oblast
+Generating taginfo-config:  ru-iva -100000000000085617 420 147 Ивановская область  ;  Ivanovo Oblast
+mapdata: 420 147 43.37 57.75 39.37 56.35 Ивановская область Ivanovo Oblast
+Generating taginfo-config:  ru-kam -100000000000151233 291 216 Камчатский край  ;  Kamchatka Krai
+mapdata: 291 216 174.61 65.08 155.21 50.68 Камчатский край Kamchatka Krai
+Generating taginfo-config:  ru-kb -100000000000109879 336 184 Кабардино-Балкария  ;  Kabardino-Balkaria
+mapdata: 336 184 44.49 44.03 42.39 42.88 Кабардино-Балкария Kabardino-Balkaria
+Generating taginfo-config:  ru-kc -100000000000109878 303 198 Карачаево-Черкесия  ;  Karachay-Cherkessia
+mapdata: 303 198 42.69 44.5 40.67 43.18 Карачаево-Черкесия Karachay-Cherkessia
+Generating taginfo-config:  ru-kda -100000000000108082 294 217 Краснодарский край  ;  Krasnodar Krai
+mapdata: 294 217 41.78 47.095 36.53 43.22 Краснодарский край Krasnodar Krai
+Generating taginfo-config:  ru-kem -100000000000144763 260 247 Кемеровская область  ;  Kemerovo Oblast
+mapdata: 260 247 89.44 56.91 84.44 52.16 Кемеровская область Kemerovo Oblast
+Generating taginfo-config:  ru-kgd -100000000000103906 448 144 Калининградская область  ;  Kaliningrad
+mapdata: 448 144 22.91 55.435 19.41 54.31 Калининградская область Kaliningrad
+Generating taginfo-config:  ru-kgn -100000000000140290 385 154 Курганская область  ;  Kurgan Oblast
+mapdata: 385 154 68.835 56.93 61.96 54.18 Курганская область Kurgan Oblast
+Generating taginfo-config:  ru-kha -100000000000151223 255 240 Хабаровский край  ;  Khabarovsk Krai
+mapdata: 255 240 147.38 62.63 130.38 46.63 Хабаровский край Khabarovsk Krai
+Generating taginfo-config:  ru-khm -100000000000140296 430 116 Ханты-Мансийский автономный округ - Югра  ;  Khanty-Mansiysk Autonomous Okrug – Ugra
+mapdata: 430 116 86.075 65.82 59.2 58.57 Ханты-Мансийский автономный округ - Югра Khanty-Mansiysk Autonomous Okrug – Ugra
+Generating taginfo-config:  ru-kir -100000000000115100 308 201 Кировская область  ;  Kirov Oblast
+mapdata: 308 201 53.96 61.085 46.26 56.06 Кировская область Kirov Oblast
+Generating taginfo-config:  ru-kk -100000000000190911 243 252 Республика Хакасия  ;  Republic of Khakassia
+mapdata: 243 252 91.93 55.48 87.88 51.28 Республика Хакасия Republic of Khakassia
+Generating taginfo-config:  ru-kl -100000000000108083 325 195 Калмыкия  ;  Kalmykia
+mapdata: 325 195 47.88 48.46 41.63 44.71 Калмыкия Kalmykia
+Generating taginfo-config:  ru-klu -100000000000081995 341 187 Калужская область  ;  Kaluga Oblast
+mapdata: 341 187 37.315 55.395 33.44 53.27 Калужская область Kaluga Oblast
+Generating taginfo-config:  ru-ko -100000000000115136 378 171 Республика Коми  ;  Komi Republic
+mapdata: 378 171 66.39 68.69 45.39 59.19 Республика Коми Komi Republic
+Generating taginfo-config:  ru-kos -100000000000085963 435 144 Костромская область  ;  Kostroma Oblast
+mapdata: 435 144 47.64 59.67 40.39 57.27 Костромская область Kostroma Oblast
+Generating taginfo-config:  ru-kr -100000000000393980 308 210 Республика Карелия  ;  Republic of Karelia
+mapdata: 308 210 38.1 66.67 29.3 60.67 Республика Карелия Republic of Karelia
+Generating taginfo-config:  ru-krs -100000000000072223 405 144 Курская область  ;  Kursk Oblast
+mapdata: 405 144 38.58 52.5 34.08 50.9 Курская область Kursk Oblast
+Generating taginfo-config:  ru-kya -100000000000190090 280 210 Красноярский край  ;  Krasnoyarsk Krai
+mapdata: 280 210 114.98 81.77 74.98 51.77 Красноярский край Krasnoyarsk Krai
+Generating taginfo-config:  ru-len -100000000000176095 450 144 Ленинградская область  ;  Leningrad oblast
+mapdata: 450 144 35.815 61.41 26.44 58.41 Ленинградская область Leningrad oblast
+Generating taginfo-config:  ru-lip -100000000000072169 336 189 Липецкая область  ;  Lipetsk Oblast
+mapdata: 336 189 40.92 53.68 37.72 51.88 Липецкая область Lipetsk Oblast
+Generating taginfo-config:  ru-mag -100000000000151228 376 155 Магаданская область  ;  Magadan Oblast
+mapdata: 376 155 163.52 66.38 144.72 58.63 Магаданская область Magadan Oblast
+Generating taginfo-config:  ru-me -100000000000115114 414 144 Марий Эл  ;  Mari El
+mapdata: 414 144 50.22 57.42 45.62 55.82 Марий Эл Mari El
+Generating taginfo-config:  ru-mo -100000000000072196 414 144 Мордовия  ;  Republic of Mordovia
+mapdata: 414 144 46.76 55.24 42.16 53.64 Мордовия Republic of Mordovia
+Generating taginfo-config:  ru-mos -100000000000051490 338 182 Московская область  ;  Moscow Oblast
+mapdata: 338 182 40.34 57.05 35.14 54.25 Московская область Moscow Oblast
+Generating taginfo-config:  ru-mow -100000000000102269 282 216 Москва  ;  Moscow
+mapdata: 282 216 37.975 56.04 36.8 55.14 Москва Moscow
+Generating taginfo-config:  ru-mur -100000000002099216 423 135 Мурманская область  ;  Murmansk Oblast
+mapdata: 423 135 42.51 70.19 28.41 65.69 Мурманская область Murmansk Oblast
+Generating taginfo-config:  ru-nen -100000000000274048 539 110 Ненецкий автономный округ  ;  Nenets Autonomous Okrug
+mapdata: 539 110 65.81 70.82 41.31 65.82 Ненецкий автономный округ Nenets Autonomous Okrug
+Generating taginfo-config:  ru-ngr -100000000000089331 399 153 Новгородская область  ;  Novgorod Oblast
+mapdata: 399 153 36.26 59.45 29.61 56.9 Новгородская область Novgorod Oblast
+Generating taginfo-config:  ru-niz -100000000000072195 325 195 Нижегородская область  ;  Nizhny Novgorod Oblast
+mapdata: 325 195 48.02 58.21 41.77 54.46 Нижегородская область Nizhny Novgorod Oblast
+Generating taginfo-config:  ru-nvs -100000000000140294 402 158 Новосибирская область  ;  Novosibirsk Oblast
+mapdata: 402 158 85.13 57.24 75.08 53.29 Новосибирская область Novosibirsk Oblast
+Generating taginfo-config:  ru-oms -100000000000140292 270 234 Омская область  ;  Omsk Oblast
+mapdata: 270 234 76.35 58.63 70.35 53.43 Омская область Omsk Oblast
+Generating taginfo-config:  ru-ore -100000000000077669 418 152 Оренбургская область  ;  Orenburg Oblast
+mapdata: 418 152 61.76 54.49 50.76 50.49 Оренбургская область Orenburg Oblast
+Generating taginfo-config:  ru-orl -100000000000072224 351 182 Орловская область  ;  Oryol Oblast
+mapdata: 351 182 38.165 53.68 34.79 51.93 Орловская область Oryol Oblast
+Generating taginfo-config:  ru-per -100000000000115135 279 207 Пермский край  ;  Perm Krai
+mapdata: 279 207 59.52 61.85 51.77 56.1 Пермский край Perm Krai
+Generating taginfo-config:  ru-pnz -100000000000072182 425 153 Пензенская область  ;  Penza Oblast
+mapdata: 425 153 47.08 54.09 42.08 52.29 Пензенская область Penza Oblast
+Generating taginfo-config:  ru-pri -100000000000151225 288 204 Приморский край  ;  Primorsky Krai
+mapdata: 288 204 139.39 48.545 130.39 42.17 Приморский край Primorsky Krai
+Generating taginfo-config:  ru-psk -100000000000155262 272 224 Псковская область  ;  Pskov Oblast
+mapdata: 272 224 31.56 59.08 27.31 55.58 Псковская область Pskov Oblast
+Generating taginfo-config:  ru-ros -100000000000085606 294 210 Ростовская область  ;  Rostov Oblast
+mapdata: 294 210 44.345 50.325 38.22 45.95 Ростовская область Rostov Oblast
+Generating taginfo-config:  ru-rya -100000000000071950 324 166 Рязанская область  ;  Ryazan Oblast
+mapdata: 324 166 42.71 55.375 38.66 53.3 Рязанская область Ryazan Oblast
+Generating taginfo-config:  ru-sa -100000000000151234 406 154 Республика Саха (Якутия)  ;  Sakha Republic
+mapdata: 406 154 163.5 77.48 105.5 55.48 Республика Саха (Якутия) Sakha Republic
+Generating taginfo-config:  ru-sak -100000000000394235 288 207 Сахалинская область  ;  Sakhalin Oblast
+mapdata: 288 207 156.92 54.67 140.92 43.17 Сахалинская область Sakhalin Oblast
+Generating taginfo-config:  ru-sam -100000000000072194 312 195 Самарская область  ;  Samara Oblast
+mapdata: 312 195 52.73 54.77 47.93 51.77 Самарская область Samara Oblast
+Generating taginfo-config:  ru-sar -100000000000072193 417 151 Саратовская область  ;  Saratov Oblast
+mapdata: 417 151 50.84 52.82 42.5 49.8 Саратовская область Saratov Oblast
+Generating taginfo-config:  ru-se -100000000000110032 280 231 Северная Осетия - Алания  ;  North Ossetia–Alania
+mapdata: 280 231 44.99 43.86 43.39 42.54 Северная Осетия - Алания North Ossetia–Alania
+Generating taginfo-config:  ru-sev -100000000003788485 252 228 Севастополь  ;  Sevastopol
+mapdata: 252 228 33.93 44.95 33.09 44.19 Севастополь Sevastopol
+Generating taginfo-config:  ru-smo -100000000000081996 329 189 Смоленская область  ;  Smolensk Oblast
+mapdata: 329 189 35.45 56.1 30.75 53.4 Смоленская область Smolensk Oblast
+Generating taginfo-config:  ru-spe -100000000000337422 374 170 Санкт-Петербург  ;  Saint Petersburg
+mapdata: 374 170 30.795 60.255 29.42 59.63 Санкт-Петербург Saint Petersburg
+Generating taginfo-config:  ru-sta -100000000000108081 343 182 Ставропольский край  ;  Stavropol Krai
+mapdata: 343 182 45.74 46.25 40.84 43.65 Ставропольский край Stavropol Krai
+Generating taginfo-config:  ru-sve -100000000000079379 306 204 Свердловская область  ;  Sverdlovsk Oblast
+mapdata: 306 204 66.22 62.05 57.22 56.05 Свердловская область Sverdlovsk Oblast
+Generating taginfo-config:  ru-ta -100000000000079374 399 154 Татарстан  ;  Tatarstan
+mapdata: 399 154 54.355 56.72 47.23 53.97 Татарстан Tatarstan
+Generating taginfo-config:  ru-tam -100000000000072180 306 207 Тамбовская область  ;  Tambov Oblast
+mapdata: 306 207 43.31 53.88 39.91 51.58 Тамбовская область Tambov Oblast
+Generating taginfo-config:  ru-tom -100000000000140295 406 154 Томская область  ;  Tomsk Oblast
+mapdata: 406 154 89.55 61.1 75.05 55.6 Томская область Tomsk Oblast
+Generating taginfo-config:  ru-tul -100000000000081993 307 192 Тульская область  ;  Tula Oblast
+mapdata: 307 192 38.96 54.86 35.89 52.94 Тульская область Tula Oblast
+Generating taginfo-config:  ru-tve -100000000002095259 381 162 Тверская область  ;  Tver Oblast
+mapdata: 381 162 38.34 58.87 30.72 55.63 Тверская область Tver Oblast
+Generating taginfo-config:  ru-ty -100000000000145195 399 152 Республика Тыва  ;  Tuva Republic
+mapdata: 399 152 99.29 53.74 88.79 49.74 Республика Тыва Tuva Republic
+Generating taginfo-config:  ru-tyu -100000000000140291 364 175 Тюменская область  ;  Tyumen Oblast
+mapdata: 364 175 75.22 60.14 64.82 55.14 Тюменская область Tyumen Oblast
+Generating taginfo-config:  ru-ud -100000000000115134 266 216 Удмуртия  ;  Udmurtia
+mapdata: 266 216 54.445 58.55 51.12 55.85 Удмуртия Udmurtia
+Generating taginfo-config:  ru-uly -100000000000072192 342 190 Ульяновская область  ;  Ulyanovsk Oblast
+mapdata: 342 190 50.29 55.03 45.79 52.53 Ульяновская область Ulyanovsk Oblast
+Generating taginfo-config:  ru-vgg -100000000000077665 314 191 Волгоградская область  ;  Volgograd Oblast
+mapdata: 314 191 47.44 51.26 41.16 47.44 Волгоградская область Volgograd Oblast
+Generating taginfo-config:  ru-vla -100000000000072197 418 154 Владимирская область  ;  Vladimir Oblast
+mapdata: 418 154 43.01 56.85 38.26 55.1 Владимирская область Vladimir Oblast
+Generating taginfo-config:  ru-vlg -100000000000115106 498 126 Вологодская область  ;  Vologda Oblast
+mapdata: 498 126 47.16 61.62 34.71 58.47 Вологодская область Vologda Oblast
+Generating taginfo-config:  ru-vor -100000000000072181 343 182 Воронежская область  ;  Voronezh Oblast
+mapdata: 343 182 43.03 52.15 38.13 49.55 Воронежская область Voronezh Oblast
+Generating taginfo-config:  ru-yan -100000000000191706 363 174 Ямало-Ненецкий автономный округ  ;  Yamalo-Nenets Autonomous Okrug
+mapdata: 363 174 86.2 73.79 62.0 62.19 Ямало-Ненецкий автономный округ Yamalo-Nenets Autonomous Okrug
+Generating taginfo-config:  ru-yar -100000000000081994 312 196 Ярославская область  ;  Yaroslavl Oblast
+mapdata: 312 196 41.22 58.98 37.32 56.53 Ярославская область Yaroslavl Oblast
+Generating taginfo-config:  ru-yev -100000000000147167 378 168 Еврейская автономная область  ;  Jewish Autonomous Oblast
+mapdata: 378 168 135.02 49.65 130.52 47.65 Еврейская автономная область Jewish Autonomous Oblast
+Generating taginfo-config:  ru-zab -100000000000145730 289 186 Забайкальский край  ;  Zabaykalsky Krai
+mapdata: 289 186 122.18 58.45 107.73 49.15 Забайкальский край Zabaykalsky Krai
+------start setup_docker.py ----- 
+------chmod settings -----
+:: generated services
+# generated : 2018-07-25:09:37  // template : ./setup/service_create.sh.jinja2
+
+export CURRENT_UID="$(id -u):$(id -g)" 
+
+
+ docker-compose up --no-start taginfo-ru-ru-ad
+ docker-compose up --no-start taginfo-ru-ru-al
+ docker-compose up --no-start taginfo-ru-ru-alt
+ docker-compose up --no-start taginfo-ru-ru-amu
+ docker-compose up --no-start taginfo-ru-ru-ark
+ docker-compose up --no-start taginfo-ru-ru-ast
+ docker-compose up --no-start taginfo-ru-ru-ba
+ docker-compose up --no-start taginfo-ru-ru-bel
+ docker-compose up --no-start taginfo-ru-ru-bry
+ docker-compose up --no-start taginfo-ru-ru-bu
+ docker-compose up --no-start taginfo-ru-ru-ce
+ docker-compose up --no-start taginfo-ru-ru-che
+ docker-compose up --no-start taginfo-ru-ru-chu
+ docker-compose up --no-start taginfo-ru-ru-cr
+ docker-compose up --no-start taginfo-ru-ru-cu
+ docker-compose up --no-start taginfo-ru-ru-da
+ docker-compose up --no-start taginfo-ru-ru-in
+ docker-compose up --no-start taginfo-ru-ru-irk
+ docker-compose up --no-start taginfo-ru-ru-iva
+ docker-compose up --no-start taginfo-ru-ru-kam
+ docker-compose up --no-start taginfo-ru-ru-kb
+ docker-compose up --no-start taginfo-ru-ru-kc
+ docker-compose up --no-start taginfo-ru-ru-kda
+ docker-compose up --no-start taginfo-ru-ru-kem
+ docker-compose up --no-start taginfo-ru-ru-kgd
+ docker-compose up --no-start taginfo-ru-ru-kgn
+ docker-compose up --no-start taginfo-ru-ru-kha
+ docker-compose up --no-start taginfo-ru-ru-khm
+ docker-compose up --no-start taginfo-ru-ru-kir
+ docker-compose up --no-start taginfo-ru-ru-kk
+ docker-compose up --no-start taginfo-ru-ru-kl
+ docker-compose up --no-start taginfo-ru-ru-klu
+ docker-compose up --no-start taginfo-ru-ru-ko
+ docker-compose up --no-start taginfo-ru-ru-kos
+ docker-compose up --no-start taginfo-ru-ru-kr
+ docker-compose up --no-start taginfo-ru-ru-krs
+ docker-compose up --no-start taginfo-ru-ru-kya
+ docker-compose up --no-start taginfo-ru-ru-len
+ docker-compose up --no-start taginfo-ru-ru-lip
+ docker-compose up --no-start taginfo-ru-ru-mag
+ docker-compose up --no-start taginfo-ru-ru-me
+ docker-compose up --no-start taginfo-ru-ru-mo
+ docker-compose up --no-start taginfo-ru-ru-mos
+ docker-compose up --no-start taginfo-ru-ru-mow
+ docker-compose up --no-start taginfo-ru-ru-mur
+ docker-compose up --no-start taginfo-ru-ru-nen
+ docker-compose up --no-start taginfo-ru-ru-ngr
+ docker-compose up --no-start taginfo-ru-ru-niz
+ docker-compose up --no-start taginfo-ru-ru-nvs
+ docker-compose up --no-start taginfo-ru-ru-oms
+ docker-compose up --no-start taginfo-ru-ru-ore
+ docker-compose up --no-start taginfo-ru-ru-orl
+ docker-compose up --no-start taginfo-ru-ru-per
+ docker-compose up --no-start taginfo-ru-ru-pnz
+ docker-compose up --no-start taginfo-ru-ru-pri
+ docker-compose up --no-start taginfo-ru-ru-psk
+ docker-compose up --no-start taginfo-ru-ru-ros
+ docker-compose up --no-start taginfo-ru-ru-rya
+ docker-compose up --no-start taginfo-ru-ru-sa
+ docker-compose up --no-start taginfo-ru-ru-sak
+ docker-compose up --no-start taginfo-ru-ru-sam
+ docker-compose up --no-start taginfo-ru-ru-sar
+ docker-compose up --no-start taginfo-ru-ru-se
+ docker-compose up --no-start taginfo-ru-ru-sev
+ docker-compose up --no-start taginfo-ru-ru-smo
+ docker-compose up --no-start taginfo-ru-ru-spe
+ docker-compose up --no-start taginfo-ru-ru-sta
+ docker-compose up --no-start taginfo-ru-ru-sve
+ docker-compose up --no-start taginfo-ru-ru-ta
+ docker-compose up --no-start taginfo-ru-ru-tam
+ docker-compose up --no-start taginfo-ru-ru-tom
+ docker-compose up --no-start taginfo-ru-ru-tul
+ docker-compose up --no-start taginfo-ru-ru-tve
+ docker-compose up --no-start taginfo-ru-ru-ty
+ docker-compose up --no-start taginfo-ru-ru-tyu
+ docker-compose up --no-start taginfo-ru-ru-ud
+ docker-compose up --no-start taginfo-ru-ru-uly
+ docker-compose up --no-start taginfo-ru-ru-vgg
+ docker-compose up --no-start taginfo-ru-ru-vla
+ docker-compose up --no-start taginfo-ru-ru-vlg
+ docker-compose up --no-start taginfo-ru-ru-vor
+ docker-compose up --no-start taginfo-ru-ru-yan
+ docker-compose up --no-start taginfo-ru-ru-yar
+ docker-compose up --no-start taginfo-ru-ru-yev
+ docker-compose up --no-start taginfo-ru-ru-zab
+ 
+# generated : 2018-07-25:09:37:: don't forget copy hugo files

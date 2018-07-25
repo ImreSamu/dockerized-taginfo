@@ -1,0 +1,1150 @@
+select iso, name_en,area_pct,name,wikidata from osm_admin2_continent_all order by iso ;
+  iso   |                 name_en                 |     area_pct      |                             name                              | wikidata  
+--------+-----------------------------------------+-------------------+---------------------------------------------------------------+-----------
+ ae     | United Arab Emirates                    |                 1 | الإمارات العربية المتحدة                                      | Q878
+ ae-aj  | Ajman                                   |                 1 | عجمان                                                         | Q159477
+ ae-az  | Abu Dhabi                               |                 1 | أبو ظبي                                                       | Q187712
+ ae-du  | Dubai                                   |                 1 | دبي‎                                                           | Q613
+ ae-fu  | Fujairah                                |                 1 | فجيرة                                                         | Q4091
+ ae-rk  | Ras al-Khaimah                          |                 1 | ‏رأس الخيمة‎                                                    | Q170024
+ ae-sh  | Sharjah                                 |                 1 | الشارقة                                                       | Q188810
+ ae-uq  | Umm al-Quwain                           |                 1 | ‏أم القيوين‎                                                    | Q175021
+ af     | Afghanistan                             |                 1 | افغانستان                                                     | Q889
+ af-bal | Balkh                                   |                 1 | بلخ                                                           | Q121104
+ af-bam | Bamyan                                  |                 1 | بامیان                                                        | Q171382
+ af-bdg | Badghis                                 |                 1 | بادغیس                                                        | Q172052
+ af-bds | Badakhshan                              |                 1 | ولایت بدخشان                                                  | Q165376
+ af-bgl | Baghlan                                 |                 1 | بغلان                                                         | Q170309
+ af-day | Daykundi                                |                 1 | دایکندی                                                       | Q181220
+ af-fra | Farah                                   |                 1 | فراه                                                          | Q180330
+ af-fyb | Faryab                                  |                 1 | فاریاب                                                        | Q173830
+ af-gha | Ghazni                                  |                 1 | غزني                                                          | Q180415
+ af-gho | Ghor                                    |                 1 | غور                                                           | Q186392
+ af-hel | Helmand                                 |                 1 | هلمند                                                         | Q173821
+ af-her | Herat                                   |                 1 | هرات                                                          | Q182844
+ af-jow | Jowzjan                                 |                 1 | ولایت جوزجان                                                  | Q183036
+ af-kab | Kabul                                   |                 1 | كابل                                                          | Q188933
+ af-kan | Kandahar                                |                 1 | کندهار - قندهار                                               | Q173808
+ af-kap | Kapisa                                  |                 1 | کاپیس                                                         | Q173816
+ af-kdz | Kunduz                                  |                 1 | کندز                                                          | Q186418
+ af-kho | Khost                                   |                 1 | خوست                                                          | Q185752
+ af-knr | Kunar                                   |                 1 | کونړ                                                          | Q188147
+ af-lag | Laghman                                 |                 1 | لغمان                                                         | Q185442
+ af-log | Logar                                   |                 1 | لوګر                                                          | Q6667298
+ af-nan | Nangarhar                               |                 1 | ننگرهار                                                       | Q178471
+ af-nim | Nimruz                                  |                 1 | نیمروز                                                        | Q183021
+ af-nur | Nuristan                                |                 1 | نورستان                                                       | Q167485
+ af-pan | Panjshir                                |                 1 | پنجشیر                                                        | Q181235
+ af-par | Parwan                                  |                 1 | پروان                                                         | Q188157
+ af-pia | Paktia                                  |                 1 | پکتيا                                                         | Q182493
+ af-pka | Paktika                                 |                 1 | پکتیکا                                                        | Q185575
+ af-sam | Samangan                                |                 1 | سمنگان‎                                                        | Q183015
+ af-sar | Sar-e Pol                               |                 1 | سرپل                                                          | Q182487
+ af-tak | Takhar                                  |                 1 | تخار‎‎                                                          | Q186395
+ af-uru | Urōzgān                                 |                 1 | روزگان                                                        | Q183028
+ af-war | Maidan Wardak                           |                 1 | ميدان وردگ                                                    | Q183056
+ af-zab | Zabul                                   |                 1 | زابل                                                          | Q139126
+ am     | Armenia                                 |                 1 | Հայաստան                                                      | Q399
+ am-ag  | Aragatsotn Province                     |                 1 | Արագածոտնի մարզ                                               | Q17915
+ am-ar  | Ararat Province                         |                 1 | Արարատի մարզ                                                  | Q199880
+ am-av  | Armavir Province                        |                 1 | Արմավիրի մարզ                                                 | Q201147
+ am-er  | Yerevan                                 |                 1 | Երևան                                                         | Q1953
+ am-gr  | Gegharkunik Province                    |                 1 | Գեղարքունիքի մարզ                                             | Q199905
+ am-kt  | Kotayk Province                         |                 1 | Կոտայքի մարզ                                                  | Q4511
+ am-lo  | Lori Province                           |                 1 | Լոռու մարզ                                                    | Q200350
+ am-sh  | Shirak Province                         |                 1 | Շիրակի մարզ                                                   | Q201063
+ am-su  | Syunik Province                         |                 1 | Սյունիք                                                       | Q2523428
+ am-tv  | Tavush Province                         |                 1 | Տավուշի մարզ                                                  | Q201140
+ am-vd  | Vayots Dzor Province                    |                 1 | Վայոց ձորի մարզ                                               | Q200124
+ az     | Azerbaijan                              |                 1 | Azərbaycan                                                    | Q227
+ az-abs | Absheron District                       |                 1 | Abşeron rayonu                                                | Q179538
+ az-aga | Agstafa                                 |                 1 | Ağstafa rayonu                                                | Q275744
+ az-agc | Aghjabadi District                      |                 1 | Ağcabədi rayonu                                               | Q330818
+ az-agm | Agdam District                          |                 1 | Ağdam rayonu                                                  | Q201647
+ az-ags | Agdash District                         |                 1 | Ağdaş rayonu                                                  | Q275784
+ az-agu | Agsu District                           |                 1 | Ağsu rayonu                                                   | Q330800
+ az-ast | Astara District                         |                 1 | Astara rayonu                                                 | Q269680
+ az-ba  | Baku                                    |                 1 | Bakı İnzibati Ərazisi                                         | Q9248
+ az-bab | Babek District                          |                 1 | Babək rayonu                                                  | Q643895
+ az-bal | Balakan                                 |                 1 | Balakən rayonu                                                | Q330850
+ az-bar | Barda District                          |                 1 | Bərdə rayonu                                                  | Q330857
+ az-bey | Beylagan District                       |                 1 | Beyləqan rayonu                                               | Q330807
+ az-bil | Bilasuvar District                      |                 1 | Biləsuvar rayonu                                              | Q330834
+ az-cab | Jabrayil District                       |                 1 | Cəbrayıl rayonu                                               | Q457491
+ az-cal | Jalilabad District                      |                 1 | Cəlilabad rayonu                                              | Q372795
+ az-cul | Julfa District                          |                 1 | Culfa rayonu                                                  | Q644035
+ az-das | Dashkasan District                      |                 1 | Daşkəsən rayonu                                               | Q457494
+ az-fuz | Fizuli District                         |                 1 | Füzuli rayonu                                                 | Q331687
+ az-ga  | Ganja District                          |                 1 | Gəncə İnzibati Ərazisi                                        | Q131290
+ az-gad | Gədəbəy District                        |                 1 | Gədəbəy rayonu                                                | Q330749
+ az-gor | Goranboy District                       |                 1 | Goranboy rayonu                                               | Q330843
+ az-goy | Goychay District                        |                 1 | Göyçay rayonu                                                 | Q477163
+ az-gyg | Goygol District                         |                 1 | Göygöl rayonu                                                 | Q388087
+ az-hac | Hajigabul District                      |                 1 | Hacıqabul rayonu                                              | Q476690
+ az-imi | Imishli District                        |                 1 | İmişli rayonu                                                 | Q343908
+ az-ism | Ismailli District                       |                 1 | İsmayıllı rayonu                                              | Q344252
+ az-kan | Kangarli District                       |                 1 | Kəngərli rayonu                                               | Q734030
+ az-kur | Kurdamir District                       |                 1 | Kürdəmir rayonu                                               | Q688589
+ az-la  | Lankaran                                |                 1 | Lənkəran İnzibati Ərazisi                                     | Q228811
+ az-lan | Lankaran District                       |                 1 | Lənkəran rayonu                                               | Q269986
+ az-ler | Lerik District                          |                 1 | Lerik rayonu                                                  | Q688626
+ az-mas | Masally District                        |                 1 | Masallı rayonu                                                | Q476695
+ az-mi  | Mingachevir                             |                 1 | Mingəçevir İnzibati Ərazisi                                   | Q230932
+ az-na  | Naftalan                                |                 1 | Naftalan İnzibati Ərazisi                                     | Q152825
+ az-nef | Neftchala District                      |                 1 | Neftçala rayonu                                               | Q688633
+ az-nv  | Nakhchivan                              |                 1 | Naxçıvan                                                      | Q230104
+ az-nx  | Nakhichevan                             |                 1 | Naxçıvan Muxtar Respublikası                                  | Q131083
+ az-ogu | Oghuz District                          |                 1 | Oğuz rayonu                                                   | Q643989
+ az-ord | Ordubad District                        |                 1 | Ordubad rayonu                                                | Q512623
+ az-qab | Qabala District                         |                 1 | Qəbələ rayonu                                                 | Q593872
+ az-qax | Qakh                                    |                 1 | Qax rayonu                                                    | Q330796
+ az-qaz | Qazakh                                  |                 1 | Qazax rayonu                                                  | Q389381
+ az-qba | Quba District                           |                 1 | Quba rayonu                                                   | Q457499
+ az-qob | Gobustan District                       |                 1 | Qobustan rayonu                                               | Q457508
+ az-qus | Qusar District                          |                 1 | Qusar rayonu                                                  | Q386506
+ az-sa  | Shaki                                   |                 1 | Şəki İnzibati Ərazisi                                         | Q234783
+ az-sab | Sabirabad District                      |                 1 | Sabirabad rayonu                                              | Q382132
+ az-sad | Sadarak District                        |                 1 | Sədərək rayonu                                                | Q641468
+ az-sah | Shakhbuz Rayon                          |                 1 | Şahbuz rayonu                                                 | Q388081
+ az-sak | Shaki District                          |                 1 | Şəki rayonu                                                   | Q330864
+ az-sal | Salyan District                         |                 1 | Salyan rayonu                                                 | Q457485
+ az-sar | Sharur District                         |                 1 | Şərur rayonu                                                  | Q390820
+ az-sat | Saatly District                         |                 1 | Saatlı rayonu                                                 | Q601105
+ az-sbn | Shabran District                        |                 1 | Şabran rayonu                                                 | Q387994
+ az-siy | Siazan District                         |                 1 | Siyəzən rayonu                                                | Q820940
+ az-skr | Shamkir                                 |                 1 | Şəmkir rayonu                                                 | Q467491
+ az-sm  | Sumqayit                                |                 1 | Sumqayıt İnzibati Ərazisi                                     | Q179833
+ az-smi | Shamakhi District                       |                 1 | Şamaxı rayonu                                                 | Q330839
+ az-smx | Samukh                                  |                 1 | Samux rayonu                                                  | Q498437
+ az-sr  | Shirvan District                        |                 1 | Şirvan İnzibati Ərazisi                                       | Q241116
+ az-sus | Shusha District                         |                 1 | Շուշիի շրջան                                                  | Q388960
+ az-tar | Tartar District                         |                 1 | Tərtər rayonu                                                 | Q477168
+ az-tov | Tovuz                                   |                 1 | Tovuz rayonu                                                  | Q388980
+ az-uca | Ujar District                           |                 1 | Ucar rayonu                                                   | Q476703
+ az-xa  | Stepanakert                             |                 1 | Ստեփանակերտ                                                   | Q129352
+ az-xac | Khachmaz District                       |                 1 | Xaçmaz rayonu                                                 | Q6398826
+ az-xci | Askeran District                        |                 1 | Ասկերանի մարզ                                                 | Q4807202
+ az-xiz | Khizi District                          |                 1 | Xızı rayonu                                                   | Q476708
+ az-xvd | Khojavend District                      |                 1 | Xocavənd rayonu                                               | Q330813
+ az-yar | Yardymli District                       |                 1 | Yardımlı rayonu                                               | Q127255
+ az-ye  | Yevlakh                                 |                 1 | Yevlax İnzibati Ərazisi                                       | Q175459
+ az-yev | Yevlakh District                        |                 1 | Yevlax rayonu                                                 | Q458524
+ az-zaq | Zaqatala                                |                 1 | Zaqatala rayonu                                               | Q147553
+ az-zar | Zardab District                         |                 1 | Zərdab rayonu                                                 | Q249293
+ bd     | Bangladesh                              |                 1 | বাংলাদেশ                                                      | Q902
+ bd-a   | Barisal Division                        |                 1 | বরিশাল বিভাগ                                                  | Q459723
+ bd-b   | Chittagong Division                     |                 1 | চট্টগ্রাম বিভাগ                                                 | Q158087
+ bd-c   | Dhaka Division                          |                 1 | ঢাকা বিভাগ                                                    | Q330158
+ bd-d   | Khulna Division                         |                 1 | খুলনা বিভাগ                                                    | Q501696
+ bd-e   | Rajshahi Division                       |                 1 | রাজশাহী বিভাগ                                                 | Q379382
+ bd-f   | Rangpur Division                        |                 1 | রংপুর বিভাগ                                                    | Q876023
+ bd-g   | Sylhet Division                         |                 1 | সিলেট বিভাগ                                                   | Q459732
+ bd-h   | Mymensingh Division                     |                 1 | ময়মনসিংহ বিভাগ                                                | Q19594930
+ bh     | Bahrain                                 |                 1 | ‏البحرين‎                                                       | Q398
+ bh-13  | Capital Governorate                     |                 1 | محافظة العاصمة                                                | Q528953
+ bh-14  | Southern Governorate                    |                 1 | المحافظة الجنوبية                                             | Q838532
+ bh-15  | Muharraq Governorate                    |                 1 | محافظة المحرق                                                 | Q375630
+ bh-17  | Northern Governorate                    |                 1 | المحافظة الشمالية                                             | Q840445
+ bn     | Brunei                                  |                 1 | Brunei                                                        | Q921
+ bn-be  | Belait                                  |                 1 | Belait                                                        | Q40395
+ bn-bm  | Brunei-Muara                            |                 1 | Brunei-Muara                                                  | Q153009
+ bn-tu  | Tutong                                  |                 1 | Tutong                                                        | Q40398
+ bt     | Bhutan                                  |                 1 | འབྲུག་ཡུལ་                                                       | Q917
+ bt-11  | Paro District                           |                 1 | སྤ་རོ་རྫོང་ཁག་                                                    | Q652784
+ bt-12  | Chukha District                         |                 1 | ཆུ་ཁ་རྫོང་ཁག་                                                    | Q652754
+ bt-13  | Haa District                            |                 1 | ཧཱ་རྫོང་ཁག་                                                      | Q754448
+ bt-14  | Samtse District                         |                 1 | བསམ་རྩེ་རྫོང་ཁག་                                                  | Q728917
+ bt-15  | Thimphu District                        |                 1 | ཐིམ་ཕུ་རྫོང་ཁག་                                                   | Q254889
+ bt-21  | Tsirang District                        |                 1 | རྩི་རང་རྫོང་ཁག་                                                   | Q728922
+ bt-22  | Dagana District                         |                 1 | དར་དཀར་ན་རྫོང་ཁག་                                               | Q735146
+ bt-23  | Punakha District                        |                 1 | སྤུ་ན་ཁ་རྫོང་ཁག་                                                  | Q587062
+ bt-24  | Wangdue Phodrang District               |                 1 | དབང་འདུས་ཕོ་བྲང་རྫོང་ཁག་                                           | Q728933
+ bt-31  | Sarpang District                        |                 1 | གསར་སྤང་རྫོང་ཁག་                                                 | Q728947
+ bt-32  | Trongsa District                        |                 1 | ཀྲོང་གསར་རྫོང་ཁག་                                                 | Q728938
+ bt-33  | Bumthang District                       |                 1 | བུམ་ཐང་རྫོང་ཁག་                                                  | Q463242
+ bt-34  | Zhemgang District                       |                 1 | གཞལམ་སྒང་རྫོང་ཁག་                                                | Q197564
+ bt-41  | Trashigang District                     |                 1 | བཀྲ་ཤིས་སྒང་རྫོང་ཁག་                                               | Q652773
+ bt-42  | Mongar District                         |                 1 | མོང་སྒར་རྫོང་ཁག་                                                  | Q389734
+ bt-43  | Pemagatshel District                    |                 1 | པདྨ་དགའ་ཚལ་རྫོང་ཁག་                                              | Q167279
+ bt-44  | Lhuntse District                        |                 1 | ལྷུན་རྩེ་རྫོང་ཁག་                                                   | Q598793
+ bt-45  | Samdrup Jongkhar District               |                 1 | བསམ་གྲུབ་ལྗོངས་མཁར་རྫོང་ཁག་                                         | Q728929
+ bt-ga  | Gasa District                           |                 1 | མགར་ས་རྫོང་ཁག་                                                  | Q578294
+ bt-ty  | Trashiyangtse District                  |                 1 | བཀྲ་ཤིས་གྱང་ཙེ་རྫོང་ཁག་                                             | Q600200
+ cn     | China                                   |                 1 | 中国                                                          | Q148
+ cn-11  | Beijing                                 |                 1 | 北京市                                                        | Q956
+ cn-12  | Tianjin                                 |                 1 | 天津市                                                        | Q11736
+ cn-13  | Hebei                                   |                 1 | 河北省                                                        | Q21208
+ cn-14  | Shanxi                                  |                 1 | 山西省                                                        | Q46913
+ cn-15  | Inner Mongolia                          |                 1 | 内蒙古自治区                                                  | Q41079
+ cn-21  | Liaoning                                |                 1 | 辽宁省                                                        | Q43934
+ cn-22  | Jilin                                   |                 1 | 吉林省                                                        | Q45208
+ cn-23  | Heilongjiang                            |                 1 | 黑龙江省                                                      | Q19206
+ cn-31  | Shanghai                                |                 1 | 上海市                                                        | Q8686
+ cn-32  | Jiangsu                                 |                 1 | 江苏省                                                        | Q16963
+ cn-33  | Zhejiang                                |                 1 | 浙江省                                                        | Q16967
+ cn-34  | Anhui                                   |                 1 | 安徽省                                                        | Q40956
+ cn-35  | Fujian                                  |                 1 | 福建省                                                        | Q41705
+ cn-36  | Jiangxi                                 |                 1 | 江西省                                                        | Q57052
+ cn-37  | Shandong                                |                 1 | 山东省                                                        | Q43407
+ cn-41  | Henan                                   |                 1 | 河南省                                                        | Q43684
+ cn-42  | Hubei                                   |                 1 | 湖北省                                                        | Q46862
+ cn-43  | Hunan                                   |                 1 | 湖南省                                                        | Q45761
+ cn-44  | Guangdong                               |                 1 | 广东省                                                        | Q15175
+ cn-45  | Guangxi                                 |                 1 | 广西壮族自治区                                                | Q15176
+ cn-46  | Hainan                                  |                 1 | 海南省                                                        | Q42200
+ cn-50  | Chongqing                               |                 1 | 重庆市                                                        | Q11725
+ cn-51  | Sichuan                                 |                 1 | 四川省                                                        | Q19770
+ cn-52  | Guizhou                                 |                 1 | 贵州省                                                        | Q47097
+ cn-53  | Yunnan                                  |                 1 | 云南省                                                        | Q43194
+ cn-54  | Tibet Autonomous Region                 |                 1 | 西藏自治区                                                    | Q17269
+ cn-61  | Shaanxi                                 |                 1 | 陕西省                                                        | Q47974
+ cn-62  | Gansu                                   |                 1 | 甘肃省                                                        | Q42392
+ cn-63  | Qinghai                                 |                 1 | 青海省                                                        | Q45833
+ cn-64  | Ningxia Hui                             |                 1 | 宁夏回族自治区                                                | Q57448
+ cn-65  | Xinjiang                                |                 1 | 新疆维吾尔自治区                                              | Q34800
+ cn-91  | Hong Kong                               |                 1 | 香港 Hong Kong                                                | Q8646
+ cn-92  | Macau                                   |                 1 | 澳門 Macau                                                    | Q14773
+ eg-dk  | Dakahlia Governorate                    | 0.336445606290251 | الدقهلية                                                      | Q31068
+ eg-dt  | Damietta Governorate                    | 0.685303010545075 | دمياط                                                         | Q30644
+ eg-is  | Ismailia Governorate                    | 0.685856565391556 | الإسماعيلية                                                   | Q31067
+ eg-js  | South Sinai Governorate                 | 0.942436845098064 | جنوب سيناء                                                    | Q30815
+ eg-pts | Port Said Governorate                   |                 1 | ‏محافظة بورسعيد                                                | Q31079
+ eg-sin | North Sinai Governorate                 |                 1 | شمال سيناء                                                    | Q30662
+ ge     | Georgia                                 |                 1 | საქართველო                                                    | Q230
+ ge-ab  | Autonomous Republic of Abkhazia         |                 1 | აფხაზეთის ავტონომიური რესპუბლიკა - Аҧсны Автономтә Республика | Q2914461
+ ge-aj  | Autonomous Republic of Adjara           |                 1 | აჭარის ავტონომიური რესპუბლიკა                                 | Q45693
+ ge-gu  | Guria                                   |                 1 | გურია                                                         | Q19038
+ ge-im  | Imereti                                 |                 1 | იმერეთი                                                       | Q200045
+ ge-ka  | Kakheti                                 |                 1 | კახეთი                                                        | Q169674
+ ge-kk  | Lower Kartli                            |                 1 | ქვემო ქართლი                                                  | Q200048
+ ge-mm  | Mtskheta-Mtianeti                       |                 1 | მცხეთა-მთიანეთი                                               | Q203339
+ ge-rl  | Racha-Lechkhumi and Lower Svaneti       |                 1 | რაჭა-ლეჩხუმი და ქვემო სვანეთი                                 | Q38893
+ ge-sj  | Samtskhe-Javakheti                      |                 1 | სამცხე-ჯავახეთი                                               | Q19039
+ ge-sk  | Inner Kartli                            |                 1 | შიდა ქართლი                                                   | Q200047
+ ge-sz  | Samegrelo-Upper Svaneti                 |                 1 | სამეგრელო-ზემო სვანეთი                                        | Q200309
+ ge-tb  | Tbilisi                                 |                 1 | თბილისი                                                       | Q994
+ id     | Indonesia                               |                 1 | Indonesia                                                     | Q252
+ id-ac  |                                         |                 1 | Aceh                                                          | Q1823
+ id-ba  |                                         |                 1 | Bali                                                          | Q3125978
+ id-bb  | Bangka-Belitung Islands                 |                 1 | Kepulauan Bangka Belitung                                     | Q1866
+ id-be  |                                         |                 1 | Bengkulu                                                      | Q1890
+ id-bt  | Banten                                  |                 1 | Banten                                                        | Q3540
+ id-go  |                                         |                 1 | Gorontalo                                                     | Q5067
+ id-ja  |                                         |                 1 | Jambi                                                         | Q2051
+ id-jb  | West Java                               |                 1 | Jawa Barat                                                    | Q3724
+ id-ji  | East Java                               |                 1 | Jawa Timur                                                    | Q3586
+ id-jk  | Jakarta Special Capital Region          |                 1 | Daerah Khusus Ibukota Jakarta                                 | Q3630
+ id-jt  | Central Java                            |                 1 | Jawa Tengah                                                   | Q3557
+ id-kb  | West Kalimantan                         |                 1 | Kalimantan Barat                                              | Q3916
+ id-ki  | East Kalimantan                         |                 1 | Kalimantan Timur                                              | Q3899
+ id-kr  | Riau Islands                            |                 1 | Kepulauan Riau                                                | Q2223
+ id-ks  | South Kalimantan                        |                 1 | Kalimantan Selatan                                            | Q3906
+ id-kt  | Central Kalimantan                      |                 1 | Kalimantan Tengah                                             | Q3891
+ id-ku  | North Kalimantan                        |                 1 | Kalimantan Utara                                              | Q3903
+ id-la  |                                         |                 1 | Lampung                                                       | Q2110
+ id-ma  |                                         |                 1 | Maluku                                                        | Q5093
+ id-mu  | North Maluku                            |                 1 | Maluku Utara                                                  | Q5094
+ id-nb  | West Nusa Tenggara                      |                 1 | Nusa Tenggara Barat                                           | Q5062
+ id-nt  | East Nusa Tenggara                      |                 1 | Nusa Tenggara Timur                                           | Q5061
+ id-pa  | Papua                                   |                 1 | Papua                                                         | Q5095
+ id-pb  | West Papua                              |                 1 | Papua Barat                                                   | Q5096
+ id-ri  |                                         |                 1 | Riau                                                          | Q2175
+ id-sa  | North Sulawesi                          |                 1 | Sulawesi Utara                                                | Q5068
+ id-sb  | West Sumatra                            |                 1 | Sumatera Barat                                                | Q2772
+ id-sg  | Southeast Sulawesi                      |                 1 | Sulawesi Tenggara                                             | Q5075
+ id-sn  | South Sulawesi                          |                 1 | Sulawesi Selatan                                              | Q5078
+ id-sr  | West Sulawesi                           |                 1 | Sulawesi Barat                                                | Q5082
+ id-ss  | South Sumatra                           |                 1 | Sumatera Selatan                                              | Q2271
+ id-st  | Central Sulawesi                        |                 1 | Sulawesi Tengah                                               | 
+ id-su  | North Sumatra                           |                 1 | Sumatera Utara                                                | Q2140
+ id-yo  | Special Region of Yogyakarta            |                 1 | Daerah Istimewa Yogyakarta                                    | Q3741
+ il     | Israel                                  |                 1 | ישראל                                                         | Q801
+ il-d   | South District                          |                 1 | מחוז הדרום                                                    | Q188781
+ il-ha  | Haifa District                          |                 1 | מחוז חיפה                                                     | Q185845
+ il-jm  | Jerusalem District                      |                 1 | מחוז ירושלים                                                  | Q192232
+ il-m   | Center District                         |                 1 | מחוז המרכז                                                    | Q188785
+ il-ta  | Tel Aviv District                       |                 1 | מחוז תל אביב                                                  | Q192811
+ il-z   | North District                          |                 1 | מחוז הצפון                                                    | Q189942
+ in     | India                                   |                 1 | भारत                                                          | Q668
+ in-an  | Andaman and Nicobar Islands             |                 1 | Andaman and Nicobar Islands                                   | Q40888
+ in-ap  | Andhra Pradesh                          |                 1 | Andhra Pradesh                                                | Q1159
+ in-ar  | Arunachal Pradesh                       |                 1 | Arunachal Pradesh                                             | Q1162
+ in-as  | Assam                                   |                 1 | Assam                                                         | Q1164
+ in-br  | Bihar                                   |                 1 | Bihar                                                         | Q1165
+ in-ch  | Chandigarh                              |                 1 | Chandigarh                                                    | Q43433
+ in-ct  | Chhattisgarh                            |                 1 | Chhattisgarh                                                  | Q1168
+ in-dd  | Daman and Diu                           |                 1 | Daman and Diu                                                 | Q66710
+ in-dl  | Delhi                                   |                 1 | Delhi                                                         | Q1353
+ in-dn  | Dadra and Nagar Haveli                  |                 1 | Dadra and Nagar Haveli                                        | Q46107
+ in-ga  | Goa                                     |                 1 | Goa                                                           | Q1171
+ in-gj  | Gujarat                                 |                 1 | Gujarat                                                       | Q1061
+ in-hp  | Himachal Pradesh                        |                 1 | Himachal Pradesh                                              | Q1177
+ in-hr  | Haryana                                 |                 1 | Haryana                                                       | Q1174
+ in-jh  | Jharkhand                               |                 1 | Jharkhand                                                     | Q1184
+ in-jk  | Jammu and Kashmir                       |                 1 | Jammu and Kashmir                                             | Q1180
+ in-ka  | Karnataka                               |                 1 | Karnataka                                                     | Q1185
+ in-kl  | Kerala                                  |                 1 | കേരളം                                                         | Q1186
+ in-ld  | Lakshadweep                             |                 1 | Lakshadweep                                                   | Q26927
+ in-mh  | Maharashtra                             |                 1 | Maharashtra                                                   | Q1191
+ in-ml  | Meghalaya                               |                 1 | Meghalaya                                                     | Q1195
+ in-mn  | Manipur                                 |                 1 | Manipur                                                       | Q1193
+ in-mp  | Madhya Pradesh                          |                 1 | Madhya Pradesh                                                | Q1188
+ in-mz  | Mizoram                                 |                 1 | Mizoram                                                       | Q1502
+ in-nl  | Nagaland                                |                 1 | Nagaland                                                      | Q1599
+ in-or  | Odisha                                  |                 1 | Odisha                                                        | Q22048
+ in-pb  | Punjab                                  |                 1 | Punjab                                                        | Q22424
+ in-py  |                                         |                 1 | Puducherry                                                    | Q66743
+ in-rj  | Rajasthan                               |                 1 | Rajasthan                                                     | Q1437
+ in-sk  | Sikkim                                  |                 1 | Sikkim                                                        | Q1505
+ in-tg  | Telangana                               |                 1 | Telangana                                                     | Q677037
+ in-tn  | Tamil Nadu                              |                 1 | தமிழ்நாடு                                                      | Q1445
+ in-tr  | Tripura                                 |                 1 | Tripura                                                       | Q1363
+ in-up  | Uttar Pradesh                           |                 1 | Uttar Pradesh                                                 | Q1498
+ in-ut  | Uttarakhand                             |                 1 | Uttarakhand                                                   | Q1499
+ in-wb  | West Bengal                             |                 1 | West Bengal                                                   | Q1356
+ io     | British Indian Ocean Territory          |                 1 | British Indian Ocean Territory                                | Q43448
+ iq     | Iraq                                    |                 1 | العراق                                                        | Q796
+ iq-an  | Al Anbar                                |                 1 | الأنبار                                                       | Q187334
+ iq-ar  | Erbil                                   |                 1 | هەولێر                                                        | Q213189
+ iq-ba  | Basra                                   |                 1 | البصرة                                                        | Q193551
+ iq-bb  | Babil                                   |                 1 | بابل                                                          | Q59202
+ iq-bg  | Baghdad                                 |                 1 | محافظة بغداد                                                  | Q191075
+ iq-da  | Dohuk                                   |                 1 | دهوك                                                          | Q189541
+ iq-di  | Diyala                                  |                 1 | ديالى                                                         | Q217075
+ iq-dq  | Dhi Qar                                 |                 1 | ذي قار                                                        | Q215649
+ iq-ha  | Halabja                                 |                 1 | حلبجة                                                         | Q15631321
+ iq-ka  | Karbala                                 |                 1 | كربلاء                                                        | Q214104
+ iq-ki  | Kirkuk                                  |                 1 | كركوك                                                         | Q193268
+ iq-ma  | Maysan                                  |                 1 | ميسان                                                         | Q213170
+ iq-mu  | Muthanna                                |                 1 | المثنى                                                        | Q212761
+ iq-na  | Najaf                                   |                 1 | النجف                                                         | Q192882
+ iq-ni  | Nineveh                                 |                 1 | نینوى                                                         | Q189352
+ iq-qa  | Al-Qadisiyah                            |                 1 | القادسية                                                      | Q62987
+ iq-sd  | Saladin                                 |                 1 | صلاح الدين                                                    | Q190131
+ iq-su  | Sulaymaniyah                            |                 1 | السليمانية                                                    | Q213182
+ iq-wa  | Wasit                                   |                 1 | واسط                                                          | Q189747
+ ir     | Iran                                    |                 1 | ‏ایران‎                                                         | Q794
+ ir-01  | East Azerbaijan Province                |                 1 | استان آذربایجان شرقی                                          | Q176081
+ ir-02  | West Azerbaijan Province                |                 1 | استان آذربایجان غربی                                          | Q134411
+ ir-03  | Ardabil Province                        |                 1 | استان اردبیل                                                  | Q134228
+ ir-04  | Isfahan Province                        |                 1 | استان اصفهان                                                  | Q1367759
+ ir-05  | Ilam Province                           |                 1 | استان ایلام                                                   | Q170570
+ ir-06  | Bushehr Province                        |                 1 | استان بوشهر                                                   | Q132945
+ ir-07  | Tehran Province                         |                 1 | استان تهران                                                   | Q590866
+ ir-08  | Chaharmahal and Bakhtiyari Province     |                 1 | استان چهارمحال و بختیاری                                      | Q171702
+ ir-10  | Khuzestan Province                      |                 1 | استان خوزستان                                                 | Q241119
+ ir-11  | Zanjan Province                         |                 1 | استان زنجان                                                   | Q146726
+ ir-12  | Semnan Province                         |                 1 | استان سمنان                                                   | Q168949
+ ir-13  | Sistan and Baluchestan Province         |                 1 | استان سیستان و بلوچستان‎                                       | Q939575
+ ir-14  | Fars Province                           |                 1 | استان فارس                                                    | Q1004666
+ ir-15  | Kerman Province                         |                 1 | استان کرمان                                                   | Q165352
+ ir-16  | Kurdistan Province                      |                 1 | استان کردستان                                                 | Q134386
+ ir-17  | Kermanshah Province                     |                 1 | استان کرمانشاه                                                | Q174010
+ ir-18  | Kohgiluye and Buyer Ahmad Province      |                 1 | استان کهگیلویه و بویر احمد                                    | Q180068
+ ir-19  | Gilan Province                          |                 1 | استان گیلان                                                   | Q928828
+ ir-20  | Lorestan Province                       |                 1 | استان لرستان‎                                                  | Q1131727
+ ir-21  | Mazandaran Province                     |                 1 | استان مازندران‎                                                | Q308864
+ ir-22  | Markazi Province                        |                 1 | استان مرکزی                                                   | Q134417
+ ir-23  | Hormozgan Province                      |                 1 | استان ‏هرمزگان‎                                                 | Q633659
+ ir-24  | Hamadan Province                        |                 1 | استان همدان                                                   | Q187373
+ ir-25  | Yazd Province                           |                 1 | استان یزد                                                     | Q170568
+ ir-26  | Qom Province                            |                 1 | استان قم                                                      | Q131664
+ ir-27  | Golestan Province                       |                 1 | استان گلستان                                                  | Q170041
+ ir-28  | Qazvin Province                         |                 1 | استان قزوین                                                   | Q1105893
+ ir-29  | South Khorasan Province                 |                 1 | استان خراسان جنوبی                                            | Q171551
+ ir-30  | Razavi Khorasan Province                |                 1 | استان خراسان رضوی                                             | Q587090
+ ir-31  | North Khorasan Province                 |                 1 | استان خراسان شمالی                                            | Q180075
+ ir-32  | Alborz Province                         |                 1 | استان البرز                                                   | Q392522
+ jo     | Jordan                                  |                 1 | الأردن                                                        | Q810
+ jo-aj  | Ajlun                                   |                 1 | عجلون                                                         | Q506658
+ jo-am  | Amman                                   |                 1 | عمان                                                          | Q472788
+ jo-aq  | Aqaba                                   |                 1 | العقبة                                                        | Q260796
+ jo-at  | Tafilah                                 |                 1 | الطفيلة                                                       | Q750259
+ jo-az  | Zarqa                                   |                 1 | الزرقاء                                                       | Q721445
+ jo-ba  | Balqa                                   |                 1 | البلقاء                                                       | Q721431
+ jo-ir  | Irbid                                   |                 1 | إربد                                                          | Q721441
+ jo-ja  | Jarash                                  |                 1 | جرش                                                           | Q750270
+ jo-ka  | Karak                                   |                 1 | الكرك                                                         | Q735245
+ jo-ma  | Mafraq                                  |                 1 | المفرق‎                                                        | Q854871
+ jo-md  | Madaba                                  |                 1 | مادبا                                                         | Q750447
+ jo-mn  | Ma’an                                   |                 1 | معان                                                          | Q606340
+ jp     | Japan                                   |                 1 | 日本                                                          | Q17
+ jp-01  | Hokkaidō Prefecture                     |                 1 | 北海道                                                        | Q1037393
+ jp-02  | Aomori Prefecture                       |                 1 | 青森県                                                        | Q71699
+ jp-03  | Iwate Prefecture                        |                 1 | 岩手県                                                        | Q48326
+ jp-04  | Miyagi Prefecture                       |                 1 | 宮城県                                                        | Q47896
+ jp-05  | Akita Prefecture                        |                 1 | 秋田県                                                        | Q81863
+ jp-06  | Yamagata Prefecture                     |                 1 | 山形県                                                        | Q125863
+ jp-07  | Fukushima Prefecture                    |                 1 | 福島県                                                        | Q71707
+ jp-08  | Ibaraki Prefecture                      |                 1 | 茨城県                                                        | Q83273
+ jp-09  | Tochigi Prefecture                      |                 1 | 栃木県                                                        | Q44843
+ jp-10  | Gunma Prefecture                        |                 1 | 群馬県                                                        | Q129499
+ jp-11  | Saitama Prefecture                      |                 1 | 埼玉県                                                        | Q128186
+ jp-12  | Chiba Prefecture                        |                 1 | 千葉県                                                        | Q80011
+ jp-13  | Tokyo                                   |                 1 | 東京都                                                        | Q1490
+ jp-14  | Kanagawa Prefecture                     |                 1 | 神奈川県                                                      | Q127513
+ jp-15  | Niigata Prefecture                      |                 1 | 新潟県                                                        | Q132705
+ jp-16  | Toyama Prefecture                       |                 1 | 富山県                                                        | Q132929
+ jp-17  | Ishikawa Prefecture                     |                 1 | 石川県                                                        | Q131281
+ jp-18  | Fukui Prefecture                        |                 1 | 福井県                                                        | Q133879
+ jp-19  | Yamanashi Prefecture                    |                 1 | 山梨県                                                        | Q132720
+ jp-20  | Nagano Prefecture                       |                 1 | 長野県                                                        | Q127877
+ jp-21  | Gifu Prefecture                         |                 1 | 岐阜県                                                        | Q131277
+ jp-22  | Shizuoka Prefecture                     |                 1 | 静岡県                                                        | Q131320
+ jp-23  | Aichi Prefecture                        |                 1 | 愛知県                                                        | Q80434
+ jp-24  | Mie Prefecture                          |                 1 | 三重県                                                        | Q128196
+ jp-25  | Shiga Prefecture                        |                 1 | 滋賀県                                                        | Q131358
+ jp-26  | Kyoto Prefecture                        |                 1 | 京都府                                                        | Q120730
+ jp-27  | Osaka Prefecture                        |                 1 | 大阪府                                                        | Q122723
+ jp-28  | Hyogo Prefecture                        |                 1 | 兵庫県                                                        | Q130290
+ jp-29  | Nara Prefecture                         |                 1 | 奈良県                                                        | Q131287
+ jp-30  | Wakayama Prefecture                     |                 1 | 和歌山県                                                      | Q131314
+ jp-31  | Tottori Prefecture                      |                 1 | 鳥取県                                                        | Q133935
+ jp-32  | Shimane Prefecture                      |                 1 | 島根県                                                        | Q132751
+ jp-33  | Okayama Prefecture                      |                 1 | 岡山県                                                        | Q132936
+ jp-34  | Hiroshima Prefecture                    |                 1 | 広島県                                                        | Q617375
+ jp-35  | Yamaguchi Prefecture                    |                 1 | 山口県                                                        | Q127264
+ jp-36  | Tokushima Prefecture                    |                 1 | 徳島県                                                        | Q160734
+ jp-37  | Kagawa Prefecture                       |                 1 | 香川県                                                        | Q161454
+ jp-38  | Ehime Prefecture                        |                 1 | 愛媛県                                                        | Q123376
+ jp-39  | Kochi Prefecture                        |                 1 | 高知県                                                        | Q134093
+ jp-40  | Fukuoka Prefecture                      |                 1 | 福岡県                                                        | Q123258
+ jp-41  | Saga Prefecture                         |                 1 | 佐賀県                                                        | Q160420
+ jp-42  | Nagasaki Prefecture                     |                 1 | 長崎県                                                        | Q169376
+ jp-43  | Kumamoto Prefecture                     |                 1 | 熊本県                                                        | Q130308
+ jp-44  | Oita Prefecture                         |                 1 | 大分県                                                        | Q133924
+ jp-45  | Miyazaki Prefecture                     |                 1 | 宮崎県                                                        | Q130300
+ jp-46  | Kagoshima Prefecture                    |                 1 | 鹿児島県                                                      | Q15701
+ jp-47  | Okinawa Prefecture                      |                 1 | 沖縄県                                                        | Q766445
+ kg     | Kyrgyzstan                              |                 1 | Кыргызстан                                                    | Q813
+ kg-b   | Batken Region                           |                 1 | Баткенская область                                            | Q487631
+ kg-c   | Chuy Region                             |                 1 | Чуйская область                                               | Q486370
+ kg-j   | Jalal-Abad Region                       |                 1 | Джалал-Абадская область                                       | Q487640
+ kg-n   | Naryn Region                            |                 1 | Нарынская область                                             | Q486375
+ kg-o   | Osh Region                              |                 1 | Ошская область                                                | Q231987
+ kg-t   | Talas Region                            |                 1 | Таласская область                                             | Q109838
+ kg-y   | Issyk-Kul Region                        |                 1 | Иссык-Кульская область                                        | Q487413
+ kh     | Cambodia                                |                 1 | ព្រះរាជាណាចក្រ​កម្ពុជា                                             | Q424
+ kh-1   | Bantey Meanchey                         |                 1 | ខេត្តបន្ទាយមានជ័យ                                                | Q3817
+ kh-10  | Kratie                                  |                 1 | ខេត្តក្រចេះ                                                     | Q785896
+ kh-11  | Mondulkiri                              |                 1 | ខេត្តមណ្ឌលគិរី                                                    | Q652830
+ kh-12  | Phnom Penh                              |                 1 | រាជធានីភ្នំពេញ                                                   | Q1850
+ kh-13  | Preah Vihear                            |                 1 | ខេត្តព្រះវិហារ                                                   | Q502151
+ kh-14  | Prey Veng                               |                 1 | ខេត្តព្រៃវែង                                                    | Q856788
+ kh-15  | Pursat                                  |                 1 | ខេត្តពោធិ៍សាត់                                                    | Q834464
+ kh-16  | Ratanakiri Province                     |                 1 | ខេត្តរតនគិរី                                                     | Q747846
+ kh-17  | Siem Reap                               |                 1 | ខេត្តសៀមរាប                                                    | Q652818
+ kh-18  | Preah Sihanouk                          |                 1 | ខេត្តព្រះសីហនុ                                                    | Q220966
+ kh-19  | Stung Treng                             |                 1 | ខេត្តស្ទឹងត្រែង                                                   | Q837889
+ kh-2   | Battambang                              |                 1 | ខេត្តបាត់ដំបង                                                    | Q810923
+ kh-20  | Svay Rieng                              |                 1 | ខេត្តស្វាយរៀង                                                   | Q751864
+ kh-21  | Takeo                                   |                 1 | ខេត្តតាកែវ                                                     | Q613345
+ kh-22  | Oddar Meanchey                          |                 1 | ខេត្តឧត្ដរមានជ័យ                                                 | Q629538
+ kh-23  | Kep                                     |                 1 | ខេត្តកែប                                                       | Q852089
+ kh-24  | Pailin                                  |                 1 | ខេត្តប៉ៃលិន                                                      | Q506646
+ kh-25  | Tbong Khmum                             |                 1 | ខេត្តត្បូងឃ្មុំ                                                     | Q15623578
+ kh-3   | Kampong Cham                            |                 1 | ខេត្តកំពង់ចាម                                                    | Q142258
+ kh-4   | Kampong Chhnang                         |                 1 | ខេត្តកំពង់ឆ្នាំង                                                   | Q877468
+ kh-5   | Kampong Speu                            |                 1 | ខេត្តកំពង់ស្ពឺ                                                     | Q652867
+ kh-6   | Kampong Thom                            |                 1 | ខេត្តកំពង់ធំ                                                      | Q502148
+ kh-7   | Kampot                                  |                 1 | ខេត្តកំពត                                                       | Q748470
+ kh-8   | Kandal                                  |                 1 | ខេត្តកណ្ដាល                                                     | Q466031
+ kh-9   | Koh Kong                                |                 1 | ខេត្តកោះកុង                                                     | Q466000
+ kp     | North Korea                             |                 1 | 조선민주주의인민공화국                                        | Q423
+ kp-01  | Pyongyang                               |                 1 | 평양시                                                        | Q18808
+ kp-02  | Pyongannam-do                           |                 1 | 평안남도                                                      | Q109380
+ kp-03  | North Pyongan                           |                 1 | 평안북도                                                      | Q109348
+ kp-04  | Chagang                                 |                 1 | 자강도                                                        | Q272406
+ kp-05  | Hwanghaenam-do                          |                 1 | 황해남도                                                      | Q626052
+ kp-06  | Hwanghaebuk-do                          |                 1 | 황해북도                                                      | Q109342
+ kp-07  | Kangwon-do                              |                 1 | 강원도                                                        | Q41416
+ kp-08  | Hamgyongnam-do                          |                 1 | 함경남도                                                      | Q109368
+ kp-09  | North Hamgyong                          |                 1 | 함경북도                                                      | Q109361
+ kp-10  | Ryanggang                               |                 1 | 량강도                                                        | Q110171
+ kp-13  | Rason                                   |                 1 | 라선시                                                        | Q221734
+ kr     | South Korea                             |                 1 | 대한민국                                                      | Q884
+ kr-11  | Seoul                                   |                 1 | 서울특별시                                                    | Q8684
+ kr-26  | Busan                                   |                 1 | 부산광역시                                                    | Q16520
+ kr-27  | Daegu                                   |                 1 | 대구                                                          | Q20927
+ kr-28  | Incheon                                 |                 1 | 인천광역시                                                    | Q20934
+ kr-29  | Gwangju                                 |                 1 | 광주                                                          | Q41283
+ kr-30  | Daejeon                                 |                 1 | 대전                                                          | Q20921
+ kr-31  | Ulsan                                   |                 1 | 울산광역시                                                    | Q41278
+ kr-41  | Gyeonggi-do                             |                 1 | 경기도                                                        | Q20937
+ kr-42  | Gangwon-do                              |                 1 | 강원도                                                        | Q41071
+ kr-43  | Chungcheongbuk-do                       |                 1 | 충청북도                                                      | Q41066
+ kr-44  | Chungcheongnam-do                       |                 1 | 충청남도                                                      | Q41070
+ kr-45  | Jeollabuk-do                            |                 1 | 전라북도                                                      | Q41157
+ kr-46  | Jeollanam-do                            |                 1 | 전라남도                                                      | Q41161
+ kr-47  | Gyeongsangbuk-do                        |                 1 | 경상북도                                                      | Q41154
+ kr-48  | Gyeongsangnam-do                        |                 1 | 경상남도                                                      | Q41151
+ kr-49  | Jeju-do                                 |                 1 | 제주특별자치도                                                | Q41164
+ kr-50  | Sejong                                  |                 1 | 세종특별자치시                                                | Q20929
+ kw     | Kuwait                                  |                 1 | ‏الكويت‎                                                        | Q817
+ kw-ah  | Ahmadi                                  |                 1 | الاحمدي                                                       | Q552354
+ kw-fa  | Farwaniya                               |                 1 | الفروانية                                                     | Q1072757
+ kw-ha  | Hawalli                                 |                 1 | حولي                                                          | Q747432
+ kw-ja  | Jahra                                   |                 1 | الجهراء                                                       | Q405701
+ kw-ku  | Al Asimah                               |                 1 | العاصمة                                                       | Q1046645
+ kw-mu  | Mubarak Al-Kabeer                       |                 1 | مبارك الكبير‎                                                  | Q913370
+ kz     | Kazakhstan                              |                 1 | Казахстан                                                     | Q232
+ kz-akm | Akmola Region                           |                 1 | Акмолинская область                                           | Q485056
+ kz-akt | Aktobe Region                           |                 1 | Актюбинская область                                           | Q485437
+ kz-ala | Almaty                                  |                 1 | Алматы                                                        | Q35493
+ kz-alm | Almaty Region                           |                 1 | Алматинская область                                           | Q186466
+ kz-ast | Astana                                  |                 1 | Астана                                                        | Q1520
+ kz-aty | Atyrau Region                           |                 1 | Атырауская область                                            | Q427658
+ kz-bay |                                         |                 1 | Байконыр Г.А.                                                 | Q165413
+ kz-kar | Karaganda Region                        |                 1 | Карагандинская область                                        | Q485429
+ kz-kus | Kostanay Region                         |                 1 | Костанайская область                                          | Q485605
+ kz-kzy | Kyzylorda Region                        |                 1 | Кызылординская область                                        | Q485322
+ kz-man | Mangystau Region                        |                 1 | Мангистауская область                                         | Q238931
+ kz-pav | Pavlodar Region                         |                 1 | Павлодарская область                                          | Q486144
+ kz-sev | North Kazakhstan Region                 |                 1 | Северо-Казахстанская область                                  | Q485088
+ kz-vos | East Kazakhstan Region                  |                 1 | Восточно-Казахстанская область                                | Q36156
+ kz-yuz | Turkistan Region                        |                 1 | Туркестанская область                                         | Q815330
+ kz-zap | West Kazakhstan Region                  |                 1 | Западно-Казахстанская область                                 | Q486007
+ kz-zha | Jambyl Region                           |                 1 | Жамбылская область                                            | Q486657
+ la     | Laos                                    |                 1 | ປະເທດລາວ                                                      | Q819
+ la-at  | Attapeu                                 |                 1 | ອັດຕະປື                                                         | Q503004
+ la-bk  | Bokeo Province                          |                 1 | ບໍ່ແກ້ວ                                                          | Q334884
+ la-bl  | Bolikhamsai                             |                 1 | ບໍລິຄຳໄຊ                                                        | Q2403514
+ la-ch  | Champasak Province                      |                 1 | ຈຳປາສັກ                                                        | Q334888
+ la-ho  | Houaphanh                               |                 1 | ຫົວພັນ                                                          | Q502997
+ la-kh  | Khammouane                              |                 1 | ຄໍາມ່ວນ                                                         | Q506641
+ la-lm  | Luang Namtha                            |                 1 | ຫລວງນໍ້າທາ                                                      | Q948691
+ la-lp  | Luang Prabang                           |                 1 | ຫລວງພະບາງ                                                     | Q747881
+ la-ou  | Oudomxay                                |                 1 | ອຸດົມໄຊ                                                         | Q465961
+ la-ph  | Phongsaly                               |                 1 | ຜົ້ງສາລີ                                                         | Q334868
+ la-sl  | Salavan Province                        |                 1 | ສາລະວັນ                                                        | Q302656
+ la-sv  | Savannakhet Province                    |                 1 | ສະຫວັນນະເຂດ                                                    | Q465940
+ la-vi  | Vientiane Province                      |                 1 | ວຽງຈັນ                                                         | Q720066
+ la-vt  | Vientiane Prefecture                    |                 1 | ນະຄອນຫຼວງວຽງຈັນ                                                 | Q390377
+ la-xa  | Sainyabuli Province                     |                 1 | ໄຊຍະບູລີ                                                        | Q465929
+ la-xe  | Sekong Province                         |                 1 | ເຊກອງ                                                         | Q585707
+ la-xi  | Xiangkhouang Province                   |                 1 | ຊຽງຂວາງ                                                       | Q465947
+ la-xs  | Xaisomboun Province                     |                 1 | ໄຊສົມບູນ                                                        | Q20202028
+ lb     | Lebanon                                 |                 1 | لبنان                                                         | Q822
+ lb-ak  | Akkar Governorate                       |                 1 | محافظة عكار                                                   | Q556146
+ lb-as  | North Governorate                       |                 1 | محافظة الشمال                                                 | Q390267
+ lb-ba  | Beirut Governorate                      |                 1 | محافظة بيروت                                                  | Q651688
+ lb-bh  | Baalbek-Hermel Governorate              |                 1 | محافظة بعلبك الهرمل                                           | Q787753
+ lb-bi  | Beqaa Governorate                       |                 1 | محافظة البقاع                                                 | Q319632
+ lb-ja  | South Governorate                       |                 1 | محافظة الجنوب                                                 | Q223643
+ lb-jl  | Mount Lebanon Governorate               |                 1 | محافظة جبل لبنان                                              | Q216945
+ lb-na  | Nabatieh Governorate                    |                 1 | محافظة النبطية                                                | Q458417
+ lk     | Sri Lanka                               |                 1 | ශ්‍රී ලංකාව இலங்கை                                                | Q854
+ lk-1   | Western Province                        |                 1 | Western Province                                              | Q856686
+ lk-11  | Colombo District                        |                 1 | කොළඹ දිස්ත්‍රික්කය                                                  | Q606287
+ lk-12  | Gampaha District                        |                 1 | ගම්පහ දිස්ත්‍රික්කය                                                  | Q206344
+ lk-13  | Kalutara District                       |                 1 | කළුතර දිස්ත්‍රික්කය                                                  | Q728935
+ lk-2   | Central Province                        |                 1 | Central Province                                              | Q190716
+ lk-21  | Kandy District                          |                 1 | මහනුවර දිස්ත්‍රික්කය                                                 | Q723002
+ lk-22  | Matale District                         |                 1 | මාතලේ දිස්ත්‍රික්කය                                                 | Q787421
+ lk-23  | Nuwara Eliya District                   |                 1 | නුවරඑළිය දිස්ත්‍රික්කය                                                | Q1583950
+ lk-3   | Southern Province                       |                 1 | Southern Province                                             | Q876308
+ lk-31  | Galle District                          |                 1 | ගාල්ල දිස්ත්‍රික්කය                                                  | Q647649
+ lk-32  | Matara District                         |                 1 | මාතර දිස්ත්‍රික්කය                                                  | Q1281285
+ lk-33  | Hambantota District                     |                 1 | හම්බන්තොට දිස්ත්‍රික්කය                                               | Q723006
+ lk-4   | Northern Province                       |                 1 | Northern Province                                             | Q598745
+ lk-41  | Jaffna District                         |                 1 | යාපනය දිස්ත්‍රික්කය Yāḻppāṇam māvaṭṭam                              | Q1520182
+ lk-42  | Kilinochchi District                    |                 1 | කිලිනොච්චි දිස්ත්‍රික්කය Kiḷinocaci māvaṭṭam                            | Q1584007
+ lk-43  | Mannar District                         |                 1 | මන්නාරම දිස්ත්‍රික්කය Maṉṉār Māvaṭṭam                                | Q178003
+ lk-44  | Vavuniya District                       |                 1 | Vavuniya District                                             | Q527980
+ lk-45  | Mullaitivu District                     |                 1 | Mullaitivu District                                           | Q1587508
+ lk-5   | Eastern                                 |                 1 | Eastern Province                                              | Q1046126
+ lk-51  | Batticaloa District                     |                 1 | මඩකලපුව දිස්ත්‍රික්කය                                                | Q810960
+ lk-52  | Ampara District                         |                 1 | අම්පාර දිස්ත්‍රික්කය                                                 | Q474395
+ lk-53  | Trincomalee District                    |                 1 | තිරිකුණාමළය දිස්ත්‍රික්කය                                              | Q1493318
+ lk-6   | North Western Province                  |                 1 | North Western Province                                        | Q876339
+ lk-61  | Kurunegala District                     |                 1 | කුරුණෑගල දිස්ත්‍රික්කය                                                | Q745073
+ lk-62  | Puttalam District                       |                 1 | පුත්තලම් දිස්ත්‍රික්කය                                                 | Q1665318
+ lk-7   | North Central Province                  |                 1 | North Central Province                                        | Q1057124
+ lk-71  | Anuradhapura District                   |                 1 | අනුරාධපුර දිස්ත්‍රික්කය                                               | Q612614
+ lk-72  | Polonnaruwa District                    |                 1 | පොළොන්නරුව දිස්ත්‍රික්කය                                              | Q931057
+ lk-8   | Uva                                     |                 1 | Uva Province                                                  | Q876293
+ lk-81  | Badulla District                        |                 1 | බදුල්ල දිස්ත්‍රික්කය                                                  | Q799713
+ lk-82  | Monaragala District                     |                 1 | මොනරාගල දිස්ත්‍රික්කය                                               | Q923420
+ lk-9   | Sabaragamuwa Province                   |                 1 | Sabaragamuwa Province                                         | Q853272
+ lk-91  | Ratnapura District                      |                 1 | රත්නපුර දිස්ත්‍රික්කය                                                 | Q1587175
+ lk-92  | Kegalle District                        |                 1 | කෑගල්ල දිස්ත්‍රික්කය                                                 | Q1737803
+ mm     | Myanmar                                 |                 1 | မြန်မာ                                                        | Q836
+ mm-01  | Sagaing                                 |                 1 | စစ်ကိုင်းတိုင်း (Sagaing)                                         | Q847289
+ mm-02  | Bago Region                             |                 1 | ပဲခူးတိုင်းဒေသကြီး (Bago)                                          | Q800124
+ mm-03  | Magway                                  |                 1 | မကွေးတိုင်းဒေသကြီး                                               | Q833013
+ mm-04  | Mandalay                                |                 1 | မန္တလေးတိုင်း                                                    | Q119494
+ mm-05  | Tanintharyi Region                      |                 1 | Tanintharyi Region                                            | Q843954
+ mm-06  | Yangon                                  |                 1 | Yangon                                                        | Q856781
+ mm-07  | Ayeyarwady                              |                 1 | Ayeyarwady                                                    | Q47047
+ mm-11  | Kachin                                  |                 1 | ကချင်ပြည်နယ် (Kachin)                                         | Q140646
+ mm-12  | Kayah                                   |                 1 | ကယားပြည်နယ်‌ (Kayah)                                           | Q652845
+ mm-13  | Kayin                                   |                 1 | ကရင်ပြည်နယ (Kayin)                                            | Q495342
+ mm-14  | Chin                                    |                 1 | Chin                                                          | Q46910
+ mm-15  | Mon                                     |                 1 | Mon                                                           | Q818742
+ mm-16  | Rakhine                                 |                 1 | ရခိုင်ပြည်နယ် (Rakhine)                                         | Q233838
+ mm-17  | Shan State                              |                 1 | ရှမ်းပြည်နယ် Shan State                                       | Q456847
+ mm-18  | Naypyitaw                               |                 1 | နေပြည်တော် ပြည်ထောင်စုနယ်မြ                                    | Q4796
+ mn     | Mongolia                                |                 1 | Монгол улс                                                    | Q711
+ mn-035 | Orkhon                                  |                 1 | Орхон                                                         | Q234710
+ mn-037 | Darkhan-Uul                             |                 1 | Дархан-Уул                                                    | Q18827
+ mn-039 | Khentii                                 |                 1 | Хэнтий                                                        | Q239040
+ mn-041 | Hovsgel                                 |                 1 | Хөвсгөл                                                       | Q244788
+ mn-043 | Khovd                                   |                 1 | Ховд                                                          | Q194098
+ mn-046 | Uvs                                     |                 1 | Увс                                                           | Q192942
+ mn-047 | Töv                                     |                 1 | Төв                                                           | Q276195
+ mn-049 | Selenge                                 |                 1 | Сэлэнгэ                                                       | Q234680
+ mn-051 | Sükhbaatar                              |                 1 | Сүхбаатар                                                     | Q244804
+ mn-053 | Ömnögovi                                |                 1 | Өмнөговь                                                      | Q235579
+ mn-055 | Övörkhangai                             |                 1 | Өвөрхангай                                                    | Q234713
+ mn-057 | Zavkhan                                 |                 1 | Завхан                                                        | Q167764
+ mn-059 | Dundgovi                                |                 1 | Дундговь                                                      | Q211835
+ mn-061 | Dornod                                  |                 1 | Дорнод                                                        | Q207795
+ mn-063 | Dornogovi                               |                 1 | Дорноговь                                                     | Q213272
+ mn-064 | Govisumber                              |                 1 | Говьсүмбэр                                                    | Q236333
+ mn-065 | Govi-Altai                              |                 1 | Говь-Алтай                                                    | Q192945
+ mn-067 | Bulgan                                  |                 1 | Булган                                                        | Q209774
+ mn-069 | Bayankhongor                            |                 1 | Баянхонгор                                                    | Q276200
+ mn-071 | Bayan-Ölgii                             |                 1 | Баян-Өлгий                                                    | Q191792
+ mn-073 | Arkhangai                               |                 1 | Архангай                                                      | Q207809
+ mn-1   | Ulaanbaatar                             |                 1 | Улаанбаатар                                                   | Q23430
+ mv     | Maldives                                |                 1 | ދިވެހިރާއްޖެ                                                        | Q826
+ mv-00  |                                         |                 1 | Alif Dhaalu                                                   | Q2316922
+ mv-01  |                                         |                 1 | Addu                                                          | Q353375
+ mv-02  |                                         |                 1 | Alif Alif                                                     | Q775323
+ mv-03  |                                         |                 1 | Lhaviyani                                                     | Q1390048
+ mv-04  |                                         |                 1 | Vaavu                                                         | Q2709111
+ mv-05  |                                         |                 1 | Laamu                                                         | Q1996432
+ mv-07  |                                         |                 1 | Haa Alif                                                      | Q2360912
+ mv-08  |                                         |                 1 | Thaa                                                          | Q2709118
+ mv-12  |                                         |                 1 | Meemu                                                         | Q2210716
+ mv-13  |                                         |                 1 | Raa                                                           | Q1457965
+ mv-14  |                                         |                 1 | Faafu                                                         | Q2469227
+ mv-17  |                                         |                 1 | Dhaalu                                                        | Q2290784
+ mv-20  |                                         |                 1 | Baa                                                           | Q949513
+ mv-23  |                                         |                 1 | Haa Dhaalu                                                    | Q2360368
+ mv-24  |                                         |                 1 | Shaviyani                                                     | Q2190334
+ mv-25  |                                         |                 1 | Noonu                                                         | Q2406322
+ mv-26  |                                         |                 1 | Kaafu                                                         | Q1468407
+ mv-27  |                                         |                 1 | Gaafu Alif                                                    | Q1116203
+ mv-28  |                                         |                 1 | Gaafu Dhaalu                                                  | Q2640183
+ mv-29  |                                         |                 1 | Gnaviyani                                                     | Q1811116
+ mv-mle | Malé                                    |                 1 | މާލެ                                                            | Q9347
+ my     | Malaysia                                |                 1 | Malaysia                                                      | Q833
+ my-01  |                                         |                 1 | Johor                                                         | Q183032
+ my-02  | Kedah                                   |                 1 | Kedah                                                         | Q188947
+ my-03  | Kelantan                                |                 1 | Kelantan                                                      | Q185944
+ my-04  | Malacca                                 |                 1 | Melaka                                                        | Q185221
+ my-05  |                                         |                 1 | Negeri Sembilan                                               | Q213893
+ my-06  | Pahang                                  |                 1 | Pahang                                                        | Q191346
+ my-07  | Penang                                  |                 1 | Pulau Pinang                                                  | Q188096
+ my-08  | Perak                                   |                 1 | Perak / ڨيرق                                                  | Q188953
+ my-09  | Perlis                                  |                 1 | Perlis                                                        | Q213467
+ my-10  |                                         |                 1 | Selangor                                                      | Q189710
+ my-11  | Terengganu                              |                 1 | Terengganu / ترڠڬانو                                          | Q189701
+ my-12  |                                         |                 1 | Sabah                                                         | Q179029
+ my-13  | Sarawak                                 |                 1 | Sarawak                                                       | Q170462
+ my-14  |                                         |                 1 | Kuala Lumpur                                                  | Q1865
+ my-15  |                                         |                 1 | Labuan                                                        | Q214504
+ my-16  |                                         |                 1 | Putrajaya                                                     | Q182378
+ np     | Nepal                                   |                 1 | नेपाल                                                          | Q837
+ np-1   | Central Development Region              |                 1 | मध्यमाञ्चल विकास क्षेत्र                                           | Q28579
+ np-2   | Mid-Western Development Region          |                 1 | मध्य-पश्चिमाञ्चल विकास क्षेत्र                                      | Q28464
+ np-3   | Western Development Region              |                 1 | पश्चिमाञ्चल विकास क्षेत्र                                          | Q28462
+ np-4   | Eastern Development Region              |                 1 | पुर्वाञ्चल विकास क्षेत्र                                            | Q28576
+ np-5   | Far-Western Development Region          |                 1 | सुदुर पश्चिमाञ्चल विकास क्षेत्र                                      | Q28235
+ np-ba  | Bagmati                                 |                 1 | बागमती अञ्चल                                                   | Q9046
+ np-bh  | Bheri                                   |                 1 | भेरी                                                           | Q9060
+ np-dh  | Dhaulagiri                              |                 1 | धौलागिरी अञ्चल                                                 | Q9088
+ np-ga  | Gandaki                                 |                 1 | गण्डकी अञ्चल                                                    | Q9133
+ np-ja  | Janakpur                                |                 1 | जनकपुर अञ्चल                                                    | Q9152
+ np-ka  | Karnali                                 |                 1 | कर्णाली अञ्चल                                                   | Q9164
+ np-ko  | Koshi                                   |                 1 | कोशी अञ्चल                                                     | Q9170
+ np-lu  | Lumbini                                 |                 1 | लुम्बिनी अञ्चल                                                   | Q9172
+ np-ma  | Mahakali                                |                 1 | महाकाली अञ्चल                                                  | Q9178
+ np-me  | Mechi                                   |                 1 | मेची अञ्चल                                                      | Q9180
+ np-na  | Narayani                                |                 1 | नारायणी अञ्चल                                                  | Q9183
+ np-ra  | Rapti                                   |                 1 | राप्ती अञ्चल                                                    | Q9185
+ np-sa  | Sagarmatha                              |                 1 | सगरमाथा अञ्चल                                                  | Q9195
+ np-se  | Seti                                    |                 1 | सेती अञ्चल                                                      | Q9196
+ om     | Oman                                    |                 1 | عمان                                                          | Q842
+ om-bu  | Al Buraymi                              |                 1 | محافظة البريمي                                                | Q852039
+ om-da  | Ad Dakhiliyah                           |                 1 | منطقة الداخلية                                                | Q792550
+ om-ma  | Muscat                                  |                 1 | محافظة مسقط                                                   | Q544762
+ om-mu  | Musandam                                |                 1 | محافظة مسندم                                                  | Q372144
+ om-sh  | Ash Sharqiyah                           |                 1 | المنطقة الشرقية                                               | Q1106416
+ om-wu  | Al Wusta                                |                 1 | محافظة الوسطى                                                 | Q958518
+ om-za  | Ad Dhahirah                             |                 1 | محافظة الظاهرة                                                | Q1468596
+ om-zu  | Dhofar                                  |                 1 | محافظة ظفار                                                   | Q1207752
+ ph     | Philippines                             |                 1 | Philippines                                                   | Q928
+ ph-00  | Metro Manila                            |                 1 | Metro Manila                                                  | Q13580
+ ph-01  | Ilocos Region                           |                 1 | Ilocos                                                        | Q12933
+ ph-02  | Cagayan Valley                          |                 1 | Cagayan Valley                                                | Q13615
+ ph-03  | Central Luzon                           |                 1 | Central Luzon                                                 | Q13617
+ ph-05  | Bicol Region                            |                 1 | Bicol                                                         | Q13662
+ ph-06  | Western Visayas                         |                 1 | Western Visayas                                               | Q13665
+ ph-07  | Central Visayas                         |                 1 | Central Visayas                                               | Q13669
+ ph-08  | Eastern Visayas                         |                 1 | Eastern Visayas                                               | Q13675
+ ph-09  | Zamboanga Peninsula                     |                 1 | Zamboanga Peninsula                                           | Q13682
+ ph-10  | Northern Mindanao                       |                 1 | Northern Mindanao                                             | Q13690
+ ph-11  |                                         |                 1 | Davao                                                         | Q13694
+ ph-12  | Soccsksargen                            |                 1 | Soccsksargen                                                  | Q13701
+ ph-13  | Caraga                                  |                 1 | Caraga                                                        | Q13704
+ ph-14  | Autonomous Region in Muslim Mindanao    |                 1 | Autonomous Region in Muslim Mindanao                          | Q13708
+ ph-15  | Cordillera Administrative Region        |                 1 | Cordillera Administrative Region                              | Q13606
+ ph-40  | Calabarzon                              |                 1 | Calabarzon                                                    | Q13650
+ ph-41  | Mimaropa                                |                 1 | Mimaropa                                                      | Q13658
+ ph-abr |                                         |                 1 | Abra                                                          | Q13711
+ ph-agn |                                         |                 1 | Agusan del Norte                                              | Q13714
+ ph-ags |                                         |                 1 | Agusan del Sur                                                | Q13721
+ ph-akl |                                         |                 1 | Aklan                                                         | Q13723
+ ph-alb |                                         |                 1 | Albay                                                         | Q13726
+ ph-ant |                                         |                 1 | Antique                                                       | Q13727
+ ph-apa |                                         |                 1 | Apayao                                                        | Q13728
+ ph-aur | Aurora                                  |                 1 | Aurora                                                        | Q13730
+ ph-ban | Bataan                                  |                 1 | Bataan                                                        | Q13739
+ ph-bas |                                         |                 1 | Basilan                                                       | Q13737
+ ph-ben |                                         |                 1 | Benguet                                                       | Q13750
+ ph-bil |                                         |                 1 | Biliran                                                       | Q13751
+ ph-boh |                                         |                 1 | Bohol                                                         | Q13752
+ ph-btg |                                         |                 1 | Batangas                                                      | Q13744
+ ph-btn |                                         |                 1 | Batanes                                                       | Q13740
+ ph-buk |                                         |                 1 | Bukidnon                                                      | Q13753
+ ph-bul | Bulacan                                 |                 1 | Bulacan                                                       | Q13755
+ ph-cag |                                         |                 1 | Cagayan                                                       | Q13759
+ ph-cam |                                         |                 1 | Camiguin                                                      | Q13769
+ ph-can |                                         |                 1 | Camarines Norte                                               | Q13763
+ ph-cap |                                         |                 1 | Capiz                                                         | Q13772
+ ph-cas |                                         |                 1 | Camarines Sur                                                 | Q13767
+ ph-cat |                                         |                 1 | Catanduanes                                                   | Q13778
+ ph-cav |                                         |                 1 | Cavite                                                        | Q13785
+ ph-ceb |                                         |                 1 | Cebu                                                          | Q13786
+ ph-com |                                         |                 1 | Compostela Valley                                             | Q13789
+ ph-dao |                                         |                 1 | Davao Oriental                                                | Q13806
+ ph-das |                                         |                 1 | Davao del Sur                                                 | Q13794
+ ph-dav |                                         |                 1 | Davao del Norte                                               | Q13792
+ ph-din |                                         |                 1 | Dinagat Islands                                               | Q13807
+ ph-dvo |                                         |                 1 | Davao Occidental                                              | Q3656379
+ ph-eas |                                         |                 1 | Eastern Samar                                                 | Q13809
+ ph-gui |                                         |                 1 | Guimaras                                                      | Q13810
+ ph-ifu |                                         |                 1 | Ifugao                                                        | Q13812
+ ph-ili |                                         |                 1 | Iloilo                                                        | Q13825
+ ph-iln |                                         |                 1 | Ilocos Norte                                                  | Q13813
+ ph-ils |                                         |                 1 | Ilocos Sur                                                    | Q12741
+ ph-isa |                                         |                 1 | Isabela                                                       | Q13826
+ ph-kal |                                         |                 1 | Kalinga                                                       | Q13827
+ ph-lag |                                         |                 1 | Laguna                                                        | Q13840
+ ph-lan |                                         |                 1 | Lanao del Norte                                               | Q13841
+ ph-las |                                         |                 1 | Lanao del Sur                                                 | Q13843
+ ph-ley |                                         |                 1 | Leyte                                                         | Q13844
+ ph-lun |                                         |                 1 | La Union                                                      | Q13829
+ ph-mad |                                         |                 1 | Marinduque                                                    | Q13846
+ ph-mag |                                         |                 1 | Maguindanao                                                   | Q13845
+ ph-mas |                                         |                 1 | Masbate                                                       | Q13847
+ ph-mdc |                                         |                 1 | Occidental Mindoro                                            | Q13867
+ ph-mdr |                                         |                 1 | Oriental Mindoro                                              | Q13868
+ ph-mou |                                         |                 1 | Mountain Province                                             | Q13861
+ ph-msc |                                         |                 1 | Misamis Occidental                                            | Q13857
+ ph-msr |                                         |                 1 | Misamis Oriental                                              | Q13860
+ ph-nco |                                         |                 1 | Cotabato                                                      | Q13791
+ ph-nec |                                         |                 1 | Negros Occidental                                             | Q13862
+ ph-ner |                                         |                 1 | Negros Oriental                                               | Q13863
+ ph-nsa |                                         |                 1 | Northern Samar                                                | Q13864
+ ph-nue | Nueva Ecija                             |                 1 | Nueva Ecija                                                   | Q13865
+ ph-nuv |                                         |                 1 | Nueva Vizcaya                                                 | Q13866
+ ph-pam | Pampanga                                |                 1 | Pampanga                                                      | Q13870
+ ph-pan |                                         |                 1 | Pangasinan                                                    | Q13871
+ ph-plw |                                         |                 1 | Palawan                                                       | Q13869
+ ph-que |                                         |                 1 | Quezon                                                        | Q13872
+ ph-qui |                                         |                 1 | Quirino                                                       | Q13873
+ ph-riz |                                         |                 1 | Rizal                                                         | Q13874
+ ph-rom |                                         |                 1 | Romblon                                                       | Q13875
+ ph-sar |                                         |                 1 | Sarangani                                                     | Q13877
+ ph-sco |                                         |                 1 | South Cotabato                                                | Q13882
+ ph-sig |                                         |                 1 | Siquijor                                                      | Q13879
+ ph-sle |                                         |                 1 | Southern Leyte                                                | Q13884
+ ph-slu |                                         |                 1 | Sulu                                                          | Q13887
+ ph-sor |                                         |                 1 | Sorsogon                                                      | Q13881
+ ph-suk |                                         |                 1 | Sultan Kudarat                                                | Q13885
+ ph-sun |                                         |                 1 | Surigao Del Norte                                             | Q13889
+ ph-sur |                                         |                 1 | Surigao del Sur                                               | Q13891
+ ph-tar | Tarlac                                  |                 1 | Tarlac                                                        | Q13892
+ ph-taw |                                         |                 1 | Tawi Tawi                                                     | Q13893
+ ph-wsa |                                         |                 1 | Samar                                                         | Q13876
+ ph-zan |                                         |                 1 | Zamboanga del Norte                                           | Q13899
+ ph-zas |                                         |                 1 | Zamboanga del Sur                                             | Q13900
+ ph-zmb | Zambales                                |                 1 | Zambales                                                      | Q13895
+ ph-zsi |                                         |                 1 | Zamboanga Sibugay                                             | Q13902
+ pk     | Pakistan                                |                 1 | ‏پاکستان‎                                                       | Q843
+ pk-ba  | Balochistan                             |                 1 | بلوچستان                                                      | Q163239
+ pk-gb  | Gilgit-Baltistan                        |                 1 | گلگت بلتستان                                                  | Q200697
+ pk-is  |                                         |                 1 | وفاقی دارالحکومت اسلام آباد                                   | 
+ pk-jk  |                                         |                 1 | آزاد جموں و کشمیر                                             | Q200130
+ pk-kp  | Khyber Pakhtunkhwa                      |                 1 | خیبر پختونخوا                                                 | Q183314
+ pk-pb  | Punjab                                  |                 1 | پنجاب                                                         | Q4478
+ pk-sd  | Sindh                                   |                 1 | سنڌ                                                           | Q37211
+ pk-ta  | Federally Administered Tribal Areas     |                 1 | وفاقی قبائلی علاقہ جات                                        | Q208270
+ ps     | Palestinian Territories                 |                 1 | الأراضي الفلسطينية                                            | Q407199
+ ps-deb | Deir al-Balah Governorate               |                 1 | محافظة دير البلح‎                                              | Q592249
+ ps-gza | Gaza Governorate                        |                 1 | محافظة غزة                                                    | Q762573
+ ps-hbn | Hebron Governorate                      |                 1 | محافظة الخليل                                                 | Q264180
+ ps-jen | Jenin Governorate                       |                 1 | محافظة جنين                                                   | Q519311
+ ps-jrh | Jericho Governorate                     |                 1 | محافظة أريحا                                                  | Q658527
+ ps-kys | Khan Yunis Governorate                  |                 1 | محافظة خان يونس                                               | Q948026
+ ps-nbs | Nablus Governorate                      |                 1 | محافظة نابلس                                                  | Q1074138
+ ps-ngz | North Gaza Governorate                  |                 1 | محافظة شمال غزة                                               | Q181636
+ ps-qqa | Qalqilya Governorate                    |                 1 | محافظة قلقيلية                                                | Q1074443
+ ps-rbh | Ramallah and al-Bireh Governorate       |                 1 | محافظة رام الله والبيرة                                       | Q1093166
+ ps-rfh | Rafah Governorate                       |                 1 | محافظة رفح                                                    | Q1074341
+ ps-slt | Salfit Governorate                      |                 1 | محافظة سلفيت‎                                                  | Q926530
+ ps-tbs | Tubas Governorate                       |                 1 | محافظة طوباس‎                                                  | Q948228
+ ps-tkm | Tulkarm Governorate                     |                 1 | محافظة طولكرم                                                 | Q1093157
+ qa     | Qatar                                   |                 1 | ‏قطر‎                                                           | Q846
+ qa-da  | Doha                                    |                 1 | الدوحة                                                        | Q3861
+ qa-gh  | Al Ghuwariyah                           |                 1 | الغويرية                                                      | Q623609
+ qa-jb  | Jariyan Al Batnah                       |                 1 | جريان الباطنة                                                 | Q1070191
+ qa-ju  | Al Jamiliyah                            |                 1 | الجميلية                                                      | Q1147593
+ qa-kh  | Al Khawr                                |                 1 | الخور                                                         | Q1156471
+ qa-ms  | Ash Shamal                              |                 1 | الشمال                                                        | Q310872
+ qa-ra  | Ar Rayyan                               |                 1 | الريان                                                        | Q311272
+ qa-us  | Umm Salal                               |                 1 | أم صلال                                                       | Q990414
+ qa-wa  | Al Wakrah                               |                 1 | الوكرة                                                        | Q310893
+ ru     | Russia                                  | 0.940104730454547 | Россия                                                        | Q159
+ ru-ad  | Adygea                                  |                 1 | Адыгея                                                        | Q3734
+ ru-al  | Altai Republic                          |                 1 | Республика Алтай                                              | Q5971
+ ru-alt | Altai Krai                              |                 1 | Алтайский край                                                | Q5942
+ ru-amu | Amur Oblast                             |                 1 | Амурская область                                              | Q6886
+ ru-ark | Arkhangelsk Oblast                      | 0.885487691597529 | Архангельская область                                         | Q1875
+ ru-ast | Astrakhan Oblast                        |                 1 | Астраханская область                                          | Q3941
+ ru-ba  | Bashkortostan                           |                 1 | Башкортостан                                                  | Q5710
+ ru-bu  | Buryatia                                |                 1 | Республика Бурятия                                            | Q6809
+ ru-ce  | Chechnya                                |                 1 | Чечня                                                         | Q5187
+ ru-che | Chelyabinsk Oblast                      |                 1 | Челябинская область                                           | Q5714
+ ru-chu | Chukotka Autonomous Okrug               | 0.999992907138069 | Чукотский автономный округ                                    | Q7984
+ ru-cu  | Chuvashia                               |                 1 | Чувашия                                                       | Q5466
+ ru-da  | Dagestan                                |                 1 | Дагестан                                                      | Q5118
+ ru-in  | Ingushetia                              |                 1 | Ингушетия                                                     | Q5219
+ ru-irk | Irkutsk Oblast                          |                 1 | Иркутская область                                             | Q6585
+ ru-iva | Ivanovo Oblast                          |  0.97553807796367 | Ивановская область                                            | Q2654
+ ru-kam | Kamchatka Krai                          |                 1 | Камчатский край                                               | Q7948
+ ru-kb  | Kabardino-Balkaria                      |                 1 | Кабардино-Балкария                                            | Q5267
+ ru-kc  | Karachay-Cherkessia                     |                 1 | Карачаево-Черкесия                                            | Q5328
+ ru-kda | Krasnodar Krai                          |                 1 | Краснодарский край                                            | Q3680
+ ru-kem | Kemerovo Oblast                         |                 1 | Кемеровская область                                           | Q6076
+ ru-kgn | Kurgan Oblast                           |                 1 | Курганская область                                            | Q5741
+ ru-kha | Khabarovsk Krai                         |                 1 | Хабаровский край                                              | Q7788
+ ru-khm | Khanty-Mansiysk Autonomous Okrug – Ugra |                 1 | Ханты-Мансийский автономный округ - Югра                      | Q6320
+ ru-kir | Kirov Oblast                            |                 1 | Кировская область                                             | Q5387
+ ru-kk  | Republic of Khakassia                   |                 1 | Республика Хакасия                                            | Q6543
+ ru-kl  | Kalmykia                                |                 1 | Калмыкия                                                      | Q3953
+ ru-ko  | Komi Republic                           |                 1 | Республика Коми                                               | Q2073
+ ru-kos | Kostroma Oblast                         |                 1 | Костромская область                                           | Q2596
+ ru-kya | Krasnoyarsk Krai                        |                 1 | Красноярский край                                             | Q6563
+ ru-mag | Magadan Oblast                          |                 1 | Магаданская область                                           | Q7971
+ ru-me  | Mari El                                 |                 1 | Марий Эл                                                      | Q5446
+ ru-mo  | Republic of Mordovia                    |                 1 | Мордовия                                                      | Q5340
+ ru-nen | Nenets Autonomous Okrug                 |                 1 | Ненецкий автономный округ                                     | Q2164
+ ru-niz | Nizhny Novgorod Oblast                  |                 1 | Нижегородская область                                         | Q2246
+ ru-nvs | Novosibirsk Oblast                      |                 1 | Новосибирская область                                         | Q5851
+ ru-oms | Omsk Oblast                             |                 1 | Омская область                                                | Q5835
+ ru-ore | Orenburg Oblast                         |                 1 | Оренбургская область                                          | Q5338
+ ru-per | Perm Krai                               |                 1 | Пермский край                                                 | Q5400
+ ru-pnz | Penza Oblast                            |                 1 | Пензенская область                                            | Q5545
+ ru-pri | Primorsky Krai                          |                 1 | Приморский край                                               | Q4341
+ ru-ros | Rostov Oblast                           |                 1 | Ростовская область                                            | Q3573
+ ru-rya | Ryazan Oblast                           | 0.775949569683969 | Рязанская область                                             | Q2753
+ ru-sa  | Sakha Republic                          |                 1 | Республика Саха (Якутия)                                      | Q6605
+ ru-sak | Sakhalin Oblast                         |                 1 | Сахалинская область                                           | Q7797
+ ru-sam | Samara Oblast                           |                 1 | Самарская область                                             | Q1727
+ ru-sar | Saratov Oblast                          |                 1 | Саратовская область                                           | Q5334
+ ru-se  | North Ossetia–Alania                    |                 1 | Северная Осетия - Алания                                      | Q5237
+ ru-sta | Stavropol Krai                          |                 1 | Ставропольский край                                           | Q5207
+ ru-sve | Sverdlovsk Oblast                       |                 1 | Свердловская область                                          | Q5462
+ ru-ta  | Tatarstan                               |                 1 | Татарстан                                                     | Q5481
+ ru-tam | Tambov Oblast                           |                 1 | Тамбовская область                                            | Q3550
+ ru-tom | Tomsk Oblast                            |                 1 | Томская область                                               | Q5884
+ ru-ty  | Tuva Republic                           |                 1 | Республика Тыва                                               | Q960
+ ru-tyu | Tyumen Oblast                           |                 1 | Тюменская область                                             | Q5824
+ ru-ud  | Udmurtia                                |                 1 | Удмуртия                                                      | Q5422
+ ru-uly | Ulyanovsk Oblast                        |                 1 | Ульяновская область                                           | Q5634
+ ru-vgg | Volgograd Oblast                        |                 1 | Волгоградская область                                         | Q3819
+ ru-vla | Vladimir Oblast                         | 0.759275550949942 | Владимирская область                                          | Q2702
+ ru-vlg | Vologda Oblast                          | 0.537370236982059 | Вологодская область                                           | Q2015
+ ru-vor | Voronezh Oblast                         | 0.653468954880016 | Воронежская область                                           | Q3447
+ ru-yan | Yamalo-Nenets Autonomous Okrug          |                 1 | Ямало-Ненецкий автономный округ                               | Q6407
+ ru-yev | Jewish Autonomous Oblast                |                 1 | Еврейская автономная область                                  | Q7730
+ ru-zab | Zabaykalsky Krai                        |                 1 | Забайкальский край                                            | Q6838
+ sa     | Saudi Arabia                            |                 1 | السعودية                                                      | Q851
+ sa-01  | Riyadh Region                           |                 1 | منطقة الرياض                                                  | Q1249255
+ sa-02  | Makkah Region                           |                 1 | منطقة مكة المكرمة                                             | Q234167
+ sa-03  | Al Madinah Region                       |                 1 | منطقة المدينة المنورة                                         | Q236027
+ sa-04  | Eastern Region                          |                 1 | المنطقة الشرقية                                               | Q953508
+ sa-05  | Al-Qassim Region                        |                 1 | منطقة القصيم                                                  | Q1105411
+ sa-06  | Hayel Region                            |                 1 | منطقة حائل                                                    | Q243656
+ sa-07  | Tabuk Region                            |                 1 | منطقة تبوك                                                    | Q1315953
+ sa-08  | Northern Borders Region                 |                 1 | منطقة الحدود الشمالية                                         | Q201781
+ sa-09  | Jazan Region                            |                 1 | منطقة جازان                                                   | Q269973
+ sa-10  | Najran Region                           |                 1 | منطقة نجران                                                   | Q464718
+ sa-11  | Al Bahah Region                         |                 1 | منطقة الباحة                                                  | Q852774
+ sa-12  | Al Jawf Region                          |                 1 | منطقة الجوف                                                   | Q1471266
+ sa-14  | 'Asir Region                            |                 1 | منطقة عسير                                                    | Q779855
+ sg     | Singapore                               |                 1 | Singapore                                                     | Q334
+ sg-01  |                                         |                 1 | Central                                                       | Q2544592
+ sg-02  |                                         |                 1 | Northeast                                                     | Q3710534
+ sg-03  |                                         |                 1 | Northwest                                                     | Q5784118
+ sg-04  |                                         |                 1 | Southeast                                                     | Q1687545
+ sg-05  |                                         |                 1 | Southwest                                                     | Q5784126
+ sy     | Syria                                   |                 1 | سوريا                                                         | Q858
+ sy-di  | Damascus                                |                 1 | دمشق                                                          | Q2007044
+ sy-dr  | Daraa                                   |                 1 | درعا                                                          | Q1689560
+ sy-dy  | Deir ez-Zor                             |                 1 | دير الزور                                                     | Q232387
+ sy-ha  | Al-Hasakah                              |                 1 | الحسكة                                                        | Q233914
+ sy-hi  | Homs                                    |                 1 | حمص                                                           | Q214094
+ sy-hl  | Aleppo                                  |                 1 | حلب                                                           | Q214064
+ sy-hm  | Hama                                    |                 1 | حماه                                                          | Q232355
+ sy-id  | Idlib                                   |                 1 | إدلب                                                          | Q233218
+ sy-la  | Latakia                                 |                 1 | اللاذقية                                                      | Q233236
+ sy-qu  | Al-Qunaitra                             |                 1 | القنيطرة                                                      | Q219690
+ sy-ra  | Ar-Raqqah                               |                 1 | الرقة                                                         | Q235563
+ sy-rd  | Rif Dimashq                             |                 1 | ريف دمشق                                                      | Q232399
+ sy-su  | As-Suwayda                              |                 1 | السويداء                                                      | Q236797
+ sy-ta  | Tartus                                  |                 1 | طرطوس                                                         | Q232382
+ th     | Thailand                                |                 1 | ประเทศไทย                                                     | Q869
+ th-10  | Bangkok                                 |                 1 | กรุงเทพมหานคร                                                  | Q1861
+ th-11  | Samut Prakan Province                   |                 1 | จังหวัดสมุทรปราการ                                               | Q271529
+ th-12  | Nonthaburi Province                     |                 1 | จังหวัดนนทบุรี                                                    | Q242932
+ th-13  | Pathum Thani Province                   |                 1 | จังหวัดปทุมธานี                                                   | Q459748
+ th-14  | Phra Nakhon Si Ayutthaya Province       |                 1 | จังหวัดพระนครศรีอยุธยา                                            | Q476222
+ th-15  | Ang Thong Province                      |                 1 | จังหวัดอ่างทอง                                                   | Q243795
+ th-16  | Lopburi Province                        |                 1 | จังหวัดลพบุรี                                                     | Q336122
+ th-17  | Sing Buri Province                      |                 1 | จังหวัดสิงห์บุรี                                                    | Q334836
+ th-18  | Chai Nat Province                       |                 1 | จังหวัดชัยนาท                                                    | Q459759
+ th-19  | Saraburi Province                       |                 1 | จังหวัดสระบุรี                                                    | Q337627
+ th-20  | Chon Buri Province                      |                 1 | จังหวัดชลบุรี                                                     | Q207068
+ th-21  | Rayong Province                         |                 1 | จังหวัดระยอง                                                    | Q335221
+ th-22  | Chanthaburi Province                    |                 1 | จังหวัดจันทบุรี                                                    | Q327730
+ th-23  | Trat Province                           |                 1 | จังหวัดตราด                                                     | Q241884
+ th-24  | Chachoengsao Province                   |                 1 | จังหวัดฉะเชิงเทรา                                                | Q334906
+ th-25  | Prachin Buri Province                   |                 1 | จังหวัดปราจีนบุรี                                                  | Q321324
+ th-26  | Nakhon Nayok Province                   |                 1 | จังหวัดนครนายก                                                  | Q466212
+ th-27  | Sa Kaeo Province                        |                 1 | จังหวัดสระแก้ว                                                   | Q381889
+ th-30  | Nakhon Ratchasima Province              |                 1 | จังหวัดนครราชสีมา                                                | Q271737
+ th-31  | Buri Ram Province                       |                 1 | จังหวัดบุรีรัมย์                                                    | Q327510
+ th-32  | Surin Province                          |                 1 | จังหวัดสุรินทร์                                                    | Q380757
+ th-33  | Si Sa Ket Province                      |                 1 | จังหวัดศรีสะเกษ                                                  | Q380761
+ th-34  | Ubon Ratchathani Province               |                 1 | จังหวัดอุบลราชธานี                                                | Q629024
+ th-35  | Yasothon Province                       |                 1 | จังหวัดยโสธร                                                    | Q506598
+ th-36  | Chaiyaphum Province                     |                 1 | จังหวัดชัยภูมิ                                                     | Q275377
+ th-37  | Amnat Charoen Province                  |                 1 | จังหวัดอำนาจเจริญ                                                | Q243791
+ th-38  | Bueng Kan Province                      |                 1 | จังหวัดบึงกาฬ                                                    | Q1001862
+ th-39  | Nong Bua Lam Phu Province               |                 1 | จังหวัดหนองบัวลำภู                                                | Q261241
+ th-40  | Khon Kaen Province                      |                 1 | จังหวัดขอนแก่น                                                   | Q327533
+ th-41  | Udon Thani Province                     |                 1 | จังหวัดอุดรธานี                                                   | Q380752
+ th-42  | Loei Province                           |                 1 | จังหวัดเลย                                                      | Q275388
+ th-43  | Nong Khai Province                      |                 1 | จังหวัดหนองคาย                                                  | Q327737
+ th-44  | Maha Sarakham Province                  |                 1 | จังหวัดมหาสารคาม                                                | Q468554
+ th-45  | Roi Et Province                         |                 1 | จังหวัดร้อยเอ็ด                                                   | Q625463
+ th-46  | Kalasin                                 |                 1 | จังหวัดกาฬสินธุ์                                                   | Q382144
+ th-47  | Sakon Nakhon Province                   |                 1 | จังหวัดสกลนคร                                                   | Q382125
+ th-48  | Nakhon Phanom Province                  |                 1 | จังหวัดนครพนม                                                   | Q468547
+ th-49  | Mukdahan Province                       |                 1 | จังหวัดมุกดาหาร                                                  | Q335119
+ th-50  | Chiang Mai Province                     |                 1 | จังหวัดเชียงใหม่                                                  | Q233588
+ th-51  | Lamphun Province                        |                 1 | จังหวัดลำพูน                                                     | Q240540
+ th-52  | Lampang Province                        |                 1 | จังหวัดลำปาง                                                    | Q240495
+ th-53  | Uttaradit Province                      |                 1 | จังหวัดอุตรดิตถ์                                                   | Q273794
+ th-54  | Phrae Province                          |                 1 | จังหวัดแพร่                                                      | Q244652
+ th-55  | Nan Province                            |                 1 | จังหวัดน่าน                                                      | Q244698
+ th-56  | Phayao Province                         |                 1 | จังหวัดพะเยา                                                    | Q244618
+ th-57  | Chiang Rai Province                     |                 1 | จังหวัดเชียงราย                                                  | Q236419
+ th-58  | Mae Hong Son Province                   |                 1 | จังหวัดแม่ฮ่องสอน                                                 | Q269270
+ th-60  | Nakhon Sawan Province                   |                 1 | จังหวัดนครสวรรค์                                                 | Q239844
+ th-61  | Uthai Thani Province                    |                 1 | จังหวัดอุทัยธานี                                                   | Q244649
+ th-62  | Kamphaeng Phet Province                 |                 1 | จังหวัดกำแพงเพชร                                                | Q273807
+ th-63  | Tak Province                            |                 1 | จังหวัดตาก                                                      | Q275758
+ th-64  | Sukhothai Province                      |                 1 | จังหวัดสุโขทัย                                                    | Q380764
+ th-65  | Phitsanulok Province                    |                 1 | จังหวัดพิษณุโลก                                                   | Q275781
+ th-66  | Phichit Province                        |                 1 | จังหวัดพิจิตร                                                     | Q237874
+ th-67  | Phetchabun Province                     |                 1 | จังหวัดเพชรบูรณ์                                                  | Q240520
+ th-70  | Ratchaburi Province                     |                 1 | จังหวัดราชบุรี                                                    | Q335492
+ th-71  | Kanchanaburi Province                   |                 1 | จังหวัดกาญจนบุรี                                                  | Q275740
+ th-72  | Suphan Buri Province                    |                 1 | จังหวัดสุพรรณบุรี                                                  | Q272247
+ th-73  | Nakhon Pathom Province                  |                 1 | จังหวัดนครปฐม                                                   | Q334841
+ th-74  | Samut Sakhon Province                   |                 1 | จังหวัดสมุทรสาคร                                                 | Q334686
+ th-75  | Samut Songkhram Province                |                 1 | จังหวัดสมุทรสงคราม                                               | Q459742
+ th-76  | Phetchaburi Province                    |                 1 | จังหวัดเพชรบุรี                                                   | Q244699
+ th-77  | Prachuap Khiri Khan Province            |                 1 | จังหวัดประจวบคีรีขันธ์                                              | Q244628
+ th-80  | Nakhon Si Thammarat Province            |                 1 | จังหวัดนครศรีธรรมราช                                             | Q244691
+ th-81  | Krabi Province                          |                 1 | จังหวัดกระบี่                                                     | Q236769
+ th-82  | Phangnga Province                       |                 1 | จังหวัดพังงา                                                     | Q273306
+ th-83  | Phuket Province                         |                 1 | จังหวัดภูเก็ต                                                     | Q182565
+ th-84  | Surat Thani Province                    |                 1 | จังหวัดสุราษฎร์ธานี                                                | Q240463
+ th-85  | Ranong Province                         |                 1 | จังหวัดระนอง                                                    | Q236802
+ th-86  | Chumphon Province                       |                 1 | จังหวัดชุมพร                                                     | Q244695
+ th-90  | Songkhla Province                       |                 1 | จังหวัดสงขลา                                                    | Q235574
+ th-91  | Satun Province                          |                 1 | จังหวัดสตูล                                                      | Q236263
+ th-92  | Trang Province                          |                 1 | จังหวัดตรัง                                                      | Q243805
+ th-93  | Phatthalung Province                    |                 1 | จังหวัดพัทลุง                                                     | Q243808
+ th-94  | Pattani Province                        |                 1 | จังหวัดปัตตานี                                                    | Q236781
+ th-95  | Yala Province                           |                 1 | จังหวัดยะลา                                                     | Q242977
+ th-96  | Narathiwat Province                     |                 1 | จังหวัดนราธิวาส                                                  | Q271442
+ tj     | Tajikistan                              |                 1 | Тоҷикистон                                                    | Q863
+ tj-du  | Dushanbe                                |                 1 | Душанбе                                                       | 
+ tj-gb  | Gorno-Badakhshan Autonomous Region      |                 1 | Вилояти Мухтори Кӯҳистони Бадахшон                            | Q207319
+ tj-kt  | Khatlon Region                          |                 1 | Вилояти Хатлон                                                | Q633511
+ tj-ra  | Districts of Republican Subordination   |                 1 | Ноҳияҳои тобеи ҷумҳурӣ                                        | Q633490
+ tj-su  | Sughd Region                            |                 1 | Вилояти Суғд                                                  | Q241582
+ tl     | East Timor                              |                 1 | Timór Lorosa'e                                                | Q574
+ tl-al  |                                         |                 1 | Aileu                                                         | Q405100
+ tl-an  |                                         |                 1 | Ainaro                                                        | Q405926
+ tl-ba  |                                         |                 1 | Baucau                                                        | Q811132
+ tl-bo  |                                         |                 1 | Bobonaro                                                      | Q860913
+ tl-co  |                                         |                 1 | Cova Lima                                                     | Q165575
+ tl-di  |                                         |                 1 | Dili                                                          | Q860901
+ tl-er  |                                         |                 1 | Ermera                                                        | Q668171
+ tl-la  |                                         |                 1 | Lautém                                                        | Q686554
+ tl-li  |                                         |                 1 | Liquiçá                                                       | Q860897
+ tl-mf  |                                         |                 1 | Manufahi                                                      | Q629934
+ tl-mt  |                                         |                 1 | Manatuto                                                      | Q860630
+ tl-oe  |                                         |                 1 | Oecusse                                                       | Q860639
+ tl-vi  |                                         |                 1 | Viqueque                                                      | Q610726
+ tm     | Turkmenistan                            |                 1 | Türkmenistan                                                  | Q874
+ tm-a   | Ahal Region                             |                 1 | Ahal welaýaty                                                 | Q399899
+ tm-b   | Balkan Region                           |                 1 | Balkan welaýaty                                               | Q486073
+ tm-d   | Daşoguz Region                          |                 1 | Daşoguz welaýaty                                              | Q487393
+ tm-l   | Lebap Region                            |                 1 | Lebap welaýaty                                                | Q487389
+ tm-m   | Mary Region                             |                 1 | Mary welaýaty                                                 | Q487401
+ tm-s   | Ashgabat                                |                 1 | Aşgabat                                                       | Q23438
+ tr-27  | Gaziantep                               |                 1 | Gaziantep                                                     | Q483154
+ tr-30  | Hakkâri                                 |                 1 | Hakkari                                                       | Q93209
+ tr-31  | Hatay                                   | 0.978417395024226 | Hatay                                                         | Q83274
+ tr-47  | Mardin                                  |                 1 | Mardin                                                        | Q131293
+ tr-63  | Şanlıurfa                               | 0.941900762235174 | Şanlıurfa                                                     | Q388469
+ tr-73  | Şırnak                                  |                 1 | Şırnak                                                        | Q647378
+ tr-76  | Iğdır                                   | 0.923416950123124 | Iğdır                                                         | Q125506
+ tr-79  | Kilis                                   |                 1 | Kilis                                                         | Q128978
+ tw     | Taiwan                                  |                 1 | 臺灣                                                          | Q865
+ tw-cha | Changhua County                         |                 1 | 彰化縣                                                        | Q133865
+ tw-cyi | Chiayi                                  |                 1 | 嘉義市                                                        | Q249995
+ tw-cyq | Chiayi County                           |                 1 | 嘉義縣                                                        | Q166977
+ tw-hsq | Hsinchu County                          |                 1 | 新竹縣                                                        | Q74054
+ tw-hsz | Hsinchu                                 |                 1 | 新竹市                                                        | Q249994
+ tw-hua | Hualien County                          |                 1 | 花蓮縣                                                        | Q249868
+ tw-ila | Yilan County                            |                 1 | 宜蘭縣                                                        | Q237258
+ tw-kee | Keelung                                 |                 1 | 基隆市                                                        | Q249996
+ tw-khh | Kaohsiung                               |                 1 | 高雄市                                                        | Q181557
+ tw-kin | Kinmen                                  |                 1 | 金門縣                                                        | Q249870
+ tw-lie | Matsu Islands                           |                 1 | 馬祖列島                                                      | Q609255
+ tw-mia | Miaoli County                           |                 1 | 苗栗縣                                                        | Q63706
+ tw-nan | Nantou County                           |                 1 | 南投縣                                                        | Q82357
+ tw-nwt | New Taipei                              |                 1 | 新北市                                                        | Q244898
+ tw-pen | Penghu                                  |                 1 | 澎湖縣                                                        | Q198525
+ tw-pif | Pingtung County                         |                 1 | 屏東縣                                                        | Q194989
+ tw-tao | Taoyuan                                 |                 1 | 桃園市                                                        | Q115256
+ tw-tnn | Tainan                                  |                 1 | 臺南市                                                        | Q140631
+ tw-tpe | Taipei                                  |                 1 | 臺北市                                                        | Q1867
+ tw-ttt | Taitung County                          |                 1 | 臺東縣                                                        | Q249904
+ tw-txg | Taichung                                |                 1 | 臺中市                                                        | Q245023
+ tw-yun | Yunlin County                           |                 1 | 雲林縣                                                        | Q153221
+ uz     | Uzbekistan                              |                 1 | Oʻzbekiston                                                   | Q265
+ uz-an  | Andijan Region                          |                 1 | Andijon Viloyati                                              | Q487384
+ uz-bu  | Bukhara Region                          |                 1 | Buxoro Viloyati                                               | Q487372
+ uz-fa  | Fergana Region                          |                 1 | Farg'ona Viloyati                                             | Q487089
+ uz-ji  | Jizzakh Region                          |                 1 | Jizzax Viloyati                                               | Q488811
+ uz-ng  | Namangan Region                         |                 1 | Namangan Viloyati                                             | Q474876
+ uz-nw  | Navoiy Region                           |                 1 | Navoiy Viloyati                                               | Q487570
+ uz-qa  | Qashqadaryo Region                      |                 1 | Qashqadaryo Viloyati                                          | Q487577
+ uz-qr  | Republic of Karakalpakstan              |                 1 | Qaraqalpaqstan Respublikasi                                   | Q484245
+ uz-sa  | Samarqand Region                        |                 1 | Samarqand Viloyati                                            | Q487532
+ uz-si  | Sirdaryo Region                         |                 1 | Sirdaryo Viloyati                                             | Q487547
+ uz-su  | Surxondaryo Region                      |                 1 | Surxondaryo Viloyati                                          | Q487537
+ uz-tk  | Tashkent                                |                 1 | Toshkent                                                      | Q269
+ uz-to  | Tashkent Region                         |                 1 | Toshkent Viloyati                                             | Q487585
+ uz-xo  | Xorazm Region                           |                 1 | Xorazm Viloyati                                               | Q487561
+ vn     | Vietnam                                 |                 1 | Việt Nam                                                      | Q881
+ vn-01  | Lai Chau province                       |                 1 | Tỉnh Lai Châu                                                 | Q36409
+ vn-02  | Lao Cai province                        |                 1 | Tỉnh Lào Cai                                                  | Q36446
+ vn-03  | Ha Giang province                       |                 1 | Tỉnh Hà Giang                                                 | Q36685
+ vn-04  | Cao Bang province                       |                 1 | Cao Bằng                                                      | Q36865
+ vn-05  | Son La province                         |                 1 | Sơn La                                                        | Q33379
+ vn-06  | Yen Bai Province                        |                 1 | Tỉnh Yên Bái                                                  | Q36349
+ vn-07  | Tuyen Quang Province                    |                 1 | Tỉnh Tuyên Quang                                              | Q2332060
+ vn-09  | Lạng Sơn Province                       |                 1 | Tỉnh Lạng Sơn                                                 | Q33403
+ vn-13  | Quang Ninh Province                     |                 1 | Tỉnh Quảng Ninh                                               | Q33396
+ vn-14  | Hoa Binh province                       |                 1 | Hòa Bình                                                      | Q36015
+ vn-18  | Ninh Binh province                      |                 1 | Tỉnh Ninh Bình                                                | Q36900
+ vn-20  | Thai Binh province                      |                 1 | Tỉnh Thái Bình                                                | Q36681
+ vn-21  | Thanh Hoa province                      |                 1 | Thanh Hóa                                                     | Q36512
+ vn-22  | Nghe An province                        |                 1 | Tỉnh Nghệ An                                                  | Q36587
+ vn-23  | Ha Tinh Province                        |                 1 | Hà Tĩnh                                                       | Q33351
+ vn-24  | Quang Binh province                     |                 1 | Tỉnh Quảng Bình                                               | Q23533
+ vn-25  | Quang Tri province                      |                 1 | Tỉnh Quảng Trị                                                | Q36579
+ vn-26  | Thừa Thiên-Huế Province                 |                 1 | Tỉnh Thừa Thiên - Huế                                         | Q36399
+ vn-27  |                                         |                 1 | Tỉnh Quảng Nam                                                | Q33356
+ vn-28  | Kon Tum province                        |                 1 | Tỉnh Kon Tum                                                  | Q36315
+ vn-29  |                                         |                 1 | Quảng Ngãi                                                    | Q33304
+ vn-30  | Gia Lai Province                        |                 1 | Tỉnh Gia Lai                                                  | Q36662
+ vn-31  | Bình Định Province                      |                 1 | Bình Định                                                     | Q36693
+ vn-32  | Phu Yen province                        |                 1 | Tỉnh Phú Yên                                                  | Q36725
+ vn-33  | Đắk Lắk province                        |                 1 | Đắk Lắk                                                       | Q36690
+ vn-34  | Khanh Hoa province                      |                 1 | Tỉnh Khánh Hòa                                                | Q33369
+ vn-35  | Lâm Đồng Province                       |                 1 | Lâm Đồng                                                      | Q36721
+ vn-36  | Ninh Thuan province                     |                 1 | Tỉnh Ninh Thuận                                               | Q36903
+ vn-37  | Tay Ninh province                       |                 1 | Tỉnh Tây Ninh                                                 | Q36608
+ vn-39  | Dong Nai province                       |                 1 | Tỉnh Đồng Nai                                                 | Q33271
+ vn-40  | Binh Thuan province                     |                 1 | Tỉnh Bình Thuận                                               | Q36869
+ vn-41  | Long An province                        |                 1 | Tỉnh Long An                                                  | Q26573
+ vn-43  | Ba Ria-Vung Tau Province                |                 1 | Tỉnh Bà Rịa-Vũng Tàu                                          | Q36874
+ vn-44  | An Giang province                       |                 1 | Tỉnh An Giang                                                 | Q36592
+ vn-45  | Dong Thap Province                      |                 1 | Tỉnh Đồng Tháp                                                | Q36676
+ vn-46  | Tien Giang province                     |                 1 | Tỉnh Tiền Giang                                               | Q36666
+ vn-47  | Kien Giang Province                     |                 1 | Tỉnh Kiên Giang                                               | Q36576
+ vn-49  | Vinh Long province                      |                 1 | Tỉnh Vĩnh Long                                                | Q7333405
+ vn-50  | Bến Tre Province                        |                 1 | Tỉnh Bến Tre                                                  | Q33366
+ vn-51  | Tra Vinh province                       |                 1 | Tỉnh Trà Vinh                                                 | Q36615
+ vn-52  | Soc Trang province                      |                 1 | Tỉnh Sóc Trăng                                                | Q33272
+ vn-53  | Bac Kan Province                        |                 1 | Tỉnh Bắc Kạn                                                  | Q36404
+ vn-54  | Bac Giang Province                      |                 1 | Tỉnh Bắc Giang                                                | Q36367
+ vn-55  | Bac Lieu province                       |                 1 | Bạc Liêu                                                      | Q36658
+ vn-56  | Bac Ninh province                       |                 1 | Tỉnh Bắc Ninh                                                 | Q33408
+ vn-57  | Binh Duong province                     |                 1 | Tỉnh Bình Dương                                               | Q36866
+ vn-58  | Bình Phước Province                     |                 1 | Bình Phước                                                    | Q36672
+ vn-59  | Ca Mau province                         |                 1 | Tỉnh Cà Mau                                                   | Q33354
+ vn-61  | Hải Dương Province                      |                 1 | Tỉnh Hải Dương                                                | Q36729
+ vn-63  | Ha Nam province                         |                 1 | Tỉnh Hà Nam                                                   | Q36413
+ vn-66  | Hung Yen Province                       |                 1 | Tỉnh Hưng Yên                                                 | Q36235
+ vn-67  | Nam Dinh province                       |                 1 | Tỉnh Nam Định                                                 | Q36907
+ vn-68  | Phu Tho Province                        |                 1 | Tỉnh Phú Thọ                                                  | Q36610
+ vn-69  | Thai Nguyen province                    |                 1 | Tỉnh Thái Nguyên                                              | Q26575
+ vn-70  | Vinh Phuc Province                      |                 1 | Tỉnh Vĩnh Phúc                                                | Q27566
+ vn-71  | Điện Biên Province                      |                 1 | Tỉnh Điện Biên                                                | Q36955
+ vn-72  | Đắk Nông Province                       |                 1 | Đắk Nông                                                      | Q36723
+ vn-73  | Hậu Giang Province                      |                 1 | Tỉnh Hậu Giang                                                | Q36320
+ vn-ct  | Can Tho City                            |                 1 | Thành phố Cần Thơ                                             | Q216075
+ vn-dn  |                                         |                 1 | Đà Nẵng                                                       | Q25282
+ vn-hn  | Hanoi                                   |                 1 | Hà Nội                                                        | Q1858
+ vn-hp  | Haiphong                                |                 1 | Hải Phòng                                                     | Q72818
+ vn-sg  | Ho Chi Minh City                        |                 1 | Thành phố Hồ Chí Minh                                         | Q1854
+ ye     | Yemen                                   | 0.999879556350287 | اليمن                                                         | Q805
+ ye-ab  | Abyan Governorate                       |                 1 | أبين                                                          | Q241774
+ ye-ad  | ‘Adan Governorate                       |                 1 | عدن                                                           | Q275729
+ ye-am  | 'Amran Governorate                      |                 1 | عمران                                                         | Q275720
+ ye-ba  | Al Bayda' Governorate                   |                 1 | البيضاء                                                       | Q221212
+ ye-da  | Ad Dali' Governorate                    |                 1 | الضالع                                                        | Q328187
+ ye-dh  | Dhamar Governorate                      |                 1 | ذمار                                                          | Q328193
+ ye-hd  | Hadhramaut                              |                 1 | حضرموت                                                        | Q241135
+ ye-hj  | Hajjah Governorate                      |                 1 | حجة                                                           | Q328158
+ ye-hu  | Al Hudaydah Governorate                 |                 1 | الحديدة                                                       | Q275755
+ ye-ib  | Ibb Governorate                         |                 1 | إب                                                            | Q388274
+ ye-ja  | Al Jawf Governorate                     |                 1 | منطقة الجوف                                                   | Q328128
+ ye-la  | Lahij Governorate                       |                 1 | لحج                                                           | Q388318
+ ye-ma  | Ma'rib Governorate                      |                 1 | مأرب‎                                                          | Q498465
+ ye-mr  | Al Mahrah Governorate                   |                 1 | المهرة                                                        | Q275752
+ ye-mw  | Al Mahwit Governorate                   |                 1 | المحويت                                                       | Q388280
+ ye-ra  | Raymah Governorate                      |                 1 | ريمه‎                                                          | Q475033
+ ye-sa  | Sanʿaʾ                                  |                 1 | صنعاء                                                         | Q2471
+ ye-sd  | Sa'dah Governorate                      |                 1 | صعدة                                                          | Q275732
+ ye-sh  | Shabwah Governorate                     |                 1 | شبوة                                                          | Q328180
+ ye-sn  | Sanʿaʾ Governorate                      |                 1 | صنعاء                                                         | Q388291
+ ye-su  | Socotra                                 |                 1 | سقطرى                                                         | Q15728745
+ ye-ta  | Ta'izz Governorate                      | 0.995056182688487 | تعز                                                           | Q388330
+(1145 rows)
+

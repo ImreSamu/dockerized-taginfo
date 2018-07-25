@@ -1,0 +1,4399 @@
+# generated : 2018-07-25:08:48  // template : ./setup/template/docker-compose-job.jinja2
+
+# For jobs ...
+
+version: "3.5"
+
+networks:
+  taginfo:
+    name: taginfo
+
+services:
+
+  # for downloading geofabrik osm extract  
+  taginfo_download:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+
+
+  #---------------------------------------------------------
+  # Service for : "ad" - "Andorra"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ad:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ad/data:/osm/data
+     - ./ad/download:/osm/download
+     - ./ad/sources:/osm/sources:rw
+     - ./ad:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ad
+     - AREA_NAME="Andorra"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "al" - "Albania"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-al:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./al/data:/osm/data
+     - ./al/download:/osm/download
+     - ./al/sources:/osm/sources:rw
+     - ./al:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=al
+     - AREA_NAME="Albania"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "at" - "Austria"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-at:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./at/data:/osm/data
+     - ./at/download:/osm/download
+     - ./at/sources:/osm/sources:rw
+     - ./at:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=at
+     - AREA_NAME="Austria"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ax" - "Åland Islands"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ax:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ax/data:/osm/data
+     - ./ax/download:/osm/download
+     - ./ax/sources:/osm/sources:rw
+     - ./ax:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ax
+     - AREA_NAME="Åland Islands"
+     - GDNAME=${GDNAME:-finland}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ba" - "Bosnia and Herzegovina"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ba:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ba/data:/osm/data
+     - ./ba/download:/osm/download
+     - ./ba/sources:/osm/sources:rw
+     - ./ba:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ba
+     - AREA_NAME="Bosnia and Herzegovina"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "be" - "Belgium"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-be:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./be/data:/osm/data
+     - ./be/download:/osm/download
+     - ./be/sources:/osm/sources:rw
+     - ./be:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=be
+     - AREA_NAME="Belgium"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "bg" - "Bulgaria"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-bg:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./bg/data:/osm/data
+     - ./bg/download:/osm/download
+     - ./bg/sources:/osm/sources:rw
+     - ./bg:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=bg
+     - AREA_NAME="Bulgaria"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "by" - "Belarus"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-by:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./by/data:/osm/data
+     - ./by/download:/osm/download
+     - ./by/sources:/osm/sources:rw
+     - ./by:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=by
+     - AREA_NAME="Belarus"
+     - GDNAME=${GDNAME:-belarus}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ch" - "Switzerland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ch:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ch/data:/osm/data
+     - ./ch/download:/osm/download
+     - ./ch/sources:/osm/sources:rw
+     - ./ch:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ch
+     - AREA_NAME="Switzerland"
+     - GDNAME=${GDNAME:-alps}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "cy" - "Cyprus"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-cy:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./cy/data:/osm/data
+     - ./cy/download:/osm/download
+     - ./cy/sources:/osm/sources:rw
+     - ./cy:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=cy
+     - AREA_NAME="Cyprus"
+     - GDNAME=${GDNAME:-cyprus}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "cz" - "Czechia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-cz:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./cz/data:/osm/data
+     - ./cz/download:/osm/download
+     - ./cz/sources:/osm/sources:rw
+     - ./cz:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=cz
+     - AREA_NAME="Czechia"
+     - GDNAME=${GDNAME:-czech-republic}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-bb" - "Brandenburg"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-bb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-bb/data:/osm/data
+     - ./de-bb/download:/osm/download
+     - ./de-bb/sources:/osm/sources:rw
+     - ./de-bb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-bb
+     - AREA_NAME="Brandenburg"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-be" - "Berlin"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-be:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-be/data:/osm/data
+     - ./de-be/download:/osm/download
+     - ./de-be/sources:/osm/sources:rw
+     - ./de-be:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-be
+     - AREA_NAME="Berlin"
+     - GDNAME=${GDNAME:-brandenburg}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-bw" - "Baden-Württemberg"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-bw:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-bw/data:/osm/data
+     - ./de-bw/download:/osm/download
+     - ./de-bw/sources:/osm/sources:rw
+     - ./de-bw:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-bw
+     - AREA_NAME="Baden-Württemberg"
+     - GDNAME=${GDNAME:-dach}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-by" - "Bavaria"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-by:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-by/data:/osm/data
+     - ./de-by/download:/osm/download
+     - ./de-by/sources:/osm/sources:rw
+     - ./de-by:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-by
+     - AREA_NAME="Bavaria"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-hb" - "Bremen"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-hb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-hb/data:/osm/data
+     - ./de-hb/download:/osm/download
+     - ./de-hb/sources:/osm/sources:rw
+     - ./de-hb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-hb
+     - AREA_NAME="Bremen"
+     - GDNAME=${GDNAME:-niedersachsen}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-he" - "Hesse"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-he:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-he/data:/osm/data
+     - ./de-he/download:/osm/download
+     - ./de-he/sources:/osm/sources:rw
+     - ./de-he:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-he
+     - AREA_NAME="Hesse"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-hh" - "Hamburg"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-hh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-hh/data:/osm/data
+     - ./de-hh/download:/osm/download
+     - ./de-hh/sources:/osm/sources:rw
+     - ./de-hh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-hh
+     - AREA_NAME="Hamburg"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-mv" - "Mecklenburg-Vorpommern"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-mv:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-mv/data:/osm/data
+     - ./de-mv/download:/osm/download
+     - ./de-mv/sources:/osm/sources:rw
+     - ./de-mv:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-mv
+     - AREA_NAME="Mecklenburg-Vorpommern"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-ni" - "Lower Saxony"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-ni:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-ni/data:/osm/data
+     - ./de-ni/download:/osm/download
+     - ./de-ni/sources:/osm/sources:rw
+     - ./de-ni:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-ni
+     - AREA_NAME="Lower Saxony"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-nw" - "North Rhine-Westphalia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-nw:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-nw/data:/osm/data
+     - ./de-nw/download:/osm/download
+     - ./de-nw/sources:/osm/sources:rw
+     - ./de-nw:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-nw
+     - AREA_NAME="North Rhine-Westphalia"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-rp" - "Rhineland-Palatinate"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-rp:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-rp/data:/osm/data
+     - ./de-rp/download:/osm/download
+     - ./de-rp/sources:/osm/sources:rw
+     - ./de-rp:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-rp
+     - AREA_NAME="Rhineland-Palatinate"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-sh" - "Schleswig-Holstein"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-sh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-sh/data:/osm/data
+     - ./de-sh/download:/osm/download
+     - ./de-sh/sources:/osm/sources:rw
+     - ./de-sh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-sh
+     - AREA_NAME="Schleswig-Holstein"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-sl" - "Saarland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-sl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-sl/data:/osm/data
+     - ./de-sl/download:/osm/download
+     - ./de-sl/sources:/osm/sources:rw
+     - ./de-sl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-sl
+     - AREA_NAME="Saarland"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-sn" - "Saxony"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-sn:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-sn/data:/osm/data
+     - ./de-sn/download:/osm/download
+     - ./de-sn/sources:/osm/sources:rw
+     - ./de-sn:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-sn
+     - AREA_NAME="Saxony"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-st" - "Saxony-Anhalt"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-st:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-st/data:/osm/data
+     - ./de-st/download:/osm/download
+     - ./de-st/sources:/osm/sources:rw
+     - ./de-st:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-st
+     - AREA_NAME="Saxony-Anhalt"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "de-th" - "Thuringia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-de-th:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./de-th/data:/osm/data
+     - ./de-th/download:/osm/download
+     - ./de-th/sources:/osm/sources:rw
+     - ./de-th:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=de-th
+     - AREA_NAME="Thuringia"
+     - GDNAME=${GDNAME:-germany}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "dk" - "Denmark"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-dk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./dk/data:/osm/data
+     - ./dk/download:/osm/download
+     - ./dk/sources:/osm/sources:rw
+     - ./dk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=dk
+     - AREA_NAME="Denmark"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ee" - "Estonia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ee:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ee/data:/osm/data
+     - ./ee/download:/osm/download
+     - ./ee/sources:/osm/sources:rw
+     - ./ee:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ee
+     - AREA_NAME="Estonia"
+     - GDNAME=${GDNAME:-estonia}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "es" - "Spain"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-es:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./es/data:/osm/data
+     - ./es/download:/osm/download
+     - ./es/sources:/osm/sources:rw
+     - ./es:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=es
+     - AREA_NAME="Spain"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fi" - "Finland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fi:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fi/data:/osm/data
+     - ./fi/download:/osm/download
+     - ./fi/sources:/osm/sources:rw
+     - ./fi:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fi
+     - AREA_NAME="Finland"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fo" - "Faroe Islands"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fo:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fo/data:/osm/data
+     - ./fo/download:/osm/download
+     - ./fo/sources:/osm/sources:rw
+     - ./fo:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fo
+     - AREA_NAME="Faroe Islands"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-01" - "Ain"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-01:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-01/data:/osm/data
+     - ./fr-01/download:/osm/download
+     - ./fr-01/sources:/osm/sources:rw
+     - ./fr-01:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-01
+     - AREA_NAME="Ain"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-02" - "Aisne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-02:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-02/data:/osm/data
+     - ./fr-02/download:/osm/download
+     - ./fr-02/sources:/osm/sources:rw
+     - ./fr-02:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-02
+     - AREA_NAME="Aisne"
+     - GDNAME=${GDNAME:-picardie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-03" - "Allier"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-03:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-03/data:/osm/data
+     - ./fr-03/download:/osm/download
+     - ./fr-03/sources:/osm/sources:rw
+     - ./fr-03:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-03
+     - AREA_NAME="Allier"
+     - GDNAME=${GDNAME:-auvergne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-04" - "Alpes-de-Haute-Provence"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-04:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-04/data:/osm/data
+     - ./fr-04/download:/osm/download
+     - ./fr-04/sources:/osm/sources:rw
+     - ./fr-04:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-04
+     - AREA_NAME="Alpes-de-Haute-Provence"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-05" - "Hautes-Alpes"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-05:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-05/data:/osm/data
+     - ./fr-05/download:/osm/download
+     - ./fr-05/sources:/osm/sources:rw
+     - ./fr-05:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-05
+     - AREA_NAME="Hautes-Alpes"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-06" - "Maritime Alps"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-06:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-06/data:/osm/data
+     - ./fr-06/download:/osm/download
+     - ./fr-06/sources:/osm/sources:rw
+     - ./fr-06:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-06
+     - AREA_NAME="Maritime Alps"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-07" - "Ardèche"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-07:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-07/data:/osm/data
+     - ./fr-07/download:/osm/download
+     - ./fr-07/sources:/osm/sources:rw
+     - ./fr-07:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-07
+     - AREA_NAME="Ardèche"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-08" - "Ardennes"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-08:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-08/data:/osm/data
+     - ./fr-08/download:/osm/download
+     - ./fr-08/sources:/osm/sources:rw
+     - ./fr-08:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-08
+     - AREA_NAME="Ardennes"
+     - GDNAME=${GDNAME:-champagne-ardenne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-09" - "Ariège"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-09:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-09/data:/osm/data
+     - ./fr-09/download:/osm/download
+     - ./fr-09/sources:/osm/sources:rw
+     - ./fr-09:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-09
+     - AREA_NAME="Ariège"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-10" - "Aube"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-10:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-10/data:/osm/data
+     - ./fr-10/download:/osm/download
+     - ./fr-10/sources:/osm/sources:rw
+     - ./fr-10:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-10
+     - AREA_NAME="Aube"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-11" - "Aude"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-11:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-11/data:/osm/data
+     - ./fr-11/download:/osm/download
+     - ./fr-11/sources:/osm/sources:rw
+     - ./fr-11:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-11
+     - AREA_NAME="Aude"
+     - GDNAME=${GDNAME:-languedoc-roussillon}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-12" - "Aveyron"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-12:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-12/data:/osm/data
+     - ./fr-12/download:/osm/download
+     - ./fr-12/sources:/osm/sources:rw
+     - ./fr-12:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-12
+     - AREA_NAME="Aveyron"
+     - GDNAME=${GDNAME:-midi-pyrenees}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-13" - "Bouches-du-Rhône"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-13:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-13/data:/osm/data
+     - ./fr-13/download:/osm/download
+     - ./fr-13/sources:/osm/sources:rw
+     - ./fr-13:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-13
+     - AREA_NAME="Bouches-du-Rhône"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-14" - "Calvados"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-14:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-14/data:/osm/data
+     - ./fr-14/download:/osm/download
+     - ./fr-14/sources:/osm/sources:rw
+     - ./fr-14:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-14
+     - AREA_NAME="Calvados"
+     - GDNAME=${GDNAME:-basse-normandie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-15" - "Cantal"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-15:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-15/data:/osm/data
+     - ./fr-15/download:/osm/download
+     - ./fr-15/sources:/osm/sources:rw
+     - ./fr-15:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-15
+     - AREA_NAME="Cantal"
+     - GDNAME=${GDNAME:-auvergne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-16" - "Charente"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-16:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-16/data:/osm/data
+     - ./fr-16/download:/osm/download
+     - ./fr-16/sources:/osm/sources:rw
+     - ./fr-16:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-16
+     - AREA_NAME="Charente"
+     - GDNAME=${GDNAME:-poitou-charentes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-17" - "Charente-Maritime"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-17:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-17/data:/osm/data
+     - ./fr-17/download:/osm/download
+     - ./fr-17/sources:/osm/sources:rw
+     - ./fr-17:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-17
+     - AREA_NAME="Charente-Maritime"
+     - GDNAME=${GDNAME:-poitou-charentes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-18" - "Cher"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-18:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-18/data:/osm/data
+     - ./fr-18/download:/osm/download
+     - ./fr-18/sources:/osm/sources:rw
+     - ./fr-18:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-18
+     - AREA_NAME="Cher"
+     - GDNAME=${GDNAME:-centre}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-19" - "Corrèze"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-19:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-19/data:/osm/data
+     - ./fr-19/download:/osm/download
+     - ./fr-19/sources:/osm/sources:rw
+     - ./fr-19:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-19
+     - AREA_NAME="Corrèze"
+     - GDNAME=${GDNAME:-limousin}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-21" - "Côte-d'Or"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-21:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-21/data:/osm/data
+     - ./fr-21/download:/osm/download
+     - ./fr-21/sources:/osm/sources:rw
+     - ./fr-21:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-21
+     - AREA_NAME="Côte-d'Or"
+     - GDNAME=${GDNAME:-bourgogne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-22" - "Côtes-d'Armor"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-22:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-22/data:/osm/data
+     - ./fr-22/download:/osm/download
+     - ./fr-22/sources:/osm/sources:rw
+     - ./fr-22:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-22
+     - AREA_NAME="Côtes-d'Armor"
+     - GDNAME=${GDNAME:-bretagne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-23" - "Creuse"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-23:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-23/data:/osm/data
+     - ./fr-23/download:/osm/download
+     - ./fr-23/sources:/osm/sources:rw
+     - ./fr-23:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-23
+     - AREA_NAME="Creuse"
+     - GDNAME=${GDNAME:-limousin}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-24" - "Dordogne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-24:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-24/data:/osm/data
+     - ./fr-24/download:/osm/download
+     - ./fr-24/sources:/osm/sources:rw
+     - ./fr-24:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-24
+     - AREA_NAME="Dordogne"
+     - GDNAME=${GDNAME:-aquitaine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-25" - "Doubs"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-25:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-25/data:/osm/data
+     - ./fr-25/download:/osm/download
+     - ./fr-25/sources:/osm/sources:rw
+     - ./fr-25:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-25
+     - AREA_NAME="Doubs"
+     - GDNAME=${GDNAME:-franche-comte}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-26" - "Drôme"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-26:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-26/data:/osm/data
+     - ./fr-26/download:/osm/download
+     - ./fr-26/sources:/osm/sources:rw
+     - ./fr-26:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-26
+     - AREA_NAME="Drôme"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-27" - "Eure"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-27:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-27/data:/osm/data
+     - ./fr-27/download:/osm/download
+     - ./fr-27/sources:/osm/sources:rw
+     - ./fr-27:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-27
+     - AREA_NAME="Eure"
+     - GDNAME=${GDNAME:-haute-normandie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-28" - "Eure-et-Loir"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-28:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-28/data:/osm/data
+     - ./fr-28/download:/osm/download
+     - ./fr-28/sources:/osm/sources:rw
+     - ./fr-28:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-28
+     - AREA_NAME="Eure-et-Loir"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-29" - "Finistère"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-29:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-29/data:/osm/data
+     - ./fr-29/download:/osm/download
+     - ./fr-29/sources:/osm/sources:rw
+     - ./fr-29:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-29
+     - AREA_NAME="Finistère"
+     - GDNAME=${GDNAME:-bretagne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-2a" - "South Corsica"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-2a:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-2a/data:/osm/data
+     - ./fr-2a/download:/osm/download
+     - ./fr-2a/sources:/osm/sources:rw
+     - ./fr-2a:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-2a
+     - AREA_NAME="South Corsica"
+     - GDNAME=${GDNAME:-corse}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-2b" - "Haute-Corse"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-2b:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-2b/data:/osm/data
+     - ./fr-2b/download:/osm/download
+     - ./fr-2b/sources:/osm/sources:rw
+     - ./fr-2b:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-2b
+     - AREA_NAME="Haute-Corse"
+     - GDNAME=${GDNAME:-corse}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-30" - "Gard"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-30:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-30/data:/osm/data
+     - ./fr-30/download:/osm/download
+     - ./fr-30/sources:/osm/sources:rw
+     - ./fr-30:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-30
+     - AREA_NAME="Gard"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-31" - "Haute-Garonne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-31:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-31/data:/osm/data
+     - ./fr-31/download:/osm/download
+     - ./fr-31/sources:/osm/sources:rw
+     - ./fr-31:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-31
+     - AREA_NAME="Haute-Garonne"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-32" - "Gers"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-32:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-32/data:/osm/data
+     - ./fr-32/download:/osm/download
+     - ./fr-32/sources:/osm/sources:rw
+     - ./fr-32:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-32
+     - AREA_NAME="Gers"
+     - GDNAME=${GDNAME:-midi-pyrenees}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-33" - "Gironde"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-33:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-33/data:/osm/data
+     - ./fr-33/download:/osm/download
+     - ./fr-33/sources:/osm/sources:rw
+     - ./fr-33:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-33
+     - AREA_NAME="Gironde"
+     - GDNAME=${GDNAME:-aquitaine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-34" - "Hérault"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-34:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-34/data:/osm/data
+     - ./fr-34/download:/osm/download
+     - ./fr-34/sources:/osm/sources:rw
+     - ./fr-34:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-34
+     - AREA_NAME="Hérault"
+     - GDNAME=${GDNAME:-languedoc-roussillon}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-35" - "Ille-et-Vilaine"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-35:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-35/data:/osm/data
+     - ./fr-35/download:/osm/download
+     - ./fr-35/sources:/osm/sources:rw
+     - ./fr-35:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-35
+     - AREA_NAME="Ille-et-Vilaine"
+     - GDNAME=${GDNAME:-bretagne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-36" - "Indre"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-36:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-36/data:/osm/data
+     - ./fr-36/download:/osm/download
+     - ./fr-36/sources:/osm/sources:rw
+     - ./fr-36:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-36
+     - AREA_NAME="Indre"
+     - GDNAME=${GDNAME:-centre}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-37" - "Indre-et-Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-37:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-37/data:/osm/data
+     - ./fr-37/download:/osm/download
+     - ./fr-37/sources:/osm/sources:rw
+     - ./fr-37:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-37
+     - AREA_NAME="Indre-et-Loire"
+     - GDNAME=${GDNAME:-centre}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-38" - "Isère"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-38:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-38/data:/osm/data
+     - ./fr-38/download:/osm/download
+     - ./fr-38/sources:/osm/sources:rw
+     - ./fr-38:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-38
+     - AREA_NAME="Isère"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-39" - "Jura"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-39:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-39/data:/osm/data
+     - ./fr-39/download:/osm/download
+     - ./fr-39/sources:/osm/sources:rw
+     - ./fr-39:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-39
+     - AREA_NAME="Jura"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-40" - "Landes"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-40:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-40/data:/osm/data
+     - ./fr-40/download:/osm/download
+     - ./fr-40/sources:/osm/sources:rw
+     - ./fr-40:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-40
+     - AREA_NAME="Landes"
+     - GDNAME=${GDNAME:-aquitaine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-41" - "Loir-et-Cher"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-41:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-41/data:/osm/data
+     - ./fr-41/download:/osm/download
+     - ./fr-41/sources:/osm/sources:rw
+     - ./fr-41:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-41
+     - AREA_NAME="Loir-et-Cher"
+     - GDNAME=${GDNAME:-centre}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-42" - "Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-42:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-42/data:/osm/data
+     - ./fr-42/download:/osm/download
+     - ./fr-42/sources:/osm/sources:rw
+     - ./fr-42:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-42
+     - AREA_NAME="Loire"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-43" - "Haute-Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-43:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-43/data:/osm/data
+     - ./fr-43/download:/osm/download
+     - ./fr-43/sources:/osm/sources:rw
+     - ./fr-43:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-43
+     - AREA_NAME="Haute-Loire"
+     - GDNAME=${GDNAME:-auvergne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-44" - "Loire-Atlantique"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-44:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-44/data:/osm/data
+     - ./fr-44/download:/osm/download
+     - ./fr-44/sources:/osm/sources:rw
+     - ./fr-44:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-44
+     - AREA_NAME="Loire-Atlantique"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-45" - "Loiret"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-45:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-45/data:/osm/data
+     - ./fr-45/download:/osm/download
+     - ./fr-45/sources:/osm/sources:rw
+     - ./fr-45:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-45
+     - AREA_NAME="Loiret"
+     - GDNAME=${GDNAME:-centre}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-46" - "Lot"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-46:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-46/data:/osm/data
+     - ./fr-46/download:/osm/download
+     - ./fr-46/sources:/osm/sources:rw
+     - ./fr-46:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-46
+     - AREA_NAME="Lot"
+     - GDNAME=${GDNAME:-midi-pyrenees}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-47" - "Lot-et-Garonne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-47:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-47/data:/osm/data
+     - ./fr-47/download:/osm/download
+     - ./fr-47/sources:/osm/sources:rw
+     - ./fr-47:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-47
+     - AREA_NAME="Lot-et-Garonne"
+     - GDNAME=${GDNAME:-aquitaine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-48" - "Lozère"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-48:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-48/data:/osm/data
+     - ./fr-48/download:/osm/download
+     - ./fr-48/sources:/osm/sources:rw
+     - ./fr-48:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-48
+     - AREA_NAME="Lozère"
+     - GDNAME=${GDNAME:-languedoc-roussillon}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-49" - "Maine-et-Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-49:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-49/data:/osm/data
+     - ./fr-49/download:/osm/download
+     - ./fr-49/sources:/osm/sources:rw
+     - ./fr-49:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-49
+     - AREA_NAME="Maine-et-Loire"
+     - GDNAME=${GDNAME:-pays-de-la-loire}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-50" - "Manche"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-50:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-50/data:/osm/data
+     - ./fr-50/download:/osm/download
+     - ./fr-50/sources:/osm/sources:rw
+     - ./fr-50:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-50
+     - AREA_NAME="Manche"
+     - GDNAME=${GDNAME:-basse-normandie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-51" - "Marne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-51:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-51/data:/osm/data
+     - ./fr-51/download:/osm/download
+     - ./fr-51/sources:/osm/sources:rw
+     - ./fr-51:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-51
+     - AREA_NAME="Marne"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-52" - "Haute-Marne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-52:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-52/data:/osm/data
+     - ./fr-52/download:/osm/download
+     - ./fr-52/sources:/osm/sources:rw
+     - ./fr-52:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-52
+     - AREA_NAME="Haute-Marne"
+     - GDNAME=${GDNAME:-champagne-ardenne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-53" - "Mayenne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-53:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-53/data:/osm/data
+     - ./fr-53/download:/osm/download
+     - ./fr-53/sources:/osm/sources:rw
+     - ./fr-53:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-53
+     - AREA_NAME="Mayenne"
+     - GDNAME=${GDNAME:-pays-de-la-loire}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-54" - "Meurthe-et-Moselle"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-54:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-54/data:/osm/data
+     - ./fr-54/download:/osm/download
+     - ./fr-54/sources:/osm/sources:rw
+     - ./fr-54:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-54
+     - AREA_NAME="Meurthe-et-Moselle"
+     - GDNAME=${GDNAME:-lorraine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-55" - "Meuse"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-55:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-55/data:/osm/data
+     - ./fr-55/download:/osm/download
+     - ./fr-55/sources:/osm/sources:rw
+     - ./fr-55:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-55
+     - AREA_NAME="Meuse"
+     - GDNAME=${GDNAME:-lorraine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-56" - "Morbihan"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-56:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-56/data:/osm/data
+     - ./fr-56/download:/osm/download
+     - ./fr-56/sources:/osm/sources:rw
+     - ./fr-56:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-56
+     - AREA_NAME="Morbihan"
+     - GDNAME=${GDNAME:-bretagne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-57" - "Moselle"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-57:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-57/data:/osm/data
+     - ./fr-57/download:/osm/download
+     - ./fr-57/sources:/osm/sources:rw
+     - ./fr-57:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-57
+     - AREA_NAME="Moselle"
+     - GDNAME=${GDNAME:-lorraine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-58" - "Nièvre"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-58:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-58/data:/osm/data
+     - ./fr-58/download:/osm/download
+     - ./fr-58/sources:/osm/sources:rw
+     - ./fr-58:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-58
+     - AREA_NAME="Nièvre"
+     - GDNAME=${GDNAME:-bourgogne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-59" - "Nord"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-59:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-59/data:/osm/data
+     - ./fr-59/download:/osm/download
+     - ./fr-59/sources:/osm/sources:rw
+     - ./fr-59:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-59
+     - AREA_NAME="Nord"
+     - GDNAME=${GDNAME:-nord-pas-de-calais}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-60" - "Oise"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-60:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-60/data:/osm/data
+     - ./fr-60/download:/osm/download
+     - ./fr-60/sources:/osm/sources:rw
+     - ./fr-60:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-60
+     - AREA_NAME="Oise"
+     - GDNAME=${GDNAME:-picardie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-61" - "Orne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-61:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-61/data:/osm/data
+     - ./fr-61/download:/osm/download
+     - ./fr-61/sources:/osm/sources:rw
+     - ./fr-61:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-61
+     - AREA_NAME="Orne"
+     - GDNAME=${GDNAME:-basse-normandie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-62" - "Pas-de-Calais"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-62:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-62/data:/osm/data
+     - ./fr-62/download:/osm/download
+     - ./fr-62/sources:/osm/sources:rw
+     - ./fr-62:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-62
+     - AREA_NAME="Pas-de-Calais"
+     - GDNAME=${GDNAME:-nord-pas-de-calais}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-63" - "Puy-de-Dôme"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-63:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-63/data:/osm/data
+     - ./fr-63/download:/osm/download
+     - ./fr-63/sources:/osm/sources:rw
+     - ./fr-63:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-63
+     - AREA_NAME="Puy-de-Dôme"
+     - GDNAME=${GDNAME:-auvergne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-64" - "Pyrénées-Atlantiques"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-64:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-64/data:/osm/data
+     - ./fr-64/download:/osm/download
+     - ./fr-64/sources:/osm/sources:rw
+     - ./fr-64:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-64
+     - AREA_NAME="Pyrénées-Atlantiques"
+     - GDNAME=${GDNAME:-aquitaine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-65" - "Hautespyrenees"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-65:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-65/data:/osm/data
+     - ./fr-65/download:/osm/download
+     - ./fr-65/sources:/osm/sources:rw
+     - ./fr-65:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-65
+     - AREA_NAME="Hautespyrenees"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-66" - "Pyrénées-Orientales"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-66:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-66/data:/osm/data
+     - ./fr-66/download:/osm/download
+     - ./fr-66/sources:/osm/sources:rw
+     - ./fr-66:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-66
+     - AREA_NAME="Pyrénées-Orientales"
+     - GDNAME=${GDNAME:-languedoc-roussillon}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-67" - "Bas-Rhin"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-67:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-67/data:/osm/data
+     - ./fr-67/download:/osm/download
+     - ./fr-67/sources:/osm/sources:rw
+     - ./fr-67:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-67
+     - AREA_NAME="Bas-Rhin"
+     - GDNAME=${GDNAME:-alsace}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-68" - "Haut-Rhin"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-68:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-68/data:/osm/data
+     - ./fr-68/download:/osm/download
+     - ./fr-68/sources:/osm/sources:rw
+     - ./fr-68:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-68
+     - AREA_NAME="Haut-Rhin"
+     - GDNAME=${GDNAME:-alsace}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-69" - "Departemental constituency of Rhône"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-69:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-69/data:/osm/data
+     - ./fr-69/download:/osm/download
+     - ./fr-69/sources:/osm/sources:rw
+     - ./fr-69:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-69
+     - AREA_NAME="Departemental constituency of Rhône"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-70" - "Haute-Saône"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-70:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-70/data:/osm/data
+     - ./fr-70/download:/osm/download
+     - ./fr-70/sources:/osm/sources:rw
+     - ./fr-70:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-70
+     - AREA_NAME="Haute-Saône"
+     - GDNAME=${GDNAME:-franche-comte}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-71" - "Saône-et-Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-71:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-71/data:/osm/data
+     - ./fr-71/download:/osm/download
+     - ./fr-71/sources:/osm/sources:rw
+     - ./fr-71:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-71
+     - AREA_NAME="Saône-et-Loire"
+     - GDNAME=${GDNAME:-bourgogne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-72" - "Sarthe"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-72:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-72/data:/osm/data
+     - ./fr-72/download:/osm/download
+     - ./fr-72/sources:/osm/sources:rw
+     - ./fr-72:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-72
+     - AREA_NAME="Sarthe"
+     - GDNAME=${GDNAME:-pays-de-la-loire}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-73" - "Savoy"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-73:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-73/data:/osm/data
+     - ./fr-73/download:/osm/download
+     - ./fr-73/sources:/osm/sources:rw
+     - ./fr-73:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-73
+     - AREA_NAME="Savoy"
+     - GDNAME=${GDNAME:-rhone-alpes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-74" - "Upper Savoy"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-74:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-74/data:/osm/data
+     - ./fr-74/download:/osm/download
+     - ./fr-74/sources:/osm/sources:rw
+     - ./fr-74:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-74
+     - AREA_NAME="Upper Savoy"
+     - GDNAME=${GDNAME:-alps}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-75" - "Paris"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-75:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-75/data:/osm/data
+     - ./fr-75/download:/osm/download
+     - ./fr-75/sources:/osm/sources:rw
+     - ./fr-75:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-75
+     - AREA_NAME="Paris"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-76" - "Seine-Maritime"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-76:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-76/data:/osm/data
+     - ./fr-76/download:/osm/download
+     - ./fr-76/sources:/osm/sources:rw
+     - ./fr-76:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-76
+     - AREA_NAME="Seine-Maritime"
+     - GDNAME=${GDNAME:-haute-normandie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-77" - "Seine-et-Marne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-77:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-77/data:/osm/data
+     - ./fr-77/download:/osm/download
+     - ./fr-77/sources:/osm/sources:rw
+     - ./fr-77:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-77
+     - AREA_NAME="Seine-et-Marne"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-78" - "Yvelines"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-78:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-78/data:/osm/data
+     - ./fr-78/download:/osm/download
+     - ./fr-78/sources:/osm/sources:rw
+     - ./fr-78:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-78
+     - AREA_NAME="Yvelines"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-79" - "Deux-Sèvres"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-79:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-79/data:/osm/data
+     - ./fr-79/download:/osm/download
+     - ./fr-79/sources:/osm/sources:rw
+     - ./fr-79:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-79
+     - AREA_NAME="Deux-Sèvres"
+     - GDNAME=${GDNAME:-poitou-charentes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-80" - "Somme"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-80:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-80/data:/osm/data
+     - ./fr-80/download:/osm/download
+     - ./fr-80/sources:/osm/sources:rw
+     - ./fr-80:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-80
+     - AREA_NAME="Somme"
+     - GDNAME=${GDNAME:-picardie}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-81" - "Tarn"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-81:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-81/data:/osm/data
+     - ./fr-81/download:/osm/download
+     - ./fr-81/sources:/osm/sources:rw
+     - ./fr-81:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-81
+     - AREA_NAME="Tarn"
+     - GDNAME=${GDNAME:-midi-pyrenees}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-82" - "Tarn-et-Garonne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-82:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-82/data:/osm/data
+     - ./fr-82/download:/osm/download
+     - ./fr-82/sources:/osm/sources:rw
+     - ./fr-82:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-82
+     - AREA_NAME="Tarn-et-Garonne"
+     - GDNAME=${GDNAME:-midi-pyrenees}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-83" - "Var"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-83:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-83/data:/osm/data
+     - ./fr-83/download:/osm/download
+     - ./fr-83/sources:/osm/sources:rw
+     - ./fr-83:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-83
+     - AREA_NAME="Var"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-84" - "Vaucluse"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-84:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-84/data:/osm/data
+     - ./fr-84/download:/osm/download
+     - ./fr-84/sources:/osm/sources:rw
+     - ./fr-84:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-84
+     - AREA_NAME="Vaucluse"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-85" - "Vendée"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-85:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-85/data:/osm/data
+     - ./fr-85/download:/osm/download
+     - ./fr-85/sources:/osm/sources:rw
+     - ./fr-85:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-85
+     - AREA_NAME="Vendée"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-86" - "Vienne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-86:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-86/data:/osm/data
+     - ./fr-86/download:/osm/download
+     - ./fr-86/sources:/osm/sources:rw
+     - ./fr-86:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-86
+     - AREA_NAME="Vienne"
+     - GDNAME=${GDNAME:-poitou-charentes}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-87" - "Haute-Vienne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-87:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-87/data:/osm/data
+     - ./fr-87/download:/osm/download
+     - ./fr-87/sources:/osm/sources:rw
+     - ./fr-87:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-87
+     - AREA_NAME="Haute-Vienne"
+     - GDNAME=${GDNAME:-limousin}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-88" - "Vosges"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-88:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-88/data:/osm/data
+     - ./fr-88/download:/osm/download
+     - ./fr-88/sources:/osm/sources:rw
+     - ./fr-88:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-88
+     - AREA_NAME="Vosges"
+     - GDNAME=${GDNAME:-lorraine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-89" - "Yonne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-89:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-89/data:/osm/data
+     - ./fr-89/download:/osm/download
+     - ./fr-89/sources:/osm/sources:rw
+     - ./fr-89:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-89
+     - AREA_NAME="Yonne"
+     - GDNAME=${GDNAME:-bourgogne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-90" - "Territoire-de-Belfort"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-90:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-90/data:/osm/data
+     - ./fr-90/download:/osm/download
+     - ./fr-90/sources:/osm/sources:rw
+     - ./fr-90:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-90
+     - AREA_NAME="Territoire-de-Belfort"
+     - GDNAME=${GDNAME:-franche-comte}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-91" - "Essonne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-91:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-91/data:/osm/data
+     - ./fr-91/download:/osm/download
+     - ./fr-91/sources:/osm/sources:rw
+     - ./fr-91:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-91
+     - AREA_NAME="Essonne"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-92" - "Hauts-de-Seine"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-92:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-92/data:/osm/data
+     - ./fr-92/download:/osm/download
+     - ./fr-92/sources:/osm/sources:rw
+     - ./fr-92:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-92
+     - AREA_NAME="Hauts-de-Seine"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-93" - "Seine-Saint-Denis"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-93:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-93/data:/osm/data
+     - ./fr-93/download:/osm/download
+     - ./fr-93/sources:/osm/sources:rw
+     - ./fr-93:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-93
+     - AREA_NAME="Seine-Saint-Denis"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-94" - "Val-de-Marne"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-94:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-94/data:/osm/data
+     - ./fr-94/download:/osm/download
+     - ./fr-94/sources:/osm/sources:rw
+     - ./fr-94:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-94
+     - AREA_NAME="Val-de-Marne"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-95" - "Val-d'Oise"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-95:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-95/data:/osm/data
+     - ./fr-95/download:/osm/download
+     - ./fr-95/sources:/osm/sources:rw
+     - ./fr-95:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-95
+     - AREA_NAME="Val-d'Oise"
+     - GDNAME=${GDNAME:-ile-de-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-ara" - "Auvergne-Rhône-Alpes"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-ara:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-ara/data:/osm/data
+     - ./fr-ara/download:/osm/download
+     - ./fr-ara/sources:/osm/sources:rw
+     - ./fr-ara:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-ara
+     - AREA_NAME="Auvergne-Rhône-Alpes"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-bfc" - "Bourgogne-Franche-Comté"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-bfc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-bfc/data:/osm/data
+     - ./fr-bfc/download:/osm/download
+     - ./fr-bfc/sources:/osm/sources:rw
+     - ./fr-bfc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-bfc
+     - AREA_NAME="Bourgogne-Franche-Comté"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-bre" - "Brittany"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-bre:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-bre/data:/osm/data
+     - ./fr-bre/download:/osm/download
+     - ./fr-bre/sources:/osm/sources:rw
+     - ./fr-bre:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-bre
+     - AREA_NAME="Brittany"
+     - GDNAME=${GDNAME:-bretagne}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-cor" - "Corsica"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-cor:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-cor/data:/osm/data
+     - ./fr-cor/download:/osm/download
+     - ./fr-cor/sources:/osm/sources:rw
+     - ./fr-cor:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-cor
+     - AREA_NAME="Corsica"
+     - GDNAME=${GDNAME:-corse}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-cvl" - "Centre-Loire Valley"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-cvl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-cvl/data:/osm/data
+     - ./fr-cvl/download:/osm/download
+     - ./fr-cvl/sources:/osm/sources:rw
+     - ./fr-cvl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-cvl
+     - AREA_NAME="Centre-Loire Valley"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-ges" - "Grand Est"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-ges:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-ges/data:/osm/data
+     - ./fr-ges/download:/osm/download
+     - ./fr-ges/sources:/osm/sources:rw
+     - ./fr-ges:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-ges
+     - AREA_NAME="Grand Est"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-hdf" - "Hauts-de-France"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-hdf:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-hdf/data:/osm/data
+     - ./fr-hdf/download:/osm/download
+     - ./fr-hdf/sources:/osm/sources:rw
+     - ./fr-hdf:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-hdf
+     - AREA_NAME="Hauts-de-France"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-idf" - "Ile-de-France"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-idf:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-idf/data:/osm/data
+     - ./fr-idf/download:/osm/download
+     - ./fr-idf/sources:/osm/sources:rw
+     - ./fr-idf:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-idf
+     - AREA_NAME="Ile-de-France"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-naq" - "New Aquitaine"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-naq:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-naq/data:/osm/data
+     - ./fr-naq/download:/osm/download
+     - ./fr-naq/sources:/osm/sources:rw
+     - ./fr-naq:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-naq
+     - AREA_NAME="New Aquitaine"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-nor" - "Normandy"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-nor:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-nor/data:/osm/data
+     - ./fr-nor/download:/osm/download
+     - ./fr-nor/sources:/osm/sources:rw
+     - ./fr-nor:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-nor
+     - AREA_NAME="Normandy"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-occ" - "Occitania"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-occ:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-occ/data:/osm/data
+     - ./fr-occ/download:/osm/download
+     - ./fr-occ/sources:/osm/sources:rw
+     - ./fr-occ:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-occ
+     - AREA_NAME="Occitania"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-pac" - "Provence-Alpes-Côte d'Azur"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-pac:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-pac/data:/osm/data
+     - ./fr-pac/download:/osm/download
+     - ./fr-pac/sources:/osm/sources:rw
+     - ./fr-pac:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-pac
+     - AREA_NAME="Provence-Alpes-Côte d'Azur"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "fr-pdl" - "Pays de la Loire"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-fr-pdl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./fr-pdl/data:/osm/data
+     - ./fr-pdl/download:/osm/download
+     - ./fr-pdl/sources:/osm/sources:rw
+     - ./fr-pdl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=fr-pdl
+     - AREA_NAME="Pays de la Loire"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "gb" - "United Kingdom"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-gb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./gb/data:/osm/data
+     - ./gb/download:/osm/download
+     - ./gb/sources:/osm/sources:rw
+     - ./gb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=gb
+     - AREA_NAME="United Kingdom"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ge" - "Georgia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ge:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ge/data:/osm/data
+     - ./ge/download:/osm/download
+     - ./ge/sources:/osm/sources:rw
+     - ./ge:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ge
+     - AREA_NAME="Georgia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "gg" - "Guernsey"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-gg:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./gg/data:/osm/data
+     - ./gg/download:/osm/download
+     - ./gg/sources:/osm/sources:rw
+     - ./gg:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=gg
+     - AREA_NAME="Guernsey"
+     - GDNAME=${GDNAME:-great-britain}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "gi" - "Gibraltar"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-gi:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./gi/data:/osm/data
+     - ./gi/download:/osm/download
+     - ./gi/sources:/osm/sources:rw
+     - ./gi:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=gi
+     - AREA_NAME="Gibraltar"
+     - GDNAME=${GDNAME:-spain}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "gr" - "Greece"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-gr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./gr/data:/osm/data
+     - ./gr/download:/osm/download
+     - ./gr/sources:/osm/sources:rw
+     - ./gr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=gr
+     - AREA_NAME="Greece"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "hr" - "Croatia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-hr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./hr/data:/osm/data
+     - ./hr/download:/osm/download
+     - ./hr/sources:/osm/sources:rw
+     - ./hr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=hr
+     - AREA_NAME="Croatia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "hu" - "Hungary"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-hu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./hu/data:/osm/data
+     - ./hu/download:/osm/download
+     - ./hu/sources:/osm/sources:rw
+     - ./hu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=hu
+     - AREA_NAME="Hungary"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ie" - "Ireland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ie:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ie/data:/osm/data
+     - ./ie/download:/osm/download
+     - ./ie/sources:/osm/sources:rw
+     - ./ie:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ie
+     - AREA_NAME="Ireland"
+     - GDNAME=${GDNAME:-ireland-and-northern-ireland}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "im" - "Isle of Man"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-im:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./im/data:/osm/data
+     - ./im/download:/osm/download
+     - ./im/sources:/osm/sources:rw
+     - ./im:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=im
+     - AREA_NAME="Isle of Man"
+     - GDNAME=${GDNAME:-isle-of-man}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "is" - "Iceland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-is:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./is/data:/osm/data
+     - ./is/download:/osm/download
+     - ./is/sources:/osm/sources:rw
+     - ./is:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=is
+     - AREA_NAME="Iceland"
+     - GDNAME=${GDNAME:-iceland}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "it" - "Italy"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-it:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./it/data:/osm/data
+     - ./it/download:/osm/download
+     - ./it/sources:/osm/sources:rw
+     - ./it:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=it
+     - AREA_NAME="Italy"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "it-32" - "Trentino-Alto Adige/Südtirol"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-it-32:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./it-32/data:/osm/data
+     - ./it-32/download:/osm/download
+     - ./it-32/sources:/osm/sources:rw
+     - ./it-32:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=it-32
+     - AREA_NAME="Trentino-Alto Adige/Südtirol"
+     - GDNAME=${GDNAME:-alps}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "it-88" - "Sardinia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-it-88:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./it-88/data:/osm/data
+     - ./it-88/download:/osm/download
+     - ./it-88/sources:/osm/sources:rw
+     - ./it-88:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=it-88
+     - AREA_NAME="Sardinia"
+     - GDNAME=${GDNAME:-isole}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "je" - "Jersey"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-je:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./je/data:/osm/data
+     - ./je/download:/osm/download
+     - ./je/sources:/osm/sources:rw
+     - ./je:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=je
+     - AREA_NAME="Jersey"
+     - GDNAME=${GDNAME:-france}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "li" - "Liechtenstein"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-li:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./li/data:/osm/data
+     - ./li/download:/osm/download
+     - ./li/sources:/osm/sources:rw
+     - ./li:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=li
+     - AREA_NAME="Liechtenstein"
+     - GDNAME=${GDNAME:-alps}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "lt" - "Lithuania"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-lt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./lt/data:/osm/data
+     - ./lt/download:/osm/download
+     - ./lt/sources:/osm/sources:rw
+     - ./lt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=lt
+     - AREA_NAME="Lithuania"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "lu" - "Luxembourg"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-lu:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./lu/data:/osm/data
+     - ./lu/download:/osm/download
+     - ./lu/sources:/osm/sources:rw
+     - ./lu:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=lu
+     - AREA_NAME="Luxembourg"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "lv" - "Latvia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-lv:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./lv/data:/osm/data
+     - ./lv/download:/osm/download
+     - ./lv/sources:/osm/sources:rw
+     - ./lv:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=lv
+     - AREA_NAME="Latvia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "mc" - "Monaco"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-mc:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./mc/data:/osm/data
+     - ./mc/download:/osm/download
+     - ./mc/sources:/osm/sources:rw
+     - ./mc:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=mc
+     - AREA_NAME="Monaco"
+     - GDNAME=${GDNAME:-provence-alpes-cote-d-azur}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "md" - "Moldova"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-md:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./md/data:/osm/data
+     - ./md/download:/osm/download
+     - ./md/sources:/osm/sources:rw
+     - ./md:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=md
+     - AREA_NAME="Moldova"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "me" - "Montenegro"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-me:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./me/data:/osm/data
+     - ./me/download:/osm/download
+     - ./me/sources:/osm/sources:rw
+     - ./me:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=me
+     - AREA_NAME="Montenegro"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "mk" - "Macedonia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-mk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./mk/data:/osm/data
+     - ./mk/download:/osm/download
+     - ./mk/sources:/osm/sources:rw
+     - ./mk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=mk
+     - AREA_NAME="Macedonia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "mt" - "Malta"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-mt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./mt/data:/osm/data
+     - ./mt/download:/osm/download
+     - ./mt/sources:/osm/sources:rw
+     - ./mt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=mt
+     - AREA_NAME="Malta"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl" - "The Netherlands"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl/data:/osm/data
+     - ./nl/download:/osm/download
+     - ./nl/sources:/osm/sources:rw
+     - ./nl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl
+     - AREA_NAME="The Netherlands"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-dr" - "Drenthe"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-dr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-dr/data:/osm/data
+     - ./nl-dr/download:/osm/download
+     - ./nl-dr/sources:/osm/sources:rw
+     - ./nl-dr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-dr
+     - AREA_NAME="Drenthe"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-fl" - "Flevoland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-fl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-fl/data:/osm/data
+     - ./nl-fl/download:/osm/download
+     - ./nl-fl/sources:/osm/sources:rw
+     - ./nl-fl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-fl
+     - AREA_NAME="Flevoland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-fr" - "Friesland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-fr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-fr/data:/osm/data
+     - ./nl-fr/download:/osm/download
+     - ./nl-fr/sources:/osm/sources:rw
+     - ./nl-fr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-fr
+     - AREA_NAME="Friesland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-ge" - "Gelderland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-ge:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-ge/data:/osm/data
+     - ./nl-ge/download:/osm/download
+     - ./nl-ge/sources:/osm/sources:rw
+     - ./nl-ge:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-ge
+     - AREA_NAME="Gelderland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-gr" - "Groningen"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-gr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-gr/data:/osm/data
+     - ./nl-gr/download:/osm/download
+     - ./nl-gr/sources:/osm/sources:rw
+     - ./nl-gr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-gr
+     - AREA_NAME="Groningen"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-li" - "Limburg"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-li:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-li/data:/osm/data
+     - ./nl-li/download:/osm/download
+     - ./nl-li/sources:/osm/sources:rw
+     - ./nl-li:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-li
+     - AREA_NAME="Limburg"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-nb" - "North Brabant"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-nb:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-nb/data:/osm/data
+     - ./nl-nb/download:/osm/download
+     - ./nl-nb/sources:/osm/sources:rw
+     - ./nl-nb:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-nb
+     - AREA_NAME="North Brabant"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-nh" - "North Holland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-nh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-nh/data:/osm/data
+     - ./nl-nh/download:/osm/download
+     - ./nl-nh/sources:/osm/sources:rw
+     - ./nl-nh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-nh
+     - AREA_NAME="North Holland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-ov" - "Overijssel"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-ov:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-ov/data:/osm/data
+     - ./nl-ov/download:/osm/download
+     - ./nl-ov/sources:/osm/sources:rw
+     - ./nl-ov:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-ov
+     - AREA_NAME="Overijssel"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-ut" - "Utrecht"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-ut:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-ut/data:/osm/data
+     - ./nl-ut/download:/osm/download
+     - ./nl-ut/sources:/osm/sources:rw
+     - ./nl-ut:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-ut
+     - AREA_NAME="Utrecht"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-ze" - "Zeeland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-ze:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-ze/data:/osm/data
+     - ./nl-ze/download:/osm/download
+     - ./nl-ze/sources:/osm/sources:rw
+     - ./nl-ze:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-ze
+     - AREA_NAME="Zeeland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "nl-zh" - "South Holland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-nl-zh:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./nl-zh/data:/osm/data
+     - ./nl-zh/download:/osm/download
+     - ./nl-zh/sources:/osm/sources:rw
+     - ./nl-zh:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=nl-zh
+     - AREA_NAME="South Holland"
+     - GDNAME=${GDNAME:-netherlands}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "no" - "Norway"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-no:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./no/data:/osm/data
+     - ./no/download:/osm/download
+     - ./no/sources:/osm/sources:rw
+     - ./no:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=no
+     - AREA_NAME="Norway"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "pl" - "Poland"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-pl:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./pl/data:/osm/data
+     - ./pl/download:/osm/download
+     - ./pl/sources:/osm/sources:rw
+     - ./pl:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=pl
+     - AREA_NAME="Poland"
+     - GDNAME=${GDNAME:-poland}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "pt" - "Portugal"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-pt:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./pt/data:/osm/data
+     - ./pt/download:/osm/download
+     - ./pt/sources:/osm/sources:rw
+     - ./pt:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=pt
+     - AREA_NAME="Portugal"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ro" - "Romania"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ro:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ro/data:/osm/data
+     - ./ro/download:/osm/download
+     - ./ro/sources:/osm/sources:rw
+     - ./ro:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ro
+     - AREA_NAME="Romania"
+     - GDNAME=${GDNAME:-romania}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "rs" - "Serbia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-rs:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./rs/data:/osm/data
+     - ./rs/download:/osm/download
+     - ./rs/sources:/osm/sources:rw
+     - ./rs:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=rs
+     - AREA_NAME="Serbia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "se" - "Sweden"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-se:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./se/data:/osm/data
+     - ./se/download:/osm/download
+     - ./se/sources:/osm/sources:rw
+     - ./se:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=se
+     - AREA_NAME="Sweden"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "si" - "Slovenia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-si:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./si/data:/osm/data
+     - ./si/download:/osm/download
+     - ./si/sources:/osm/sources:rw
+     - ./si:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=si
+     - AREA_NAME="Slovenia"
+     - GDNAME=${GDNAME:-alps}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "sk" - "Slovakia"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-sk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./sk/data:/osm/data
+     - ./sk/download:/osm/download
+     - ./sk/sources:/osm/sources:rw
+     - ./sk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=sk
+     - AREA_NAME="Slovakia"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "sm" - "San Marino"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-sm:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./sm/data:/osm/data
+     - ./sm/download:/osm/download
+     - ./sm/sources:/osm/sources:rw
+     - ./sm:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=sm
+     - AREA_NAME="San Marino"
+     - GDNAME=${GDNAME:-italy}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "tr" - "Turkey"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-tr:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./tr/data:/osm/data
+     - ./tr/download:/osm/download
+     - ./tr/sources:/osm/sources:rw
+     - ./tr:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=tr
+     - AREA_NAME="Turkey"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "ua" - "Ukraine"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-ua:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./ua/data:/osm/data
+     - ./ua/download:/osm/download
+     - ./ua/sources:/osm/sources:rw
+     - ./ua:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=ua
+     - AREA_NAME="Ukraine"
+     - GDNAME=${GDNAME:-ukraine}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "va" - "Vatican City"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-va:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./va/data:/osm/data
+     - ./va/download:/osm/download
+     - ./va/sources:/osm/sources:rw
+     - ./va:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=va
+     - AREA_NAME="Vatican City"
+     - GDNAME=${GDNAME:-centro}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+  #---------------------------------------------------------
+  # Service for : "xk" - "Kosovo"
+  #            continent: "eu"
+  #
+  taginfo-job-eu-xk:
+    image: taginfo_job
+    user: ${CURRENT_UID}
+    networks:
+      - taginfo    
+    volumes:
+     - ./xk/data:/osm/data
+     - ./xk/download:/osm/download
+     - ./xk/sources:/osm/sources:rw
+     - ./xk:/osm/cfg
+     - ../../import:/osm/import
+     - ../../sh:/osm/sh
+    environment:
+     - AREA_ID=xk
+     - AREA_NAME="Kosovo"
+     - GDNAME=${GDNAME:-europe}   
+     - CONTINENT=eu
+     - CONTINENT_LONG=europe
+
+
+# generated : 2018-07-25:08:48  

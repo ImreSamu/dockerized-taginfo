@@ -1,0 +1,256 @@
+select iso, name_en,area_pct,name,wikidata from osm_admin2_continent_all order by iso ;
+  iso   |                 name_en                 |     area_pct      |                                name                                 | wikidata  
+--------+-----------------------------------------+-------------------+---------------------------------------------------------------------+-----------
+ ag     | Antigua and Barbuda                     |                 1 | Antigua and Barbuda                                                 | Q781
+ ag-10  | Barbuda                                 |                 1 | Barbuda                                                             | Q238752
+ ag-11  | Redonda                                 |                 1 | Redonda                                                             | Q457261
+ ai     | Anguilla                                |                 1 | Anguilla                                                            | Q25228
+ bb     | Barbados                                |                 1 | Barbados                                                            | Q244
+ bb-01  |                                         |                 1 | Christ Church                                                       | Q1626524
+ bb-02  |                                         |                 1 | Saint Andrew                                                        | Q1647439
+ bb-03  |                                         |                 1 | Saint George                                                        | Q1647443
+ bb-04  |                                         |                 1 | Saint James                                                         | Q592141
+ bb-05  |                                         |                 1 | Saint John                                                          | Q1626540
+ bb-06  |                                         |                 1 | Saint Joseph                                                        | Q550249
+ bb-07  |                                         |                 1 | Saint Lucy                                                          | Q1647447
+ bb-08  |                                         |                 1 | Saint Michael                                                       | Q819170
+ bb-09  |                                         |                 1 | Saint Peter                                                         | Q932723
+ bb-10  |                                         |                 1 | Saint Philip                                                        | Q1647436
+ bb-11  |                                         |                 1 | Saint Thomas                                                        | Q1647432
+ bq     | Caribbean Netherlands                   |                 1 | Caribisch Nederland                                                 | Q27561
+ bs     | The Bahamas                             |                 1 | The Bahamas                                                         | Q778
+ bz     | Belize                                  | 0.993779746508886 | Belize                                                              | Q242
+ bz-bz  |                                         | 0.999014067765471 | Belize District                                                     | Q506056
+ bz-cy  |                                         |                 1 | Cayo                                                                | Q508773
+ bz-czl |                                         | 0.972307059182997 | Corozal                                                             | Q512273
+ bz-ow  |                                         | 0.971306944865981 | Orange Walk                                                         | Q506036
+ bz-sc  |                                         |                 1 | Stann Creek                                                         | Q502652
+ bz-tol |                                         |                 1 | Toledo                                                              | Q506049
+ co-sap |                                         |                 1 | Archipiélago de San Andrés, Providencia y Santa Catalina (Colombia) | Q26855
+ cr     | Costa Rica                              |                 1 | Costa Rica                                                          | Q800
+ cr-a   |                                         |                 1 | Provincia Alajuela                                                  | Q502188
+ cr-c   |                                         |                 1 | Provincia Cartago                                                   | Q502181
+ cr-g   |                                         |                 1 | Provincia Guanacaste                                                | Q690026
+ cr-h   |                                         |                 1 | Provincia Heredia                                                   | Q502192
+ cr-l   |                                         |                 1 | Provincia Limón                                                     | Q642644
+ cr-p   |                                         |                 1 | Provincia Puntarenas                                                | Q502170
+ cr-sj  |                                         |                 1 | Provincia San José                                                  | Q647808
+ cu     | Cuba                                    |                 1 | Cuba                                                                | Q241
+ cu-01  | Pinar del Rio                           |                 1 | Pinar del Río                                                       | Q115497
+ cu-03  | Havana                                  |                 1 | La Habana                                                           | Q12588
+ cu-04  |                                         |                 1 | Matanzas                                                            | Q115438
+ cu-05  |                                         |                 1 | Villa Clara                                                         | Q115434
+ cu-06  |                                         |                 1 | Cienfuegos                                                          | Q115444
+ cu-07  | Sancti Spiritus                         |                 1 | Sancti Spiritus                                                     | Q115441
+ cu-08  | Ciego de Avila                          |                 1 | Ciego de Ávila                                                      | Q220692
+ cu-09  |                                         |                 1 | Camagüey                                                            | Q215147
+ cu-10  |                                         |                 1 | Las Tunas                                                           | Q115334
+ cu-11  |                                         |                 1 | Holguín                                                             | Q115302
+ cu-12  |                                         |                 1 | Granma                                                              | Q115046
+ cu-13  |                                         |                 1 | Santiago de Cuba                                                    | Q234200
+ cu-14  |                                         |                 1 | Guantánamo                                                          | Q115319
+ cu-15  |                                         |                 1 | Artemisa                                                            | Q115325
+ cu-16  |                                         |                 1 | Mayabeque                                                           | Q115310
+ cu-99  | Isle of Youth                           |                 1 | Isla de la Juventud                                                 | Q115027
+ dm     | Dominica                                |                 1 | Dominica                                                            | Q784
+ dm-02  |                                         |                 1 | Saint Andrew Parish                                                 | Q732322
+ dm-03  |                                         |                 1 | Saint David Parish                                                  | Q1431129
+ dm-04  |                                         |                 1 | Saint George Parish                                                 | Q617801
+ dm-05  |                                         |                 1 | Saint John Parish                                                   | Q1476285
+ dm-06  |                                         |                 1 | Saint Joseph Parish                                                 | Q1476302
+ dm-07  |                                         |                 1 | Saint Luke Parish                                                   | Q1431099
+ dm-08  |                                         |                 1 | Saint Mark Parish                                                   | Q1431115
+ dm-09  |                                         |                 1 | Saint Patrick Parish                                                | Q1431108
+ dm-10  |                                         |                 1 | Saint Paul Parish                                                   | Q339063
+ dm-11  |                                         |                 1 | Saint Peter Parish                                                  | Q1476294
+ do     | Dominican Republic                      |                 1 | República Dominicana                                                | Q786
+ do-01  |                                         |                 1 | Distrito Nacional                                                   | Q2499228
+ do-02  |                                         |                 1 | Azua                                                                | Q794239
+ do-03  |                                         |                 1 | Baoruco                                                             | Q807079
+ do-04  |                                         |                 1 | Barahona                                                            | Q1137551
+ do-05  |                                         |                 1 | Dajabón                                                             | Q1138575
+ do-06  |                                         |                 1 | Duarte                                                              | Q1262745
+ do-07  |                                         |                 1 | Elías Piña                                                          | Q1137545
+ do-08  |                                         |                 1 | El Seibo                                                            | Q1774831
+ do-09  |                                         |                 1 | Espaillat                                                           | Q530231
+ do-10  |                                         |                 1 | Independencia                                                       | Q1424401
+ do-11  |                                         |                 1 | La Altagracia                                                       | Q1323353
+ do-12  |                                         |                 1 | La Romana                                                           | Q1140742
+ do-13  |                                         |                 1 | La Vega                                                             | Q594405
+ do-14  |                                         |                 1 | María Trinidad Sánchez                                              | Q1949656
+ do-15  |                                         |                 1 | Monte Cristi                                                        | Q592624
+ do-16  |                                         |                 1 | Pedernales                                                          | Q1352533
+ do-17  |                                         |                 1 | Peravia                                                             | Q1331932
+ do-18  |                                         |                 1 | Puerto Plata                                                        | Q693487
+ do-19  |                                         |                 1 | Hermanas Mirabal                                                    | Q549386
+ do-20  |                                         |                 1 | Samaná                                                              | Q1145487
+ do-21  |                                         |                 1 | San Cristóbal                                                       | Q1366107
+ do-22  |                                         |                 1 | San Juan                                                            | Q2001793
+ do-23  |                                         |                 1 | San Pedro de Macorís                                                | Q1366119
+ do-24  |                                         |                 1 | Sánchez Ramírez                                                     | Q1836903
+ do-25  |                                         |                 1 | Santiago                                                            | Q1772983
+ do-26  |                                         |                 1 | Santiago Rodríguez                                                  | Q2021942
+ do-27  |                                         |                 1 | Valverde                                                            | Q1774848
+ do-28  |                                         |                 1 | Monseñor Nouel                                                      | Q1295496
+ do-29  |                                         |                 1 | Monte Plata                                                         | Q1772745
+ do-30  |                                         |                 1 | Hato Mayor                                                          | Q937217
+ do-31  |                                         |                 1 | San José de Ocoa                                                    | Q1424391
+ do-32  |                                         |                 1 | Santo Domingo                                                       | Q1352536
+ fr-bl  | Saint Barthélemy                        |                 1 | Saint-Barthélemy                                                    | Q25362
+ fr-mf  | Saint Martin                            |                 1 | Saint-Martin                                                        | Q126125
+ gd     | Grenada                                 |                 1 | Grenada                                                             | Q769
+ gp     | Guadeloupe                              |                 1 | Guadeloupe                                                          | Q17012
+ gt     | Guatemala                               | 0.994478836242336 | Guatemala                                                           | Q774
+ gt-av  |                                         | 0.999997933362447 | Alta Verapaz                                                        | Q504637
+ gt-bv  |                                         |                 1 | Baja Verapaz                                                        | Q504647
+ gt-cm  |                                         |                 1 | Chimaltenango                                                       | Q765975
+ gt-cq  |                                         |                 1 | Chiquimula                                                          | Q753037
+ gt-es  |                                         |                 1 | Escuintla                                                           | Q795587
+ gt-gu  |                                         |                 1 | Guatemala                                                           | Q695660
+ gt-hu  |                                         | 0.988619320969269 | Huehuetenango                                                       | Q842266
+ gt-iz  |                                         |                 1 | Izabal                                                              | Q693658
+ gt-ja  |                                         |                 1 | Jalapa                                                              | Q795441
+ gt-ju  |                                         |                 1 | Jutiapa                                                             | Q765984
+ gt-pe  |                                         | 0.986837816915492 | Petén                                                               | Q466061
+ gt-pr  |                                         |                 1 | El Progreso                                                         | Q795591
+ gt-qc  |                                         | 0.996314728178713 | Quiché                                                              | Q669802
+ gt-qz  |                                         |                 1 | Quetzaltenango                                                      | Q844502
+ gt-re  |                                         |                 1 | Retalhuleu                                                          | Q888307
+ gt-sa  |                                         |                 1 | Sacatepéquez                                                        | Q508804
+ gt-sm  |                                         | 0.987869490402496 | San Marcos                                                          | Q883907
+ gt-so  |                                         |                 1 | Sololá                                                              | Q178136
+ gt-sr  |                                         |                 1 | Santa Rosa                                                          | Q885656
+ gt-su  |                                         |                 1 | Suchitepéquez                                                       | Q883734
+ gt-to  |                                         |                 1 | Totonicapán                                                         | Q885644
+ gt-za  |                                         |                 1 | Zacapa                                                              | Q780784
+ hn     | Honduras                                |                 1 | Honduras                                                            | Q783
+ hn-at  |                                         |                 1 | Atlántida                                                           | Q622619
+ hn-ch  |                                         |                 1 | Choluteca                                                           | Q899272
+ hn-cl  |                                         |                 1 | Colón                                                               | Q867117
+ hn-cm  |                                         |                 1 | Comayagua                                                           | Q823443
+ hn-cp  |                                         |                 1 | Copán                                                               | Q843984
+ hn-cr  |                                         |                 1 | Cortés                                                              | Q767244
+ hn-ep  |                                         |                 1 | El Paraíso                                                          | Q867108
+ hn-fm  |                                         |                 1 | Francisco Morazán                                                   | Q867126
+ hn-gd  |                                         |                 1 | Gracias a Dios                                                      | Q867112
+ hn-ib  | Bay Islands                             |                 1 | Islas de la Bahía                                                   | Q751725
+ hn-in  |                                         |                 1 | Intibucá                                                            | Q262125
+ hn-le  |                                         |                 1 | Lempira                                                             | Q744138
+ hn-lp  |                                         |                 1 | La Paz                                                              | Q866886
+ hn-oc  |                                         |                 1 | Ocotepeque                                                          | Q867084
+ hn-ol  |                                         |                 1 | Olancho                                                             | Q867089
+ hn-sb  |                                         |                 1 | Santa Bárbara                                                       | Q591139
+ hn-va  |                                         |                 1 | Valle                                                               | Q867097
+ hn-yo  |                                         |                 1 | Yoro                                                                | Q1123380
+ ht     | Haiti                                   |                 1 | Ayiti                                                               | Q790
+ ht-ar  | Artibonite Department                   |                 1 | Département de l'Artibonite                                         | Q844024
+ ht-ce  | Centre Department                       |                 1 | Département du Centre                                               | Q844528
+ ht-ga  |                                         |                 1 | Département de la Grande-Anse                                       | Q913231
+ ht-nd  |                                         |                 1 | Département du Nord                                                 | Q943932
+ ht-ne  | Nord-Est Department                     |                 1 | Département du Nord-Est                                             | Q928694
+ ht-ni  |                                         |                 1 | Département des Nippes                                              | Q125232
+ ht-no  | Nord-Ouest Department                   |                 1 | Département du Nord-Ouest                                           | Q608361
+ ht-ou  |                                         |                 1 | Département de l'Ouest                                              | Q1434621
+ ht-sd  | Sud Department                          |                 1 | Département du Sud                                                  | Q936704
+ ht-se  |                                         |                 1 | Département du Sud-Est                                              | Q936717
+ jm     | Jamaica                                 |                 1 | Jamaica                                                             | Q766
+ jm-01  |                                         |                 1 | Kingston                                                            | Q1473680
+ jm-02  |                                         |                 1 | Saint Andrew                                                        | Q2212935
+ jm-03  |                                         |                 1 | Saint Thomas                                                        | Q1422332
+ jm-04  |                                         |                 1 | Portland                                                            | Q125148
+ jm-05  |                                         |                 1 | Saint Mary                                                          | Q633565
+ jm-06  |                                         |                 1 | Saint Ann                                                           | Q1326284
+ jm-07  |                                         |                 1 | Trelawny                                                            | Q1123340
+ jm-08  |                                         |                 1 | Saint James                                                         | Q1421939
+ jm-09  |                                         |                 1 | Hanover                                                             | Q1131779
+ jm-10  |                                         |                 1 | Westmoreland                                                        | Q1440250
+ jm-11  |                                         |                 1 | Saint Elizabeth                                                     | Q1473646
+ jm-12  |                                         |                 1 | Manchester                                                          | Q920496
+ jm-13  |                                         |                 1 | Clarendon                                                           | Q1095557
+ jm-14  |                                         |                 1 | Saint Catherine                                                     | Q1473663
+ kn     | Saint Kitts and Nevis                   |                 1 | Saint Kitts and Nevis                                               | Q763
+ kn-k   |                                         |                 1 | Saint Kitts                                                         | 
+ kn-n   |                                         |                 1 | Nevis                                                               | 
+ ky     | Cayman Islands                          |                 1 | Cayman Islands                                                      | Q5785
+ lc     | Saint Lucia                             |                 1 | Saint Lucia                                                         | Q760
+ mq     | Martinique                              |                 1 | Martinique                                                          | Q17054
+ ms     | Montserrat                              |                 1 | Montserrat                                                          | Q13353
+ ni     | Nicaragua                               |                 1 | Nicaragua                                                           | Q811
+ ni-an  | North Carribean Coast Autonomous Region |                 1 | Región Autónoma de la Costa Caribe Norte                            | Q498452
+ ni-as  | South Atlantic Autonomous Region        |                 1 | Región Autónoma de la Costa Caribe Sur                              | Q291279
+ ni-bo  |                                         |                 1 | Boaco                                                               | Q280973
+ ni-ca  |                                         |                 1 | Carazo                                                              | Q461133
+ ni-ci  |                                         |                 1 | Chinandega                                                          | Q644024
+ ni-co  |                                         |                 1 | Chontales                                                           | Q498443
+ ni-es  |                                         |                 1 | Estelí                                                              | Q728015
+ ni-gr  |                                         |                 1 | Granada                                                             | Q258405
+ ni-ji  |                                         |                 1 | Jinotega (Departamento)                                             | Q728120
+ ni-le  | Leon                                    |                 1 | León                                                                | Q586818
+ ni-md  |                                         |                 1 | Madriz                                                              | Q728056
+ ni-mn  |                                         |                 1 | Managua                                                             | Q260009
+ ni-ms  |                                         |                 1 | Masaya                                                              | Q570358
+ ni-mt  |                                         |                 1 | Matagalpa (Departemento)                                            | Q728099
+ ni-ns  |                                         |                 1 | Nueva Segovia                                                       | Q728022
+ ni-ri  |                                         |                 1 | Rivas                                                               | Q728127
+ ni-sj  | Rio San Juan                            |                 1 | Río San Juan                                                        | Q728155
+ nl-aw  | Aruba                                   |                 1 | Aruba                                                               | Q21203
+ nl-cw  | Curacao                                 |                 1 | Curaçao                                                             | Q25279
+ nl-sx  | Saint Martin                            |                 1 | Sint Maarten                                                        | Q26273
+ pa     | Panama                                  | 0.999790973068087 | Panamá                                                              | Q804
+ pa-1   |                                         |                 1 | Provincia de Bocas del Toro                                         | Q217138
+ pa-10  |                                         |                 1 | Provincia de Panamá Oeste                                           | Q16250688
+ pa-2   |                                         |                 1 | Provincia de Coclé                                                  | Q825799
+ pa-3   | Colón Province                          |                 1 | Provincia de Colón                                                  | Q820514
+ pa-4   |                                         |                 1 | Provincia de Chiriquí                                               | Q739651
+ pa-5   |                                         | 0.998354814105825 | Provincia de Darién                                                 | Q688660
+ pa-6   |                                         |                 1 | Provincia de Herrera                                                | Q842886
+ pa-7   |                                         |                 1 | Provincia de Los Santos                                             | Q911278
+ pa-8   |                                         |                 1 | Provincia de Panamá                                                 | Q557506
+ pa-9   |                                         |                 1 | Provincia de Veraguas                                               | Q593137
+ pa-em  |                                         |                 1 | Comarca Emberá-Wounaan                                              | Q1141041
+ pa-ky  |                                         |                 1 | Comarca Guna Yala                                                   | Q919017
+ pa-nb  |                                         |                 1 | Comarca Ngäbe-Buglé                                                 | Q1129783
+ sv     | El Salvador                             |                 1 | El Salvador                                                         | Q792
+ sv-ah  |                                         |                 1 | Departamento de Ahuachapán                                          | Q572993
+ sv-ca  |                                         |                 1 | Departamento de Cabañas                                             | Q914058
+ sv-ch  |                                         |                 1 | Departemento de Chalatenango                                        | Q522221
+ sv-cu  |                                         |                 1 | Departamento de Cuscatlán                                           | Q1130677
+ sv-li  |                                         |                 1 | Departamento de La Libertad                                         | Q930820
+ sv-mo  |                                         |                 1 | Departamento de Morazán                                             | Q1122836
+ sv-pa  |                                         |                 1 | Departamento de La Paz                                              | Q1129788
+ sv-sa  |                                         |                 1 | Departamento de Santa Ana                                           | Q671158
+ sv-sm  |                                         |                 1 | Departamento de San Miguel                                          | Q930804
+ sv-so  |                                         |                 1 | Departamento de Sonsonate                                           | Q212540
+ sv-ss  |                                         |                 1 | Departamento de San Salvador                                        | Q1543219
+ sv-sv  |                                         |                 1 | Departamento de San Vicente                                         | Q1130180
+ sv-un  |                                         |                 1 | Departamento de La Unión                                            | Q1130688
+ sv-us  |                                         |                 1 | Departamento de Usulután                                            | Q1122748
+ tc     | Turks and Caicos Islands                |                 1 | Turks and Caicos Islands                                            | Q18221
+ tt     | Trinidad and Tobago                     |                 1 | Trinidad and Tobago                                                 | Q754
+ tt-cha |                                         |                 1 | Chaguanas                                                           | Q1444575
+ tt-ctt |                                         |                 1 | Couva-Tabaquite-Talparo                                             | Q2679127
+ tt-dmn |                                         |                 1 | Diego Martin                                                        | Q2679107
+ tt-mrc |                                         |                 1 | Rio Claro-Mayaro                                                    | Q2487249
+ tt-ped |                                         |                 1 | Penal-Debe                                                          | Q2056273
+ tt-pos |                                         |                 1 | Port of Spain                                                       | Q39178
+ tt-prt |                                         |                 1 | Princes Town                                                        | Q2228167
+ tt-ptf |                                         |                 1 | Point Fortin                                                        | Q786957
+ tt-sfo |                                         |                 1 | San Fernando                                                        | Q1023712
+ tt-sge |                                         |                 1 | Sangre Grande                                                       | Q290292
+ tt-sip |                                         |                 1 | Siparia                                                             | Q2679119
+ tt-sjl |                                         |                 1 | San Juan-Laventille                                                 | Q979608
+ tt-tob |                                         |                 1 | Tobago                                                              | Q185111
+ tt-tup |                                         |                 1 | Tunapuna-Piarco                                                     | Q1899163
+ us-pr  | Puerto Rico                             |                 1 | Puerto Rico                                                         | Q1183
+ us-vi  | United States Virgin Islands            |                 1 | United States Virgin Islands                                        | Q11703
+ vc     | Saint Vincent and the Grenadines        |                 1 | Saint Vincent and the Grenadines                                    | Q757
+ vc-01  |                                         |                 1 | Charlotte                                                           | Q2075188
+ vc-02  |                                         |                 1 | Saint Andrew                                                        | Q2305115
+ vc-03  |                                         |                 1 | Saint David                                                         | Q2412394
+ vc-04  |                                         |                 1 | Saint George                                                        | Q2300294
+ vc-05  |                                         |                 1 | Saint Patrick                                                       | Q1864637
+ vc-06  |                                         |                 1 | Grenadines                                                          | Q2545297
+ ve-w   | Federal Dependencies                    | 0.587731716210777 | Dependencias Federales                                              | Q130343
+ vg     | British Virgin Islands                  |                 1 | British Virgin Islands                                              | Q25305
+(251 rows)
+

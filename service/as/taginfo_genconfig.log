@@ -1,0 +1,2543 @@
+=========================================
+DATETIME=20180725T0816  1532499374
+CONTINENT_LONG=asia
+CONTINENT=as
+START_PORT=14000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where (area_pct > 0.8) and (iso not in ('in','jp','ru','fr','nl')) and ( (length(iso)=2) or substr(iso,1,2) in ('in','jp','fr','nl','es','dk','us')) 
+ISO_SERVICE_FILTER=1=1 
+=========================================
+:: gen new configs
+Starting dockerized-taginfo_db_1 ... 
+[1A[2KStarting dockerized-taginfo_db_1 ... [32mdone[0m[1Bcheck db connection
+CONTINENT_LONG=asia
+CONTINENT=as
+START_PORT=14000
+DOMAIN=taginfo-dev.opengeodata.hu
+ISO_FILTER=where (area_pct > 0.8) and (iso not in ('in','jp','ru','fr','nl')) and ( (length(iso)=2) or substr(iso,1,2) in ('in','jp','fr','nl','es','dk','us'))
+ISO_SERVICE_FILTER=1=1
+CONTINENT_LONG=asia
+CONTINENT=as
+-------- asia ----------- 
+--2018-07-25 06:16:16--  http://download.geofabrik.de/asia.kml
+Resolving download.geofabrik.de (download.geofabrik.de)... 88.99.24.113, 88.99.105.98
+Connecting to download.geofabrik.de (download.geofabrik.de)|88.99.24.113|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1285 (1.3K) [application/vnd.google-earth.kml+xml]
+Saving to: 'asia.kml'
+
+     0K .                                                     100%  127M=0s
+
+2018-07-25 06:16:16 (127 MB/s) - 'asia.kml' saved [1285/1285]
+
+==================================
+;
+;
+;
+;
+;
+;
+;
+CREATE OR REPLACE FUNCTION imposmid2shortid (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN 'n'|| id::text
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN 'w'|| (abs(id))::text   
+   WHEN  (id <  -1e17 )               THEN 'r'|| (abs(id) -1e17)::text   
+   ELSE 'error'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION imposmid2weburl (id BIGINT ) RETURNS text AS $$
+BEGIN
+ RETURN CASE
+   WHEN  (id >=     0 )               THEN format('<a href="http://www.osm.org/node/%1$s">n%1$s</a>'     , id::text )
+   WHEN  (id >= -1e17 ) AND (id < 0 ) THEN format('<a href="http://www.osm.org/way/%1$s">w%1$s</a>'      , (abs(id))::text )   
+   WHEN  (id <  -1e17 )               THEN format('<a href="http://www.osm.org/relation/%1$s">r%1$s</a>' , (abs(id) -1e17)::text )  
+   ELSE 'error_url'||id::text
+  END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+CREATE FUNCTION
+CREATE OR REPLACE FUNCTION get_xtaginfo(iso text, xmin  numeric, xmax  numeric, ymin  numeric, ymax numeric ) 
+      RETURNS numeric[]   AS
+$BODY$
+DECLARE
+    i  integer ;
+    xs numeric ;
+    ys numeric ; 
+    last_ok integer ;
+    xd numeric;
+    yd numeric;
+    zzz numeric;
+    xppd numeric;
+    yppd numeric;
+    moda numeric[] ;
+BEGIN
+    moda= ARRAY [
+                 0.000,0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009
+                ,0.010,0.011,0.012,0.013,0.014,0.015,0.016,0.017,0.018,0.019
+                ,0.020,0.021,0.022,0.023,0.024,0.025,0.026,0.027,0.028,0.029
+                ,0.030,0.031,0.032,0.033,0.034,0.035,0.036,0.037,0.038,0.039
+                ,0.040,0.041,0.042,0.043,0.044,0.045,0.046,0.047,0.048,0.049
+                ,0.050,0.051,0.052,0.053,0.054,0.055,0.056,0.057,0.058,0.059
+                ,0.060,0.061,0.062,0.063,0.064,0.065,0.066,0.067,0.068,0.069
+                ,0.070,0.071,0.072,0.073,0.074,0.075,0.076,0.077,0.078,0.079
+                ,0.080,0.081,0.082,0.083,0.084,0.085,0.086,0.087,0.088,0.089
+                ,0.090,0.091,0.092,0.093,0.094,0.095,0.096,0.097,0.098,0.099 
+                
+                ,0.100,0.101,0.102,0.103,0.104,0.105,0.106,0.107,0.108,0.109
+                ,0.110,0.111,0.112,0.113,0.114,0.115,0.116,0.117,0.118,0.119
+                ,0.120,0.121,0.122,0.123,0.124,0.125,0.126,0.127,0.128,0.129
+                ,0.130,0.131,0.132,0.133,0.134,0.135,0.136,0.137,0.138,0.139
+                ,0.140,0.141,0.142,0.143,0.144,0.145,0.146,0.147,0.148,0.149
+                ,0.150,0.151,0.152,0.153,0.154,0.155,0.156,0.157,0.158,0.159
+                ,0.160,0.161,0.162,0.163,0.164,0.165,0.166,0.167,0.168,0.169
+                ,0.170,0.171,0.172,0.173,0.174,0.175,0.176,0.177,0.178,0.179
+                ,0.180,0.181,0.182,0.183,0.184,0.185,0.186,0.187,0.188,0.189
+                ,0.190,0.191,0.192,0.193,0.194,0.195,0.196,0.197,0.198,0.199 
+
+                ,0.200,0.201,0.202,0.203,0.204,0.205,0.206,0.207,0.208,0.209
+                ,0.210,0.211,0.212,0.213,0.214,0.215,0.216,0.217,0.218,0.219
+                ,0.220,0.221,0.222,0.223,0.224,0.225,0.226,0.227,0.228,0.229
+                ,0.230,0.231,0.232,0.233,0.234,0.235,0.236,0.237,0.238,0.239
+                ,0.240,0.241,0.242,0.243,0.244,0.245,0.246,0.247,0.248,0.249
+                ,0.250,0.251,0.252,0.253,0.254,0.255,0.256,0.257,0.258,0.259
+                ,0.260,0.261,0.262,0.263,0.264,0.265,0.266,0.267,0.268,0.269
+                ,0.270,0.271,0.272,0.273,0.274,0.275,0.276,0.277,0.278,0.279
+                ,0.280,0.281,0.282,0.283,0.284,0.285,0.286,0.287,0.288,0.289
+                ,0.290,0.291,0.292,0.293,0.294,0.295,0.296,0.297,0.298,0.299  
+
+                ,0.300,0.301,0.302,0.303,0.304,0.305,0.306,0.307,0.308,0.309
+                ,0.310,0.311,0.312,0.313,0.314,0.315,0.316,0.317,0.318,0.319
+                ,0.320,0.321,0.322,0.323,0.324,0.325,0.326,0.327,0.328,0.329
+                ,0.330,0.331,0.332,0.333,0.334,0.335,0.336,0.337,0.338,0.339
+                ,0.340,0.341,0.342,0.343,0.344,0.345,0.346,0.347,0.348,0.349
+                ,0.350,0.351,0.352,0.353,0.354,0.355,0.356,0.357,0.358,0.359
+                ,0.360,0.361,0.362,0.363,0.364,0.365,0.366,0.367,0.368,0.369
+                ,0.370,0.371,0.372,0.373,0.374,0.375,0.376,0.377,0.378,0.379
+                ,0.380,0.381,0.382,0.383,0.384,0.385,0.386,0.387,0.388,0.389
+                ,0.390,0.391,0.392,0.393,0.394,0.395,0.396,0.397,0.398,0.399 
+
+                ,0.400,0.401,0.402,0.403,0.404,0.405,0.406,0.407,0.408,0.409
+                ,0.410,0.411,0.412,0.413,0.414,0.415,0.416,0.417,0.418,0.419
+                ,0.420,0.421,0.422,0.423,0.424,0.425,0.426,0.427,0.428,0.429
+                ,0.430,0.431,0.432,0.433,0.434,0.435,0.436,0.437,0.438,0.439
+                ,0.440,0.441,0.442,0.443,0.444,0.445,0.446,0.447,0.448,0.449
+                ,0.450,0.451,0.452,0.453,0.454,0.455,0.456,0.457,0.458,0.459
+                ,0.460,0.461,0.462,0.463,0.464,0.465,0.466,0.467,0.468,0.469
+                ,0.470,0.471,0.472,0.473,0.474,0.475,0.476,0.477,0.478,0.479
+                ,0.480,0.481,0.482,0.483,0.484,0.485,0.486,0.487,0.488,0.489
+                ,0.490,0.491,0.492,0.493,0.494,0.495,0.496,0.497,0.498,0.499 
+
+                ,0.500,0.501,0.502,0.503,0.504,0.505,0.506,0.507,0.508,0.509
+                ,0.510,0.511,0.512,0.513,0.514,0.515,0.516,0.517,0.518,0.519
+                ,0.520,0.521,0.522,0.523,0.524,0.525,0.526,0.527,0.528,0.529
+                ,0.530,0.531,0.532,0.533,0.534,0.535,0.536,0.537,0.538,0.539
+                ,0.540,0.541,0.542,0.543,0.544,0.545,0.546,0.547,0.548,0.549
+                ,0.550,0.551,0.552,0.553,0.554,0.555,0.556,0.557,0.558,0.559
+                ,0.560,0.561,0.562,0.563,0.564,0.565,0.566,0.567,0.568,0.569
+                ,0.570,0.571,0.572,0.573,0.574,0.575,0.576,0.577,0.578,0.579
+                ,0.580,0.581,0.582,0.583,0.584,0.585,0.586,0.587,0.588,0.589
+                ,0.590,0.591,0.592,0.593,0.594,0.595,0.596,0.597,0.598,0.599 
+
+                ];
+    last_ok =0 ;
+    xd = xmax-xmin;  
+    yd = ymax-ymin; 
+    FOR i IN 1..30000 LOOP
+        xs = i * xd ;
+        ys = i * yd ;
+
+        IF  xs * ys  >= ( 255*255) THEN
+
+        FOR ri IN REVERSE i..0 LOOP
+           FOREACH  yppd IN ARRAY moda LOOP
+             FOREACH  xppd IN ARRAY moda  LOOP
+                 
+                  xs=ri* (xd+   xppd ) ;
+                  ys=ri* (yd+   yppd ) ; 
+
+                  IF     
+                             xs=round(xs) 
+                         and ys=round(ys) 
+                         and (  xs * ys ) <= (255*255) 
+                         and xs>0 
+                         and ys>0
+                         THEN
+                         RAISE NOTICE 'OK   R# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                        -- Reverse Antimeridian shift.
+                         IF xmax+xppd > 180 THEN
+                            xmax= xmax -180;
+                            xmin= xmin -180;
+                            RAISE NOTICE 'Reversed# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+
+                            IF xmin <  -180  THEN
+                                RAISE NOTICE 'ERROR: XMIN < -180# = %, % , % , % ,% ,%', iso, ri , xs, ys,  xppd, yppd ; 
+                            END IF ;
+                         END IF ;
+                         RETURN  ARRAY[ round(xs) , round(ys) , xmin, xmax+xppd , ymin, ymax+yppd ] ;
+                   END IF;               
+             END LOOP;
+           END LOOP ;
+        END LOOP;   
+        
+        RETURN ARRAY[-2,0,0,0,0,0];
+
+           
+        END IF;
+
+        
+        IF  xs * ys  >= ( 255*255) 
+        THEN  
+           RETURN ARRAY[0,0,0,0,0,0]  ;
+        END IF;   
+        
+    END LOOP;
+       
+    RETURN ARRAY[-1,0,0,0,0,0]  ;
+END
+$BODY$
+LANGUAGE 'plpgsql' IMMUTABLE STRICT PARALLEL SAFE ;
+CREATE FUNCTION
+DROP TABLE IF EXISTS  osm_admin2_continent_all ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent_all as
+select a.*   
+    ,st_area( ST_Intersection(  c.wkb_geometry  ,   a.geometry )) / st_area(  a.geometry )  as area_pct
+    ,case 
+            when a.iso3166_2!=''  then lower(a.iso3166_2) 
+                                  else lower(a.iso3166_1)
+            end   
+            as iso
+from KMLX_CONTINENT as c,
+        osm_admin   as a
+where 
+        ( length(a.iso3166_1) = 2  or length(a.iso3166_2) > 3 )
+    and 
+        ST_Contains (c.wkb_geometry , St_PointOnSurface( a.geometry ))
+;
+SELECT 1145
+;
+DROP TABLE IF EXISTS  osm_admin2_continent ;
+DROP TABLE
+CREATE TABLE          osm_admin2_continent as
+select * 
+from osm_admin2_continent_all   
+  where (area_pct > 0.8) and (iso not in ('in','jp','ru','fr','nl')) and ( (length(iso)=2) or substr(iso,1,2) in ('in','jp','fr','nl','es','dk','us')) 
+order by iso
+;
+SELECT 129
+;
+                                         Table "public.osm_admin2_continent"
+      Column      |          Type           | Collation | Nullable | Default | Storage  | Stats target | Description 
+------------------+-------------------------+-----------+----------+---------+----------+--------------+-------------
+ id               | bigint                  |           |          |         | plain    |              | 
+ admin_level      | integer                 |           |          |         | plain    |              | 
+ name             | character varying       |           |          |         | extended |              | 
+ int_name         | character varying       |           |          |         | extended |              | 
+ official_name    | character varying       |           |          |         | extended |              | 
+ name_en          | character varying       |           |          |         | extended |              | 
+ maritime         | character varying       |           |          |         | extended |              | 
+ border_type      | character varying       |           |          |         | extended |              | 
+ iso3166_1        | character varying       |           |          |         | extended |              | 
+ iso3166_2        | character varying       |           |          |         | extended |              | 
+ iso3166_1alpha3  | character varying       |           |          |         | extended |              | 
+ default_language | character varying       |           |          |         | extended |              | 
+ wikipedia        | character varying       |           |          |         | extended |              | 
+ wikidata         | character varying       |           |          |         | extended |              | 
+ flag             | character varying       |           |          |         | extended |              | 
+ boundary         | character varying       |           |          |         | extended |              | 
+ geometry         | geometry(Geometry,4326) |           |          |         | main     |              | 
+ area_pct         | double precision        |           |          |         | plain    |              | 
+ iso              | text                    |           |          |         | extended |              | 
+
+update osm_admin2_continent set name_en=name  where name_en='' ;
+UPDATE 1
+select count(*) as iso_admin_numbers from osm_admin2_continent;
+ iso_admin_numbers 
+-------------------
+               129
+(1 row)
+
+DROP TABLE IF EXISTS iso_gdname CASCADE;
+DROP TABLE
+CREATE TABLE iso_gdname as
+SELECT distinct on (t.iso) 
+       t.iso, t."name" as iso_name , g."name" as gdname, st_area(g.wkb_geometry) as area
+FROM osm_admin2_continent  as t
+    ,gkml                  as g
+where
+     ST_Contains (   g.wkb_geometry  ,  t.geometry   )
+order by t.iso, area NULLS LAST
+;
+SELECT 128
+Drop table IF EXISTS xtaginfo CASCADE;
+DROP TABLE
+create table xtaginfo as
+with pdata as
+(
+    select distinct on (osm.iso) 
+         osm.iso 
+        ,name
+        ,name_en
+        ,id
+        ,area_pct
+        ,iso_gdname.gdname    as gdname
+        ,imposmid2shortid(id) as osmid
+        ,admin_level 
+        ,row_number() OVER ( ORDER BY osm.iso ) as port_order 
+        ,st_xmax( geometry)  - st_xmin( geometry)  as dx 
+        ,wikidata
+        ,wikipedia
+        ,flag
+        ,geometry
+        ,st_area(geometry) as iso_area
+        ,case when  (  1=1   )  then 'yes'
+                                               else ''
+         end as service     
+    from osm_admin2_continent as osm
+    left join iso_gdname on osm.iso=iso_gdname.iso
+    ORDER BY osm.iso, iso_area DESC NULLS LAST
+)
+, normal_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( geometry) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( geometry) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( geometry) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( geometry) +  0.0051)::numeric, 2 ) as tymax
+       ,'normal'::text as ttype
+       from pdata 
+       where dx < 200 
+       )
+, antimerdian_data as
+(
+    Select  
+       *
+       ,round ( (st_xmin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as txmin
+       ,round ( (st_xmax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as txmax
+       ,round ( (st_ymin( ST_ShiftLongitude(geometry)) -  0.0051)::numeric, 2 ) as tymin
+       ,round ( (st_ymax( ST_ShiftLongitude(geometry)) +  0.0051)::numeric, 2 ) as tymax
+       ,'shifted'::text as ttype
+       from pdata 
+       where dx >= 200 
+       )
+       select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  normal_data       
+union  select * , get_xtaginfo(iso,txmin , txmax , tymin , tymax )  as taginfo_scale   from  antimerdian_data
+order by iso 
+;
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ae, 56 , 294.000 , 203.000 ,0.050 ,0.095
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = af, 20 , 288.000 , 183.000 ,0.020 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = am, 90 , 288.000 , 225.000 ,0.000 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = az, 52 , 325.000 , 195.000 ,0.000 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = bd, 45 , 216.000 , 288.000 ,0.110 ,0.130
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = bh, 280 , 189.000 , 329.000 ,0.005 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = bn, 200 , 260.000 , 222.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = bt, 105 , 357.000 , 168.000 ,0.010 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = cn, 4 , 246.000 , 179.000 ,0.210 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ge, 60 , 414.000 , 153.000 ,0.040 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = id, 8 , 370.000 , 140.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = il, 100 , 164.000 , 389.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-an, 58 , 145.000 , 435.000 ,0.010 ,0.160
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ap, 32 , 272.000 , 212.000 ,0.100 ,0.075
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ar, 60 , 351.000 , 165.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-as, 50 , 317.000 , 193.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-br, 60 , 300.000 , 195.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ch, 1700 , 255.000 , 238.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ct, 48 , 204.000 , 306.000 ,0.100 ,0.045
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-dd, 280 , 574.000 , 112.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-dl, 500 , 260.000 , 245.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-dn, 800 , 248.000 , 256.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ga, 240 , 246.000 , 252.000 ,0.005 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-gj, 45 , 288.000 , 207.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-hp, 80 , 276.000 , 232.000 ,0.020 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-hr, 75 , 237.000 , 249.000 ,0.020 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-jh, 60 , 282.000 , 204.000 ,0.040 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-jk, 56 , 322.000 , 196.000 ,0.020 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ka, 44 , 209.000 , 308.000 ,0.030 ,0.110
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-kl, 65 , 182.000 , 312.000 ,0.020 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ld, 70 , 182.000 , 336.000 ,0.080 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-mh, 34 , 289.000 , 221.000 ,0.130 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ml, 140 , 420.000 , 154.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-mn, 136 , 255.000 , 255.000 ,0.095 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-mp, 35 , 308.000 , 203.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-mz, 140 , 168.000 , 364.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-nl, 130 , 260.000 , 247.000 ,0.070 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-or, 45 , 279.000 , 216.000 ,0.070 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-pb, 80 , 246.000 , 240.000 ,0.005 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-py, 38 , 285.000 , 228.000 ,0.430 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-rj, 30 , 264.000 , 216.000 ,0.010 ,0.060
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-sk, 250 , 230.000 , 265.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-tg, 60 , 246.000 , 246.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-tn, 50 , 223.000 , 286.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-tr, 180 , 216.000 , 297.000 ,0.010 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-up, 35 , 266.000 , 231.000 ,0.040 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-ut, 80 , 280.000 , 220.000 ,0.010 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = in-wb, 50 , 203.000 , 299.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = io, 120 , 204.000 , 315.000 ,0.020 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = iq, 26 , 273.000 , 221.000 ,0.440 ,0.160
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ir, 14 , 273.000 , 210.000 ,0.190 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jo, 56 , 252.000 , 238.000 ,0.070 ,0.050
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-01, 44 , 308.000 , 209.000 ,0.050 ,0.180
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-02, 130 , 351.000 , 182.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-03, 140 , 238.000 , 259.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-04, 160 , 288.000 , 200.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-05, 150 , 249.000 , 249.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-06, 150 , 228.000 , 282.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-07, 150 , 342.000 , 189.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-08, 192 , 264.000 , 240.000 ,0.015 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-09, 255 , 255.000 , 255.000 ,0.020 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-10, 210 , 273.000 , 231.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-11, 300 , 360.000 , 162.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-12, 160 , 260.000 , 240.000 ,0.005 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-13, 14 , 259.000 , 224.000 ,0.140 ,0.310
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-14, 292 , 292.000 , 219.000 ,0.000 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-15, 110 , 264.000 , 242.000 ,0.030 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-16, 250 , 253.000 , 248.000 ,0.002 ,0.002
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-17, 130 , 234.000 , 273.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-18, 200 , 280.000 , 224.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-19, 280 , 273.000 , 231.000 ,0.005 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-20, 152 , 228.000 , 285.000 ,0.080 ,0.025
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-21, 180 , 252.000 , 243.000 ,0.010 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-22, 152 , 304.000 , 209.000 ,0.040 ,0.095
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-23, 210 , 252.000 , 252.000 ,0.030 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-24, 160 , 240.000 , 264.000 ,0.020 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-25, 300 , 210.000 , 276.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-26, 184 , 230.000 , 276.000 ,0.040 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-27, 325 , 247.000 , 260.000 ,0.030 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-28, 160 , 196.000 , 300.000 ,0.005 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-29, 300 , 210.000 , 282.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-30, 190 , 285.000 , 228.000 ,0.050 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-31, 240 , 336.000 , 186.000 ,0.010 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-32, 110 , 242.000 , 253.000 ,0.020 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-33, 210 , 252.000 , 252.000 ,0.040 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-34, 192 , 288.000 , 216.000 ,0.030 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-35, 135 , 297.000 , 216.000 ,0.070 ,0.070
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-36, 200 , 266.000 , 208.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-37, 288 , 360.000 , 180.000 ,0.000 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-38, 150 , 273.000 , 231.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-39, 130 , 312.000 , 208.000 ,0.060 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-40, 160 , 232.000 , 276.000 ,0.010 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-41, 300 , 276.000 , 231.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-42, 85 , 238.000 , 272.000 ,0.170 ,0.080
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-43, 160 , 324.000 , 192.000 ,0.015 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-44, 170 , 255.000 , 255.000 ,0.040 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-45, 160 , 244.000 , 256.000 ,0.015 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-46, 60 , 189.000 , 333.000 ,0.030 ,0.040
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = jp-47, 40 , 354.000 , 170.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kg, 36 , 396.000 , 153.000 ,0.030 ,0.150
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kh, 48 , 258.000 , 252.000 ,0.075 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kp, 40 , 274.000 , 218.000 ,0.010 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kr, 36 , 288.000 , 207.000 ,0.200 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kw, 125 , 308.000 , 199.000 ,0.004 ,0.002
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = kz, 10 , 409.000 , 149.000 ,0.070 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = la, 30 , 228.000 , 261.000 ,0.040 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = lb, 144 , 252.000 , 252.000 ,0.000 ,0.090
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = lk, 72 , 198.000 , 315.000 ,0.050 ,0.045
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = mm, 18 , 171.000 , 351.000 ,0.490 ,0.380
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = mn, 12 , 387.000 , 129.000 ,0.040 ,0.170
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = mv, 65 , 117.000 , 546.000 ,0.170 ,0.170
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = my, 21 , 441.000 , 147.000 ,0.490 ,0.330
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = np, 40 , 327.000 , 165.000 ,0.015 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = om, 26 , 221.000 , 273.000 ,0.430 ,0.250
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ph, 16 , 204.000 , 274.000 ,0.030 ,0.005
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = pk, 16 , 262.000 , 218.000 ,0.115 ,0.065
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ps, 175 , 266.000 , 238.000 ,0.000 ,0.020
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = qa, 125 , 260.000 , 240.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = sa, 12 , 255.000 , 192.000 ,0.030 ,0.120
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = sg, 400 , 408.000 , 156.000 ,0.000 ,0.000
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = sy, 40 , 277.000 , 201.000 ,0.015 ,0.015
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = th, 22 , 187.000 , 330.000 ,0.200 ,0.140
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = tj, 42 , 336.000 , 189.000 ,0.170 ,0.120
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = tl, 110 , 385.000 , 165.000 ,0.000 ,0.010
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = tm, 24 , 345.000 , 186.000 ,0.015 ,0.070
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = tw, 22 , 176.000 , 363.000 ,0.050 ,0.460
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = uz, 20 , 343.000 , 169.000 ,0.000 ,0.030
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = vn, 18 , 225.000 , 279.000 ,0.300 ,0.270
+psql:/osm/setup/setup_xtaginfo_admin.sql:284: NOTICE:  OK   R# = ye, 25 , 329.000 , 178.000 ,0.020 ,0.010
+SELECT 129
+select iso, taginfo_scale,ttype, area_pct,  service  from xtaginfo order by iso ;
+  iso  |             taginfo_scale             | ttype  |     area_pct      | service 
+-------+---------------------------------------+--------+-------------------+---------
+ ae    | {294,203,51.41,56.660,22.63,26.255}   | normal |                 1 | yes
+ af    | {288,183,60.51,74.910,29.37,38.520}   | normal |                 1 | yes
+ am    | {288,225,43.44,46.640,38.84,41.340}   | normal |                 1 | yes
+ az    | {325,195,44.76,51.010,38.39,42.140}   | normal |                 1 | yes
+ bd    | {216,288,88.00,92.800,20.37,26.770}   | normal |                 1 | yes
+ bh    | {189,329,50.26,50.935,25.53,26.705}   | normal |                 1 | yes
+ bn    | {260,222,114.07,115.370,4.00,5.110}   | normal |                 1 | yes
+ bt    | {357,168,88.74,92.140,26.70,28.300}   | normal |                 1 | yes
+ cn    | {246,179,73.49,134.990,8.83,53.580}   | normal |                 1 | yes
+ ge    | {414,153,39.88,46.780,41.05,43.600}   | normal |                 1 | yes
+ id    | {370,140,94.77,141.020,-11.21,6.290}  | normal |                 1 | yes
+ il    | {164,389,34.26,35.900,29.45,33.340}   | normal |                 1 | yes
+ in-an | {145,435,91.99,94.490,6.55,14.050}    | normal |                 1 | yes
+ in-ap | {272,212,76.76,85.260,12.62,19.245}   | normal |                 1 | yes
+ in-ar | {351,165,91.56,97.410,26.65,29.400}   | normal |                 1 | yes
+ in-as | {317,193,89.69,96.030,24.13,27.990}   | normal |                 1 | yes
+ in-br | {300,195,83.31,88.310,24.28,27.530}   | normal |                 1 | yes
+ in-ch | {255,238,76.70,76.850,30.66,30.800}   | normal |                 1 | yes
+ in-ct | {204,306,80.24,84.490,17.78,24.155}   | normal |                 1 | yes
+ in-dd | {574,112,70.87,72.920,20.36,20.760}   | normal |                 1 | yes
+ in-dl | {260,245,76.83,77.350,28.40,28.890}   | normal |                 1 | yes
+ in-dn | {248,256,72.92,73.230,20.05,20.370}   | normal |                 1 | yes
+ in-ga | {246,252,73.32,74.345,14.75,15.800}   | normal |                 1 | yes
+ in-gj | {288,207,68.11,74.510,20.12,24.720}   | normal |                 1 | yes
+ in-hp | {276,232,75.57,79.020,30.38,33.280}   | normal |                 1 | yes
+ in-hr | {237,249,74.46,77.620,27.65,30.970}   | normal |                 1 | yes
+ in-jh | {282,204,83.32,88.020,21.96,25.360}   | normal |                 1 | yes
+ in-jk | {322,196,73.74,79.490,32.27,35.770}   | normal |                 1 | yes
+ in-ka | {209,308,73.87,78.620,11.59,18.590}   | normal |                 1 | yes
+ in-kl | {182,312,74.64,77.440,8.09,12.890}    | normal |                 1 | yes
+ in-ld | {182,336,71.51,74.110,7.88,12.680}    | normal |                 1 | yes
+ in-mh | {289,221,72.53,81.030,15.60,22.100}   | normal |                 1 | yes
+ in-ml | {420,154,89.82,92.820,25.02,26.120}   | normal |                 1 | yes
+ in-mn | {255,255,92.97,94.845,23.83,25.705}   | normal |                 1 | yes
+ in-mp | {308,203,74.03,82.830,21.07,26.870}   | normal |                 1 | yes
+ in-mz | {168,364,92.25,93.450,21.95,24.550}   | normal |                 1 | yes
+ in-nl | {260,247,93.32,95.320,25.20,27.100}   | normal |                 1 | yes
+ in-or | {279,216,81.38,87.580,17.80,22.600}   | normal |                 1 | yes
+ in-pb | {246,240,73.87,76.945,29.54,32.540}   | normal |                 1 | yes
+ in-py | {285,228,75.25,82.750,10.81,16.810}   | normal |                 1 | yes
+ in-rj | {264,216,69.48,78.280,23.06,30.260}   | normal |                 1 | yes
+ in-sk | {230,265,88.01,88.930,27.07,28.130}   | normal |                 1 | yes
+ in-tg | {246,246,77.23,81.330,15.83,19.930}   | normal |                 1 | yes
+ in-tn | {223,286,76.22,80.680,7.85,13.570}    | normal |                 1 | yes
+ in-tr | {216,297,91.15,92.350,22.94,24.590}   | normal |                 1 | yes
+ in-up | {266,231,77.08,84.680,23.87,30.470}   | normal |                 1 | yes
+ in-ut | {280,220,77.56,81.060,28.71,31.460}   | normal |                 1 | yes
+ in-wb | {203,299,85.82,89.880,21.25,27.230}   | normal |                 1 | yes
+ io    | {204,315,71.03,72.730,-7.65,-5.025}   | normal |                 1 | yes
+ iq    | {273,221,38.79,49.290,29.05,37.550}   | normal |                 1 | yes
+ ir    | {273,210,44.03,63.530,24.84,39.840}   | normal |                 1 | yes
+ jo    | {252,238,34.88,39.380,29.18,33.430}   | normal |                 1 | yes
+ jp-01 | {308,209,139.06,146.060,41.15,45.900} | normal |                 1 | yes
+ jp-02 | {351,182,139.23,141.930,40.21,41.610} | normal |                 1 | yes
+ jp-03 | {238,259,140.65,142.350,38.74,40.590} | normal |                 1 | yes
+ jp-04 | {288,200,140.27,142.070,37.77,39.020} | normal |                 1 | yes
+ jp-05 | {249,249,139.34,141.000,38.87,40.530} | normal |                 1 | yes
+ jp-06 | {228,282,139.13,140.650,37.73,39.610} | normal |                 1 | yes
+ jp-07 | {342,189,139.16,141.440,36.74,38.000} | normal |                 1 | yes
+ jp-08 | {264,240,139.68,141.055,35.73,36.980} | normal |                 1 | yes
+ jp-09 | {255,255,139.32,140.320,36.19,37.190} | normal |                 1 | yes
+ jp-10 | {273,231,138.39,139.690,35.98,37.080} | normal |                 1 | yes
+ jp-11 | {360,162,138.71,139.910,35.75,36.290} | normal |                 1 | yes
+ jp-12 | {260,240,139.51,141.135,34.61,36.110} | normal |                 1 | yes
+ jp-13 | {259,224,135.85,154.350,20.21,36.210} | normal |                 1 | yes
+ jp-14 | {292,219,138.91,139.910,34.95,35.700} | normal |                 1 | yes
+ jp-15 | {264,242,137.53,139.930,36.73,38.930} | normal |                 1 | yes
+ jp-16 | {253,248,136.76,137.772,36.27,37.262} | normal |                 1 | yes
+ jp-17 | {234,273,136.08,137.880,36.06,38.160} | normal |                 1 | yes
+ jp-18 | {280,224,135.44,136.840,35.34,36.460} | normal |                 1 | yes
+ jp-19 | {273,231,138.17,139.145,35.16,35.985} | normal |                 1 | yes
+ jp-20 | {228,285,137.32,138.820,35.19,37.065} | normal |                 1 | yes
+ jp-21 | {252,243,136.27,137.670,35.13,36.480} | normal |                 1 | yes
+ jp-22 | {304,209,137.47,139.470,34.37,35.745} | normal |                 1 | yes
+ jp-23 | {252,252,136.67,137.870,34.27,35.470} | normal |                 1 | yes
+ jp-24 | {240,264,135.85,137.350,33.61,35.260} | normal |                 1 | yes
+ jp-25 | {210,276,135.76,136.460,34.79,35.710} | normal |                 1 | yes
+ jp-26 | {230,276,134.85,136.100,34.70,36.200} | normal |                 1 | yes
+ jp-27 | {247,260,135.02,135.780,34.27,35.070} | normal |                 1 | yes
+ jp-28 | {196,300,134.25,135.475,34.01,35.885} | normal |                 1 | yes
+ jp-29 | {210,282,135.53,136.230,33.85,34.790} | normal |                 1 | yes
+ jp-30 | {285,228,134.88,136.380,33.23,34.430} | normal |                 1 | yes
+ jp-31 | {336,186,133.13,134.530,35.05,35.825} | normal |                 1 | yes
+ jp-32 | {242,253,131.46,133.660,34.30,36.600} | normal |                 1 | yes
+ jp-33 | {252,252,133.26,134.460,34.25,35.450} | normal |                 1 | yes
+ jp-34 | {288,216,132.03,133.530,34.00,35.125} | normal |                 1 | yes
+ jp-35 | {297,216,130.39,132.590,33.55,35.150} | normal |                 1 | yes
+ jp-36 | {266,208,133.66,134.990,33.33,34.370} | normal |                 1 | yes
+ jp-37 | {360,180,133.35,134.600,34.01,34.635} | normal |                 1 | yes
+ jp-38 | {273,231,131.88,133.700,32.78,34.320} | normal |                 1 | yes
+ jp-39 | {312,208,132.21,134.610,32.38,33.980} | normal |                 1 | yes
+ jp-40 | {232,276,129.81,131.260,32.93,34.655} | normal |                 1 | yes
+ jp-41 | {276,231,129.63,130.550,32.91,33.680} | normal |                 1 | yes
+ jp-42 | {238,272,127.86,130.660,31.78,34.980} | normal |                 1 | yes
+ jp-43 | {324,192,129.32,131.345,32.00,33.200} | normal |                 1 | yes
+ jp-44 | {255,255,130.82,132.320,32.37,33.870} | normal |                 1 | yes
+ jp-45 | {244,256,130.70,132.225,31.25,32.850} | normal |                 1 | yes
+ jp-46 | {189,333,128.20,131.350,26.83,32.380} | normal |                 1 | yes
+ jp-47 | {354,170,122.71,131.560,23.84,28.090} | normal |                 1 | yes
+ kg    | {396,153,69.26,80.260,39.17,43.420}   | normal |                 1 | yes
+ kh    | {258,252,102.33,107.705,9.47,14.720}  | normal |                 1 | yes
+ kp    | {274,218,124.09,130.940,37.58,43.030} | normal |                 1 | yes
+ kr    | {288,207,124.35,132.350,32.91,38.660} | normal |                 1 | yes
+ kw    | {308,199,46.55,49.014,28.52,30.112}   | normal |                 1 | yes
+ kz    | {409,149,46.49,87.390,40.56,55.460}   | normal |                 1 | yes
+ la    | {228,261,100.08,107.680,13.90,22.600} | normal |                 1 | yes
+ lb    | {252,252,34.88,36.630,33.04,34.790}   | normal |                 1 | yes
+ lk    | {198,315,79.39,82.140,5.71,10.085}    | normal |                 1 | yes
+ mm    | {171,351,92.17,101.670,9.43,28.930}   | normal |                 1 | yes
+ mn    | {387,129,87.73,119.980,41.57,52.320}  | normal |                 1 | yes
+ mv    | {117,546,72.35,74.150,-0.91,7.490}    | normal |                 1 | yes
+ my    | {441,147,98.93,119.930,0.85,7.850}    | normal |                 1 | yes
+ np    | {327,165,80.05,88.225,26.34,30.465}   | normal |                 1 | yes
+ om    | {221,273,51.99,60.490,16.46,26.960}   | normal |                 1 | yes
+ ph    | {204,274,114.09,126.840,4.21,21.335}  | normal |                 1 | yes
+ pk    | {262,218,60.87,77.245,23.53,37.155}   | normal |                 1 | yes
+ ps    | {266,238,34.06,35.580,31.22,32.580}   | normal |                 1 | yes
+ qa    | {260,240,50.56,52.640,24.47,26.390}   | normal |                 1 | yes
+ sa    | {255,192,34.45,55.700,16.28,32.280}   | normal |                 1 | yes
+ sg    | {408,156,103.56,104.580,1.13,1.520}   | normal |                 1 | yes
+ sy    | {277,201,35.47,42.395,32.31,37.335}   | normal |                 1 | yes
+ th    | {187,330,97.34,105.840,5.61,20.610}   | normal |                 1 | yes
+ tj    | {336,189,67.33,75.330,36.67,41.170}   | normal |                 1 | yes
+ tl    | {385,165,124.04,127.540,-9.57,-8.070} | normal |                 1 | yes
+ tm    | {345,186,52.33,66.705,35.12,42.870}   | normal |                 1 | yes
+ tw    | {176,363,114.35,122.350,10.37,26.870} | normal |                 1 | yes
+ uz    | {343,169,55.99,73.140,37.18,45.630}   | normal |                 1 | yes
+ vn    | {225,279,102.14,114.640,8.17,23.670}  | normal |                 1 | yes
+ ye    | {329,178,41.60,54.760,11.90,19.020}   | normal | 0.999879556350287 | yes
+(129 rows)
+
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+processing:  ae -100000000000307763
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ae/poly/poly.osm.pbf  r307763
+processing:  af -100000000000303427
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/af/poly/poly.osm.pbf  r303427
+processing:  am -100000000000364066
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/am/poly/poly.osm.pbf  r364066
+processing:  az -100000000000364110
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/az/poly/poly.osm.pbf  r364110
+processing:  bd -100000000000184640
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/bd/poly/poly.osm.pbf  r184640
+processing:  bh -100000000000378734
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/bh/poly/poly.osm.pbf  r378734
+processing:  bn -100000000002103120
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/bn/poly/poly.osm.pbf  r2103120
+processing:  bt -100000000000184629
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/bt/poly/poly.osm.pbf  r184629
+processing:  cn -100000000000270056
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/cn/poly/poly.osm.pbf  r270056
+processing:  ge -100000000000028699
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ge/poly/poly.osm.pbf  r28699
+processing:  id -100000000000304751
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/id/poly/poly.osm.pbf  r304751
+processing:  il -100000000001473946
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/il/poly/poly.osm.pbf  r1473946
+processing:  in-an -100000000002025855
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-an/poly/poly.osm.pbf  r2025855
+processing:  in-ap -100000000002022095
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ap/poly/poly.osm.pbf  r2022095
+processing:  in-ar -100000000002027346
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ar/poly/poly.osm.pbf  r2027346
+processing:  in-as -100000000002025886
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-as/poly/poly.osm.pbf  r2025886
+processing:  in-br -100000000001958982
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-br/poly/poly.osm.pbf  r1958982
+processing:  in-ch -100000000001942809
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ch/poly/poly.osm.pbf  r1942809
+processing:  in-ct -100000000001972004
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ct/poly/poly.osm.pbf  r1972004
+processing:  in-dd -100000000001953041
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-dd/poly/poly.osm.pbf  r1953041
+processing:  in-dl -100000000001942586
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-dl/poly/poly.osm.pbf  r1942586
+processing:  in-dn -100000000001952530
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-dn/poly/poly.osm.pbf  r1952530
+processing:  in-ga -100000000001997192
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ga/poly/poly.osm.pbf  r1997192
+processing:  in-gj -100000000001949080
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-gj/poly/poly.osm.pbf  r1949080
+processing:  in-hp -100000000000364186
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-hp/poly/poly.osm.pbf  r364186
+processing:  in-hr -100000000001942601
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-hr/poly/poly.osm.pbf  r1942601
+processing:  in-jh -100000000001960191
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-jh/poly/poly.osm.pbf  r1960191
+processing:  in-jk -100000000001943188
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-jk/poly/poly.osm.pbf  r1943188
+processing:  in-ka -100000000002019939
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ka/poly/poly.osm.pbf  r2019939
+processing:  in-kl -100000000002018151
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-kl/poly/poly.osm.pbf  r2018151
+processing:  in-ld -100000000002027460
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ld/poly/poly.osm.pbf  r2027460
+processing:  in-mh -100000000001950884
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-mh/poly/poly.osm.pbf  r1950884
+processing:  in-ml -100000000002027521
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ml/poly/poly.osm.pbf  r2027521
+processing:  in-mn -10End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+0000000002027869
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-mn/poly/poly.osm.pbf  r2027869
+processing:  in-mp -100000000001950071
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-mp/poly/poly.osm.pbf  r1950071
+processing:  in-mz -100000000002029046
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-mz/poly/poly.osm.pbf  r2029046
+processing:  in-nl -100000000002027973
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-nl/poly/poly.osm.pbf  r2027973
+processing:  in-or -100000000001984022
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-or/poly/poly.osm.pbf  r1984022
+processing:  in-pb -100000000001942686
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-pb/poly/poly.osm.pbf  r1942686
+processing:  in-py -100000000000107001
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-py/poly/poly.osm.pbf  r107001
+processing:  in-rj -100000000001942920
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-rj/poly/poly.osm.pbf  r1942920
+processing:  in-sk -100000000001791324
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-sk/poly/poly.osm.pbf  r1791324
+processing:  in-tg -100000000003250963
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-tg/poly/poly.osm.pbf  r3250963
+processing:  in-tn -100000000000096905
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-tn/poly/poly.osm.pbf  r96905
+processing:  in-tr -100000000002026458
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-tr/poly/poly.osm.pbf  r2026458
+processing:  in-up -100000000001942587
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-up/poly/poly.osm.pbf  r1942587
+processing:  in-ut -100000000000374810
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-ut/poly/poly.osm.pbf  r374810
+processing:  in-wb -100000000001960177
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/in-wb/poly/poly.osm.pbf  r1960177
+processing:  io -100000000001993867
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/io/poly/poly.osm.pbf  r1993867
+processing:  iq -100000000000304934
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/iq/poly/poly.osm.pbf  r304934
+processing:  ir -100000000000304938
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ir/poly/poly.osm.pbf  r304938
+processing:  jo -100000000000184818
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jo/poly/poly.osm.pbf  r184818
+processing:  jp-01 -100000000003795658
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-01/poly/poly.osm.pbf  r3795658
+processing:  jp-02 -100000000001834655
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-02/poly/poly.osm.pbf  r1834655
+processing:  jp-03 -100000000003792412
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-03/poly/poly.osm.pbf  r3792412
+processing:  jp-04 -100000000003790801
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-04/poly/poly.osm.pbf  r3790801
+processing:  jp-05 -100000000003791413
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-05/poly/poly.osm.pbf  r3791413
+processing:  jp-06 -100000000003790869
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-06/poly/poly.osm.pbf  r3790869
+processing:  jp-07 -100000000001800608
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-07/poly/poly.osm.pbf  r1800608
+processing:  jp-08 -100000000002682940
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-08/poly/poly.osm.pbf  r2682940
+processing:  jp-09 -100000000001800742
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-09/poly/poly.osm.pbf  r1800742
+processing:  jp-10 -100000000001851649
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-10/poly/poly.osm.pbf  r1851649
+processing:  jp-11 -100000000001768185
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-11/poly/poly.osm.pbf  r1768185
+processing:  jp-12 -100000000002679957
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-12/poly/poly.osm.pbf  r2679957
+processing:  jp-13 -100000000001543125
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-13/poly/poly.osm.pbf  r1543125
+processing:  jp-14 -100000000002689487
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-14/poly/poly.osm.pbf  End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+r2689487
+processing:  jp-15 -100000000003559887
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-15/poly/poly.osm.pbf  r3559887
+processing:  jp-16 -100000000003793529
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-16/poly/poly.osm.pbf  r3793529
+processing:  jp-17 -100000000003794726
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-17/poly/poly.osm.pbf  r3794726
+processing:  jp-18 -100000000000357112
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-18/poly/poly.osm.pbf  r357112
+processing:  jp-19 -100000000003578391
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-19/poly/poly.osm.pbf  r3578391
+processing:  jp-20 -100000000003560284
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-20/poly/poly.osm.pbf  r3560284
+processing:  jp-21 -100000000000760746
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-21/poly/poly.osm.pbf  r760746
+processing:  jp-22 -100000000003793581
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-22/poly/poly.osm.pbf  r3793581
+processing:  jp-23 -100000000003560336
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-23/poly/poly.osm.pbf  r3560336
+processing:  jp-24 -100000000000812190
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-24/poly/poly.osm.pbf  r812190
+processing:  jp-25 -100000000000357800
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-25/poly/poly.osm.pbf  r357800
+processing:  jp-26 -100000000002137477
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-26/poly/poly.osm.pbf  r2137477
+processing:  jp-27 -100000000000341906
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-27/poly/poly.osm.pbf  r341906
+processing:  jp-28 -100000000000356912
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-28/poly/poly.osm.pbf  r356912
+processing:  jp-29 -100000000000358631
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-29/poly/poly.osm.pbf  r358631
+processing:  jp-30 -100000000000908959
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-30/poly/poly.osm.pbf  r908959
+processing:  jp-31 -100000000003285636
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-31/poly/poly.osm.pbf  r3285636
+processing:  jp-32 -100000000003346137
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-32/poly/poly.osm.pbf  r3346137
+processing:  jp-33 -100000000003794962
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-33/poly/poly.osm.pbf  r3794962
+processing:  jp-34 -100000000003218753
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-34/poly/poly.osm.pbf  r3218753
+processing:  jp-35 -100000000004016543
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-35/poly/poly.osm.pbf  r4016543
+processing:  jp-36 -100000000003795000
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-36/poly/poly.osm.pbf  r3795000
+processing:  jp-37 -100000000003795064
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-37/poly/poly.osm.pbf  r3795064
+processing:  jp-38 -100000000003795063
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-38/poly/poly.osm.pbf  r3795063
+processing:  jp-39 -100000000003795031
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-39/poly/poly.osm.pbf  r3795031
+processing:  jp-40 -100000000001553735
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-40/poly/poly.osm.pbf  r1553735
+processing:  jp-41 -100000000001842150
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-41/poly/poly.osm.pbf  r1842150
+processing:  jp-42 -100000000001842151
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-42/poly/poly.osm.pbf  r1842151
+processing:  jp-43 -100000000001842185
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-43/poly/poly.osm.pbf  r1842185
+processing:  jp-44 -100000000000356911
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-44/poly/poly.osm.pbf  r356911
+processing:  jp-45 -100000000001842184
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-45/poly/poly.osm.pbf  r1842184
+processing:  jp-46 -100000000001842186
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/jp-46/poly/poly.osm.pbf  r1842186
+processing:  jp-47 -100000000003795635
+executing: /osm/sh/osm_geEnd of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+End of osm_getpolygon.sh
+tpolygon.sh /osm/service/as/jp-47/poly/poly.osm.pbf  r3795635
+processing:  kg -100000000000178009
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kg/poly/poly.osm.pbf  r178009
+processing:  kh -100000000000049898
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kh/poly/poly.osm.pbf  r49898
+processing:  kp -100000000000192734
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kp/poly/poly.osm.pbf  r192734
+processing:  kr -100000000000307756
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kr/poly/poly.osm.pbf  r307756
+processing:  kw -100000000000305099
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kw/poly/poly.osm.pbf  r305099
+processing:  kz -100000000000214665
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/kz/poly/poly.osm.pbf  r214665
+processing:  la -100000000000049903
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/la/poly/poly.osm.pbf  r49903
+processing:  lb -100000000000184843
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/lb/poly/poly.osm.pbf  r184843
+processing:  lk -100000000000536807
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/lk/poly/poly.osm.pbf  r536807
+processing:  mm -100000000000050371
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/mm/poly/poly.osm.pbf  r50371
+processing:  mn -100000000000161033
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/mn/poly/poly.osm.pbf  r161033
+processing:  mv -100000000000536773
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/mv/poly/poly.osm.pbf  r536773
+processing:  my -100000000002108121
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/my/poly/poly.osm.pbf  r2108121
+processing:  np -100000000000184633
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/np/poly/poly.osm.pbf  r184633
+processing:  om -100000000000305138
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/om/poly/poly.osm.pbf  r305138
+processing:  ph -100000000000443174
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ph/poly/poly.osm.pbf  r443174
+processing:  pk -100000000000307573
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/pk/poly/poly.osm.pbf  r307573
+processing:  ps -100000000001703814
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ps/poly/poly.osm.pbf  r1703814
+processing:  qa -100000000000305095
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/qa/poly/poly.osm.pbf  r305095
+processing:  sa -100000000000307584
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/sa/poly/poly.osm.pbf  r307584
+processing:  sg -100000000000536780
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/sg/poly/poly.osm.pbf  r536780
+processing:  sy -100000000000184840
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/sy/poly/poly.osm.pbf  r184840
+processing:  th -100000000002067731
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/th/poly/poly.osm.pbf  r2067731
+processing:  tj -100000000000214626
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/tj/poly/poly.osm.pbf  r214626
+processing:  tl -100000000000305142
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/tl/poly/poly.osm.pbf  r305142
+processing:  tm -100000000000223026
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/tm/poly/poly.osm.pbf  r223026
+processing:  tw -100000000000449220
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/tw/poly/poly.osm.pbf  r449220
+processing:  uz -100000000000196240
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/uz/poly/poly.osm.pbf  r196240
+processing:  vn -100000000000049915
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/vn/poly/poly.osm.pbf  r49915
+processing:  ye -100000000000305092
+executing: /osm/sh/osm_getpolygon.sh /osm/service/as/ye/poly/poly.osm.pbf  r305092
+------start setup_map.py ------
+Creating output file that is 294P x 203L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 294, 203
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 183L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 183
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 225L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 225
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 325P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 325, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 216P x 288L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 216, 288
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 189P x 329L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 189, 329
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 222L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 222
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 357P x 168L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 357, 168
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 246P x 179L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 246, 179
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 414P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 414, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 370P x 140L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 370, 140
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 164P x 389L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 164, 389
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 145P x 435L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 145, 435
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Generating background map:  ae -100000000000307763 294 203 الإمارات العربية المتحدة
+mapdata: 294 203 56.66 26.255 51.41 22.63
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 51.41 22.63 56.66 26.255  -ts 294 203   -of GTiff   /osm/ne/ne.tif /osm/service/as/ae/img/nebackground.geotif  
+Generating background map:  af -100000000000303427 288 183 افغانستان
+mapdata: 288 183 74.91 38.52 60.51 29.37
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 60.51 29.37 74.91 38.52  -ts 288 183   -of GTiff   /osm/ne/ne.tif /osm/service/as/af/img/nebackground.geotif  
+Generating background map:  am -100000000000364066 288 225 Հայաստան
+mapdata: 288 225 46.64 41.34 43.44 38.84
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 43.44 38.84 46.64 41.34  -ts 288 225   -of GTiff   /osm/ne/ne.tif /osm/service/as/am/img/nebackground.geotif  
+Generating background map:  az -100000000000364110 325 195 Azərbaycan
+mapdata: 325 195 51.01 42.14 44.76 38.39
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 44.76 38.39 51.01 42.14  -ts 325 195   -of GTiff   /osm/ne/ne.tif /osm/service/as/az/img/nebackground.geotif  
+Generating background map:  bd -100000000000184640 216 288 বাংলাদেশ
+mapdata: 216 288 92.8 26.77 88.0 20.37
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 88.0 20.37 92.8 26.77  -ts 216 288   -of GTiff   /osm/ne/ne.tif /osm/service/as/bd/img/nebackground.geotif  
+Generating background map:  bh -100000000000378734 189 329 ‏البحرين‎
+mapdata: 189 329 50.935 26.705 50.26 25.53
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 50.26 25.53 50.935 26.705  -ts 189 329   -of GTiff   /osm/ne/ne.tif /osm/service/as/bh/img/nebackground.geotif  
+Generating background map:  bn -100000000002103120 260 222 Brunei
+mapdata: 260 222 115.37 5.11 114.07 4.0
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 114.07 4.0 115.37 5.11  -ts 260 222   -of GTiff   /osm/ne/ne.tif /osm/service/as/bn/img/nebackground.geotif  
+Generating background map:  bt -100000000000184629 357 168 འབྲུག་ཡུལ་
+mapdata: 357 168 92.14 28.3 88.74 26.7
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 88.74 26.7 92.14 28.3  -ts 357 168   -of GTiff   /osm/ne/ne.tif /osm/service/as/bt/img/nebackground.geotif  
+Generating background map:  cn -100000000000270056 246 179 中国
+mapdata: 246 179 134.99 53.58 73.49 8.83
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 73.49 8.83 134.99 53.58  -ts 246 179   -of GTiff   /osm/ne/ne.tif /osm/service/as/cn/img/nebackground.geotif  
+Generating background map:  ge -100000000000028699 414 153 საქართველო
+mapdata: 414 153 46.78 43.6 39.88 41.05
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 39.88 41.05 46.78 43.6  -ts 414 153   -of GTiff   /osm/ne/ne.tif /osm/service/as/ge/img/nebackground.geotif  
+Generating background map:  id -100000000000304751 370 140 Indonesia
+mapdata: 370 140 141.02 6.29 94.77 -11.21
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 94.77 -11.21 141.02 6.29  -ts 370 140   -of GTiff   /osm/ne/ne.tif /osm/service/as/id/img/nebackground.geotif  
+Generating background map:  il -100000000001473946 164 389 ישראל
+mapdata: 164 389 35.9 33.34 34.26 29.45
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 34.26 29.45 35.9 33.34  -ts 164 389   -of GTiff   /osm/ne/ne.tif /osm/service/as/il/img/nebackground.geotif  
+Generating background map:  in-an -100000000002025855 145 435 Andaman and Nicobar Islands
+mapdata: 145 435 94.49 14.05 91.99 6.55
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 91.99 6.55 94.49 14.05  -ts 145 435   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-an/img/nebackground.geotif  
+Generating background map:  in-ap -100000000002022095 272 212 Andhra Pradesh
+mapdata: 272 212 85.26 19.245 76.76 12.62
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 76.76 12.62 85.26 Creating output file that is 272P x 212L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 272, 212
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 351P x 165L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 351, 165
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 317P x 193L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 317, 193
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 300P x 195L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 300, 195
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 204P x 306L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 204, 306
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 574P x 112L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 574, 112
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 245L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 245
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 248P x 256L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 248, 256
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 246P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 246, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 276P x 232L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 276, 232
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 237P x 249L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 237, 249
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 282P x 204L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 282, 204
+0...10...20...30...40...50...60...70...80...90...100 - done.
+19.245  -ts 272 212   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ap/img/nebackground.geotif  
+Generating background map:  in-ar -100000000002027346 351 165 Arunachal Pradesh
+mapdata: 351 165 97.41 29.4 91.56 26.65
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 91.56 26.65 97.41 29.4  -ts 351 165   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ar/img/nebackground.geotif  
+Generating background map:  in-as -100000000002025886 317 193 Assam
+mapdata: 317 193 96.03 27.99 89.69 24.13
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 89.69 24.13 96.03 27.99  -ts 317 193   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-as/img/nebackground.geotif  
+Generating background map:  in-br -100000000001958982 300 195 Bihar
+mapdata: 300 195 88.31 27.53 83.31 24.28
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 83.31 24.28 88.31 27.53  -ts 300 195   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-br/img/nebackground.geotif  
+Generating background map:  in-ch -100000000001942809 255 238 Chandigarh
+mapdata: 255 238 76.85 30.8 76.7 30.66
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 76.7 30.66 76.85 30.8  -ts 255 238   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ch/img/nebackground.geotif  
+Generating background map:  in-ct -100000000001972004 204 306 Chhattisgarh
+mapdata: 204 306 84.49 24.155 80.24 17.78
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 80.24 17.78 84.49 24.155  -ts 204 306   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ct/img/nebackground.geotif  
+Generating background map:  in-dd -100000000001953041 574 112 Daman and Diu
+mapdata: 574 112 72.92 20.76 70.87 20.36
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 70.87 20.36 72.92 20.76  -ts 574 112   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-dd/img/nebackground.geotif  
+Generating background map:  in-dl -100000000001942586 260 245 Delhi
+mapdata: 260 245 77.35 28.89 76.83 28.4
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 76.83 28.4 77.35 28.89  -ts 260 245   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-dl/img/nebackground.geotif  
+Generating background map:  in-dn -100000000001952530 248 256 Dadra and Nagar Haveli
+mapdata: 248 256 73.23 20.37 72.92 20.05
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 72.92 20.05 73.23 20.37  -ts 248 256   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-dn/img/nebackground.geotif  
+Generating background map:  in-ga -100000000001997192 246 252 Goa
+mapdata: 246 252 74.345 15.8 73.32 14.75
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 73.32 14.75 74.345 15.8  -ts 246 252   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ga/img/nebackground.geotif  
+Generating background map:  in-gj -100000000001949080 288 207 Gujarat
+mapdata: 288 207 74.51 24.72 68.11 20.12
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 68.11 20.12 74.51 24.72  -ts 288 207   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-gj/img/nebackground.geotif  
+Generating background map:  in-hp -100000000000364186 276 232 Himachal Pradesh
+mapdata: 276 232 79.02 33.28 75.57 30.38
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 75.57 30.38 79.02 33.28  -ts 276 232   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-hp/img/nebackground.geotif  
+Generating background map:  in-hr -100000000001942601 237 249 Haryana
+mapdata: 237 249 77.62 30.97 74.46 27.65
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 74.46 27.65 77.62 30.97  -ts 237 249   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-hr/img/nebackground.geotif  
+Generating background map:  in-jh -100000000001960191 282 204 Jharkhand
+mapdata: 282 204 88.02 25.36 83.32 21.96
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 83.32 21.96 88.02 25.36  -ts 282 204   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-jh/img/nebackground.geotif  
+Generating background map:  in-jk -100000000001943188 322 196 Jammu and Kashmir
+mapdata: 322 196 79.49 35.77 73.74 32.27
+<mapnik.Datasource object at 0x7f95Creating output file that is 322P x 196L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 322, 196
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 209P x 308L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 209, 308
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 182P x 312L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 182, 312
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 182P x 336L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 182, 336
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 289P x 221L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 289, 221
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 420P x 154L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 420, 154
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 255L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 255
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 203L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 203
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 168P x 364L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 168, 364
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 247L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 247
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 279P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 279, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 246P x 240L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 246, 240
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 285P x 228L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 285, 228
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 264P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 264, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+0e61b6e0>
+gdalw: gdalwarp    -te 73.74 32.27 79.49 35.77  -ts 322 196   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-jk/img/nebackground.geotif  
+Generating background map:  in-ka -100000000002019939 209 308 Karnataka
+mapdata: 209 308 78.62 18.59 73.87 11.59
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 73.87 11.59 78.62 18.59  -ts 209 308   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ka/img/nebackground.geotif  
+Generating background map:  in-kl -100000000002018151 182 312 കേരളം
+mapdata: 182 312 77.44 12.89 74.64 8.09
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 74.64 8.09 77.44 12.89  -ts 182 312   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-kl/img/nebackground.geotif  
+Generating background map:  in-ld -100000000002027460 182 336 Lakshadweep
+mapdata: 182 336 74.11 12.68 71.51 7.88
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 71.51 7.88 74.11 12.68  -ts 182 336   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ld/img/nebackground.geotif  
+Generating background map:  in-mh -100000000001950884 289 221 Maharashtra
+mapdata: 289 221 81.03 22.1 72.53 15.6
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 72.53 15.6 81.03 22.1  -ts 289 221   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-mh/img/nebackground.geotif  
+Generating background map:  in-ml -100000000002027521 420 154 Meghalaya
+mapdata: 420 154 92.82 26.12 89.82 25.02
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 89.82 25.02 92.82 26.12  -ts 420 154   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ml/img/nebackground.geotif  
+Generating background map:  in-mn -100000000002027869 255 255 Manipur
+mapdata: 255 255 94.845 25.705 92.97 23.83
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 92.97 23.83 94.845 25.705  -ts 255 255   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-mn/img/nebackground.geotif  
+Generating background map:  in-mp -100000000001950071 308 203 Madhya Pradesh
+mapdata: 308 203 82.83 26.87 74.03 21.07
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 74.03 21.07 82.83 26.87  -ts 308 203   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-mp/img/nebackground.geotif  
+Generating background map:  in-mz -100000000002029046 168 364 Mizoram
+mapdata: 168 364 93.45 24.55 92.25 21.95
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 92.25 21.95 93.45 24.55  -ts 168 364   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-mz/img/nebackground.geotif  
+Generating background map:  in-nl -100000000002027973 260 247 Nagaland
+mapdata: 260 247 95.32 27.1 93.32 25.2
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 93.32 25.2 95.32 27.1  -ts 260 247   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-nl/img/nebackground.geotif  
+Generating background map:  in-or -100000000001984022 279 216 Odisha
+mapdata: 279 216 87.58 22.6 81.38 17.8
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 81.38 17.8 87.58 22.6  -ts 279 216   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-or/img/nebackground.geotif  
+Generating background map:  in-pb -100000000001942686 246 240 Punjab
+mapdata: 246 240 76.945 32.54 73.87 29.54
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 73.87 29.54 76.945 32.54  -ts 246 240   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-pb/img/nebackground.geotif  
+Generating background map:  in-py -100000000000107001 285 228 Puducherry
+mapdata: 285 228 82.75 16.81 75.25 10.81
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 75.25 10.81 82.75 16.81  -ts 285 228   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-py/img/nebackground.geotif  
+Generating background map:  in-rj -100000000001942920 264 216 Rajasthan
+mapdata: 264 216 78.28 30.26 69.48 23.06
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 69.48 23.06 78.28 30.26  -ts 264 216   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-rj/img/nebackground.geotif  
+Generating background map:  in-sk -100000000001791324 230 265 Sikkim
+mapdata: 230 265 88.93 28.13 88.01 27.07
+<mapnik.DCreating output file that is 230P x 265L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 230, 265
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 246P x 246L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 246, 246
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 223P x 286L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 223, 286
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 216P x 297L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 216, 297
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 266P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 266, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 280P x 220L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 280, 220
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 203P x 299L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 203, 299
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 204P x 315L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 204, 315
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 221L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 221
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 210L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 209L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 209
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 351P x 182L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 351, 182
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 238P x 259L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 238, 259
+0...10...20...30...40...50...60...70...80...90...100 - done.
+atasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 88.01 27.07 88.93 28.13  -ts 230 265   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-sk/img/nebackground.geotif  
+Generating background map:  in-tg -100000000003250963 246 246 Telangana
+mapdata: 246 246 81.33 19.93 77.23 15.83
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 77.23 15.83 81.33 19.93  -ts 246 246   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-tg/img/nebackground.geotif  
+Generating background map:  in-tn -100000000000096905 223 286 தமிழ்நாடு
+mapdata: 223 286 80.68 13.57 76.22 7.85
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 76.22 7.85 80.68 13.57  -ts 223 286   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-tn/img/nebackground.geotif  
+Generating background map:  in-tr -100000000002026458 216 297 Tripura
+mapdata: 216 297 92.35 24.59 91.15 22.94
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 91.15 22.94 92.35 24.59  -ts 216 297   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-tr/img/nebackground.geotif  
+Generating background map:  in-up -100000000001942587 266 231 Uttar Pradesh
+mapdata: 266 231 84.68 30.47 77.08 23.87
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 77.08 23.87 84.68 30.47  -ts 266 231   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-up/img/nebackground.geotif  
+Generating background map:  in-ut -100000000000374810 280 220 Uttarakhand
+mapdata: 280 220 81.06 31.46 77.56 28.71
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 77.56 28.71 81.06 31.46  -ts 280 220   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-ut/img/nebackground.geotif  
+Generating background map:  in-wb -100000000001960177 203 299 West Bengal
+mapdata: 203 299 89.88 27.23 85.82 21.25
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 85.82 21.25 89.88 27.23  -ts 203 299   -of GTiff   /osm/ne/ne.tif /osm/service/as/in-wb/img/nebackground.geotif  
+Generating background map:  io -100000000001993867 204 315 British Indian Ocean Territory
+mapdata: 204 315 72.73 -5.025 71.03 -7.65
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 71.03 -7.65 72.73 -5.025  -ts 204 315   -of GTiff   /osm/ne/ne.tif /osm/service/as/io/img/nebackground.geotif  
+Generating background map:  iq -100000000000304934 273 221 العراق
+mapdata: 273 221 49.29 37.55 38.79 29.05
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 38.79 29.05 49.29 37.55  -ts 273 221   -of GTiff   /osm/ne/ne.tif /osm/service/as/iq/img/nebackground.geotif  
+Generating background map:  ir -100000000000304938 273 210 ‏ایران‎
+mapdata: 273 210 63.53 39.84 44.03 24.84
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 44.03 24.84 63.53 39.84  -ts 273 210   -of GTiff   /osm/ne/ne.tif /osm/service/as/ir/img/nebackground.geotif  
+Generating background map:  jo -100000000000184818 252 238 الأردن
+mapdata: 252 238 39.38 33.43 34.88 29.18
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 34.88 29.18 39.38 33.43  -ts 252 238   -of GTiff   /osm/ne/ne.tif /osm/service/as/jo/img/nebackground.geotif  
+Generating background map:  jp-01 -100000000003795658 308 209 北海道
+mapdata: 308 209 146.06 45.9 139.06 41.15
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.06 41.15 146.06 45.9  -ts 308 209   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-01/img/nebackground.geotif  
+Generating background map:  jp-02 -100000000001834655 351 182 青森県
+mapdata: 351 182 141.93 41.61 139.23 40.21
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.23 40.21 141.93 41.61  -ts 351 182   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-02/img/nebackground.geotif  
+Generating background map:  jp-03 -100000000003792412 238 259 岩手県
+mapdata: 238 259 142.35 40.59 140.65 38.74
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 140.65 38.74 142.35 40.59  -ts 238 259   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-03/img/nebackground.geotif  
+Generating background map:  jp-04 -100000000Creating output file that is 288P x 200L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 200
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 249P x 249L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 249, 249
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 228P x 282L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 228, 282
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 342P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 342, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 264P x 240L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 264, 240
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 255L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 255
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 360P x 162L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 360, 162
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 240L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 240
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 259P x 224L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 259, 224
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 292P x 219L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 292, 219
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 264P x 242L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 264, 242
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 253P x 248L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 253, 248
+0...10...20...30...40...50...60...70...80...90...100 - done.
+003790801 288 200 宮城県
+mapdata: 288 200 142.07 39.02 140.27 37.77
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 140.27 37.77 142.07 39.02  -ts 288 200   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-04/img/nebackground.geotif  
+Generating background map:  jp-05 -100000000003791413 249 249 秋田県
+mapdata: 249 249 141.0 40.53 139.34 38.87
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.34 38.87 141.0 40.53  -ts 249 249   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-05/img/nebackground.geotif  
+Generating background map:  jp-06 -100000000003790869 228 282 山形県
+mapdata: 228 282 140.65 39.61 139.13 37.73
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.13 37.73 140.65 39.61  -ts 228 282   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-06/img/nebackground.geotif  
+Generating background map:  jp-07 -100000000001800608 342 189 福島県
+mapdata: 342 189 141.44 38.0 139.16 36.74
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.16 36.74 141.44 38.0  -ts 342 189   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-07/img/nebackground.geotif  
+Generating background map:  jp-08 -100000000002682940 264 240 茨城県
+mapdata: 264 240 141.055 36.98 139.68 35.73
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.68 35.73 141.055 36.98  -ts 264 240   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-08/img/nebackground.geotif  
+Generating background map:  jp-09 -100000000001800742 255 255 栃木県
+mapdata: 255 255 140.32 37.19 139.32 36.19
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.32 36.19 140.32 37.19  -ts 255 255   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-09/img/nebackground.geotif  
+Generating background map:  jp-10 -100000000001851649 273 231 群馬県
+mapdata: 273 231 139.69 37.08 138.39 35.98
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 138.39 35.98 139.69 37.08  -ts 273 231   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-10/img/nebackground.geotif  
+Generating background map:  jp-11 -100000000001768185 360 162 埼玉県
+mapdata: 360 162 139.91 36.29 138.71 35.75
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 138.71 35.75 139.91 36.29  -ts 360 162   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-11/img/nebackground.geotif  
+Generating background map:  jp-12 -100000000002679957 260 240 千葉県
+mapdata: 260 240 141.135 36.11 139.51 34.61
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 139.51 34.61 141.135 36.11  -ts 260 240   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-12/img/nebackground.geotif  
+Generating background map:  jp-13 -100000000001543125 259 224 東京都
+mapdata: 259 224 154.35 36.21 135.85 20.21
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.85 20.21 154.35 36.21  -ts 259 224   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-13/img/nebackground.geotif  
+Generating background map:  jp-14 -100000000002689487 292 219 神奈川県
+mapdata: 292 219 139.91 35.7 138.91 34.95
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 138.91 34.95 139.91 35.7  -ts 292 219   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-14/img/nebackground.geotif  
+Generating background map:  jp-15 -100000000003559887 264 242 新潟県
+mapdata: 264 242 139.93 38.93 137.53 36.73
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 137.53 36.73 139.93 38.93  -ts 264 242   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-15/img/nebackground.geotif  
+Generating background map:  jp-16 -100000000003793529 253 248 富山県
+mapdata: 253 248 137.772 37.262 136.76 36.27
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 136.76 36.27 137.772 37.262  -ts 253 248   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-16/img/nebackground.geotif  
+Generating background map:  jp-17 -100000000003794726 234 273 石川県
+mapdata: 234 273 137.88 38.16 136.08 36.06
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 136.08 36.06 137.88 38.16  -ts 234 273   -of GTiff   /osm/ne/ne.tCreating output file that is 234P x 273L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 234, 273
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 280P x 224L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 280, 224
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 228P x 285L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 228, 285
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 243L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 243
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 304P x 209L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 304, 209
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 240P x 264L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 240, 264
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 210P x 276L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 210, 276
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 230P x 276L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 230, 276
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 247P x 260L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 247, 260
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 196P x 300L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 196, 300
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 210P x 282L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 210, 282
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 285P x 228L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 285, 228
+0...10...20...30...40...50...60...70...80...90...100 - done.
+if /osm/service/as/jp-17/img/nebackground.geotif  
+Generating background map:  jp-18 -100000000000357112 280 224 福井県
+mapdata: 280 224 136.84 36.46 135.44 35.34
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.44 35.34 136.84 36.46  -ts 280 224   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-18/img/nebackground.geotif  
+Generating background map:  jp-19 -100000000003578391 273 231 山梨県
+mapdata: 273 231 139.145 35.985 138.17 35.16
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 138.17 35.16 139.145 35.985  -ts 273 231   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-19/img/nebackground.geotif  
+Generating background map:  jp-20 -100000000003560284 228 285 長野県
+mapdata: 228 285 138.82 37.065 137.32 35.19
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 137.32 35.19 138.82 37.065  -ts 228 285   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-20/img/nebackground.geotif  
+Generating background map:  jp-21 -100000000000760746 252 243 岐阜県
+mapdata: 252 243 137.67 36.48 136.27 35.13
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 136.27 35.13 137.67 36.48  -ts 252 243   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-21/img/nebackground.geotif  
+Generating background map:  jp-22 -100000000003793581 304 209 静岡県
+mapdata: 304 209 139.47 35.745 137.47 34.37
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 137.47 34.37 139.47 35.745  -ts 304 209   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-22/img/nebackground.geotif  
+Generating background map:  jp-23 -100000000003560336 252 252 愛知県
+mapdata: 252 252 137.87 35.47 136.67 34.27
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 136.67 34.27 137.87 35.47  -ts 252 252   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-23/img/nebackground.geotif  
+Generating background map:  jp-24 -100000000000812190 240 264 三重県
+mapdata: 240 264 137.35 35.26 135.85 33.61
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.85 33.61 137.35 35.26  -ts 240 264   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-24/img/nebackground.geotif  
+Generating background map:  jp-25 -100000000000357800 210 276 滋賀県
+mapdata: 210 276 136.46 35.71 135.76 34.79
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.76 34.79 136.46 35.71  -ts 210 276   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-25/img/nebackground.geotif  
+Generating background map:  jp-26 -100000000002137477 230 276 京都府
+mapdata: 230 276 136.1 36.2 134.85 34.7
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 134.85 34.7 136.1 36.2  -ts 230 276   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-26/img/nebackground.geotif  
+Generating background map:  jp-27 -100000000000341906 247 260 大阪府
+mapdata: 247 260 135.78 35.07 135.02 34.27
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.02 34.27 135.78 35.07  -ts 247 260   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-27/img/nebackground.geotif  
+Generating background map:  jp-28 -100000000000356912 196 300 兵庫県
+mapdata: 196 300 135.475 35.885 134.25 34.01
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 134.25 34.01 135.475 35.885  -ts 196 300   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-28/img/nebackground.geotif  
+Generating background map:  jp-29 -100000000000358631 210 282 奈良県
+mapdata: 210 282 136.23 34.79 135.53 33.85
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 135.53 33.85 136.23 34.79  -ts 210 282   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-29/img/nebackground.geotif  
+Generating background map:  jp-30 -100000000000908959 285 228 和歌山県
+mapdata: 285 228 136.38 34.43 134.88 33.23
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 134.88 33.23 136.38 34.43  -ts 285 228   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-30/img/nebackground.geotif  
+Generating background map:  jp-31 -100000000003285636 336 186 鳥取県
+mapdata: 336 186 134.53 35.825 133.13 35.05
+<mapnik.Datasource object at 0x7fCreating output file that is 336P x 186L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 336, 186
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 242P x 253L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 242, 253
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 297P x 216L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 297, 216
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 266P x 208L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 266, 208
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 360P x 180L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 360, 180
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 273P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 273, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 312P x 208L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 312, 208
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 232P x 276L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 232, 276
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 276P x 231L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 276, 231
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 238P x 272L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 238, 272
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 324P x 192L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 324, 192
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 255L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 255
+0...10...20...30...40...50...60...70...80...90...100 - done.
+950e61b6e0>
+gdalw: gdalwarp    -te 133.13 35.05 134.53 35.825  -ts 336 186   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-31/img/nebackground.geotif  
+Generating background map:  jp-32 -100000000003346137 242 253 島根県
+mapdata: 242 253 133.66 36.6 131.46 34.3
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 131.46 34.3 133.66 36.6  -ts 242 253   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-32/img/nebackground.geotif  
+Generating background map:  jp-33 -100000000003794962 252 252 岡山県
+mapdata: 252 252 134.46 35.45 133.26 34.25
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 133.26 34.25 134.46 35.45  -ts 252 252   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-33/img/nebackground.geotif  
+Generating background map:  jp-34 -100000000003218753 288 216 広島県
+mapdata: 288 216 133.53 35.125 132.03 34.0
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 132.03 34.0 133.53 35.125  -ts 288 216   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-34/img/nebackground.geotif  
+Generating background map:  jp-35 -100000000004016543 297 216 山口県
+mapdata: 297 216 132.59 35.15 130.39 33.55
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 130.39 33.55 132.59 35.15  -ts 297 216   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-35/img/nebackground.geotif  
+Generating background map:  jp-36 -100000000003795000 266 208 徳島県
+mapdata: 266 208 134.99 34.37 133.66 33.33
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 133.66 33.33 134.99 34.37  -ts 266 208   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-36/img/nebackground.geotif  
+Generating background map:  jp-37 -100000000003795064 360 180 香川県
+mapdata: 360 180 134.6 34.635 133.35 34.01
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 133.35 34.01 134.6 34.635  -ts 360 180   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-37/img/nebackground.geotif  
+Generating background map:  jp-38 -100000000003795063 273 231 愛媛県
+mapdata: 273 231 133.7 34.32 131.88 32.78
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 131.88 32.78 133.7 34.32  -ts 273 231   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-38/img/nebackground.geotif  
+Generating background map:  jp-39 -100000000003795031 312 208 高知県
+mapdata: 312 208 134.61 33.98 132.21 32.38
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 132.21 32.38 134.61 33.98  -ts 312 208   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-39/img/nebackground.geotif  
+Generating background map:  jp-40 -100000000001553735 232 276 福岡県
+mapdata: 232 276 131.26 34.655 129.81 32.93
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 129.81 32.93 131.26 34.655  -ts 232 276   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-40/img/nebackground.geotif  
+Generating background map:  jp-41 -100000000001842150 276 231 佐賀県
+mapdata: 276 231 130.55 33.68 129.63 32.91
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 129.63 32.91 130.55 33.68  -ts 276 231   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-41/img/nebackground.geotif  
+Generating background map:  jp-42 -100000000001842151 238 272 長崎県
+mapdata: 238 272 130.66 34.98 127.86 31.78
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 127.86 31.78 130.66 34.98  -ts 238 272   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-42/img/nebackground.geotif  
+Generating background map:  jp-43 -100000000001842185 324 192 熊本県
+mapdata: 324 192 131.345 33.2 129.32 32.0
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 129.32 32.0 131.345 33.2  -ts 324 192   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-43/img/nebackground.geotif  
+Generating background map:  jp-44 -100000000000356911 255 255 大分県
+mapdata: 255 255 132.32 33.87 130.82 32.37
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 130.82 32.37 132.32 33.87  -ts 255 255   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-44/img/nebackground.geotif  
+Generating background map:  jp-45 -100000000001842184 244 256 �Creating output file that is 244P x 256L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 244, 256
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 189P x 333L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 189, 333
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 354P x 170L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 354, 170
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 396P x 153L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 396, 153
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 258P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 258, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 274P x 218L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 274, 218
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 288P x 207L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 288, 207
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 308P x 199L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 308, 199
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 409P x 149L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 409, 149
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 228P x 261L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 228, 261
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 252P x 252L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 252, 252
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 198P x 315L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 198, 315
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 171P x 351L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 171, 351
+0...10...20...30...40...50...60...70...80...90...100 - done.
+��崎県
+mapdata: 244 256 132.225 32.85 130.7 31.25
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 130.7 31.25 132.225 32.85  -ts 244 256   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-45/img/nebackground.geotif  
+Generating background map:  jp-46 -100000000001842186 189 333 鹿児島県
+mapdata: 189 333 131.35 32.38 128.2 26.83
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 128.2 26.83 131.35 32.38  -ts 189 333   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-46/img/nebackground.geotif  
+Generating background map:  jp-47 -100000000003795635 354 170 沖縄県
+mapdata: 354 170 131.56 28.09 122.71 23.84
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 122.71 23.84 131.56 28.09  -ts 354 170   -of GTiff   /osm/ne/ne.tif /osm/service/as/jp-47/img/nebackground.geotif  
+Generating background map:  kg -100000000000178009 396 153 Кыргызстан
+mapdata: 396 153 80.26 43.42 69.26 39.17
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 69.26 39.17 80.26 43.42  -ts 396 153   -of GTiff   /osm/ne/ne.tif /osm/service/as/kg/img/nebackground.geotif  
+Generating background map:  kh -100000000000049898 258 252 ព្រះរាជាណាចក្រ​កម្ពុជា
+mapdata: 258 252 107.705 14.72 102.33 9.47
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 102.33 9.47 107.705 14.72  -ts 258 252   -of GTiff   /osm/ne/ne.tif /osm/service/as/kh/img/nebackground.geotif  
+Generating background map:  kp -100000000000192734 274 218 조선민주주의인민공화국
+mapdata: 274 218 130.94 43.03 124.09 37.58
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 124.09 37.58 130.94 43.03  -ts 274 218   -of GTiff   /osm/ne/ne.tif /osm/service/as/kp/img/nebackground.geotif  
+Generating background map:  kr -100000000000307756 288 207 대한민국
+mapdata: 288 207 132.35 38.66 124.35 32.91
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 124.35 32.91 132.35 38.66  -ts 288 207   -of GTiff   /osm/ne/ne.tif /osm/service/as/kr/img/nebackground.geotif  
+Generating background map:  kw -100000000000305099 308 199 ‏الكويت‎
+mapdata: 308 199 49.014 30.112 46.55 28.52
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 46.55 28.52 49.014 30.112  -ts 308 199   -of GTiff   /osm/ne/ne.tif /osm/service/as/kw/img/nebackground.geotif  
+Generating background map:  kz -100000000000214665 409 149 Казахстан
+mapdata: 409 149 87.39 55.46 46.49 40.56
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 46.49 40.56 87.39 55.46  -ts 409 149   -of GTiff   /osm/ne/ne.tif /osm/service/as/kz/img/nebackground.geotif  
+Generating background map:  la -100000000000049903 228 261 ປະເທດລາວ
+mapdata: 228 261 107.68 22.6 100.08 13.9
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 100.08 13.9 107.68 22.6  -ts 228 261   -of GTiff   /osm/ne/ne.tif /osm/service/as/la/img/nebackground.geotif  
+Generating background map:  lb -100000000000184843 252 252 لبنان
+mapdata: 252 252 36.63 34.79 34.88 33.04
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 34.88 33.04 36.63 34.79  -ts 252 252   -of GTiff   /osm/ne/ne.tif /osm/service/as/lb/img/nebackground.geotif  
+Generating background map:  lk -100000000000536807 198 315 ශ්‍රී ලංකාව இலங்கை
+mapdata: 198 315 82.14 10.085 79.39 5.71
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 79.39 5.71 82.14 10.085  -ts 198 315   -of GTiff   /osm/ne/ne.tif /osm/service/as/lk/img/nebackground.geotif  
+Generating background map:  mm -100000000000050371 171 351 မြန်မာ
+mapdata: 171 351 101.67 28.93 92.17 9.43
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 92.17 9.43 101.67 28.93  -ts 171 351   -of GTiff   /osm/ne/ne.tif /osm/service/as/mm/img/nebackground.geotif  
+Generating background map:  mn -100000000000161033 387 129 Монгол улс
+mapdata: 387 129 119.98 52.32 87.73 41.57
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdaCreating output file that is 387P x 129L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 387, 129
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 117P x 546L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 117, 546
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 441P x 147L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 441, 147
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 327P x 165L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 327, 165
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 221P x 273L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 221, 273
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 204P x 274L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 204, 274
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 262P x 218L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 262, 218
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 266P x 238L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 266, 238
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 260P x 240L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 260, 240
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 255P x 192L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 255, 192
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 408P x 156L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 408, 156
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 277P x 201L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 277, 201
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 187P x 330L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 187, 330
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 336P x 189L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 336, 189
+0...10...20...30...40...50...60...70...80...90...100 - done.
+lwarp    -te 87.73 41.57 119.98 52.32  -ts 387 129   -of GTiff   /osm/ne/ne.tif /osm/service/as/mn/img/nebackground.geotif  
+Generating background map:  mv -100000000000536773 117 546 ދިވެހިރާއްޖެ
+mapdata: 117 546 74.15 7.49 72.35 -0.91
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 72.35 -0.91 74.15 7.49  -ts 117 546   -of GTiff   /osm/ne/ne.tif /osm/service/as/mv/img/nebackground.geotif  
+Generating background map:  my -100000000002108121 441 147 Malaysia
+mapdata: 441 147 119.93 7.85 98.93 0.85
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 98.93 0.85 119.93 7.85  -ts 441 147   -of GTiff   /osm/ne/ne.tif /osm/service/as/my/img/nebackground.geotif  
+Generating background map:  np -100000000000184633 327 165 नेपाल
+mapdata: 327 165 88.225 30.465 80.05 26.34
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 80.05 26.34 88.225 30.465  -ts 327 165   -of GTiff   /osm/ne/ne.tif /osm/service/as/np/img/nebackground.geotif  
+Generating background map:  om -100000000000305138 221 273 عمان
+mapdata: 221 273 60.49 26.96 51.99 16.46
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 51.99 16.46 60.49 26.96  -ts 221 273   -of GTiff   /osm/ne/ne.tif /osm/service/as/om/img/nebackground.geotif  
+Generating background map:  ph -100000000000443174 204 274 Philippines
+mapdata: 204 274 126.84 21.335 114.09 4.21
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 114.09 4.21 126.84 21.335  -ts 204 274   -of GTiff   /osm/ne/ne.tif /osm/service/as/ph/img/nebackground.geotif  
+Generating background map:  pk -100000000000307573 262 218 ‏پاکستان‎
+mapdata: 262 218 77.245 37.155 60.87 23.53
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 60.87 23.53 77.245 37.155  -ts 262 218   -of GTiff   /osm/ne/ne.tif /osm/service/as/pk/img/nebackground.geotif  
+Generating background map:  ps -100000000001703814 266 238 الأراضي الفلسطينية
+mapdata: 266 238 35.58 32.58 34.06 31.22
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 34.06 31.22 35.58 32.58  -ts 266 238   -of GTiff   /osm/ne/ne.tif /osm/service/as/ps/img/nebackground.geotif  
+Generating background map:  qa -100000000000305095 260 240 ‏قطر‎
+mapdata: 260 240 52.64 26.39 50.56 24.47
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 50.56 24.47 52.64 26.39  -ts 260 240   -of GTiff   /osm/ne/ne.tif /osm/service/as/qa/img/nebackground.geotif  
+Generating background map:  sa -100000000000307584 255 192 السعودية
+mapdata: 255 192 55.7 32.28 34.45 16.28
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 34.45 16.28 55.7 32.28  -ts 255 192   -of GTiff   /osm/ne/ne.tif /osm/service/as/sa/img/nebackground.geotif  
+Generating background map:  sg -100000000000536780 408 156 Singapore
+mapdata: 408 156 104.58 1.52 103.56 1.13
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 103.56 1.13 104.58 1.52  -ts 408 156   -of GTiff   /osm/ne/ne.tif /osm/service/as/sg/img/nebackground.geotif  
+Generating background map:  sy -100000000000184840 277 201 سوريا
+mapdata: 277 201 42.395 37.335 35.47 32.31
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 35.47 32.31 42.395 37.335  -ts 277 201   -of GTiff   /osm/ne/ne.tif /osm/service/as/sy/img/nebackground.geotif  
+Generating background map:  th -100000000002067731 187 330 ประเทศไทย
+mapdata: 187 330 105.84 20.61 97.34 5.61
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 97.34 5.61 105.84 20.61  -ts 187 330   -of GTiff   /osm/ne/ne.tif /osm/service/as/th/img/nebackground.geotif  
+Generating background map:  tj -100000000000214626 336 189 Тоҷикистон
+mapdata: 336 189 75.33 41.17 67.33 36.67
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 67.33 36.67 75.33 41.17  -ts 336 189   -of GTiff   /osm/ne/ne.tif /osm/service/as/tj/img/nebackground.geotif  
+Generating background map:  tl -100000000000305142 385 165 Timór Lorosa'e
+mapdata: 385 165 127.54 -8.07 1Creating output file that is 385P x 165L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 385, 165
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 345P x 186L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 345, 186
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 176P x 363L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 176, 363
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 343P x 169L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 343, 169
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 225P x 279L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 225, 279
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Creating output file that is 329P x 178L.
+Processing input file /osm/ne/ne.tif.
+0...10...20...30...40...50...60...70...80...90...100 - done.
+Input file size is 329, 178
+0...10...20...30...40...50...60...70...80...90...100 - done.
+24.04 -9.57
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 124.04 -9.57 127.54 -8.07  -ts 385 165   -of GTiff   /osm/ne/ne.tif /osm/service/as/tl/img/nebackground.geotif  
+Generating background map:  tm -100000000000223026 345 186 Türkmenistan
+mapdata: 345 186 66.705 42.87 52.33 35.12
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 52.33 35.12 66.705 42.87  -ts 345 186   -of GTiff   /osm/ne/ne.tif /osm/service/as/tm/img/nebackground.geotif  
+Generating background map:  tw -100000000000449220 176 363 臺灣
+mapdata: 176 363 122.35 26.87 114.35 10.37
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 114.35 10.37 122.35 26.87  -ts 176 363   -of GTiff   /osm/ne/ne.tif /osm/service/as/tw/img/nebackground.geotif  
+Generating background map:  uz -100000000000196240 343 169 Oʻzbekiston
+mapdata: 343 169 73.14 45.63 55.99 37.18
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 55.99 37.18 73.14 45.63  -ts 343 169   -of GTiff   /osm/ne/ne.tif /osm/service/as/uz/img/nebackground.geotif  
+Generating background map:  vn -100000000000049915 225 279 Việt Nam
+mapdata: 225 279 114.64 23.67 102.14 8.17
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 102.14 8.17 114.64 23.67  -ts 225 279   -of GTiff   /osm/ne/ne.tif /osm/service/as/vn/img/nebackground.geotif  
+Generating background map:  ye -100000000000305092 329 178 اليمن
+mapdata: 329 178 54.76 19.02 41.6 11.9
+<mapnik.Datasource object at 0x7f950e61b6e0>
+gdalw: gdalwarp    -te 41.6 11.9 54.76 19.02  -ts 329 178   -of GTiff   /osm/ne/ne.tif /osm/service/as/ye/img/nebackground.geotif  
+------start setup_config.py -----
+Generating taginfo-config:  ae -100000000000307763 294 203 الإمارات العربية المتحدة  ;  United Arab Emirates
+mapdata: 294 203 56.66 26.255 51.41 22.63 الإمارات العربية المتحدة United Arab Emirates
+Generating taginfo-config:  af -100000000000303427 288 183 افغانستان  ;  Afghanistan
+mapdata: 288 183 74.91 38.52 60.51 29.37 افغانستان Afghanistan
+Generating taginfo-config:  am -100000000000364066 288 225 Հայաստան  ;  Armenia
+mapdata: 288 225 46.64 41.34 43.44 38.84 Հայաստան Armenia
+Generating taginfo-config:  az -100000000000364110 325 195 Azərbaycan  ;  Azerbaijan
+mapdata: 325 195 51.01 42.14 44.76 38.39 Azərbaycan Azerbaijan
+Generating taginfo-config:  bd -100000000000184640 216 288 বাংলাদেশ  ;  Bangladesh
+mapdata: 216 288 92.8 26.77 88.0 20.37 বাংলাদেশ Bangladesh
+Generating taginfo-config:  bh -100000000000378734 189 329 ‏البحرين‎  ;  Bahrain
+mapdata: 189 329 50.935 26.705 50.26 25.53 ‏البحرين‎ Bahrain
+Generating taginfo-config:  bn -100000000002103120 260 222 Brunei  ;  Brunei
+mapdata: 260 222 115.37 5.11 114.07 4.0 Brunei Brunei
+Generating taginfo-config:  bt -100000000000184629 357 168 འབྲུག་ཡུལ་  ;  Bhutan
+mapdata: 357 168 92.14 28.3 88.74 26.7 འབྲུག་ཡུལ་ Bhutan
+Generating taginfo-config:  cn -100000000000270056 246 179 中国  ;  China
+mapdata: 246 179 134.99 53.58 73.49 8.83 中国 China
+Generating taginfo-config:  ge -100000000000028699 414 153 საქართველო  ;  Georgia
+mapdata: 414 153 46.78 43.6 39.88 41.05 საქართველო Georgia
+Generating taginfo-config:  id -100000000000304751 370 140 Indonesia  ;  Indonesia
+mapdata: 370 140 141.02 6.29 94.77 -11.21 Indonesia Indonesia
+Generating taginfo-config:  il -100000000001473946 164 389 ישראל  ;  Israel
+mapdata: 164 389 35.9 33.34 34.26 29.45 ישראל Israel
+Generating taginfo-config:  in-an -100000000002025855 145 435 Andaman and Nicobar Islands  ;  Andaman and Nicobar Islands
+mapdata: 145 435 94.49 14.05 91.99 6.55 Andaman and Nicobar Islands Andaman and Nicobar Islands
+Generating taginfo-config:  in-ap -100000000002022095 272 212 Andhra Pradesh  ;  Andhra Pradesh
+mapdata: 272 212 85.26 19.245 76.76 12.62 Andhra Pradesh Andhra Pradesh
+Generating taginfo-config:  in-ar -100000000002027346 351 165 Arunachal Pradesh  ;  Arunachal Pradesh
+mapdata: 351 165 97.41 29.4 91.56 26.65 Arunachal Pradesh Arunachal Pradesh
+Generating taginfo-config:  in-as -100000000002025886 317 193 Assam  ;  Assam
+mapdata: 317 193 96.03 27.99 89.69 24.13 Assam Assam
+Generating taginfo-config:  in-br -100000000001958982 300 195 Bihar  ;  Bihar
+mapdata: 300 195 88.31 27.53 83.31 24.28 Bihar Bihar
+Generating taginfo-config:  in-ch -100000000001942809 255 238 Chandigarh  ;  Chandigarh
+mapdata: 255 238 76.85 30.8 76.7 30.66 Chandigarh Chandigarh
+Generating taginfo-config:  in-ct -100000000001972004 204 306 Chhattisgarh  ;  Chhattisgarh
+mapdata: 204 306 84.49 24.155 80.24 17.78 Chhattisgarh Chhattisgarh
+Generating taginfo-config:  in-dd -100000000001953041 574 112 Daman and Diu  ;  Daman and Diu
+mapdata: 574 112 72.92 20.76 70.87 20.36 Daman and Diu Daman and Diu
+Generating taginfo-config:  in-dl -100000000001942586 260 245 Delhi  ;  Delhi
+mapdata: 260 245 77.35 28.89 76.83 28.4 Delhi Delhi
+Generating taginfo-config:  in-dn -100000000001952530 248 256 Dadra and Nagar Haveli  ;  Dadra and Nagar Haveli
+mapdata: 248 256 73.23 20.37 72.92 20.05 Dadra and Nagar Haveli Dadra and Nagar Haveli
+Generating taginfo-config:  in-ga -100000000001997192 246 252 Goa  ;  Goa
+mapdata: 246 252 74.345 15.8 73.32 14.75 Goa Goa
+Generating taginfo-config:  in-gj -100000000001949080 288 207 Gujarat  ;  Gujarat
+mapdata: 288 207 74.51 24.72 68.11 20.12 Gujarat Gujarat
+Generating taginfo-config:  in-hp -100000000000364186 276 232 Himachal Pradesh  ;  Himachal Pradesh
+mapdata: 276 232 79.02 33.28 75.57 30.38 Himachal Pradesh Himachal Pradesh
+Generating taginfo-config:  in-hr -100000000001942601 237 249 Haryana  ;  Haryana
+mapdata: 237 249 77.62 30.97 74.46 27.65 Haryana Haryana
+Generating taginfo-config:  in-jh -100000000001960191 282 204 Jharkhand  ;  Jharkhand
+mapdata: 282 204 88.02 25.36 83.32 21.96 Jharkhand Jharkhand
+Generating taginfo-config:  in-jk -100000000001943188 322 196 Jammu and Kashmir  ;  Jammu and Kashmir
+mapdata: 322 196 79.49 35.77 73.74 32.27 Jammu and Kashmir Jammu and Kashmir
+Generating taginfo-config:  in-ka -100000000002019939 209 308 Karnataka  ;  Karnataka
+mapdata: 209 308 78.62 18.59 73.87 11.59 Karnataka Karnataka
+Generating taginfo-config:  in-kl -100000000002018151 182 312 കേരളം  ;  Kerala
+mapdata: 182 312 77.44 12.89 74.64 8.09 കേരളം Kerala
+Generating taginfo-config:  in-ld -100000000002027460 182 336 Lakshadweep  ;  Lakshadweep
+mapdata: 182 336 74.11 12.68 71.51 7.88 Lakshadweep Lakshadweep
+Generating taginfo-config:  in-mh -100000000001950884 289 221 Maharashtra  ;  Maharashtra
+mapdata: 289 221 81.03 22.1 72.53 15.6 Maharashtra Maharashtra
+Generating taginfo-config:  in-ml -100000000002027521 420 154 Meghalaya  ;  Meghalaya
+mapdata: 420 154 92.82 26.12 89.82 25.02 Meghalaya Meghalaya
+Generating taginfo-config:  in-mn -100000000002027869 255 255 Manipur  ;  Manipur
+mapdata: 255 255 94.845 25.705 92.97 23.83 Manipur Manipur
+Generating taginfo-config:  in-mp -100000000001950071 308 203 Madhya Pradesh  ;  Madhya Pradesh
+mapdata: 308 203 82.83 26.87 74.03 21.07 Madhya Pradesh Madhya Pradesh
+Generating taginfo-config:  in-mz -100000000002029046 168 364 Mizoram  ;  Mizoram
+mapdata: 168 364 93.45 24.55 92.25 21.95 Mizoram Mizoram
+Generating taginfo-config:  in-nl -100000000002027973 260 247 Nagaland  ;  Nagaland
+mapdata: 260 247 95.32 27.1 93.32 25.2 Nagaland Nagaland
+Generating taginfo-config:  in-or -100000000001984022 279 216 Odisha  ;  Odisha
+mapdata: 279 216 87.58 22.6 81.38 17.8 Odisha Odisha
+Generating taginfo-config:  in-pb -100000000001942686 246 240 Punjab  ;  Punjab
+mapdata: 246 240 76.945 32.54 73.87 29.54 Punjab Punjab
+Generating taginfo-config:  in-py -100000000000107001 285 228 Puducherry  ;  Puducherry
+mapdata: 285 228 82.75 16.81 75.25 10.81 Puducherry Puducherry
+Generating taginfo-config:  in-rj -100000000001942920 264 216 Rajasthan  ;  Rajasthan
+mapdata: 264 216 78.28 30.26 69.48 23.06 Rajasthan Rajasthan
+Generating taginfo-config:  in-sk -100000000001791324 230 265 Sikkim  ;  Sikkim
+mapdata: 230 265 88.93 28.13 88.01 27.07 Sikkim Sikkim
+Generating taginfo-config:  in-tg -100000000003250963 246 246 Telangana  ;  Telangana
+mapdata: 246 246 81.33 19.93 77.23 15.83 Telangana Telangana
+Generating taginfo-config:  in-tn -100000000000096905 223 286 தமிழ்நாடு  ;  Tamil Nadu
+mapdata: 223 286 80.68 13.57 76.22 7.85 தமிழ்நாடு Tamil Nadu
+Generating taginfo-config:  in-tr -100000000002026458 216 297 Tripura  ;  Tripura
+mapdata: 216 297 92.35 24.59 91.15 22.94 Tripura Tripura
+Generating taginfo-config:  in-up -100000000001942587 266 231 Uttar Pradesh  ;  Uttar Pradesh
+mapdata: 266 231 84.68 30.47 77.08 23.87 Uttar Pradesh Uttar Pradesh
+Generating taginfo-config:  in-ut -100000000000374810 280 220 Uttarakhand  ;  Uttarakhand
+mapdata: 280 220 81.06 31.46 77.56 28.71 Uttarakhand Uttarakhand
+Generating taginfo-config:  in-wb -100000000001960177 203 299 West Bengal  ;  West Bengal
+mapdata: 203 299 89.88 27.23 85.82 21.25 West Bengal West Bengal
+Generating taginfo-config:  io -100000000001993867 204 315 British Indian Ocean Territory  ;  British Indian Ocean Territory
+mapdata: 204 315 72.73 -5.025 71.03 -7.65 British Indian Ocean Territory British Indian Ocean Territory
+Generating taginfo-config:  iq -100000000000304934 273 221 العراق  ;  Iraq
+mapdata: 273 221 49.29 37.55 38.79 29.05 العراق Iraq
+Generating taginfo-config:  ir -100000000000304938 273 210 ‏ایران‎  ;  Iran
+mapdata: 273 210 63.53 39.84 44.03 24.84 ‏ایران‎ Iran
+Generating taginfo-config:  jo -100000000000184818 252 238 الأردن  ;  Jordan
+mapdata: 252 238 39.38 33.43 34.88 29.18 الأردن Jordan
+Generating taginfo-config:  jp-01 -100000000003795658 308 209 北海道  ;  Hokkaidō Prefecture
+mapdata: 308 209 146.06 45.9 139.06 41.15 北海道 Hokkaidō Prefecture
+Generating taginfo-config:  jp-02 -100000000001834655 351 182 青森県  ;  Aomori Prefecture
+mapdata: 351 182 141.93 41.61 139.23 40.21 青森県 Aomori Prefecture
+Generating taginfo-config:  jp-03 -100000000003792412 238 259 岩手県  ;  Iwate Prefecture
+mapdata: 238 259 142.35 40.59 140.65 38.74 岩手県 Iwate Prefecture
+Generating taginfo-config:  jp-04 -100000000003790801 288 200 宮城県  ;  Miyagi Prefecture
+mapdata: 288 200 142.07 39.02 140.27 37.77 宮城県 Miyagi Prefecture
+Generating taginfo-config:  jp-05 -100000000003791413 249 249 秋田県  ;  Akita Prefecture
+mapdata: 249 249 141.0 40.53 139.34 38.87 秋田県 Akita Prefecture
+Generating taginfo-config:  jp-06 -100000000003790869 228 282 山形県  ;  Yamagata Prefecture
+mapdata: 228 282 140.65 39.61 139.13 37.73 山形県 Yamagata Prefecture
+Generating taginfo-config:  jp-07 -100000000001800608 342 189 福島県  ;  Fukushima Prefecture
+mapdata: 342 189 141.44 38.0 139.16 36.74 福島県 Fukushima Prefecture
+Generating taginfo-config:  jp-08 -100000000002682940 264 240 茨城県  ;  Ibaraki Prefecture
+mapdata: 264 240 141.055 36.98 139.68 35.73 茨城県 Ibaraki Prefecture
+Generating taginfo-config:  jp-09 -100000000001800742 255 255 栃木県  ;  Tochigi Prefecture
+mapdata: 255 255 140.32 37.19 139.32 36.19 栃木県 Tochigi Prefecture
+Generating taginfo-config:  jp-10 -100000000001851649 273 231 群馬県  ;  Gunma Prefecture
+mapdata: 273 231 139.69 37.08 138.39 35.98 群馬県 Gunma Prefecture
+Generating taginfo-config:  jp-11 -100000000001768185 360 162 埼玉県  ;  Saitama Prefecture
+mapdata: 360 162 139.91 36.29 138.71 35.75 埼玉県 Saitama Prefecture
+Generating taginfo-config:  jp-12 -100000000002679957 260 240 千葉県  ;  Chiba Prefecture
+mapdata: 260 240 141.135 36.11 139.51 34.61 千葉県 Chiba Prefecture
+Generating taginfo-config:  jp-13 -100000000001543125 259 224 東京都  ;  Tokyo
+mapdata: 259 224 154.35 36.21 135.85 20.21 東京都 Tokyo
+Generating taginfo-config:  jp-14 -100000000002689487 292 219 神奈川県  ;  Kanagawa Prefecture
+mapdata: 292 219 139.91 35.7 138.91 34.95 神奈川県 Kanagawa Prefecture
+Generating taginfo-config:  jp-15 -100000000003559887 264 242 新潟県  ;  Niigata Prefecture
+mapdata: 264 242 139.93 38.93 137.53 36.73 新潟県 Niigata Prefecture
+Generating taginfo-config:  jp-16 -100000000003793529 253 248 富山県  ;  Toyama Prefecture
+mapdata: 253 248 137.772 37.262 136.76 36.27 富山県 Toyama Prefecture
+Generating taginfo-config:  jp-17 -100000000003794726 234 273 石川県  ;  Ishikawa Prefecture
+mapdata: 234 273 137.88 38.16 136.08 36.06 石川県 Ishikawa Prefecture
+Generating taginfo-config:  jp-18 -100000000000357112 280 224 福井県  ;  Fukui Prefecture
+mapdata: 280 224 136.84 36.46 135.44 35.34 福井県 Fukui Prefecture
+Generating taginfo-config:  jp-19 -100000000003578391 273 231 山梨県  ;  Yamanashi Prefecture
+mapdata: 273 231 139.145 35.985 138.17 35.16 山梨県 Yamanashi Prefecture
+Generating taginfo-config:  jp-20 -100000000003560284 228 285 長野県  ;  Nagano Prefecture
+mapdata: 228 285 138.82 37.065 137.32 35.19 長野県 Nagano Prefecture
+Generating taginfo-config:  jp-21 -100000000000760746 252 243 岐阜県  ;  Gifu Prefecture
+mapdata: 252 243 137.67 36.48 136.27 35.13 岐阜県 Gifu Prefecture
+Generating taginfo-config:  jp-22 -100000000003793581 304 209 静岡県  ;  Shizuoka Prefecture
+mapdata: 304 209 139.47 35.745 137.47 34.37 静岡県 Shizuoka Prefecture
+Generating taginfo-config:  jp-23 -100000000003560336 252 252 愛知県  ;  Aichi Prefecture
+mapdata: 252 252 137.87 35.47 136.67 34.27 愛知県 Aichi Prefecture
+Generating taginfo-config:  jp-24 -100000000000812190 240 264 三重県  ;  Mie Prefecture
+mapdata: 240 264 137.35 35.26 135.85 33.61 三重県 Mie Prefecture
+Generating taginfo-config:  jp-25 -100000000000357800 210 276 滋賀県  ;  Shiga Prefecture
+mapdata: 210 276 136.46 35.71 135.76 34.79 滋賀県 Shiga Prefecture
+Generating taginfo-config:  jp-26 -100000000002137477 230 276 京都府  ;  Kyoto Prefecture
+mapdata: 230 276 136.1 36.2 134.85 34.7 京都府 Kyoto Prefecture
+Generating taginfo-config:  jp-27 -100000000000341906 247 260 大阪府  ;  Osaka Prefecture
+mapdata: 247 260 135.78 35.07 135.02 34.27 大阪府 Osaka Prefecture
+Generating taginfo-config:  jp-28 -100000000000356912 196 300 兵庫県  ;  Hyogo Prefecture
+mapdata: 196 300 135.475 35.885 134.25 34.01 兵庫県 Hyogo Prefecture
+Generating taginfo-config:  jp-29 -100000000000358631 210 282 奈良県  ;  Nara Prefecture
+mapdata: 210 282 136.23 34.79 135.53 33.85 奈良県 Nara Prefecture
+Generating taginfo-config:  jp-30 -100000000000908959 285 228 和歌山県  ;  Wakayama Prefecture
+mapdata: 285 228 136.38 34.43 134.88 33.23 和歌山県 Wakayama Prefecture
+Generating taginfo-config:  jp-31 -100000000003285636 336 186 鳥取県  ;  Tottori Prefecture
+mapdata: 336 186 134.53 35.825 133.13 35.05 鳥取県 Tottori Prefecture
+Generating taginfo-config:  jp-32 -100000000003346137 242 253 島根県  ;  Shimane Prefecture
+mapdata: 242 253 133.66 36.6 131.46 34.3 島根県 Shimane Prefecture
+Generating taginfo-config:  jp-33 -100000000003794962 252 252 岡山県  ;  Okayama Prefecture
+mapdata: 252 252 134.46 35.45 133.26 34.25 岡山県 Okayama Prefecture
+Generating taginfo-config:  jp-34 -100000000003218753 288 216 広島県  ;  Hiroshima Prefecture
+mapdata: 288 216 133.53 35.125 132.03 34.0 広島県 Hiroshima Prefecture
+Generating taginfo-config:  jp-35 -100000000004016543 297 216 山口県  ;  Yamaguchi Prefecture
+mapdata: 297 216 132.59 35.15 130.39 33.55 山口県 Yamaguchi Prefecture
+Generating taginfo-config:  jp-36 -100000000003795000 266 208 徳島県  ;  Tokushima Prefecture
+mapdata: 266 208 134.99 34.37 133.66 33.33 徳島県 Tokushima Prefecture
+Generating taginfo-config:  jp-37 -100000000003795064 360 180 香川県  ;  Kagawa Prefecture
+mapdata: 360 180 134.6 34.635 133.35 34.01 香川県 Kagawa Prefecture
+Generating taginfo-config:  jp-38 -100000000003795063 273 231 愛媛県  ;  Ehime Prefecture
+mapdata: 273 231 133.7 34.32 131.88 32.78 愛媛県 Ehime Prefecture
+Generating taginfo-config:  jp-39 -100000000003795031 312 208 高知県  ;  Kochi Prefecture
+mapdata: 312 208 134.61 33.98 132.21 32.38 高知県 Kochi Prefecture
+Generating taginfo-config:  jp-40 -100000000001553735 232 276 福岡県  ;  Fukuoka Prefecture
+mapdata: 232 276 131.26 34.655 129.81 32.93 福岡県 Fukuoka Prefecture
+Generating taginfo-config:  jp-41 -100000000001842150 276 231 佐賀県  ;  Saga Prefecture
+mapdata: 276 231 130.55 33.68 129.63 32.91 佐賀県 Saga Prefecture
+Generating taginfo-config:  jp-42 -100000000001842151 238 272 長崎県  ;  Nagasaki Prefecture
+mapdata: 238 272 130.66 34.98 127.86 31.78 長崎県 Nagasaki Prefecture
+Generating taginfo-config:  jp-43 -100000000001842185 324 192 熊本県  ;  Kumamoto Prefecture
+mapdata: 324 192 131.345 33.2 129.32 32.0 熊本県 Kumamoto Prefecture
+Generating taginfo-config:  jp-44 -100000000000356911 255 255 大分県  ;  Oita Prefecture
+mapdata: 255 255 132.32 33.87 130.82 32.37 大分県 Oita Prefecture
+Generating taginfo-config:  jp-45 -100000000001842184 244 256 宮崎県  ;  Miyazaki Prefecture
+mapdata: 244 256 132.225 32.85 130.7 31.25 宮崎県 Miyazaki Prefecture
+Generating taginfo-config:  jp-46 -100000000001842186 189 333 鹿児島県  ;  Kagoshima Prefecture
+mapdata: 189 333 131.35 32.38 128.2 26.83 鹿児島県 Kagoshima Prefecture
+Generating taginfo-config:  jp-47 -100000000003795635 354 170 沖縄県  ;  Okinawa Prefecture
+mapdata: 354 170 131.56 28.09 122.71 23.84 沖縄県 Okinawa Prefecture
+Generating taginfo-config:  kg -100000000000178009 396 153 Кыргызстан  ;  Kyrgyzstan
+mapdata: 396 153 80.26 43.42 69.26 39.17 Кыргызстан Kyrgyzstan
+Generating taginfo-config:  kh -100000000000049898 258 252 ព្រះរាជាណាចក្រ​កម្ពុជា  ;  Cambodia
+mapdata: 258 252 107.705 14.72 102.33 9.47 ព្រះរាជាណាចក្រ​កម្ពុជា Cambodia
+Generating taginfo-config:  kp -100000000000192734 274 218 조선민주주의인민공화국  ;  North Korea
+mapdata: 274 218 130.94 43.03 124.09 37.58 조선민주주의인민공화국 North Korea
+Generating taginfo-config:  kr -100000000000307756 288 207 대한민국  ;  South Korea
+mapdata: 288 207 132.35 38.66 124.35 32.91 대한민국 South Korea
+Generating taginfo-config:  kw -100000000000305099 308 199 ‏الكويت‎  ;  Kuwait
+mapdata: 308 199 49.014 30.112 46.55 28.52 ‏الكويت‎ Kuwait
+Generating taginfo-config:  kz -100000000000214665 409 149 Казахстан  ;  Kazakhstan
+mapdata: 409 149 87.39 55.46 46.49 40.56 Казахстан Kazakhstan
+Generating taginfo-config:  la -100000000000049903 228 261 ປະເທດລາວ  ;  Laos
+mapdata: 228 261 107.68 22.6 100.08 13.9 ປະເທດລາວ Laos
+Generating taginfo-config:  lb -100000000000184843 252 252 لبنان  ;  Lebanon
+mapdata: 252 252 36.63 34.79 34.88 33.04 لبنان Lebanon
+Generating taginfo-config:  lk -100000000000536807 198 315 ශ්‍රී ලංකාව இலங்கை  ;  Sri Lanka
+mapdata: 198 315 82.14 10.085 79.39 5.71 ශ්‍රී ලංකාව இலங்கை Sri Lanka
+Generating taginfo-config:  mm -100000000000050371 171 351 မြန်မာ  ;  Myanmar
+mapdata: 171 351 101.67 28.93 92.17 9.43 မြန်မာ Myanmar
+Generating taginfo-config:  mn -100000000000161033 387 129 Монгол улс  ;  Mongolia
+mapdata: 387 129 119.98 52.32 87.73 41.57 Монгол улс Mongolia
+Generating taginfo-config:  mv -100000000000536773 117 546 ދިވެހިރާއްޖެ  ;  Maldives
+mapdata: 117 546 74.15 7.49 72.35 -0.91 ދިވެހިރާއްޖެ Maldives
+Generating taginfo-config:  my -100000000002108121 441 147 Malaysia  ;  Malaysia
+mapdata: 441 147 119.93 7.85 98.93 0.85 Malaysia Malaysia
+Generating taginfo-config:  np -100000000000184633 327 165 नेपाल  ;  Nepal
+mapdata: 327 165 88.225 30.465 80.05 26.34 नेपाल Nepal
+Generating taginfo-config:  om -100000000000305138 221 273 عمان  ;  Oman
+mapdata: 221 273 60.49 26.96 51.99 16.46 عمان Oman
+Generating taginfo-config:  ph -100000000000443174 204 274 Philippines  ;  Philippines
+mapdata: 204 274 126.84 21.335 114.09 4.21 Philippines Philippines
+Generating taginfo-config:  pk -100000000000307573 262 218 ‏پاکستان‎  ;  Pakistan
+mapdata: 262 218 77.245 37.155 60.87 23.53 ‏پاکستان‎ Pakistan
+Generating taginfo-config:  ps -100000000001703814 266 238 الأراضي الفلسطينية  ;  Palestinian Territories
+mapdata: 266 238 35.58 32.58 34.06 31.22 الأراضي الفلسطينية Palestinian Territories
+Generating taginfo-config:  qa -100000000000305095 260 240 ‏قطر‎  ;  Qatar
+mapdata: 260 240 52.64 26.39 50.56 24.47 ‏قطر‎ Qatar
+Generating taginfo-config:  sa -100000000000307584 255 192 السعودية  ;  Saudi Arabia
+mapdata: 255 192 55.7 32.28 34.45 16.28 السعودية Saudi Arabia
+Generating taginfo-config:  sg -100000000000536780 408 156 Singapore  ;  Singapore
+mapdata: 408 156 104.58 1.52 103.56 1.13 Singapore Singapore
+Generating taginfo-config:  sy -100000000000184840 277 201 سوريا  ;  Syria
+mapdata: 277 201 42.395 37.335 35.47 32.31 سوريا Syria
+Generating taginfo-config:  th -100000000002067731 187 330 ประเทศไทย  ;  Thailand
+mapdata: 187 330 105.84 20.61 97.34 5.61 ประเทศไทย Thailand
+Generating taginfo-config:  tj -100000000000214626 336 189 Тоҷикистон  ;  Tajikistan
+mapdata: 336 189 75.33 41.17 67.33 36.67 Тоҷикистон Tajikistan
+Generating taginfo-config:  tl -100000000000305142 385 165 Timór Lorosa'e  ;  East Timor
+mapdata: 385 165 127.54 -8.07 124.04 -9.57 Timór Lorosa'e East Timor
+Generating taginfo-config:  tm -100000000000223026 345 186 Türkmenistan  ;  Turkmenistan
+mapdata: 345 186 66.705 42.87 52.33 35.12 Türkmenistan Turkmenistan
+Generating taginfo-config:  tw -100000000000449220 176 363 臺灣  ;  Taiwan
+mapdata: 176 363 122.35 26.87 114.35 10.37 臺灣 Taiwan
+Generating taginfo-config:  uz -100000000000196240 343 169 Oʻzbekiston  ;  Uzbekistan
+mapdata: 343 169 73.14 45.63 55.99 37.18 Oʻzbekiston Uzbekistan
+Generating taginfo-config:  vn -100000000000049915 225 279 Việt Nam  ;  Vietnam
+mapdata: 225 279 114.64 23.67 102.14 8.17 Việt Nam Vietnam
+Generating taginfo-config:  ye -100000000000305092 329 178 اليمن  ;  Yemen
+mapdata: 329 178 54.76 19.02 41.6 11.9 اليمن Yemen
+------start setup_docker.py ----- 
+------chmod settings -----
+:: generated services
+# generated : 2018-07-25:07:01  // template : ./setup/service_create.sh.jinja2
+
+export CURRENT_UID="$(id -u):$(id -g)" 
+
+
+ docker-compose up --no-start taginfo-as-ae
+ docker-compose up --no-start taginfo-as-af
+ docker-compose up --no-start taginfo-as-am
+ docker-compose up --no-start taginfo-as-az
+ docker-compose up --no-start taginfo-as-bd
+ docker-compose up --no-start taginfo-as-bh
+ docker-compose up --no-start taginfo-as-bn
+ docker-compose up --no-start taginfo-as-bt
+ docker-compose up --no-start taginfo-as-cn
+ docker-compose up --no-start taginfo-as-ge
+ docker-compose up --no-start taginfo-as-id
+ docker-compose up --no-start taginfo-as-il
+ docker-compose up --no-start taginfo-as-in-an
+ docker-compose up --no-start taginfo-as-in-ap
+ docker-compose up --no-start taginfo-as-in-ar
+ docker-compose up --no-start taginfo-as-in-as
+ docker-compose up --no-start taginfo-as-in-br
+ docker-compose up --no-start taginfo-as-in-ch
+ docker-compose up --no-start taginfo-as-in-ct
+ docker-compose up --no-start taginfo-as-in-dd
+ docker-compose up --no-start taginfo-as-in-dl
+ docker-compose up --no-start taginfo-as-in-dn
+ docker-compose up --no-start taginfo-as-in-ga
+ docker-compose up --no-start taginfo-as-in-gj
+ docker-compose up --no-start taginfo-as-in-hp
+ docker-compose up --no-start taginfo-as-in-hr
+ docker-compose up --no-start taginfo-as-in-jh
+ docker-compose up --no-start taginfo-as-in-jk
+ docker-compose up --no-start taginfo-as-in-ka
+ docker-compose up --no-start taginfo-as-in-kl
+ docker-compose up --no-start taginfo-as-in-ld
+ docker-compose up --no-start taginfo-as-in-mh
+ docker-compose up --no-start taginfo-as-in-ml
+ docker-compose up --no-start taginfo-as-in-mn
+ docker-compose up --no-start taginfo-as-in-mp
+ docker-compose up --no-start taginfo-as-in-mz
+ docker-compose up --no-start taginfo-as-in-nl
+ docker-compose up --no-start taginfo-as-in-or
+ docker-compose up --no-start taginfo-as-in-pb
+ docker-compose up --no-start taginfo-as-in-py
+ docker-compose up --no-start taginfo-as-in-rj
+ docker-compose up --no-start taginfo-as-in-sk
+ docker-compose up --no-start taginfo-as-in-tg
+ docker-compose up --no-start taginfo-as-in-tn
+ docker-compose up --no-start taginfo-as-in-tr
+ docker-compose up --no-start taginfo-as-in-up
+ docker-compose up --no-start taginfo-as-in-ut
+ docker-compose up --no-start taginfo-as-in-wb
+ docker-compose up --no-start taginfo-as-io
+ docker-compose up --no-start taginfo-as-iq
+ docker-compose up --no-start taginfo-as-ir
+ docker-compose up --no-start taginfo-as-jo
+ docker-compose up --no-start taginfo-as-jp-01
+ docker-compose up --no-start taginfo-as-jp-02
+ docker-compose up --no-start taginfo-as-jp-03
+ docker-compose up --no-start taginfo-as-jp-04
+ docker-compose up --no-start taginfo-as-jp-05
+ docker-compose up --no-start taginfo-as-jp-06
+ docker-compose up --no-start taginfo-as-jp-07
+ docker-compose up --no-start taginfo-as-jp-08
+ docker-compose up --no-start taginfo-as-jp-09
+ docker-compose up --no-start taginfo-as-jp-10
+ docker-compose up --no-start taginfo-as-jp-11
+ docker-compose up --no-start taginfo-as-jp-12
+ docker-compose up --no-start taginfo-as-jp-13
+ docker-compose up --no-start taginfo-as-jp-14
+ docker-compose up --no-start taginfo-as-jp-15
+ docker-compose up --no-start taginfo-as-jp-16
+ docker-compose up --no-start taginfo-as-jp-17
+ docker-compose up --no-start taginfo-as-jp-18
+ docker-compose up --no-start taginfo-as-jp-19
+ docker-compose up --no-start taginfo-as-jp-20
+ docker-compose up --no-start taginfo-as-jp-21
+ docker-compose up --no-start taginfo-as-jp-22
+ docker-compose up --no-start taginfo-as-jp-23
+ docker-compose up --no-start taginfo-as-jp-24
+ docker-compose up --no-start taginfo-as-jp-25
+ docker-compose up --no-start taginfo-as-jp-26
+ docker-compose up --no-start taginfo-as-jp-27
+ docker-compose up --no-start taginfo-as-jp-28
+ docker-compose up --no-start taginfo-as-jp-29
+ docker-compose up --no-start taginfo-as-jp-30
+ docker-compose up --no-start taginfo-as-jp-31
+ docker-compose up --no-start taginfo-as-jp-32
+ docker-compose up --no-start taginfo-as-jp-33
+ docker-compose up --no-start taginfo-as-jp-34
+ docker-compose up --no-start taginfo-as-jp-35
+ docker-compose up --no-start taginfo-as-jp-36
+ docker-compose up --no-start taginfo-as-jp-37
+ docker-compose up --no-start taginfo-as-jp-38
+ docker-compose up --no-start taginfo-as-jp-39
+ docker-compose up --no-start taginfo-as-jp-40
+ docker-compose up --no-start taginfo-as-jp-41
+ docker-compose up --no-start taginfo-as-jp-42
+ docker-compose up --no-start taginfo-as-jp-43
+ docker-compose up --no-start taginfo-as-jp-44
+ docker-compose up --no-start taginfo-as-jp-45
+ docker-compose up --no-start taginfo-as-jp-46
+ docker-compose up --no-start taginfo-as-jp-47
+ docker-compose up --no-start taginfo-as-kg
+ docker-compose up --no-start taginfo-as-kh
+ docker-compose up --no-start taginfo-as-kp
+ docker-compose up --no-start taginfo-as-kr
+ docker-compose up --no-start taginfo-as-kw
+ docker-compose up --no-start taginfo-as-kz
+ docker-compose up --no-start taginfo-as-la
+ docker-compose up --no-start taginfo-as-lb
+ docker-compose up --no-start taginfo-as-lk
+ docker-compose up --no-start taginfo-as-mm
+ docker-compose up --no-start taginfo-as-mn
+ docker-compose up --no-start taginfo-as-mv
+ docker-compose up --no-start taginfo-as-my
+ docker-compose up --no-start taginfo-as-np
+ docker-compose up --no-start taginfo-as-om
+ docker-compose up --no-start taginfo-as-ph
+ docker-compose up --no-start taginfo-as-pk
+ docker-compose up --no-start taginfo-as-ps
+ docker-compose up --no-start taginfo-as-qa
+ docker-compose up --no-start taginfo-as-sa
+ docker-compose up --no-start taginfo-as-sg
+ docker-compose up --no-start taginfo-as-sy
+ docker-compose up --no-start taginfo-as-th
+ docker-compose up --no-start taginfo-as-tj
+ docker-compose up --no-start taginfo-as-tl
+ docker-compose up --no-start taginfo-as-tm
+ docker-compose up --no-start taginfo-as-tw
+ docker-compose up --no-start taginfo-as-uz
+ docker-compose up --no-start taginfo-as-vn
+ docker-compose up --no-start taginfo-as-ye
+ 
+# generated : 2018-07-25:07:01:: don't forget copy hugo files
